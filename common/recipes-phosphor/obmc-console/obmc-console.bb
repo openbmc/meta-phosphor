@@ -6,6 +6,7 @@ PR = "r1"
 inherit obmc-phosphor-license
 inherit obmc-phosphor-systemd
 inherit autotools
+inherit obmc-phosphor-discovery-service
 
 TARGET_CFLAGS   += "-fpic -O2"
 
@@ -20,6 +21,11 @@ FILES_${PN} += "${systemd_unitdir}/system/obmc-console-ssh@.service \
 		${systemd_unitdir}/system/obmc-console-ssh.socket"
 
 SYSTEMD_SERVICE_${PN} = "${BPN}.service ${BPN}-ssh.socket"
+
+AVAHI_SERVICES += "console"
+AVAHI_SVC_TYPE_console = "_console_ssh._tcp"
+AVAHI_SVC_PORT_console = "2200"
+
 
 do_install_append() {
         install -m 0755 -d ${D}${sysconfdir}

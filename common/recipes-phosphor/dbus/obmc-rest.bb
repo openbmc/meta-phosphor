@@ -8,6 +8,8 @@ LIC_FILES_CHKSUM = "file://${S}/LICENSE;md5=fa818a259cbed7ce8bc2a22d35a464fc"
 inherit allarch
 inherit obmc-phosphor-systemd
 inherit setuptools
+inherit obmc-phosphor-discovery-service
+
 
 RDEPENDS_${PN} += " \
         python-xml \
@@ -25,3 +27,7 @@ SRC_URI += "git://github.com/openbmc/phosphor-rest-server"
 SRCREV = "b41507f3b9c9a79ccd0ef6f48ac839b306a604b7"
 
 S = "${WORKDIR}/git"
+
+AVAHI_SERVICES += "phosphor_rest"
+AVAHI_SVC_TYPE_phosphor_rest = "_rest._tcp"
+AVAHI_SVC_PORT_phosphor_rest = "443"
