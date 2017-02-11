@@ -5,6 +5,8 @@ inherit native
 inherit obmc-phosphor-utils
 require phosphor-led-manager.inc
 
+PROVIDES += "virtual/phosphor-led-manager-config-native"
+
 S = "${WORKDIR}/git"
 
 # Copies example led layout yaml file
