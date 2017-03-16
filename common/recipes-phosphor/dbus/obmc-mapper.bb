@@ -10,7 +10,7 @@ inherit obmc-phosphor-dbus-service
 inherit obmc-phosphor-systemd
 inherit setuptools
 
-DBUS_SERVICES += "org.openbmc.ObjectMapper"
+DBUS_SERVICES += "org.openbmc.object_mapper"
 RDEPENDS_${PN} += " \
         python-xml \
         python-dbus \
