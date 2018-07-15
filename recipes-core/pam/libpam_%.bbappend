@@ -18,6 +18,11 @@ EXTRA_OECONF = "--with-db-uniquename=_pam \
 FILES_${PN} = "${libdir}/lib*${SOLIBS}"
 FILES_${PN}-dev += "${libdir}/security/*.la ${libdir}/*.la ${libdir}/lib*${SOLIBSDEV}"
 
+RDEPENDS_${PN}-runtime += "${MLPREFIX}pam-plugin-cracklib-${libpam_suffix} \
+                           ${MLPREFIX}pam-plugin-tally2-${libpam_suffix} \
+                           ${MLPREFIX}pam-plugin-pwhistory-${libpam_suffix} \
+                          "
+
 python populate_packages_prepend () {
     def pam_plugin_append_file(pn, dir, file):
         nf = os.path.join(dir, file)

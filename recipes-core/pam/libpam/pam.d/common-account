@@ -17,6 +17,7 @@
 account	[success=1 new_authtok_reqd=done default=ignore]	/usr/lib/security/pam_unix.so
 # here's the fallback if no module succeeds
 account	requisite			/usr/lib/security/pam_deny.so
+account	required			/usr/lib/security/pam_tally2.so
 # prime the stack with a positive return value if there isn't one already;
 # this avoids us returning an error just because nothing sets a success code
 # since the modules above will each just jump around

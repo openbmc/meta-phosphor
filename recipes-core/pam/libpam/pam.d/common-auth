@@ -8,6 +8,7 @@
 # traditional Unix authentication mechanisms.
 
 # here are the per-package modules (the "Primary" block)
+auth	[success=ok default=1]	/usr/lib/security/pam_tally2.so deny=0 unlock_time=0
 auth	[success=1 default=ignore]	/usr/lib/security/pam_unix.so nullok_secure
 # here's the fallback if no module succeeds
 auth	requisite			/usr/lib/security/pam_deny.so
