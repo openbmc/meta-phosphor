@@ -18,4 +18,5 @@ inherit core-image
 IMAGE_ROOTFS_SIZE = "8192"
 IMAGE_ROOTFS_EXTRA_SPACE = "0"
 
+PACKAGE_INSTALL_remove = "pam"
 BAD_RECOMMENDATIONS += "busybox-syslog"
