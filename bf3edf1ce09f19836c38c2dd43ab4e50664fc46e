@@ -1,0 +1,8 @@
+Code-Review+2: Brad Bishop <bradleyb@fuzziesquirrel.com>
+Ok-To-Test+1: Jenkins <openbmc-ci-admin@ozlabs.org>
+Verified+1: Jenkins <openbmc-ci-admin@ozlabs.org>
+Submitted-by: Brad Bishop <bradleyb@fuzziesquirrel.com>
+Submitted-at: Tue, 28 Aug 2018 14:56:27 +0000
+Reviewed-on: https://gerrit.openbmc-project.xyz/12152
+Project: openbmc/meta-phosphor
+Branch: refs/heads/master
