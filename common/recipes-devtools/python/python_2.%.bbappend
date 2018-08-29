@@ -12,3 +12,13 @@ FILES_${PN}-spwd= " \
         ${libdir}/python${PYTHON_MAJMIN}/lib-dynload/spwd.so \
         ${libdir}/python${PYTHON_MAJMIN}/lib-dynload/grp.so \
         "
+# Remove all python .py files from python recipe. Only the .pyc
+# files are required.
+do_install_append() {
+    rm -f ${D}${libdir}/python${PYTHON_MAJMIN}/*.py
+    rm -f ${D}${libdir}/python${PYTHON_MAJMIN}/*/*.py
+    rm -f ${D}${libdir}/python${PYTHON_MAJMIN}/*/*/*.py
+    rm -f ${D}${libdir}/python${PYTHON_MAJMIN}/*/*/*/*.py
+    # These file required for a patch
+    cp ${WORKDIR}/package/${libdir}/python${PYTHON_MAJMIN}/_* ${D}${libdir}/python${PYTHON_MAJMIN}/
+}
