@@ -1,0 +1,4 @@
+ENDPOINT=xyz.openbmc_project.Certs.Manager.server.https
+PATH=/openbmc/phosphor-rest-server/servers/gevent/cert.pem
+UNITS=nginx.service
+TYPE=server
