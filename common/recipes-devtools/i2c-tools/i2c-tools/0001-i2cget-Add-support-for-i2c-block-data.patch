@@ -59,7 +59,7 @@ index 2503942..5d8dfe7 100644
 -		   int pec)
 +		   int length, int pec)
  {
- 	int dont = 0;
+ 	int don't = 0;
  
 @@ -132,11 +141,14 @@ static int confirm(const char *filename, int address, int size, int daddress,
  		fprintf(stderr, "current data\naddress");
