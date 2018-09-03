@@ -9,6 +9,7 @@ inherit obmc-phosphor-systemd
 inherit setuptools
 
 RDEPENDS_${PN} += " \
+        pamela \
         python-netserver \
         python-json \
         python-dbus \
