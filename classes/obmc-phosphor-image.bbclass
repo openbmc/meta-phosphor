@@ -20,7 +20,7 @@
 # - obmc-system-mgmt                  - OpenBMC system management
 # - obmc-user-mgmt                    - OpenBMC user management
 # - obmc-debug-collector              - OpenBMC debug collector
-
+#
 inherit core-image
 inherit obmc-phosphor-license
 inherit obmc-phosphor-utils
