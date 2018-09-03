@@ -110,6 +110,7 @@ DISTRO_FEATURES_OBMC = " \
         obmc-phosphor-system-mgmt \
         obmc-phosphor-user-mgmt \
         obmc-settings-mgmt \
+        obmc-phosphor-certificate-mgmt \
         "
 
 DISTRO_FEATURES_DEFAULT = " \

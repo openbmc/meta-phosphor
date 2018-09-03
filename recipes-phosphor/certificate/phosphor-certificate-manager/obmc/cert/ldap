@@ -1,0 +1,12 @@
+#REST URI endpoint
+#example: /xyz/openbmc_project/certs/Client/LDAP
+ENDPOINT=LDAP
+
+#Path for the certificate file
+CERTPATH=/etc/ldap/certs/cert.pem
+
+#Units to restart
+UNIT=nslcd.service
+
+#Type of the service Client/Server
+TYPE=Client
