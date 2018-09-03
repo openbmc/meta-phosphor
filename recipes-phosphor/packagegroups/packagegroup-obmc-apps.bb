@@ -23,6 +23,7 @@ PACKAGES = " \
         ${PN}-settings \
         ${PN}-network \
         ${PN}-user-mgmt \
+        ${PN}-certificate-mgmt \
         "
 
 SUMMARY_${PN}-bmc-state-mgmt = "BMC state management"
@@ -132,4 +133,9 @@ RDEPENDS_${PN}-network = " \
 SUMMARY_${PN}-user-mgmt = "User management applications"
 RDEPENDS_${PN}-user-mgmt = " \
         ${VIRTUAL-RUNTIME_obmc-user-mgmt} \
+        "
+
+SUMMARY_${PN}-certificate-mgmt = "Certificate management applications"
+RDEPENDS_${PN}-certificate-mgmt = " \
+        ${VIRTUAL-RUNTIME_obmc-certificate-mgmt} \
         "
