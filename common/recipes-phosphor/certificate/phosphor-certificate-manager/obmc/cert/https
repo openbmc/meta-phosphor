@@ -1,0 +1,4 @@
+ENDPOINT=https
+CERTPATH=/etc/ssl/certs/nginx
+UNITS=nginx.service
+TYPE=server
