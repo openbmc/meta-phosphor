@@ -1,0 +1,11 @@
+[Unit]
+Description=Phosphor certificate manager for LDAP 
+
+[Service]
+EnvironmentFile={envfiledir}/obmc/cert/ldap
+ExecStart=/usr/bin/env phosphor-certificate-manager --endpoint=${{ENDPOINT}} --path=${{CERTPATH}} --units=${{UNITS}} --type=${{TYPE}}
+SyslogIdentifier=phosphor-certificate-manager
+Restart=always
+
+[Install]
+WantedBy={SYSTEMD_DEFAULT_TARGET}
