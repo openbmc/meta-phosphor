@@ -1,0 +1,12 @@
+#REST URI endpoint
+#example: /xyz/openbmc_project/certs/Server/Https
+ENDPOINT=LDAP
+
+#Path for the certificate file
+CERTPATH=/openbmc/phosphor-rest-server/servers/gevent/cert.pem
+
+#Units to restart
+UNITS=nslcd.service
+
+#Type of the service client/server
+TYPE=client
