@@ -117,6 +117,7 @@ DISTRO_FEATURES_DEFAULT = " \
         pam \
         slp \
         systemd \
+        libc-inet-anl \
         "
 
 DISTRO_FEATURES = " \
