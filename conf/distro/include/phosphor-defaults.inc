@@ -244,3 +244,9 @@ OBMC_DBUS_IFACE_ROOT ?= "xyz.openbmc_project"
 # Will add a build dependency to host-ipmid on the
 # phosphor-ipmi-fru-whitelist-native recipe.
 VIRTUAL-RUNTIME_phosphor-ipmi-providers ?= "phosphor-ipmi-fru"
+
+# obmc-cert-mgmt
+#
+# Provides an implementation xyz.openbmc_project.Certs.Install catering
+# to certificate management
+VIRTUAL-RUNTIME_obmc-cert-mgmt ?= "phosphor-certificate-manager"

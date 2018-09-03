@@ -1,0 +1,4 @@
+ENDPOINT=LDAP
+CERTPATH=/openbmc/phosphor-rest-server/servers/gevent/cert.pem
+UNITS=nslcd.service
+TYPE=client
