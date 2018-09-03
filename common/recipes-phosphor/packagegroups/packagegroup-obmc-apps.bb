@@ -130,4 +130,5 @@ RDEPENDS_${PN}-network = " \
 SUMMARY_${PN}-user-mgmt = "User management applications"
 RDEPENDS_${PN}-user-mgmt = " \
         ${VIRTUAL-RUNTIME_obmc-user-mgmt} \
+        nss-pam-ldapd \
         "
