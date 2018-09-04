@@ -13,16 +13,27 @@ DEPENDS += "sdbusplus"
 DEPENDS += "phosphor-logging"
 DEPENDS += "phosphor-dbus-interfaces"
 DEPENDS += "boost"
-RDEPENDS_${PN} += "libsystemd"
-RDEPENDS_${PN} += "phosphor-logging"
 
 inherit useradd
 
-USERADD_PACKAGES = "${PN}"
+USERADD_PACKAGES = " \
+	${PN} \
+	phosphor-ldap-config \
+"
+
+RDEPENDS_${PN} += "libsystemd phosphor-logging"
+DBUS_SERVICE_${PN} += "xyz.openbmc_project.User.Manager.service"
 # add groups needed for privilege maintenance
 GROUPADD_PARAM_${PN} = "priv-admin; priv-operator; priv-user; priv-callback "
 
-DBUS_SERVICE_${PN} += "xyz.openbmc_project.User.Manager.service"
+
+GROUPADD_PARAM_phosphor-ldap-config = "priv-admin; priv-operator; priv-user; priv-callback "
+
+RDEPENDS_phosphor-ldap-config += "libsystemd phosphor-logging"
+DBUS_SERVICE_phosphor-ldap-config += "xyz.openbmc_project.Ldap.Config.service"
+FILES_phosphor-ldap-config += " \
+        ${sbindir}/phosphor-ldap-conf \
+"
 
 SRC_URI += "git://github.com/openbmc/phosphor-user-manager"
 SRCREV = "10eb23f8d64d197dade920178b193c1979235156"
