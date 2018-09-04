@@ -23,6 +23,7 @@ USERADD_PACKAGES = "${PN}"
 GROUPADD_PARAM_${PN} = "priv-admin; priv-operator; priv-user; priv-callback "
 
 DBUS_SERVICE_${PN} += "xyz.openbmc_project.User.Manager.service"
+DBUS_SERVICE_${PN} += "xyz.openbmc_project.Ldap.Config.service"
 
 SRC_URI += "git://github.com/openbmc/phosphor-user-manager"
 SRCREV = "10eb23f8d64d197dade920178b193c1979235156"
