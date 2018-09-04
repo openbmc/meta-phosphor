@@ -1,0 +1,12 @@
+[Unit]
+Description=Phosphor Ldap config updater
+
+[Service]
+ExecStart=/usr/bin/env phosphor-ldap-conf
+SyslogIdentifier=phosphor-ldap-conf
+Restart=always
+Type=dbus
+BusName={BUSNAME}
+
+[Install]
+WantedBy={SYSTEMD_DEFAULT_TARGET}
