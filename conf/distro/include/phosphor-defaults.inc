@@ -228,7 +228,7 @@ PREFERRED_PROVIDER_virtual/obmc-watchdog ?= "phosphor-watchdog"
 #
 # Provides an implementation of xyz.openbmc_project.User.Manager catering
 # to user management
-VIRTUAL-RUNTIME_obmc-user-mgmt ?= "phosphor-user-manager"
+VIRTUAL-RUNTIME_obmc-user-mgmt ?= "phosphor-user-mgr phosphor-ldap-config"
 
 OBMC_DBUS_PATH_ROOT ?= "/xyz/openbmc_project"
 OBMC_DBUS_IFACE_ROOT ?= "xyz.openbmc_project"
