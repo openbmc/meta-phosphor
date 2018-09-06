@@ -20,6 +20,11 @@ do_install_append_openbmc-phosphor-tiny() {
     rm -f ${D}${libdir}/python${PYTHON_MAJMIN}/*/*.py
     rm -f ${D}${libdir}/python${PYTHON_MAJMIN}/*/*/*.py
     rm -f ${D}${libdir}/python${PYTHON_MAJMIN}/*/*/*/*.py
+    # Remove all files related to tests
+    rm -rf ${D}${libdir}/python${PYTHON_MAJMIN}/test/*
+    rm -rf ${D}${libdir}/python${PYTHON_MAJMIN}/*/test/*
+    rm -rf ${D}${libdir}/python${PYTHON_MAJMIN}/*/*/test/*
+    rm -rf ${D}${libdir}/python${PYTHON_MAJMIN}/*/*/*/test/*
     # This file required for a patch
     cp ${WORKDIR}/recipe-sysroot-native/${libdir}/python${PYTHON_MAJMIN}/_sysconfigdata.py ${D}${libdir}/python${PYTHON_MAJMIN}/
 }
