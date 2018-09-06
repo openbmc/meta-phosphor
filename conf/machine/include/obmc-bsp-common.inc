@@ -2,6 +2,8 @@
 #@NAME: OpenBMC
 #@DESCRIPTION: Common machine configuration for OpenBMC chips
 
+require conf/distro/include/phosphor-tiny.inc
+
 KERNEL_CLASSES ?= "kernel-fitimage"
 KERNEL_IMAGETYPES ?= "fitImage"
 
