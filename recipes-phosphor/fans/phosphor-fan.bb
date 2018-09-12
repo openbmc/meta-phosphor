@@ -20,6 +20,10 @@ DEPENDS += "sdbusplus-native"
 DEPENDS += "phosphor-logging"
 DEPENDS += "libevdev"
 
+EXTRA_OECONF += "--enable-lto \
+                 AR=${TARGET_PREFIX}gcc-ar \
+                 RANLIB=${TARGET_PREFIX}gcc-ranlib"
+
 # Package configuration
 FAN_PACKAGES = " \
         ${PN}-presence-tach \

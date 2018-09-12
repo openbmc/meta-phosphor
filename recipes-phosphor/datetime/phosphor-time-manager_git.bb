@@ -22,6 +22,10 @@ RDEPENDS_${PN} += "libsystemd"
 RDEPENDS_${PN} += "sdbusplus"
 RDEPENDS_${PN} += "phosphor-dbus-interfaces"
 
+EXTRA_OECONF += "--enable-lto \
+                 AR=${TARGET_PREFIX}gcc-ar \
+                 RANLIB=${TARGET_PREFIX}gcc-ranlib"
+
 SRC_URI += "git://github.com/mine260309/phosphor-time-manager;branch=dev-time-errors"
 SRCREV = "${AUTOREV}"
 PV = "1.0+git${SRCPV}"
