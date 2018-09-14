@@ -12,6 +12,7 @@ RPROVIDES_${PN} += "virtual/obmc-watchdog"
 PROVIDES += "virtual/obmc-watchdog"
 
 DEPENDS += "autoconf-archive-native"
+DEPENDS += "cli11"
 DEPENDS += "sdbusplus sdbusplus-native"
 DEPENDS += "sdeventplus"
 DEPENDS += "phosphor-dbus-interfaces"
