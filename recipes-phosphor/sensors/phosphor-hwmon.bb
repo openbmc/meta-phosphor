@@ -18,6 +18,7 @@ DEPENDS += " \
         sdbusplus \
         phosphor-dbus-interfaces \
         phosphor-logging \
+        gpioplus \
         "
 
 
