@@ -7,5 +7,5 @@ inherit phosphor-mapper
 inherit native
 inherit obmc-phosphor-license
 
-PHOSPHOR_MAPPER_NAMESPACE_append = " /xyz/openbmc_project"
+PHOSPHOR_MAPPER_NAMESPACE_append = " xyz.openbmc_project"
 PHOSPHOR_MAPPER_INTERFACE_append = " xyz.openbmc_project"
