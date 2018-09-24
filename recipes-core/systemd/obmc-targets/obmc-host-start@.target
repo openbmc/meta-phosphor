@@ -1,5 +1,7 @@
+# This file is a part of OpenBMC systemd
 [Unit]
 Description=Start Host%i
+Documentation=https://github.com/openbmc/docs/blob/master/openbmc-systemd.md
 Wants={SYSTEMD_DEFAULT_TARGET}
 After={SYSTEMD_DEFAULT_TARGET}
 Wants=mapper-wait@-org-openbmc-control-chassis%i.service
