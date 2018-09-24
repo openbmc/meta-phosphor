@@ -1,0 +1,102 @@
+--- a/libs/context/build/Jamfile.v2
++++ b/libs/context/build/Jamfile.v2
+@@ -161,8 +161,7 @@ alias asm_sources
+    : asm/make_arm_aapcs_elf_gas.S
+      asm/jump_arm_aapcs_elf_gas.S
+      asm/ontop_arm_aapcs_elf_gas.S
+-   : <abi>aapcs
+-     <address-model>32
++   : <address-model>32
+      <architecture>arm
+      <binary-format>elf
+      <toolset>clang
+@@ -172,8 +171,7 @@ alias asm_sources
+    : asm/make_arm_aapcs_elf_gas.S
+      asm/jump_arm_aapcs_elf_gas.S
+      asm/ontop_arm_aapcs_elf_gas.S
+-   : <abi>aapcs
+-     <address-model>32
++   : <address-model>32
+      <architecture>arm
+      <binary-format>elf
+      <toolset>gcc
+@@ -183,8 +181,7 @@ alias asm_sources
+    : asm/make_arm_aapcs_elf_gas.S
+      asm/jump_arm_aapcs_elf_gas.S
+      asm/ontop_arm_aapcs_elf_gas.S
+-   : <abi>aapcs
+-     <address-model>32
++   : <address-model>32
+      <architecture>arm
+      <binary-format>elf
+      <toolset>qcc
+@@ -195,8 +192,7 @@ alias asm_sources
+    : asm/make_arm_aapcs_macho_gas.S
+      asm/jump_arm_aapcs_macho_gas.S
+      asm/ontop_arm_aapcs_macho_gas.S
+-   : <abi>aapcs
+-     <address-model>32
++   : <address-model>32
+      <architecture>arm
+      <binary-format>mach-o
+      <toolset>clang
+@@ -206,8 +202,7 @@ alias asm_sources
+    : asm/make_arm_aapcs_macho_gas.S
+      asm/jump_arm_aapcs_macho_gas.S
+      asm/ontop_arm_aapcs_macho_gas.S
+-   : <abi>aapcs
+-     <address-model>32
++   : <address-model>32
+      <architecture>arm
+      <binary-format>mach-o
+      <toolset>darwin
+@@ -219,8 +214,7 @@ alias asm_sources
+      asm/jump_arm_aapcs_pe_armasm.asm
+      asm/ontop_arm_aapcs_pe_armasm.asm
+      untested.cpp
+-   : <abi>aapcs
+-     <address-model>32
++   : <address-model>32
+      <architecture>arm
+      <binary-format>pe
+      <toolset>msvc
+@@ -232,8 +226,7 @@ alias asm_sources
+    : asm/make_arm64_aapcs_elf_gas.S
+      asm/jump_arm64_aapcs_elf_gas.S
+      asm/ontop_arm64_aapcs_elf_gas.S
+-   : <abi>aapcs
+-     <address-model>64
++   : <address-model>64
+      <architecture>arm
+      <binary-format>elf
+      <toolset>clang
+@@ -243,8 +236,7 @@ alias asm_sources
+    : asm/make_arm64_aapcs_elf_gas.S
+      asm/jump_arm64_aapcs_elf_gas.S
+      asm/ontop_arm64_aapcs_elf_gas.S
+-   : <abi>aapcs
+-     <address-model>64
++   : <address-model>64
+      <architecture>arm
+      <binary-format>elf
+      <toolset>gcc
+@@ -255,8 +247,7 @@ alias asm_sources
+    : asm/make_arm64_aapcs_macho_gas.S
+      asm/jump_arm64_aapcs_macho_gas.S
+      asm/ontop_arm64_aapcs_macho_gas.S
+-   : <abi>aapcs
+-     <address-model>64
++   : <address-model>64
+      <architecture>arm
+      <binary-format>mach-o
+      <toolset>clang
+@@ -266,8 +257,7 @@ alias asm_sources
+    : asm/make_arm64_aapcs_macho_gas.S
+      asm/jump_arm64_aapcs_macho_gas.S
+      asm/ontop_arm64_aapcs_macho_gas.S
+-   : <abi>aapcs
+-     <address-model>64
++   : <address-model>64
+      <architecture>arm
+      <binary-format>mach-o
+      <toolset>darwin
