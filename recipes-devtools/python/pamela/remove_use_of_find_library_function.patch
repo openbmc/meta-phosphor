@@ -1,0 +1,15 @@
+--- pamela-0.3.0.orig/pamela.py	2018-09-24 08:24:12.646775301 +0530
++++ pamela-0.3.0/pamela.py	2018-09-24 09:09:57.818897103 +0530
+@@ -46,8 +46,10 @@
+     return s
+ 
+ 
+-LIBPAM = CDLL(find_library("pam"))
+-LIBC = CDLL(find_library("c"))
++#LIBPAM = CDLL(find_library("pam"))
++LIBPAM = CDLL("/lib/libpam.so.0")
++#LIBC = CDLL(find_library("c"))
++LIBC = CDLL("/lib/libc.so.6")
+ 
+ CALLOC = LIBC.calloc
+ CALLOC.restype = c_void_p
