@@ -1,0 +1,13 @@
+[Unit]
+Description=OpenBMC ipKVM daemon
+
+[Service]
+Type=oneshot
+RemainAfterExit=no
+ExecStartPre=/usr/sbin/create_usbhid.sh
+ExecStart=/usr/bin/env obmc-ikvm -v /dev/video0 -i /dev/hidg0
+SyslogIdentifier=obmc-ikvm
+Restart=always
+
+[Install]
+WantedBy={SYSTEMD_DEFAULT_TARGET}

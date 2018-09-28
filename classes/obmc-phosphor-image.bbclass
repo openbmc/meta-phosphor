@@ -90,6 +90,7 @@ CORE_IMAGE_EXTRA_INSTALL_append = " bash \
         rsync \
         rng-tools \
         lrzsz \
+        obmc-ikvm \
         "
 
 OBMC_IMAGE_EXTRA_INSTALL ?= ""
