@@ -1,0 +1,2456 @@
+From 02cfacbafcf9f2d25e63a902d9a00340379825c1 Mon Sep 17 00:00:00 2001
+From: Eddie James <eajames@us.ibm.com>
+Date: Mon, 27 Aug 2018 15:41:10 -0500
+Subject: [PATCH] Add obmc-ikvm application
+
+Add license, application source code, autotools recipe, and gitignore
+
+Change-Id: Ice28097a18d25ad3abe056ba0d7d244b5c3e0af2
+Signed-off-by: Eddie James <eajames@us.ibm.com>
+---
+ .clang-format    |  98 ++++++++++++
+ .gitignore       |  20 +++
+ LICENSE          | 201 ++++++++++++++++++++++++
+ MAINTAINERS      |  45 ++++++
+ Makefile.am      |  30 ++++
+ README.md        |  17 ++
+ bootstrap.sh     |  18 +++
+ configure.ac     |  26 ++++
+ ikvm_args.cpp    |  54 +++++++
+ ikvm_args.hpp    | 111 ++++++++++++++
+ ikvm_input.cpp   | 360 +++++++++++++++++++++++++++++++++++++++++++
+ ikvm_input.hpp   | 108 +++++++++++++
+ ikvm_manager.cpp |  99 ++++++++++++
+ ikvm_manager.hpp |  74 +++++++++
+ ikvm_server.cpp  | 205 +++++++++++++++++++++++++
+ ikvm_server.hpp  | 119 ++++++++++++++
+ ikvm_video.cpp   | 460 +++++++++++++++++++++++++++++++++++++++++++++++++++++++
+ ikvm_video.hpp   | 143 +++++++++++++++++
+ obmc-ikvm.cpp    |  12 ++
+ scancodes.h      |  82 ++++++++++
+ 20 files changed, 2282 insertions(+)
+ create mode 100644 .clang-format
+ create mode 100644 .gitignore
+ create mode 100644 LICENSE
+ create mode 100644 MAINTAINERS
+ create mode 100644 Makefile.am
+ create mode 100755 bootstrap.sh
+ create mode 100644 configure.ac
+ create mode 100644 ikvm_args.cpp
+ create mode 100644 ikvm_args.hpp
+ create mode 100644 ikvm_input.cpp
+ create mode 100644 ikvm_input.hpp
+ create mode 100644 ikvm_manager.cpp
+ create mode 100644 ikvm_manager.hpp
+ create mode 100644 ikvm_server.cpp
+ create mode 100644 ikvm_server.hpp
+ create mode 100644 ikvm_video.cpp
+ create mode 100644 ikvm_video.hpp
+ create mode 100644 obmc-ikvm.cpp
+ create mode 100644 scancodes.h
+
+diff --git a/.clang-format b/.clang-format
+new file mode 100644
+index 0000000..8c5278e
+--- /dev/null
++++ b/.clang-format
+@@ -0,0 +1,98 @@
++---
++Language:        Cpp
++# BasedOnStyle:  LLVM
++AccessModifierOffset: -2
++AlignAfterOpenBracket: Align
++AlignConsecutiveAssignments: false
++AlignConsecutiveDeclarations: false
++AlignEscapedNewlinesLeft: false
++AlignOperands:   true
++AlignTrailingComments: true
++AllowAllParametersOfDeclarationOnNextLine: true
++AllowShortBlocksOnASingleLine: false
++AllowShortCaseLabelsOnASingleLine: false
++AllowShortFunctionsOnASingleLine: None
++AllowShortIfStatementsOnASingleLine: false
++AllowShortLoopsOnASingleLine: false
++AlwaysBreakAfterDefinitionReturnType: None
++AlwaysBreakAfterReturnType: None
++AlwaysBreakBeforeMultilineStrings: false
++AlwaysBreakTemplateDeclarations: true
++BinPackArguments: true
++BinPackParameters: true
++BraceWrapping:
++  AfterClass:      true
++  AfterControlStatement: true
++  AfterEnum:       true
++  AfterFunction:   true
++  AfterNamespace:  true
++  AfterObjCDeclaration: true
++  AfterStruct:     true
++  AfterUnion:      true
++  BeforeCatch:     true
++  BeforeElse:      true
++  IndentBraces:    false
++BreakBeforeBinaryOperators: None
++BreakBeforeBraces: Custom
++BreakBeforeTernaryOperators: true
++BreakConstructorInitializers: AfterColon
++ColumnLimit:     80
++CommentPragmas:  '^ IWYU pragma:'
++ConstructorInitializerAllOnOneLineOrOnePerLine: false
++ConstructorInitializerIndentWidth: 4
++ContinuationIndentWidth: 4
++Cpp11BracedListStyle: true
++DerivePointerAlignment: false
++DisableFormat:   false
++ExperimentalAutoDetectBinPacking: false
++FixNamespaceComments: true
++ForEachMacros:   [ foreach, Q_FOREACH, BOOST_FOREACH ]
++IncludeBlocks: Regroup
++IncludeCategories:
++  - Regex:           '^[<"](gtest|gmock)'
++    Priority:        5
++  - Regex:           '^"config.h"'
++    Priority:        -1
++  - Regex:           '^".*\.hpp"'
++    Priority:        1
++  - Regex:           '^<.*\.h>'
++    Priority:        2
++  - Regex:           '^<.*'
++    Priority:        3
++  - Regex:           '.*'
++    Priority:        4
++IndentCaseLabels: true
++IndentWidth:     4
++IndentWrappedFunctionNames: true
++KeepEmptyLinesAtTheStartOfBlocks: true
++MacroBlockBegin: ''
++MacroBlockEnd:   ''
++MaxEmptyLinesToKeep: 1
++NamespaceIndentation: None
++ObjCBlockIndentWidth: 2
++ObjCSpaceAfterProperty: false
++ObjCSpaceBeforeProtocolList: true
++PenaltyBreakBeforeFirstCallParameter: 19
++PenaltyBreakComment: 300
++PenaltyBreakFirstLessLess: 120
++PenaltyBreakString: 1000
++PenaltyExcessCharacter: 1000000
++PenaltyReturnTypeOnItsOwnLine: 60
++PointerAlignment: Left
++ReflowComments:  true
++SortIncludes:    true
++SortUsingDeclarations: true
++SpaceAfterCStyleCast: false
++SpaceBeforeAssignmentOperators: true
++SpaceBeforeParens: ControlStatements
++SpaceInEmptyParentheses: false
++SpacesBeforeTrailingComments: 1
++SpacesInAngles:  false
++SpacesInContainerLiterals: true
++SpacesInCStyleCastParentheses: false
++SpacesInParentheses: false
++SpacesInSquareBrackets: false
++Standard:        Cpp11
++TabWidth:        4
++UseTab:          Never
++...
+diff --git a/.gitignore b/.gitignore
+new file mode 100644
+index 0000000..b7ab5e1
+--- /dev/null
++++ b/.gitignore
+@@ -0,0 +1,20 @@
++.deps/
++Makefile
++Makefile.in
++aclocal.m4
++ar-lib
++autom4te.cache/
++compile
++config.guess
++config.h
++config.h.in
++config.log
++config.status
++config.sub
++configure
++depcomp
++install-sh
++missing
++obmc-ikvm
++stamp-h1
++*.o
+diff --git a/LICENSE b/LICENSE
+new file mode 100644
+index 0000000..8dada3e
+--- /dev/null
++++ b/LICENSE
+@@ -0,0 +1,201 @@
++                                 Apache License
++                           Version 2.0, January 2004
++                        http://www.apache.org/licenses/
++
++   TERMS AND CONDITIONS FOR USE, REPRODUCTION, AND DISTRIBUTION
++
++   1. Definitions.
++
++      "License" shall mean the terms and conditions for use, reproduction,
++      and distribution as defined by Sections 1 through 9 of this document.
++
++      "Licensor" shall mean the copyright owner or entity authorized by
++      the copyright owner that is granting the License.
++
++      "Legal Entity" shall mean the union of the acting entity and all
++      other entities that control, are controlled by, or are under common
++      control with that entity. For the purposes of this definition,
++      "control" means (i) the power, direct or indirect, to cause the
++      direction or management of such entity, whether by contract or
++      otherwise, or (ii) ownership of fifty percent (50%) or more of the
++      outstanding shares, or (iii) beneficial ownership of such entity.
++
++      "You" (or "Your") shall mean an individual or Legal Entity
++      exercising permissions granted by this License.
++
++      "Source" form shall mean the preferred form for making modifications,
++      including but not limited to software source code, documentation
++      source, and configuration files.
++
++      "Object" form shall mean any form resulting from mechanical
++      transformation or translation of a Source form, including but
++      not limited to compiled object code, generated documentation,
++      and conversions to other media types.
++
++      "Work" shall mean the work of authorship, whether in Source or
++      Object form, made available under the License, as indicated by a
++      copyright notice that is included in or attached to the work
++      (an example is provided in the Appendix below).
++
++      "Derivative Works" shall mean any work, whether in Source or Object
++      form, that is based on (or derived from) the Work and for which the
++      editorial revisions, annotations, elaborations, or other modifications
++      represent, as a whole, an original work of authorship. For the purposes
++      of this License, Derivative Works shall not include works that remain
++      separable from, or merely link (or bind by name) to the interfaces of,
++      the Work and Derivative Works thereof.
++
++      "Contribution" shall mean any work of authorship, including
++      the original version of the Work and any modifications or additions
++      to that Work or Derivative Works thereof, that is intentionally
++      submitted to Licensor for inclusion in the Work by the copyright owner
++      or by an individual or Legal Entity authorized to submit on behalf of
++      the copyright owner. For the purposes of this definition, "submitted"
++      means any form of electronic, verbal, or written communication sent
++      to the Licensor or its representatives, including but not limited to
++      communication on electronic mailing lists, source code control systems,
++      and issue tracking systems that are managed by, or on behalf of, the
++      Licensor for the purpose of discussing and improving the Work, but
++      excluding communication that is conspicuously marked or otherwise
++      designated in writing by the copyright owner as "Not a Contribution."
++
++      "Contributor" shall mean Licensor and any individual or Legal Entity
++      on behalf of whom a Contribution has been received by Licensor and
++      subsequently incorporated within the Work.
++
++   2. Grant of Copyright License. Subject to the terms and conditions of
++      this License, each Contributor hereby grants to You a perpetual,
++      worldwide, non-exclusive, no-charge, royalty-free, irrevocable
++      copyright license to reproduce, prepare Derivative Works of,
++      publicly display, publicly perform, sublicense, and distribute the
++      Work and such Derivative Works in Source or Object form.
++
++   3. Grant of Patent License. Subject to the terms and conditions of
++      this License, each Contributor hereby grants to You a perpetual,
++      worldwide, non-exclusive, no-charge, royalty-free, irrevocable
++      (except as stated in this section) patent license to make, have made,
++      use, offer to sell, sell, import, and otherwise transfer the Work,
++      where such license applies only to those patent claims licensable
++      by such Contributor that are necessarily infringed by their
++      Contribution(s) alone or by combination of their Contribution(s)
++      with the Work to which such Contribution(s) was submitted. If You
++      institute patent litigation against any entity (including a
++      cross-claim or counterclaim in a lawsuit) alleging that the Work
++      or a Contribution incorporated within the Work constitutes direct
++      or contributory patent infringement, then any patent licenses
++      granted to You under this License for that Work shall terminate
++      as of the date such litigation is filed.
++
++   4. Redistribution. You may reproduce and distribute copies of the
++      Work or Derivative Works thereof in any medium, with or without
++      modifications, and in Source or Object form, provided that You
++      meet the following conditions:
++
++      (a) You must give any other recipients of the Work or
++          Derivative Works a copy of this License; and
++
++      (b) You must cause any modified files to carry prominent notices
++          stating that You changed the files; and
++
++      (c) You must retain, in the Source form of any Derivative Works
++          that You distribute, all copyright, patent, trademark, and
++          attribution notices from the Source form of the Work,
++          excluding those notices that do not pertain to any part of
++          the Derivative Works; and
++
++      (d) If the Work includes a "NOTICE" text file as part of its
++          distribution, then any Derivative Works that You distribute must
++          include a readable copy of the attribution notices contained
++          within such NOTICE file, excluding those notices that do not
++          pertain to any part of the Derivative Works, in at least one
++          of the following places: within a NOTICE text file distributed
++          as part of the Derivative Works; within the Source form or
++          documentation, if provided along with the Derivative Works; or,
++          within a display generated by the Derivative Works, if and
++          wherever such third-party notices normally appear. The contents
++          of the NOTICE file are for informational purposes only and
++          do not modify the License. You may add Your own attribution
++          notices within Derivative Works that You distribute, alongside
++          or as an addendum to the NOTICE text from the Work, provided
++          that such additional attribution notices cannot be construed
++          as modifying the License.
++
++      You may add Your own copyright statement to Your modifications and
++      may provide additional or different license terms and conditions
++      for use, reproduction, or distribution of Your modifications, or
++      for any such Derivative Works as a whole, provided Your use,
++      reproduction, and distribution of the Work otherwise complies with
++      the conditions stated in this License.
++
++   5. Submission of Contributions. Unless You explicitly state otherwise,
++      any Contribution intentionally submitted for inclusion in the Work
++      by You to the Licensor shall be under the terms and conditions of
++      this License, without any additional terms or conditions.
++      Notwithstanding the above, nothing herein shall supersede or modify
++      the terms of any separate license agreement you may have executed
++      with Licensor regarding such Contributions.
++
++   6. Trademarks. This License does not grant permission to use the trade
++      names, trademarks, service marks, or product names of the Licensor,
++      except as required for reasonable and customary use in describing the
++      origin of the Work and reproducing the content of the NOTICE file.
++
++   7. Disclaimer of Warranty. Unless required by applicable law or
++      agreed to in writing, Licensor provides the Work (and each
++      Contributor provides its Contributions) on an "AS IS" BASIS,
++      WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or
++      implied, including, without limitation, any warranties or conditions
++      of TITLE, NON-INFRINGEMENT, MERCHANTABILITY, or FITNESS FOR A
++      PARTICULAR PURPOSE. You are solely responsible for determining the
++      appropriateness of using or redistributing the Work and assume any
++      risks associated with Your exercise of permissions under this License.
++
++   8. Limitation of Liability. In no event and under no legal theory,
++      whether in tort (including negligence), contract, or otherwise,
++      unless required by applicable law (such as deliberate and grossly
++      negligent acts) or agreed to in writing, shall any Contributor be
++      liable to You for damages, including any direct, indirect, special,
++      incidental, or consequential damages of any character arising as a
++      result of this License or out of the use or inability to use the
++      Work (including but not limited to damages for loss of goodwill,
++      work stoppage, computer failure or malfunction, or any and all
++      other commercial damages or losses), even if such Contributor
++      has been advised of the possibility of such damages.
++
++   9. Accepting Warranty or Additional Liability. While redistributing
++      the Work or Derivative Works thereof, You may choose to offer,
++      and charge a fee for, acceptance of support, warranty, indemnity,
++      or other liability obligations and/or rights consistent with this
++      License. However, in accepting such obligations, You may act only
++      on Your own behalf and on Your sole responsibility, not on behalf
++      of any other Contributor, and only if You agree to indemnify,
++      defend, and hold each Contributor harmless for any liability
++      incurred by, or claims asserted against, such Contributor by reason
++      of your accepting any such warranty or additional liability.
++
++   END OF TERMS AND CONDITIONS
++
++   APPENDIX: How to apply the Apache License to your work.
++
++      To apply the Apache License to your work, attach the following
++      boilerplate notice, with the fields enclosed by brackets "{}"
++      replaced with your own identifying information. (Don't include
++      the brackets!)  The text should be enclosed in the appropriate
++      comment syntax for the file format. We also recommend that a
++      file or class name and description of purpose be included on the
++      same "printed page" as the copyright notice for easier
++      identification within third-party archives.
++
++   Copyright {yyyy} {name of copyright owner}
++
++   Licensed under the Apache License, Version 2.0 (the "License");
++   you may not use this file except in compliance with the License.
++   You may obtain a copy of the License at
++
++       http://www.apache.org/licenses/LICENSE-2.0
++
++   Unless required by applicable law or agreed to in writing, software
++   distributed under the License is distributed on an "AS IS" BASIS,
++   WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
++   See the License for the specific language governing permissions and
++   limitations under the License.
+diff --git a/MAINTAINERS b/MAINTAINERS
+new file mode 100644
+index 0000000..a5ab97e
+--- /dev/null
++++ b/MAINTAINERS
+@@ -0,0 +1,45 @@
++How to use this list:
++    Find the most specific section entry (described below) that matches where
++    your change lives and add the reviewers (R) and maintainers (M) as
++    reviewers. You can use the same method to track down who knows a particular
++    code base best.
++
++    Your change/query may span multiple entries; that is okay.
++
++    If you do not find an entry that describes your request at all, someone
++    forgot to update this list; please at least file an issue or send an email
++    to a maintainer, but preferably you should just update this document.
++
++Description of section entries:
++
++    Section entries are structured according to the following scheme:
++
++    X:  NAME <EMAIL_USERNAME@DOMAIN> <IRC_USERNAME!>
++    X:  ...
++    .
++    .
++    .
++
++    Where REPO_NAME is the name of the repository within the OpenBMC GitHub
++    organization; FILE_PATH is a file path within the repository, possibly with
++    wildcards; X is a tag of one of the following types:
++
++    M:  Denotes maintainer; has fields NAME <EMAIL_USERNAME@DOMAIN> <IRC_USERNAME!>;
++        if omitted from an entry, assume one of the maintainers from the
++        MAINTAINERS entry.
++    R:  Denotes reviewer; has fields NAME <EMAIL_USERNAME@DOMAIN> <IRC_USERNAME!>;
++        these people are to be added as reviewers for a change matching the repo
++        path.
++    F:  Denotes forked from an external repository; has fields URL.
++
++    Line comments are to be denoted "# SOME COMMENT" (typical shell style
++    comment); it is important to follow the correct syntax and semantics as we
++    may want to use automated tools with this file in the future.
++
++    A change cannot be added to an OpenBMC repository without a MAINTAINER's
++    approval; thus, a MAINTAINER should always be listed as a reviewer.
++
++START OF MAINTAINERS LIST
++-------------------------
++
++M:  Eddie James <eajames@linux.ibm.com> <eajames!>
+diff --git a/Makefile.am b/Makefile.am
+new file mode 100644
+index 0000000..58e53fb
+--- /dev/null
++++ b/Makefile.am
+@@ -0,0 +1,30 @@
++bin_PROGRAMS = obmc-ikvm
++
++noinst_HEADERS = \
++	ikvm_args.hpp \
++	ikvm_input.hpp \
++	ikvm_manager.hpp \
++	ikvm_server.hpp \
++	ikvm_video.hpp
++
++obmc_ikvm_SOURCES = \
++	ikvm_args.cpp \
++	ikvm_input.cpp \
++	ikvm_manager.cpp \
++	ikvm_server.cpp \
++	ikvm_video.cpp \
++	obmc-ikvm.cpp
++
++obmc_ikvm_CXXFLAGS = \
++	$(PHOSPHOR_DBUS_INTERFACES_CFLAGS) \
++	$(PHOSPHOR_LOGGING_CFLAGS) \
++	$(PTHREAD_CFLAGS) \
++	$(SDBUSPLUS_CFLAGS) \
++	$(LIBVNCSERVER_CFLAGS)
++
++obmc_ikvm_LDFLAGS = \
++	$(PHOSPHOR_DBUS_INTERFACES_LIBS) \
++	$(PHOSPHOR_LOGGING_LIBS) \
++	$(PTHREAD_LIBS) \
++	$(SDBUSPLUS_LIBS) \
++	$(LIBVNCSERVER_LIBS)
+diff --git a/README.md b/README.md
+index 0b25859..70d6e13 100644
+--- a/README.md
++++ b/README.md
+@@ -1 +1,18 @@
+ # OpenBMC IpKVM Server
++
++The obmc-ikvm application is a VNC server that provides access to the host
++graphics output. The application interfaces with the video device on the BMC
++that captures the host graphics, and then serves that video data on the RFB
++(remote framebuffer, also known as VNC) protocol. The application also
++interfaces with the BMC USB gadget device to pass HID events from the BMC to
++the host, allowing the user to interact with the host system.
++
++## Usage
++
++Once the host is running and an appropriate HID gadget device is instantiated
++on the BMC, the application can be started with the following command:
++``` obmc-ikvm -v <video device path> -i <HID gadget device path> ```
++
++For example:
++
++``` obmc-ikvm -v /dev/video0 -i /dev/hidg0 ```
+diff --git a/bootstrap.sh b/bootstrap.sh
+new file mode 100755
+index 0000000..50b75b7
+--- /dev/null
++++ b/bootstrap.sh
+@@ -0,0 +1,18 @@
++#!/bin/sh
++
++AUTOCONF_FILES="Makefile.in aclocal.m4 ar-lib autom4te.cache compile \
++        config.guess config.h.in config.sub configure depcomp install-sh \
++        ltmain.sh missing *libtool test-driver"
++
++case $1 in
++    clean)
++        test -f Makefile && make maintainer-clean
++        for file in ${AUTOCONF_FILES}; do
++            find -name "$file" | xargs -r rm -rf
++        done
++        exit 0
++        ;;
++esac
++
++autoreconf -i
++echo 'Run "./configure ${CONFIGURE_FLAGS} && make"'
+diff --git a/configure.ac b/configure.ac
+new file mode 100644
+index 0000000..1c69ef8
+--- /dev/null
++++ b/configure.ac
+@@ -0,0 +1,26 @@
++# Initialization
++AC_PREREQ([2.69])
++AC_INIT([obmc-ikvm], [1.0], [https://github.com/openbmc/obmc-ikvm/issues])
++AC_LANG([C++])
++AM_INIT_AUTOMAKE([subdir-objects -Wall -Werror foreign dist-xz])
++AM_SILENT_RULES([yes])
++
++# Checks for programs.
++AC_PROG_CXX
++AM_PROG_AR
++AC_PROG_INSTALL
++AC_PROG_MAKE_SET
++
++# Checks for typedefs, structures, and compiler characteristics.
++AX_CXX_COMPILE_STDCXX_14([noext])
++AX_APPEND_COMPILE_FLAGS([-Wall -Werror], [CXXFLAGS])
++
++# Checks for libraries.
++AC_CHECK_LIB([pthread], [pthread_create])
++PKG_CHECK_MODULES([LIBVNCSERVER], [libvncserver], , AC_MSG_ERROR(["Requires libvncserver package."]))
++PKG_CHECK_MODULES([SDBUSPLUS], [sdbusplus], , AC_MSG_ERROR(["Requires sdbusplus package."]))
++PKG_CHECK_MODULES([PHOSPHOR_LOGGING], [phosphor-logging], , AC_MSG_ERROR(["Requires phosphor-logging package."]))
++PKG_CHECK_MODULES([PHOSPHOR_DBUS_INTERFACES], [phosphor-dbus-interfaces], , AC_MSG_ERROR(["Requires phosphor-dbus-interfaces package."]))
++
++AC_CONFIG_FILES([Makefile])
++AC_OUTPUT
+diff --git a/ikvm_args.cpp b/ikvm_args.cpp
+new file mode 100644
+index 0000000..c226029
+--- /dev/null
++++ b/ikvm_args.cpp
+@@ -0,0 +1,54 @@
++#include <getopt.h>
++#include <rfb/rfb.h>
++#include <stdio.h>
++#include <stdlib.h>
++
++#include "ikvm_args.hpp"
++
++namespace ikvm
++{
++
++Args::Args(int argc, char* argv[]) : frameRate(30), commandLine(argc, argv)
++{
++    int option;
++    const char* opts = "f:hi:v:";
++    struct option lopts[] = {{"frameRate", 1, 0, 'f'},
++                             {"help", 0, 0, 'h'},
++                             {"input", 1, 0, 'i'},
++                             {"videoDevice", 1, 0, 'v'},
++                             {0, 0, 0, 0}};
++
++    while ((option = getopt_long(argc, argv, opts, lopts, NULL)) != -1)
++    {
++        switch (option)
++        {
++            case 'f':
++                frameRate = (int)strtol(optarg, NULL, 0);
++                if (frameRate < 0 || frameRate > 60)
++                    frameRate = 30;
++                break;
++            case 'h':
++                printUsage();
++                return;
++            case 'i':
++                inputPath = std::string(optarg);
++                break;
++            case 'v':
++                videoPath = std::string(optarg);
++                break;
++        }
++    }
++}
++
++void Args::printUsage()
++{
++    // use fprintf(stderr to match rfbUsage()
++    fprintf(stderr, "OpenBMC IKVM daemon\n");
++    fprintf(stderr, "Usage: obmc-ikvm [options]\n");
++    fprintf(stderr, "-f frame rate          try this frame rate\n");
++    fprintf(stderr, "-i device              HID gadget device\n");
++    fprintf(stderr, "-v device              V4L2 device\n");
++    rfbUsage();
++}
++
++} // namespace ikvm
+diff --git a/ikvm_args.hpp b/ikvm_args.hpp
+new file mode 100644
+index 0000000..489718b
+--- /dev/null
++++ b/ikvm_args.hpp
+@@ -0,0 +1,111 @@
++#pragma once
++
++#include <string>
++
++namespace ikvm
++{
++
++/*
++ * @class Args
++ * @brief Command line argument parser and storage
++ */
++class Args
++{
++  public:
++    /*
++     * @struct CommandLine
++     * @brief Stores the original command line arguments for later use
++     */
++    struct CommandLine
++    {
++        /*
++         * @brief Constructs CommandLine object
++         *
++         * @param[in] c - Number of arguments
++         * @param[in] v - Array of arguments
++         */
++        CommandLine(int c, char** v) : argc(c), argv(v)
++        {
++        }
++        ~CommandLine() = default;
++        CommandLine(const CommandLine&) = default;
++        CommandLine& operator=(const CommandLine&) = default;
++        CommandLine(CommandLine&&) = default;
++        CommandLine& operator=(CommandLine&&) = default;
++
++        int argc;
++        char** argv;
++    };
++
++    /*
++     * @brief Constructs Args object
++     *
++     * @param[in] argc - The number of arguments in the command line call
++     * @param[in] argv - The array of arguments from the command line
++     */
++    Args(int argc, char* argv[]);
++    ~Args() = default;
++    Args(const Args&) = default;
++    Args& operator=(const Args&) = default;
++    Args(Args&&) = default;
++    Args& operator=(Args&&) = default;
++
++    /*
++     * @brief Get the original command line arguments
++     *
++     * @return Reference to the CommandLine structure storing the original
++     *         command line arguments
++     */
++    inline const CommandLine& getCommandLine() const
++    {
++        return commandLine;
++    }
++
++    /*
++     * @brief Get the desired video frame rate
++     *
++     * @return Value of the desired frame rate in frames per second
++     */
++    inline int getFrameRate() const
++    {
++        return frameRate;
++    }
++
++    /*
++     * @brief Get the path to the USB input device
++     *
++     * @return Reference to the string storing the path to the input device
++     */
++    inline const std::string& getInputPath() const
++    {
++        return inputPath;
++    }
++
++    /*
++     * @brief Get the path to the V4L2 video device
++     *
++     * @return Reference to the string storing the path to the video device
++     */
++    inline const std::string& getVideoPath() const
++    {
++        return videoPath;
++    }
++
++  private:
++    /* @brief Prints the application usage to stderr */
++    void printUsage();
++
++    /*
++     * @brief Desired frame rate (in frames per second) of the video
++     *        stream
++     */
++    int frameRate;
++    /* @brief Path to the USB input device */
++    std::string inputPath;
++    /* @brief Path to the V4L2 video device */
++    std::string videoPath;
++    /* @brief Original command line arguments passed to the application */
++    CommandLine commandLine;
++};
++
++} // namespace ikvm
+diff --git a/ikvm_input.cpp b/ikvm_input.cpp
+new file mode 100644
+index 0000000..5f28ba5
+--- /dev/null
++++ b/ikvm_input.cpp
+@@ -0,0 +1,360 @@
++#include <err.h>
++#include <errno.h>
++#include <fcntl.h>
++#include <rfb/keysym.h>
++#include <sys/stat.h>
++#include <sys/types.h>
++#include <phosphor-logging/elog-errors.hpp>
++#include <phosphor-logging/elog.hpp>
++#include <phosphor-logging/log.hpp>
++#include <xyz/openbmc_project/Common/File/error.hpp>
++
++#include "ikvm_input.hpp"
++#include "ikvm_server.hpp"
++#include "scancodes.h"
++
++namespace ikvm
++{
++
++using namespace phosphor::logging;
++using namespace sdbusplus::xyz::openbmc_project::Common::File::Error;
++
++const char Input::keyboardID = 1;
++const char Input::pointerID = 2;
++
++const char Input::shiftCtrlMap[NUM_MODIFIER_BITS] = {
++    0x02, // left shift
++    0x20, // right shift
++    0x01, // left control
++    0x10  // right control
++};
++
++const char Input::metaAltMap[NUM_MODIFIER_BITS] = {
++    0x08, // left meta
++    0x80, // right meta
++    0x04, // left alt
++    0x40  // right alt
++};
++
++Input::Input(const std::string& p)
++    : keyboardReport{0}, pointerReport{0}, path(p)
++{
++    fd = open(path.c_str(), O_RDWR);
++    if (fd < 0)
++    {
++        log<level::ERR>("Failed to open input device",
++                        entry("PATH=%s", path.c_str()),
++                        entry("ERROR=%s", strerror(errno)));
++        elog<Open>(
++            xyz::openbmc_project::Common::File::Open::ERRNO(errno),
++            xyz::openbmc_project::Common::File::Open::PATH(path.c_str()));
++    }
++
++    // set the HID identifier byte because device is combined pointer/keyboard
++    keyboardReport[0] = keyboardID;
++    pointerReport[0] = pointerID;
++}
++
++Input::~Input()
++{
++    close(fd);
++}
++
++void Input::keyEvent(rfbBool down, rfbKeySym key, rfbClientPtr cl)
++{
++    Server::ClientData* cd = (Server::ClientData*)cl->clientData;
++    Input* input = cd->input;
++
++    if (down)
++    {
++        char sc = keyToScancode(key);
++
++        if (sc)
++        {
++            if (input->keysDown.find(key) == input->keysDown.end())
++            {
++                for (unsigned int i = 3; i < REPORT_LENGTH; ++i)
++                {
++                    if (!input->keyboardReport[i])
++                    {
++                        input->keyboardReport[i] = sc;
++                        input->keysDown.insert(std::make_pair(key, i));
++                        input->sendKeyboard = true;
++                        break;
++                    }
++                }
++            }
++        }
++        else
++        {
++            char mod = keyToMod(key);
++
++            if (mod)
++            {
++                input->keyboardReport[1] |= mod;
++                input->sendKeyboard = true;
++            }
++        }
++    }
++    else
++    {
++        auto it = input->keysDown.find(key);
++
++        if (it != input->keysDown.end())
++        {
++            input->keyboardReport[it->second] = 0;
++            input->keysDown.erase(it);
++            input->sendKeyboard = true;
++        }
++        else
++        {
++            char mod = keyToMod(key);
++
++            if (mod)
++            {
++                input->keyboardReport[1] &= ~mod;
++                input->sendKeyboard = true;
++            }
++        }
++    }
++}
++
++void Input::pointerEvent(int buttonMask, int x, int y, rfbClientPtr cl)
++{
++    Server::ClientData* cd = (Server::ClientData*)cl->clientData;
++    Input* input = cd->input;
++    Server* server = (Server*)cl->screen->screenData;
++    const Video& video = server->getVideo();
++
++    input->pointerReport[1] = buttonMask & 0xFF;
++
++    if (x >= 0 && (unsigned int)x < video.getWidth())
++    {
++        unsigned short xx = x * ((SHRT_MAX + 1) / video.getWidth());
++
++        memcpy(&input->pointerReport[2], &xx, 2);
++    }
++
++    if (y >= 0 && (unsigned int)y < video.getHeight())
++    {
++        unsigned short yy = y * ((SHRT_MAX + 1) / video.getHeight());
++
++        memcpy(&input->pointerReport[4], &yy, 2);
++    }
++
++    input->sendPointer = true;
++    rfbDefaultPtrAddEvent(buttonMask, x, y, cl);
++}
++
++void Input::sendRaw(char* data, int size)
++{
++    if (write(fd, data, size) != size)
++    {
++        log<level::ERR>("Failed to write report",
++                        entry("ERROR=%s", strerror(errno)));
++    }
++}
++
++void Input::sendReport()
++{
++    if (sendKeyboard)
++    {
++        if (write(fd, keyboardReport, REPORT_LENGTH) != REPORT_LENGTH)
++        {
++            log<level::ERR>("Failed to write keyboard report",
++                            entry("ERROR=%s", strerror(errno)));
++        }
++
++        sendKeyboard = false;
++    }
++
++    if (sendPointer)
++    {
++        if (write(fd, pointerReport, POINTER_LENGTH) != POINTER_LENGTH)
++        {
++            log<level::ERR>("Failed to write pointer report",
++                            entry("ERROR=%s", strerror(errno)));
++        }
++
++        sendPointer = false;
++    }
++}
++
++char Input::keyToMod(rfbKeySym key)
++{
++    char mod = 0;
++
++    if (key >= XK_Shift_L && key <= XK_Control_R)
++    {
++        mod = shiftCtrlMap[key - XK_Shift_L];
++    }
++    else if (key >= XK_Meta_L && key <= XK_Alt_R)
++    {
++        mod = metaAltMap[key - XK_Meta_L];
++    }
++
++    return mod;
++}
++
++char Input::keyToScancode(rfbKeySym key)
++{
++    char scancode = 0;
++
++    if ((key >= 'A' && key <= 'Z') || (key >= 'a' && key <= 'z'))
++    {
++        scancode = USBHID_KEY_A + ((key & 0x5F) - 'A');
++    }
++    else if (key >= '1' && key <= '9')
++    {
++        scancode = USBHID_KEY_1 + (key - '1');
++    }
++    else if (key >= XK_F1 && key <= XK_F12)
++    {
++        scancode = USBHID_KEY_F1 + (key - XK_F1);
++    }
++    else
++    {
++        switch (key)
++        {
++            case XK_exclam:
++                scancode = USBHID_KEY_1;
++                break;
++            case XK_at:
++                scancode = USBHID_KEY_2;
++                break;
++            case XK_numbersign:
++                scancode = USBHID_KEY_3;
++                break;
++            case XK_dollar:
++                scancode = USBHID_KEY_4;
++                break;
++            case XK_percent:
++                scancode = USBHID_KEY_5;
++                break;
++            case XK_asciicircum:
++                scancode = USBHID_KEY_6;
++                break;
++            case XK_ampersand:
++                scancode = USBHID_KEY_7;
++                break;
++            case XK_asterisk:
++                scancode = USBHID_KEY_8;
++                break;
++            case XK_parenleft:
++                scancode = USBHID_KEY_9;
++                break;
++            case XK_0:
++            case XK_parenright:
++                scancode = USBHID_KEY_0;
++                break;
++            case XK_Return:
++                scancode = USBHID_KEY_RETURN;
++                break;
++            case XK_Escape:
++                scancode = USBHID_KEY_ESC;
++                break;
++            case XK_BackSpace:
++                scancode = USBHID_KEY_BACKSPACE;
++                break;
++            case XK_Tab:
++                scancode = USBHID_KEY_TAB;
++                break;
++            case XK_space:
++                scancode = USBHID_KEY_SPACE;
++                break;
++            case XK_minus:
++            case XK_underscore:
++                scancode = USBHID_KEY_MINUS;
++                break;
++            case XK_plus:
++            case XK_equal:
++                scancode = USBHID_KEY_EQUAL;
++                break;
++            case XK_bracketleft:
++            case XK_braceleft:
++                scancode = USBHID_KEY_LEFTBRACE;
++                break;
++            case XK_bracketright:
++            case XK_braceright:
++                scancode = USBHID_KEY_RIGHTBRACE;
++                break;
++            case XK_backslash:
++            case XK_bar:
++                scancode = USBHID_KEY_BACKSLASH;
++                break;
++            case XK_colon:
++            case XK_semicolon:
++                scancode = USBHID_KEY_SEMICOLON;
++                break;
++            case XK_quotedbl:
++            case XK_apostrophe:
++                scancode = USBHID_KEY_APOSTROPHE;
++                break;
++            case XK_grave:
++            case XK_asciitilde:
++                scancode = USBHID_KEY_GRAVE;
++                break;
++            case XK_comma:
++            case XK_less:
++                scancode = USBHID_KEY_COMMA;
++                break;
++            case XK_period:
++            case XK_greater:
++                scancode = USBHID_KEY_DOT;
++                break;
++            case XK_slash:
++            case XK_question:
++                scancode = USBHID_KEY_SLASH;
++                break;
++            case XK_Caps_Lock:
++                scancode = USBHID_KEY_CAPSLOCK;
++                break;
++            case XK_Print:
++                scancode = USBHID_KEY_PRINT;
++                break;
++            case XK_Scroll_Lock:
++                scancode = USBHID_KEY_SCROLLLOCK;
++                break;
++            case XK_Pause:
++                scancode = USBHID_KEY_PAUSE;
++                break;
++            case XK_Insert:
++                scancode = USBHID_KEY_INSERT;
++                break;
++            case XK_Home:
++                scancode = USBHID_KEY_HOME;
++                break;
++            case XK_Page_Up:
++                scancode = USBHID_KEY_PAGEUP;
++                break;
++            case XK_Delete:
++                scancode = USBHID_KEY_DELETE;
++                break;
++            case XK_End:
++                scancode = USBHID_KEY_END;
++                break;
++            case XK_Page_Down:
++                scancode = USBHID_KEY_PAGEDOWN;
++                break;
++            case XK_Right:
++                scancode = USBHID_KEY_RIGHT;
++                break;
++            case XK_Left:
++                scancode = USBHID_KEY_LEFT;
++                break;
++            case XK_Down:
++                scancode = USBHID_KEY_DOWN;
++                break;
++            case XK_Up:
++                scancode = USBHID_KEY_UP;
++                break;
++            case XK_Num_Lock:
++                scancode = USBHID_KEY_NUMLOCK;
++                break;
++        }
++    }
++
++    return scancode;
++}
++
++} // namespace ikvm
+diff --git a/ikvm_input.hpp b/ikvm_input.hpp
+new file mode 100644
+index 0000000..59a95bc
+--- /dev/null
++++ b/ikvm_input.hpp
+@@ -0,0 +1,108 @@
++#pragma once
++
++#include <rfb/rfb.h>
++#include <map>
++#include <string>
++
++namespace ikvm
++{
++
++/*
++ * @class Input
++ * @brief Receives events from RFB clients and sends reports to the USB input
++ *        device
++ */
++class Input
++{
++  public:
++    /*
++     * @brief Constructs Input object
++     *
++     * @param[in] p - Path to the USB input device
++     */
++    Input(const std::string& p);
++    ~Input();
++    Input(const Input&) = default;
++    Input& operator=(const Input&) = default;
++    Input(Input&&) = default;
++    Input& operator=(Input&&) = default;
++
++    /*
++     * @brief RFB client key event handler
++     *
++     * @param[in] down - Boolean indicating whether key is pressed or not
++     * @param[in] key  - Key code
++     * @param[in] cl   - Handle to the RFB client
++     */
++    static void keyEvent(rfbBool down, rfbKeySym key, rfbClientPtr cl);
++    /*
++     * @brief RFB client pointer event handler
++     *
++     * @param[in] buttonMask - Bitmask indicating which buttons have been
++     *                         pressed
++     * @param[in] x          - Pointer x-coordinate
++     * @param[in] y          - Pointer y-coordinate
++     * @param[in] cl         - Handle to the RFB client
++     */
++    static void pointerEvent(int buttonMask, int x, int y, rfbClientPtr cl);
++
++    /*
++     * @brief Sends a data packet to the USB input device
++     *
++     * @param[in] data - pointer to data
++     * @param[in] size - number of bytes to send
++     */
++    void sendRaw(char* data, int size);
++    /* @brief Sends an HID report to the USB input device */
++    void sendReport();
++
++  private:
++    enum
++    {
++        NUM_MODIFIER_BITS = 4,
++        POINTER_LENGTH = 6,
++        REPORT_LENGTH = 8
++    };
++
++    /* @brief Keyboard HID identifier byte */
++    static const char keyboardID;
++    /* @brief Pointer HID identifier byte */
++    static const char pointerID;
++    /* @brief HID modifier bits mapped to shift and control key codes */
++    static const char shiftCtrlMap[NUM_MODIFIER_BITS];
++    /* @brief HID modifier bits mapped to meta and alt key codes */
++    static const char metaAltMap[NUM_MODIFIER_BITS];
++
++    /*
++     * @brief Translates a RFB-specific key code to HID modifier bit
++     *
++     * @param[in] key - key code
++     */
++    static char keyToMod(rfbKeySym key);
++    /*
++     * @brief Translates a RFB-specific key code to HID scancode
++     *
++     * @param[in] key - key code
++     */
++    static char keyToScancode(rfbKeySym key);
++
++    /* @brief Indicates whether or not to send a keyboard report */
++    bool sendKeyboard;
++    /* @brief Indicates whether or not to send a pointer report */
++    bool sendPointer;
++    /* @brief File descriptor for the USB input device */
++    int fd;
++    /* @brief Data for keyboard report */
++    char keyboardReport[REPORT_LENGTH];
++    /* @brief Data for pointer report */
++    char pointerReport[REPORT_LENGTH];
++    /* @brief Path to the USB input device */
++    std::string path;
++    /*
++     * @brief Mapping of RFB key code to report data index to keep track
++     *        of which keys are down
++     */
++    std::map<int, int> keysDown;
++};
++
++} // namespace ikvm
+diff --git a/ikvm_manager.cpp b/ikvm_manager.cpp
+new file mode 100644
+index 0000000..14f69c7
+--- /dev/null
++++ b/ikvm_manager.cpp
+@@ -0,0 +1,99 @@
++#include "ikvm_manager.hpp"
++#include <thread>
++
++namespace ikvm
++{
++
++Manager::Manager(const Args& args)
++    : continueExecuting(true), serverDone(false), videoDone(true),
++      input(args.getInputPath()),
++      video(args.getVideoPath(), input, args.getFrameRate()),
++      server(args, input, video)
++{
++}
++
++void Manager::run()
++{
++    std::thread run(serverThread, this);
++
++    while (continueExecuting)
++    {
++        if (server.wantsFrame())
++        {
++            video.getFrame();
++            server.sendFrame();
++        }
++        else
++        {
++            video.stop();
++        }
++
++        if (video.needsResize())
++        {
++            videoDone = false;
++            waitServer();
++            video.resize();
++            server.resize();
++            setVideoDone();
++        }
++        else
++        {
++            setVideoDone();
++            waitServer();
++        }
++    }
++
++    run.join();
++}
++
++void Manager::serverThread(Manager* manager)
++{
++    while (manager->continueExecuting)
++    {
++        manager->server.run();
++        manager->setServerDone();
++        manager->waitVideo();
++    }
++}
++
++void Manager::setServerDone()
++{
++    std::unique_lock<std::mutex> ulock(lock);
++
++    serverDone = true;
++    sync.notify_all();
++}
++
++void Manager::setVideoDone()
++{
++    std::unique_lock<std::mutex> ulock(lock);
++
++    videoDone = true;
++    sync.notify_all();
++}
++
++void Manager::waitServer()
++{
++    std::unique_lock<std::mutex> ulock(lock);
++
++    while (!serverDone)
++    {
++        sync.wait(ulock);
++    }
++
++    serverDone = false;
++}
++
++void Manager::waitVideo()
++{
++    std::unique_lock<std::mutex> ulock(lock);
++
++    while (!videoDone)
++    {
++        sync.wait(ulock);
++    }
++
++    // don't reset videoDone
++}
++
++} // namespace ikvm
+diff --git a/ikvm_manager.hpp b/ikvm_manager.hpp
+new file mode 100644
+index 0000000..ecaf7c7
+--- /dev/null
++++ b/ikvm_manager.hpp
+@@ -0,0 +1,74 @@
++#pragma once
++
++#include "ikvm_args.hpp"
++#include "ikvm_input.hpp"
++#include "ikvm_server.hpp"
++#include "ikvm_video.hpp"
++#include <condition_variable>
++#include <mutex>
++
++namespace ikvm
++{
++
++/*
++ * @class Manager
++ * @brief Manages the VNC server by executing threaded loops of RFB operations
++ *        and video device operations.
++ */
++class Manager
++{
++  public:
++    /*
++     * @brief Constructs the Manager object
++     *
++     * @param[in] args - Reference to Args object
++     */
++    Manager(const Args& args);
++    ~Manager() = default;
++    Manager(const Manager&) = default;
++    Manager& operator=(const Manager&) = default;
++    Manager(Manager&&) = default;
++    Manager& operator=(Manager&&) = default;
++
++    /* @brief Begins operation of the VNC server */
++    void run();
++
++  private:
++    /*
++     * @brief Thread function to loop the RFB update operations
++     *
++     * @param[in] manager - Pointer to the Manager object
++     */
++    static void serverThread(Manager* manager);
++
++    /* @brief Notifies thread waiters that RFB operations are complete */
++    void setServerDone();
++    /* @brief Notifies thread waiters that video operations are complete */
++    void setVideoDone();
++    /* @brief Blocks until RFB operations complete */
++    void waitServer();
++    /* @brief Blocks until video operations are complete */
++    void waitVideo();
++
++    /*
++     * @brief Boolean to indicate whether the application should continue
++     *        running
++     */
++    bool continueExecuting;
++    /* @brief Boolean to indicate that RFB operations are complete */
++    bool serverDone;
++    /* @brief Boolean to indicate that video operations are complete */
++    bool videoDone;
++    /* @brief Input object */
++    Input input;
++    /* @brief Video object */
++    Video video;
++    /* @brief RFB server object */
++    Server server;
++    /* @brief Condition variable to enable waiting for thread completion */
++    std::condition_variable sync;
++    /* @brief Mutex for waiting on condition variable safely */
++    std::mutex lock;
++};
++
++} // namespace ikvm
+diff --git a/ikvm_server.cpp b/ikvm_server.cpp
+new file mode 100644
+index 0000000..681725a
+--- /dev/null
++++ b/ikvm_server.cpp
+@@ -0,0 +1,205 @@
++#include <rfb/rfbproto.h>
++#include <phosphor-logging/elog-errors.hpp>
++#include <phosphor-logging/elog.hpp>
++#include <phosphor-logging/log.hpp>
++#include <xyz/openbmc_project/Common/error.hpp>
++
++#include "ikvm_server.hpp"
++
++namespace ikvm
++{
++
++using namespace phosphor::logging;
++using namespace sdbusplus::xyz::openbmc_project::Common::Error;
++
++Server::Server(const Args& args, Input& i, Video& v)
++    : pendingResize(false), frameCounter(0), numClients(0), input(i), video(v)
++{
++    const Args::CommandLine& commandLine = args.getCommandLine();
++    int argc = commandLine.argc;
++
++    server = rfbGetScreen(&argc, commandLine.argv, video.getWidth(),
++                          video.getHeight(), Video::bitsPerSample,
++                          Video::samplesPerPixel, Video::bytesPerPixel);
++
++    if (!server)
++    {
++        log<level::ERR>("Failed to get VNC screen due to invalid arguments");
++        elog<InvalidArgument>(
++            xyz::openbmc_project::Common::InvalidArgument::ARGUMENT_NAME(""),
++            xyz::openbmc_project::Common::InvalidArgument::ARGUMENT_VALUE(""));
++    }
++
++    framebuffer.resize(
++        video.getHeight() * video.getWidth() * Video::bytesPerPixel, 0);
++
++    server->screenData = this;
++    server->desktopName = "OpenBMC IKVM";
++    server->frameBuffer = framebuffer.data();
++    server->newClientHook = newClient;
++
++    rfbInitServer(server);
++
++    rfbMarkRectAsModified(server, 0, 0, video.getWidth(), video.getHeight());
++
++    server->kbdAddEvent = Input::keyEvent;
++    server->ptrAddEvent = Input::pointerEvent;
++
++    processTime = (1000000 / video.getFrameRate()) - 100;
++}
++
++Server::~Server()
++{
++    rfbScreenCleanup(server);
++}
++
++void Server::resize()
++{
++    if (frameCounter > video.getFrameRate())
++    {
++        doResize();
++    }
++    else
++    {
++        pendingResize = true;
++    }
++}
++
++void Server::run()
++{
++    rfbProcessEvents(server, processTime);
++
++    if (server->clientHead)
++    {
++        input.sendReport();
++
++        frameCounter++;
++        if (pendingResize && frameCounter > video.getFrameRate())
++        {
++            doResize();
++            pendingResize = false;
++        }
++    }
++}
++
++void Server::sendFrame()
++{
++    char* data = video.getData();
++    rfbClientIteratorPtr it;
++    rfbClientPtr cl;
++
++    if (!data || pendingResize)
++    {
++        return;
++    }
++
++    it = rfbGetClientIterator(server);
++
++    while ((cl = rfbClientIteratorNext(it)))
++    {
++        ClientData* cd = (ClientData*)cl->clientData;
++        rfbFramebufferUpdateMsg* fu = (rfbFramebufferUpdateMsg*)cl->updateBuf;
++
++        if (!cd)
++        {
++            continue;
++        }
++
++        if (cd->skipFrame)
++        {
++            cd->skipFrame--;
++            continue;
++        }
++
++        if (cl->enableLastRectEncoding)
++        {
++            fu->nRects = 0xFFFF;
++        }
++        else
++        {
++            fu->nRects = Swap16IfLE(1);
++        }
++
++        fu->type = rfbFramebufferUpdate;
++        cl->ublen = sz_rfbFramebufferUpdateMsg;
++        rfbSendUpdateBuf(cl);
++
++        cl->tightEncoding = rfbEncodingTight;
++        rfbSendTightHeader(cl, 0, 0, video.getWidth(), video.getHeight());
++
++        cl->updateBuf[cl->ublen++] = (char)(rfbTightJpeg << 4);
++        rfbSendCompressedDataTight(cl, data, video.getFrameSize());
++
++        if (cl->enableLastRectEncoding)
++        {
++            rfbSendLastRectMarker(cl);
++        }
++
++        rfbSendUpdateBuf(cl);
++    }
++
++    rfbReleaseClientIterator(it);
++}
++
++void Server::clientGone(rfbClientPtr cl)
++{
++    Server* server = (Server*)cl->screen->screenData;
++
++    delete (ClientData*)cl->clientData;
++
++    if (server->numClients-- == 1)
++    {
++        rfbMarkRectAsModified(server->server, 0, 0, server->video.getWidth(),
++                              server->video.getHeight());
++    }
++}
++
++enum rfbNewClientAction Server::newClient(rfbClientPtr cl)
++{
++    Server* server = (Server*)cl->screen->screenData;
++
++    cl->clientData =
++        new ClientData(server->video.getFrameRate(), &server->input);
++    cl->clientGoneHook = clientGone;
++    if (!server->numClients++)
++    {
++        server->pendingResize = false;
++        server->frameCounter = 0;
++        server->video.start();
++    }
++
++    return RFB_CLIENT_ACCEPT;
++}
++
++void Server::doResize()
++{
++    rfbClientIteratorPtr it;
++    rfbClientPtr cl;
++
++    framebuffer.resize(
++        video.getHeight() * video.getWidth() * Video::bytesPerPixel, 0);
++
++    rfbNewFramebuffer(server, framebuffer.data(), video.getWidth(),
++                      video.getHeight(), Video::bitsPerSample,
++                      Video::samplesPerPixel, Video::bytesPerPixel);
++    rfbMarkRectAsModified(server, 0, 0, video.getWidth(), video.getHeight());
++
++    it = rfbGetClientIterator(server);
++
++    while ((cl = rfbClientIteratorNext(it)))
++    {
++        ClientData* cd = (ClientData*)cl->clientData;
++
++        if (!cd)
++        {
++            continue;
++        }
++
++        // delay video updates to give the client time to resize
++        cd->skipFrame = video.getFrameRate();
++    }
++
++    rfbReleaseClientIterator(it);
++}
++
++} // namespace ikvm
+diff --git a/ikvm_server.hpp b/ikvm_server.hpp
+new file mode 100644
+index 0000000..80e414b
+--- /dev/null
++++ b/ikvm_server.hpp
+@@ -0,0 +1,119 @@
++#pragma once
++
++#include "ikvm_args.hpp"
++#include "ikvm_input.hpp"
++#include "ikvm_video.hpp"
++#include <rfb/rfb.h>
++#include <vector>
++
++namespace ikvm
++{
++
++/*
++ * @class Server
++ * @brief Manages the RFB server connection and updates
++ */
++class Server
++{
++  public:
++    /*
++     * @struct ClientData
++     * @brief Store necessary data for each connected RFB client
++     */
++    struct ClientData
++    {
++        /*
++         * @brief Constructs ClientData object
++         *
++         * @param[in] s - Number of frames to skip when client connects
++         * @param[in] i - Pointer to Input object
++         */
++        ClientData(int s, Input* i) : skipFrame(s), input(i)
++        {
++        }
++        ~ClientData() = default;
++        ClientData(const ClientData&) = default;
++        ClientData& operator=(const ClientData&) = default;
++        ClientData(ClientData&&) = default;
++        ClientData& operator=(ClientData&&) = default;
++
++        int skipFrame;
++        Input* input;
++    };
++
++    /*
++     * @brief Constructs Server object
++     *
++     * @param[in] args - Reference to Args object
++     * @param[in] i    - Reference to Input object
++     * @param[in] v    - Reference to Video object
++     */
++    Server(const Args& args, Input& i, Video& v);
++    ~Server();
++    Server(const Server&) = default;
++    Server& operator=(const Server&) = default;
++    Server(Server&&) = default;
++    Server& operator=(Server&&) = default;
++
++    /* @brief Resizes the RFB framebuffer */
++    void resize();
++    /* @brief Executes any pending RFB updates and client input */
++    void run();
++    /* @brief Sends pending video frame to clients */
++    void sendFrame();
++
++    /*
++     * @brief Indicates whether or not video data is desired
++     *
++     * @return Boolean to indicate whether any clients need a video frame
++     */
++    inline bool wantsFrame() const
++    {
++        return server->clientHead;
++    }
++    /*
++     * @brief Get the Video object
++     *
++     * @return Reference to the Video object
++     */
++    inline const Video& getVideo() const
++    {
++        return video;
++    }
++
++  private:
++    /*
++     * @brief Handler for a client disconnecting
++     *
++     * @param[in] cl - Handle to the client object
++     */
++    static void clientGone(rfbClientPtr cl);
++    /*
++     * @brief Handler for client connecting
++     *
++     * @param[in] cl - Handle to the client object
++     */
++    static enum rfbNewClientAction newClient(rfbClientPtr cl);
++
++    /* @brief Performs the resize operation on the framebuffer */
++    void doResize();
++
++    /* @brief Boolean to indicate if a resize operation is on-going */
++    bool pendingResize;
++    /* @brief Number of frames handled since a client connected */
++    int frameCounter;
++    /* @brief Number of connected clients */
++    int numClients;
++    /* @brief Microseconds to process RFB events every frame */
++    long int processTime;
++    /* @brief Handle to the RFB server object */
++    rfbScreenInfoPtr server;
++    /* @brief Reference to the Input object */
++    Input& input;
++    /* @brief Reference to the Video object */
++    Video& video;
++    /* @brief Default framebuffer storage */
++    std::vector<char> framebuffer;
++};
++
++} // namespace ikvm
+diff --git a/ikvm_video.cpp b/ikvm_video.cpp
+new file mode 100644
+index 0000000..2a44ff1
+--- /dev/null
++++ b/ikvm_video.cpp
+@@ -0,0 +1,460 @@
++#include <err.h>
++#include <errno.h>
++#include <fcntl.h>
++#include <linux/videodev2.h>
++#include <poll.h>
++#include <sys/ioctl.h>
++#include <sys/mman.h>
++#include <sys/stat.h>
++#include <sys/types.h>
++#include <phosphor-logging/elog-errors.hpp>
++#include <phosphor-logging/elog.hpp>
++#include <phosphor-logging/log.hpp>
++#include <xyz/openbmc_project/Common/Device/error.hpp>
++#include <xyz/openbmc_project/Common/File/error.hpp>
++
++#include "ikvm_video.hpp"
++
++namespace ikvm
++{
++
++const int Video::bitsPerSample(8);
++const int Video::bytesPerPixel(4);
++const int Video::samplesPerPixel(3);
++
++using namespace phosphor::logging;
++using namespace sdbusplus::xyz::openbmc_project::Common::File::Error;
++using namespace sdbusplus::xyz::openbmc_project::Common::Device::Error;
++
++Video::Video(const std::string& p, Input& input, int fr)
++    : resizeAfterOpen(false), fd(-1), frameRate(fr), lastFrameIndex(-1),
++      height(600), width(800), input(input), path(p)
++{
++}
++
++Video::~Video()
++{
++    stop();
++}
++
++char* Video::getData()
++{
++    if (lastFrameIndex >= 0)
++    {
++        return (char*)buffers[lastFrameIndex].data;
++    }
++
++    return nullptr;
++}
++
++void Video::getFrame()
++{
++    bool queue(false);
++    int rc(0);
++    v4l2_buffer buf;
++
++    if (fd < 0)
++    {
++        return;
++    }
++
++    memset(&buf, 0, sizeof(v4l2_buffer));
++    buf.type = V4L2_BUF_TYPE_VIDEO_CAPTURE;
++    buf.memory = V4L2_MEMORY_MMAP;
++
++    while (rc >= 0)
++    {
++        rc = ioctl(fd, VIDIOC_DQBUF, &buf);
++        if (rc >= 0)
++        {
++            buffers[buf.index].queued = false;
++
++            if (!(buf.flags & V4L2_BUF_FLAG_ERROR))
++            {
++                lastFrameIndex = buf.index;
++                buffers[lastFrameIndex].payload = buf.bytesused;
++                queue = true;
++                break;
++            }
++            else
++            {
++                buffers[buf.index].payload = 0;
++            }
++        }
++    }
++
++    if (queue)
++    {
++        for (unsigned int i = 0; i < buffers.size(); ++i)
++        {
++            if (i == (unsigned int)lastFrameIndex)
++            {
++                continue;
++            }
++
++            if (!buffers[i].queued)
++            {
++                memset(&buf, 0, sizeof(v4l2_buffer));
++                buf.type = V4L2_BUF_TYPE_VIDEO_CAPTURE;
++                buf.memory = V4L2_MEMORY_MMAP;
++                buf.index = i;
++
++                rc = ioctl(fd, VIDIOC_QBUF, &buf);
++                if (rc)
++                {
++                    log<level::ERR>("Failed to queue buffer",
++                                    entry("ERROR=%s", strerror(errno)));
++                    elog<ReadFailure>(
++                        xyz::openbmc_project::Common::Device::ReadFailure::
++                            CALLOUT_ERRNO(errno),
++                        xyz::openbmc_project::Common::Device::ReadFailure::
++                            CALLOUT_DEVICE_PATH(path.c_str()));
++                }
++
++                buffers[i].queued = true;
++            }
++        }
++    }
++}
++
++bool Video::needsResize()
++{
++    int rc;
++    v4l2_dv_timings timings;
++
++    if (fd < 0)
++    {
++        return false;
++    }
++
++    if (resizeAfterOpen)
++    {
++        return true;
++    }
++
++    memset(&timings, 0, sizeof(v4l2_dv_timings));
++    rc = ioctl(fd, VIDIOC_QUERY_DV_TIMINGS, &timings);
++    if (rc < 0)
++    {
++        log<level::ERR>("Failed to query timings",
++                        entry("ERROR=%s", strerror(errno)));
++        return false;
++    }
++
++    if (timings.bt.width != width || timings.bt.height != height)
++    {
++        width = timings.bt.width;
++        height = timings.bt.height;
++
++        if (!width || !height)
++        {
++            log<level::ERR>("Failed to get new resolution",
++                            entry("WIDTH=%d", width),
++                            entry("HEIGHT=%d", height));
++            elog<Open>(
++                xyz::openbmc_project::Common::File::Open::ERRNO(-EPROTO),
++                xyz::openbmc_project::Common::File::Open::PATH(path.c_str()));
++        }
++
++        lastFrameIndex = -1;
++        return true;
++    }
++
++    return false;
++}
++
++void Video::resize()
++{
++    int rc;
++    unsigned int i;
++    bool needsResizeCall(false);
++    v4l2_buf_type type(V4L2_BUF_TYPE_VIDEO_CAPTURE);
++
++    if (fd < 0)
++    {
++        return;
++    }
++
++    if (resizeAfterOpen)
++    {
++        resizeAfterOpen = false;
++        return;
++    }
++
++    for (i = 0; i < buffers.size(); ++i)
++    {
++        if (buffers[i].data)
++        {
++            needsResizeCall = true;
++            break;
++        }
++    }
++
++    if (needsResizeCall)
++    {
++        rc = ioctl(fd, VIDIOC_STREAMOFF, &type);
++        if (rc)
++        {
++            log<level::ERR>("Failed to stop streaming",
++                            entry("ERROR=%s", strerror(errno)));
++            elog<ReadFailure>(
++                xyz::openbmc_project::Common::Device::ReadFailure::
++                    CALLOUT_ERRNO(errno),
++                xyz::openbmc_project::Common::Device::ReadFailure::
++                    CALLOUT_DEVICE_PATH(path.c_str()));
++        }
++    }
++
++    for (i = 0; i < buffers.size(); ++i)
++    {
++        if (buffers[i].data)
++        {
++            munmap(buffers[i].data, buffers[i].size);
++            buffers[i].data = nullptr;
++            buffers[i].queued = false;
++        }
++    }
++
++    if (needsResizeCall)
++    {
++        v4l2_dv_timings timings;
++
++        memset(&timings, 0, sizeof(v4l2_dv_timings));
++        rc = ioctl(fd, VIDIOC_QUERY_DV_TIMINGS, &timings);
++        if (rc < 0)
++        {
++            log<level::ERR>("Failed to query timings",
++                            entry("ERROR=%s", strerror(errno)));
++            elog<ReadFailure>(
++                xyz::openbmc_project::Common::Device::ReadFailure::
++                    CALLOUT_ERRNO(errno),
++                xyz::openbmc_project::Common::Device::ReadFailure::
++                    CALLOUT_DEVICE_PATH(path.c_str()));
++        }
++
++        rc = ioctl(fd, VIDIOC_S_DV_TIMINGS, &timings);
++        if (rc < 0)
++        {
++            log<level::ERR>("Failed to set timings",
++                            entry("ERROR=%s", strerror(errno)));
++            elog<ReadFailure>(
++                xyz::openbmc_project::Common::Device::ReadFailure::
++                    CALLOUT_ERRNO(errno),
++                xyz::openbmc_project::Common::Device::ReadFailure::
++                    CALLOUT_DEVICE_PATH(path.c_str()));
++        }
++    }
++
++    for (i = 0; i < buffers.size(); ++i)
++    {
++        v4l2_buffer buf;
++
++        memset(&buf, 0, sizeof(v4l2_buffer));
++        buf.type = V4L2_BUF_TYPE_VIDEO_CAPTURE;
++        buf.memory = V4L2_MEMORY_MMAP;
++        buf.index = i;
++
++        rc = ioctl(fd, VIDIOC_QUERYBUF, &buf);
++        if (rc < 0)
++        {
++            log<level::ERR>("Failed to query buffer",
++                            entry("ERROR=%s", strerror(errno)));
++            elog<ReadFailure>(
++                xyz::openbmc_project::Common::Device::ReadFailure::
++                    CALLOUT_ERRNO(errno),
++                xyz::openbmc_project::Common::Device::ReadFailure::
++                    CALLOUT_DEVICE_PATH(path.c_str()));
++        }
++
++        buffers[i].data = mmap(NULL, buf.length, PROT_READ | PROT_WRITE,
++                               MAP_SHARED, fd, buf.m.offset);
++        if (buffers[i].data == MAP_FAILED)
++        {
++            log<level::ERR>("Failed to mmap buffer",
++                            entry("ERROR=%s", strerror(errno)));
++            elog<ReadFailure>(
++                xyz::openbmc_project::Common::Device::ReadFailure::
++                    CALLOUT_ERRNO(errno),
++                xyz::openbmc_project::Common::Device::ReadFailure::
++                    CALLOUT_DEVICE_PATH(path.c_str()));
++        }
++
++        buffers[i].size = buf.length;
++
++        rc = ioctl(fd, VIDIOC_QBUF, &buf);
++        if (rc < 0)
++        {
++            log<level::ERR>("Failed to queue buffer",
++                            entry("ERROR=%s", strerror(errno)));
++            elog<ReadFailure>(
++                xyz::openbmc_project::Common::Device::ReadFailure::
++                    CALLOUT_ERRNO(errno),
++                xyz::openbmc_project::Common::Device::ReadFailure::
++                    CALLOUT_DEVICE_PATH(path.c_str()));
++        }
++
++        buffers[i].queued = true;
++    }
++
++    rc = ioctl(fd, VIDIOC_STREAMON, &type);
++    if (rc)
++    {
++        log<level::ERR>("Failed to start streaming",
++                        entry("ERROR=%s", strerror(errno)));
++        elog<ReadFailure>(
++            xyz::openbmc_project::Common::Device::ReadFailure::CALLOUT_ERRNO(
++                errno),
++            xyz::openbmc_project::Common::Device::ReadFailure::
++                CALLOUT_DEVICE_PATH(path.c_str()));
++    }
++}
++
++void Video::start()
++{
++    int rc;
++    size_t oldHeight = height;
++    size_t oldWidth = width;
++    v4l2_capability cap;
++    v4l2_format fmt;
++    v4l2_requestbuffers req;
++    v4l2_streamparm sparm;
++
++    if (fd >= 0)
++    {
++        return;
++    }
++
++    fd = open(path.c_str(), O_RDWR);
++    if (fd < 0)
++    {
++        unsigned short xx = SHRT_MAX;
++        char wakeupReport[6] = {0};
++
++        wakeupReport[0] = 2;
++        memcpy(&wakeupReport[2], &xx, 2);
++
++        input.sendRaw(wakeupReport, 6);
++
++        fd = open(path.c_str(), O_RDWR);
++        if (fd < 0)
++        {
++            log<level::ERR>("Failed to open video device",
++                            entry("PATH=%s", path.c_str()),
++                            entry("ERROR=%s", strerror(errno)));
++            elog<Open>(
++                xyz::openbmc_project::Common::File::Open::ERRNO(errno),
++                xyz::openbmc_project::Common::File::Open::PATH(path.c_str()));
++        }
++    }
++
++    memset(&cap, 0, sizeof(v4l2_capability));
++    rc = ioctl(fd, VIDIOC_QUERYCAP, &cap);
++    if (rc < 0)
++    {
++        log<level::ERR>("Failed to query video device capabilities",
++                        entry("ERROR=%s", strerror(errno)));
++        elog<ReadFailure>(
++            xyz::openbmc_project::Common::Device::ReadFailure::CALLOUT_ERRNO(
++                errno),
++            xyz::openbmc_project::Common::Device::ReadFailure::
++                CALLOUT_DEVICE_PATH(path.c_str()));
++    }
++
++    if (!(cap.capabilities & V4L2_CAP_VIDEO_CAPTURE) ||
++        !(cap.capabilities & V4L2_CAP_STREAMING))
++    {
++        log<level::ERR>("Video device doesn't support this application");
++        elog<Open>(
++            xyz::openbmc_project::Common::File::Open::ERRNO(errno),
++            xyz::openbmc_project::Common::File::Open::PATH(path.c_str()));
++    }
++
++    memset(&fmt, 0, sizeof(v4l2_format));
++    fmt.type = V4L2_BUF_TYPE_VIDEO_CAPTURE;
++    rc = ioctl(fd, VIDIOC_G_FMT, &fmt);
++    if (rc < 0)
++    {
++        log<level::ERR>("Failed to query video device format",
++                        entry("ERROR=%s", strerror(errno)));
++        elog<ReadFailure>(
++            xyz::openbmc_project::Common::Device::ReadFailure::CALLOUT_ERRNO(
++                errno),
++            xyz::openbmc_project::Common::Device::ReadFailure::
++                CALLOUT_DEVICE_PATH(path.c_str()));
++    }
++
++    memset(&sparm, 0, sizeof(v4l2_streamparm));
++    sparm.type = V4L2_BUF_TYPE_VIDEO_CAPTURE;
++    sparm.parm.capture.timeperframe.numerator = 1;
++    sparm.parm.capture.timeperframe.denominator = frameRate;
++    rc = ioctl(fd, VIDIOC_S_PARM, &sparm);
++    if (rc < 0)
++    {
++        log<level::WARNING>("Failed to set video device frame rate",
++                            entry("ERROR=%s", strerror(errno)));
++    }
++
++    height = fmt.fmt.pix.height;
++    width = fmt.fmt.pix.width;
++
++    memset(&req, 0, sizeof(v4l2_requestbuffers));
++    req.count = 3;
++    req.type = V4L2_BUF_TYPE_VIDEO_CAPTURE;
++    req.memory = V4L2_MEMORY_MMAP;
++    rc = ioctl(fd, VIDIOC_REQBUFS, &req);
++    if (rc < 0 || req.count < 2)
++    {
++        log<level::ERR>("Failed to request streaming buffers",
++                        entry("ERROR=%s", strerror(errno)));
++        elog<ReadFailure>(
++            xyz::openbmc_project::Common::Device::ReadFailure::CALLOUT_ERRNO(
++                errno),
++            xyz::openbmc_project::Common::Device::ReadFailure::
++                CALLOUT_DEVICE_PATH(path.c_str()));
++    }
++
++    buffers.resize(req.count);
++
++    resize();
++
++    if (oldHeight != height || oldWidth != width)
++    {
++        resizeAfterOpen = true;
++    }
++}
++
++void Video::stop()
++{
++    int rc;
++    unsigned int i;
++    v4l2_buf_type type(V4L2_BUF_TYPE_VIDEO_CAPTURE);
++
++    if (fd < 0)
++    {
++        return;
++    }
++
++    lastFrameIndex = -1;
++
++    rc = ioctl(fd, VIDIOC_STREAMOFF, &type);
++    if (rc)
++    {
++        log<level::ERR>("Failed to stop streaming",
++                        entry("ERROR=%s", strerror(errno)));
++    }
++
++    for (i = 0; i < buffers.size(); ++i)
++    {
++        if (buffers[i].data)
++        {
++            munmap(buffers[i].data, buffers[i].size);
++            buffers[i].data = nullptr;
++            buffers[i].queued = false;
++        }
++    }
++
++    close(fd);
++    fd = -1;
++}
++
++} // namespace ikvm
+diff --git a/ikvm_video.hpp b/ikvm_video.hpp
+new file mode 100644
+index 0000000..32746aa
+--- /dev/null
++++ b/ikvm_video.hpp
+@@ -0,0 +1,143 @@
++#pragma once
++
++#include "ikvm_input.hpp"
++#include <mutex>
++#include <string>
++#include <vector>
++
++namespace ikvm
++{
++
++/*
++ * @class Video
++ * @brief Sets up the V4L2 video device and performs read operations
++ */
++class Video
++{
++  public:
++    /*
++     * @brief Constructs Video object
++     *
++     * @param[in] p     - Path to the V4L2 video device
++     * @param[in] input - Reference to the Input object
++     * @param[in] fr    - desired frame rate of the video
++     */
++    Video(const std::string& p, Input& input, int fr = 30);
++    ~Video();
++    Video(const Video&) = default;
++    Video& operator=(const Video&) = default;
++    Video(Video&&) = default;
++    Video& operator=(Video&&) = default;
++
++    /*
++     * @brief Gets the video frame data
++     *
++     * @return Pointer to the video frame data
++     */
++    char* getData();
++    /* @brief Performs read to grab latest video frame */
++    void getFrame();
++    /*
++     * @brief Gets whether or not the video frame needs to be resized
++     *
++     * @return Boolean indicating if the frame needs to be resized
++     */
++    bool needsResize();
++    /* @brief Performs the resize and re-allocates framebuffer */
++    void resize();
++    /* @brief Starts streaming from the video device */
++    void start();
++    /* @brief Stops streaming from the video device */
++    void stop();
++
++    /*
++     * @brief Gets the desired video frame rate in frames per second
++     *
++     * @return Value of the desired frame rate
++     */
++    inline int getFrameRate() const
++    {
++        return frameRate;
++    }
++    /*
++     * @brief Gets the size of the video frame data
++     *
++     * @return Value of the size of the video frame data in bytes
++     */
++    inline size_t getFrameSize() const
++    {
++        return buffers[lastFrameIndex].payload;
++    }
++    /*
++     * @brief Gets the height of the video frame
++     *
++     * @return Value of the height of video frame in pixels
++     */
++    inline size_t getHeight() const
++    {
++        return height;
++    }
++    /*
++     * @brief Gets the width of the video frame
++     *
++     * @return Value of the width of video frame in pixels
++     */
++    inline size_t getWidth() const
++    {
++        return width;
++    }
++
++    /* @brief Number of bits per component of a pixel */
++    static const int bitsPerSample;
++    /* @brief Number of bytes of storage for a pixel */
++    static const int bytesPerPixel;
++    /* @brief Number of components in a pixel (i.e. 3 for RGB pixel) */
++    static const int samplesPerPixel;
++
++  private:
++    /*
++     * @struct Buffer
++     * @brief Store the address and size of frame data from streaming
++     *        operations
++     */
++    struct Buffer
++    {
++        Buffer() : data(nullptr), queued(false), payload(0), size(0)
++        {
++        }
++        ~Buffer() = default;
++        Buffer(const Buffer&) = default;
++        Buffer& operator=(const Buffer&) = default;
++        Buffer(Buffer&&) = default;
++        Buffer& operator=(Buffer&&) = default;
++
++        void* data;
++        bool queued;
++        size_t payload;
++        size_t size;
++    };
++
++    /*
++     * @brief Boolean to indicate whether the resize was triggered during
++     *        the open operation
++     */
++    bool resizeAfterOpen;
++    /* @brief File descriptor for the V4L2 video device */
++    int fd;
++    /* @brief Desired frame rate of video stream in frames per second */
++    int frameRate;
++    /* @brief Buffer index for the last video frame */
++    int lastFrameIndex;
++    /* @brief Height in pixels of the video frame */
++    size_t height;
++    /* @brief Width in pixels of the video frame */
++    size_t width;
++    /* @brief Reference to the Input object */
++    Input& input;
++    /* @brief Path to the V4L2 video device */
++    const std::string path;
++    /* @brief Streaming buffer storage */
++    std::vector<Buffer> buffers;
++};
++
++} // namespace ikvm
+diff --git a/obmc-ikvm.cpp b/obmc-ikvm.cpp
+new file mode 100644
+index 0000000..271857b
+--- /dev/null
++++ b/obmc-ikvm.cpp
+@@ -0,0 +1,12 @@
++#include "ikvm_args.hpp"
++#include "ikvm_manager.hpp"
++
++int main(int argc, char* argv[])
++{
++    ikvm::Args args(argc, argv);
++    ikvm::Manager manager(args);
++
++    manager.run();
++
++    return 0;
++}
+diff --git a/scancodes.h b/scancodes.h
+new file mode 100644
+index 0000000..0a3c735
+--- /dev/null
++++ b/scancodes.h
+@@ -0,0 +1,82 @@
++#pragma once
++
++#define USBHID_KEY_A		0x04
++#define USBHID_KEY_B		0x05
++#define USBHID_KEY_C		0x06
++#define USBHID_KEY_D		0x07
++#define USBHID_KEY_E		0x08
++#define USBHID_KEY_F		0x09
++#define USBHID_KEY_G		0x0a
++#define USBHID_KEY_H		0x0b
++#define USBHID_KEY_I		0x0c
++#define USBHID_KEY_J		0x0d
++#define USBHID_KEY_K		0x0e
++#define USBHID_KEY_L		0x0f
++#define USBHID_KEY_M		0x10
++#define USBHID_KEY_N		0x11
++#define USBHID_KEY_O		0x12
++#define USBHID_KEY_P		0x13
++#define USBHID_KEY_Q		0x14
++#define USBHID_KEY_R		0x15
++#define USBHID_KEY_S		0x16
++#define USBHID_KEY_T		0x17
++#define USBHID_KEY_U		0x18
++#define USBHID_KEY_V		0x19
++#define USBHID_KEY_W		0x1a
++#define USBHID_KEY_X		0x1b
++#define USBHID_KEY_Y		0x1c
++#define USBHID_KEY_Z		0x1d
++#define USBHID_KEY_1		0x1e
++#define USBHID_KEY_2		0x1f
++#define USBHID_KEY_3		0x20
++#define USBHID_KEY_4		0x21
++#define USBHID_KEY_5		0x22
++#define USBHID_KEY_6		0x23
++#define USBHID_KEY_7		0x24
++#define USBHID_KEY_8		0x25
++#define USBHID_KEY_9		0x26
++#define USBHID_KEY_0		0x27
++#define USBHID_KEY_RETURN	0x28
++#define USBHID_KEY_ESC		0x29
++#define USBHID_KEY_BACKSPACE	0x2a
++#define USBHID_KEY_TAB		0x2b
++#define USBHID_KEY_SPACE	0x2c
++#define USBHID_KEY_MINUS	0x2d
++#define USBHID_KEY_EQUAL	0x2e
++#define USBHID_KEY_LEFTBRACE	0x2f
++#define USBHID_KEY_RIGHTBRACE	0x30
++#define USBHID_KEY_BACKSLASH	0x31
++#define USBHID_KEY_HASH		0x32
++#define USBHID_KEY_SEMICOLON	0x33
++#define USBHID_KEY_APOSTROPHE	0x34
++#define USBHID_KEY_GRAVE	0x35
++#define USBHID_KEY_COMMA	0x36
++#define USBHID_KEY_DOT		0x37
++#define USBHID_KEY_SLASH	0x38
++#define USBHID_KEY_CAPSLOCK	0x39
++#define USBHID_KEY_F1		0x3a
++#define USBHID_KEY_F2		0x3b
++#define USBHID_KEY_F3		0x3c
++#define USBHID_KEY_F4		0x3d
++#define USBHID_KEY_F5		0x3e
++#define USBHID_KEY_F6		0x3f
++#define USBHID_KEY_F7		0x40
++#define USBHID_KEY_F8		0x41
++#define USBHID_KEY_F9		0x42
++#define USBHID_KEY_F10		0x43
++#define USBHID_KEY_F11		0x44
++#define USBHID_KEY_F12		0x45
++#define USBHID_KEY_PRINT	0x46
++#define USBHID_KEY_SCROLLLOCK	0x47
++#define USBHID_KEY_PAUSE	0x48
++#define USBHID_KEY_INSERT	0x49
++#define USBHID_KEY_HOME		0x4a
++#define USBHID_KEY_PAGEUP	0x4b
++#define USBHID_KEY_DELETE	0x4c
++#define USBHID_KEY_END		0x4d
++#define USBHID_KEY_PAGEDOWN	0x4e
++#define USBHID_KEY_RIGHT	0x4f
++#define USBHID_KEY_LEFT		0x50
++#define USBHID_KEY_DOWN		0x51
++#define USBHID_KEY_UP		0x52
++#define USBHID_KEY_NUMLOCK	0x53
+-- 
+1.8.3.1
+
