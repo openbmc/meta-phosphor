@@ -1,0 +1,11 @@
+[Unit]
+Description=Fru Device
+ConditionFileNotEmpty={bindir}/fru-device
+After=dbus.service
+
+[Service]
+ExecStart={bindir}/fru-device
+Type=simple
+
+[Install]
+WantedBy=basic.target
