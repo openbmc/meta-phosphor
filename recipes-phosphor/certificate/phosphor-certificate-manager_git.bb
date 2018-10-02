@@ -26,5 +26,20 @@ DEPENDS = " \
 
 S = "${WORKDIR}/git"
 
+FILES_${PN} += "${exec_prefix}/lib/tmpfiles.d/certs.conf"
+SRC_URI += "file://certs.conf"
+
+do_install_append() {
+    # /tmp/cert_*.pem is the temporary certificate file.
+    # It should not be deleted since it is used by certificate manager
+    # for validation process before moving to permanent location.
+
+    if ${@bb.utils.contains('DISTRO_FEATURES','systemd','true', 'false', d)}; then
+        install -d ${D}${exec_prefix}/lib/tmpfiles.d
+        install -m 644 ${WORKDIR}/certs.conf ${D}${exec_prefix}/lib/tmpfiles.d/
+    fi
+}
+
+
 CERT_TMPL = "phosphor-certificate-manager@.service"
 SYSTEMD_SERVICE_${PN} = "${CERT_TMPL}"
