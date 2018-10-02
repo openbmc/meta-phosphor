@@ -1,0 +1,9 @@
+[Unit]
+Description=Fru Device
+
+[Service]
+ExecStart={bindir}/fru-device
+Type=simple
+
+[Install]
+WantedBy=basic.target

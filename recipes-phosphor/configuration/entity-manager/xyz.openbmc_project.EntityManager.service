@@ -1,0 +1,12 @@
+[Unit]
+Description=Entity Manager
+
+[Service]
+ExecStartPre=/bin/mkdir -p /var/configuration
+ExecStartPre=/bin/mkdir -p /tmp/overlays
+ExecStart={bindir}/entity-manager
+Restart=Always
+Type=simple
+
+[Install]
+WantedBy=basic.target
