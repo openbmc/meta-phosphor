@@ -1,6 +1,7 @@
 SUMMARY = "OpenBMC image signing public key"
 DESCRIPTION = "Public key information to be included in images for image verification."
 PR = "r1"
+PV = "1.0+git${SRCPV}"
 
 inherit allarch
 inherit obmc-phosphor-license
