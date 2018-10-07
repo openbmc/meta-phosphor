@@ -29,8 +29,12 @@ GROUPADD_PARAM_phosphor-ldap = "priv-admin; priv-operator; priv-user; priv-callb
 DBUS_SERVICE_${PN} += "xyz.openbmc_project.User.Manager.service"
 FILES_phosphor-ldap += " \
         ${sbindir}/phosphor-ldap-conf \
+        ${sbindir}/phosphor-ldap-mapper \
 "
-DBUS_SERVICE_phosphor-ldap = "xyz.openbmc_project.Ldap.Config.service"
+DBUS_SERVICE_phosphor-ldap = " \
+        xyz.openbmc_project.Ldap.Config.service \
+        xyz.openbmc_project.LDAP.PrivilegeMapper.service \
+"
 SRC_URI += "git://github.com/openbmc/phosphor-user-manager"
 SRCREV = "045b11231d53983577c4448f08d41d19b36409cb"
 S = "${WORKDIR}/git"
