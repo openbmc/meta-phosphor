@@ -26,5 +26,5 @@ GROUPADD_PARAM_${PN} = "priv-admin; priv-operator; priv-user; priv-callback "
 DBUS_SERVICE_${PN} += "xyz.openbmc_project.User.Manager.service"
 
 SRC_URI += "git://github.com/openbmc/phosphor-user-manager"
-SRCREV = "dccee2b7ff47757afb6a0606707b6436bb0f4c7b"
+SRCREV = "b26799aad62dfab304b322e7eb06167a9ea05ce7"
 S = "${WORKDIR}/git"
