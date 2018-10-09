@@ -8,5 +8,5 @@ CERTPATH=/etc/nslcd/certs/cert.pem
 #Units to restart
 UNIT=nslcd.service
 
-#Type of the service client/server
-TYPE=client
+#Type of the service authority
+TYPE=authority
