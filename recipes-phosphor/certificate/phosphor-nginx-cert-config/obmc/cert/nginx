@@ -8,5 +8,5 @@ CERTPATH=/etc/ssl/certs/nginx/cert.pem
 #Units to restart
 UNIT=nginx.service
 
-#Type of the service client/server
-TYPE=server
+#Type of the service authority 
+TYPE=authority
