@@ -9,3 +9,13 @@
 /etc/ssl/certs/nginx/
 /etc/ssl/private/
 /etc/systemd/network/
+/etc/nslcd.conf
+/etc/nslcd.conf.default
+/etc/nsswitch.conf
+/etc/nsswitch_ldap.conf
+/etc/pam.d/phosphor-rest-server
+/etc/pam.d/phosphor-rest-server-ldap
+/etc/rsyslog.conf
+/etc/rsyslog.d/
+/etc/ssl/certs/Root-CA.pem
+/etc/nslcd/certs/cert.pem
