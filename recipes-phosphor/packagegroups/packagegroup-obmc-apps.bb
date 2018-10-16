@@ -84,6 +84,7 @@ SUMMARY_${PN}-logging = "Logging applications"
 RDEPENDS_${PN}-logging = " \
         phosphor-logging \
         rsyslog \
+        rsyslog-policy \
         phosphor-rsyslog-config \
         "
 
