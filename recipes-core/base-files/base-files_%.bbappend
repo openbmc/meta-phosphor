@@ -13,5 +13,6 @@ do_install_append() {
 
     if [ "${@bb.utils.filter('DISTRO_FEATURES', 'ldap', d)}" ]; then
         install -D -m 600 ${WORKDIR}/nsswitch_ldap.conf ${D}/${sysconfdir}/
+        cp ${WORKDIR}/nsswitch.conf ${D}/${sysconfdir}/nsswitch_linux.conf
     fi
 }
