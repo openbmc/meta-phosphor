@@ -1,5 +1,6 @@
 [Unit]
 Description=Phosphor DBUS Browser
+Before=xyz.openbmc_project.Software.Sync.service
 
 [Service]
 Restart=always
