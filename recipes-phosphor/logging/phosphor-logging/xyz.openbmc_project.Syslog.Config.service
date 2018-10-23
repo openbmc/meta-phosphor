@@ -1,5 +1,6 @@
 [Unit]
 Description=Rsyslog config updater
+Before=xyz.openbmc_project.Software.Sync.service
 
 [Service]
 ExecStart=/usr/bin/env phosphor-rsyslog-conf
