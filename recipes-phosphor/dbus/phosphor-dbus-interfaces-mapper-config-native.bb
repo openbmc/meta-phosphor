@@ -8,4 +8,4 @@ inherit native
 inherit obmc-phosphor-license
 
 PHOSPHOR_MAPPER_SERVICE_append = " xyz.openbmc_project"
-PHOSPHOR_MAPPER_INTERFACE_append = " xyz.openbmc_project"
+PHOSPHOR_MAPPER_INTERFACE_append = " xyz.openbmc_project org.freedesktop.DBus.ObjectManager"
