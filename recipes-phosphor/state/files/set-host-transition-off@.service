@@ -1,0 +1,11 @@
+[Unit]
+Description=Set RequestedHostTransition Off for host%i
+Wants=xyz.openbmc_project.State.Host.service
+After=xyz.openbmc_project.State.Host.service
+
+[Service]
+ExecStart=/bin/sh -c "busctl set-property `mapper get-service /xyz/openbmc_project/state/host%i` /xyz/openbmc_project/state/host%i xyz.openbmc_project.State.Host RequestedHostTransition s 'xyz.openbmc_project.State.Host.Transition.Off'"
+SyslogIdentifier=set-host-transition-off
+
+[Install]
+WantedBy=obmc-chassis-hard-poweroff@%i.target
