@@ -137,6 +137,14 @@ HOST_RST_RBT_ATTEMPTS_SVC_INST = "phosphor-reset-host-reboot-attempts@{0}.servic
 HOST_RST_RBT_ATTEMPTS_SVC_FMT = "../${HOST_RST_RBT_ATTEMPTS_SVC}:${HOST_START_TGTFMT}.requires/${HOST_RST_RBT_ATTEMPTS_SVC_INST}"
 SYSTEMD_LINK_${PN}-host += "${@compose_list_zip(d, 'HOST_RST_RBT_ATTEMPTS_SVC_FMT', 'OBMC_HOST_INSTANCES', 'OBMC_HOST_INSTANCES')}"
 
+# Set the RequestedHostTransition property to Off on the obmc-chassis-hard-poweroff@.target call
+SYSTEMD_SERVICE_${PN}-host += "set-host-transition-off@.service"
+CHASSIS_HARD_STOP_TMPL = "obmc-chassis-hard-poweroff@{0}.target"
+HOST_OFF_TMPL = "set-host-transition-off@.service"
+HOST_OFF_INSTFMT = "set-host-transition-off@{1}.service"
+HOST_OFF_FMT = "../${HOST_OFF_TMPL}:${CHASSIS_HARD_STOP_TMPL}.requires/${HOST_OFF_INSTFMT}"
+SYSTEMD_LINK_${PN}-host += "${@compose_list_zip(d, 'HOST_OFF_FMT', 'OBMC_CHASSIS_INSTANCES', 'OBMC_HOST_INSTANCES')}"
+
 SRC_URI += "git://github.com/openbmc/phosphor-state-manager"
 SRCREV = "acf54d089bbd4d6f3ac790229ee7008d96ed760b"
 
