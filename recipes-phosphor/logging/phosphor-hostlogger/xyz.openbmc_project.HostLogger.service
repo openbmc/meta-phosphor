@@ -1,0 +1,14 @@
+[Unit]
+Description=Host logger
+Wants=obmc-console@{OBMC_CONSOLE_HOST_TTY}.service
+After=obmc-console@{OBMC_CONSOLE_HOST_TTY}.service
+
+[Service]
+ExecStart={sbindir}/hostlogger
+SyslogIdentifier=phosphor-hostlogger
+Restart=always
+Type=dbus
+BusName={BUSNAME}
+
+[Install]
+WantedBy={SYSTEMD_DEFAULT_TARGET}
