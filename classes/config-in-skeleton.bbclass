@@ -5,7 +5,6 @@ inherit allarch
 inherit setuptools
 inherit pythonnative
 inherit skeleton-rev
-inherit obmc-phosphor-license
 
 HOMEPAGE = "http://github.com/openbmc/skeleton"
 
