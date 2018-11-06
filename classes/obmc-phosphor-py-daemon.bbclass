@@ -2,7 +2,9 @@
 
 inherit allarch
 inherit obmc-phosphor-systemd
-inherit obmc-phosphor-license
+
+LICENSE = "Apache-2.0"
+LIC_FILES_CHKSUM = "file://${PHOSPHORBASE}/COPYING.apache-2.0;md5=34400b68072d710fecd0a2940a0d1658"
 
 RDEPENDS_${PN} += "python-dbus python-pygobject"
 INSTALL_NAME ?= "${PN}"
