@@ -22,8 +22,10 @@
 # - obmc-debug-collector              - OpenBMC debug collector
 
 inherit core-image
-inherit obmc-phosphor-license
 inherit obmc-phosphor-utils
+
+LICENSE = "Apache-2.0"
+LIC_FILES_CHKSUM = "file://${PHOSPHORBASE}/COPYING.apache-2.0;md5=34400b68072d710fecd0a2940a0d1658"
 
 FEATURE_PACKAGES_obmc-bmc-state-mgmt ?= "packagegroup-obmc-apps-bmc-state-mgmt"
 FEATURE_PACKAGES_obmc-chassis-mgmt ?= "${@cf_enabled(d, 'obmc-phosphor-chassis-mgmt', 'virtual-obmc-chassis-mgmt')}"
