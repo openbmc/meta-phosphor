@@ -1,0 +1,9 @@
+Code-Review+2: Brad Bishop <bradleyb@fuzziesquirrel.com>
+Code-Review+1: MARRI DEVENDER RAO <devenrao@in.ibm.com>
+Ok-To-Test+1: Jenkins <openbmc-ci-admin@ozlabs.org>
+Verified+1: Jenkins <openbmc-ci-admin@ozlabs.org>
+Submitted-by: Brad Bishop <bradleyb@fuzziesquirrel.com>
+Submitted-at: Wed, 07 Nov 2018 21:11:57 +0000
+Reviewed-on: https://gerrit.openbmc-project.xyz/14775
+Project: openbmc/meta-phosphor
+Branch: refs/heads/master
