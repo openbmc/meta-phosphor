@@ -14,7 +14,7 @@ DEPENDS += "phosphor-ipmi-host"
 
 S = "${WORKDIR}/git"
 SRC_URI = "git://github.com/openbmc/phosphor-ipmi-ethstats"
-SRCREV = "ee22bfb566049fc46202a29d61e4ec7d06863f10"
+SRCREV = "00801891973c0bc6941216a43f1e3a2bf9b326d5"
 
 FILES_${PN}_append = " ${libdir}/ipmid-providers/lib*${SOLIBS}"
 FILES_${PN}_append = " ${libdir}/host-ipmid/lib*${SOLIBS}"
