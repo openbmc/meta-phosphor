@@ -19,7 +19,11 @@ SRCREV = "d5b9857609401e3cf9c53b111134a6aab8e4573c"
 
 NBD_PROXY_CONFIG_JSON ??= "${S}/config.sample.json"
 
+FILES_${PN} += "${sysconfdir}/nbd-proxy/state"
+SRC_URI += "file://state_hook"
+
 do_install_append() {
     install -d ${D}${sysconfdir}/nbd-proxy/
     install -m 0644 ${NBD_PROXY_CONFIG_JSON} ${D}${sysconfdir}/nbd-proxy/config.json
+    install -m 0755 ${WORKDIR}/state_hook ${D}${sysconfdir}/nbd-proxy/state
 }
