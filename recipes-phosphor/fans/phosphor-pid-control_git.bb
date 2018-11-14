@@ -46,6 +46,8 @@ FILES_${PN}-dev_append = " ${libdir}/ipmid-providers/lib*${SOLIBSDEV} ${libdir}/
 
 EXTRA_OECONF = "SENSOR_YAML_GEN=${STAGING_DIR_NATIVE}${sensor_datadir}/sensor-list.yaml \
                 PID_YAML_GEN=${STAGING_DIR_NATIVE}${sensor_datadir}/pid-list.yaml \
-                ZONE_YAML_GEN=${STAGING_DIR_NATIVE}${sensor_datadir}/zone-info.yaml"
+                ZONE_YAML_GEN=${STAGING_DIR_NATIVE}${sensor_datadir}/zone-info.yaml \
+                AR=${TARGET_PREFIX}gcc-ar RANLIB=${TARGET_PREFIX}gcc-ranlib \
+                "
 
 HOSTIPMI_PROVIDER_LIBRARY += "libmanualcmds.so"
