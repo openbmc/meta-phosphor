@@ -92,6 +92,17 @@ FILES_${PN}_append = " ${libdir}/ipmid-providers/lib*${SOLIBS}"
 FILES_${PN}_append = " ${libdir}/net-ipmid/lib*${SOLIBS}"
 FILES_${PN}-dev_append = " ${libdir}/ipmid-providers/lib*${SOLIBSDEV} ${libdir}/ipmid-providers/*.la"
 
+FILESEXTRAPATHS_prepend := "${THISDIR}/${PN}:"
+
+do_install_append(){
+  install -d ${D}${includedir}/phosphor-ipmi-host
+  install -d ${D}${libdir}/phosphor-ipmi-host
+  install -m 0644 -D ${S}/*.h ${D}${includedir}/phosphor-ipmi-host
+  install -m 0644 -D ${S}/*.hpp ${D}${includedir}/phosphor-ipmi-host
+  install -m 0644 -D ${S}/utils.cpp ${D}${libdir}/phosphor-ipmi-host
+
+}
+
 # Soft Power Off
 # install the soft power off service in the host shutdown target
 SOFT_SVC = "xyz.openbmc_project.Ipmi.Internal.SoftPowerOff.service"
