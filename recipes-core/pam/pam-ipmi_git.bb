@@ -8,7 +8,7 @@ LICENSE = "Apache-2.0"
 LIC_FILES_CHKSUM = "file://LICENSE;md5=86d3f3a95c324c9479bd8986968f4327"
 
 SRC_URI += "git://github.com/openbmc/pam-ipmi"
-SRCREV = "d0e324ab377a1b4fb94768907eba0b48ac1857d4"
+SRCREV = "6987da9a728991b5048f6c3529941afa7a702bab"
 S = "${WORKDIR}/git"
 
 inherit autotools pkgconfig
