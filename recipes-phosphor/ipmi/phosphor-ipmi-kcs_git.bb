@@ -2,7 +2,7 @@ SUMMARY = "Phosphor OpenBMC KCS to DBUS"
 DESCRIPTION = "Phosphor OpenBMC KCS to DBUS."
 PR = "r1"
 
-LICENSE = "MIT"
+LICENSE = "Apache-2.0"
 LIC_FILES_CHKSUM = "file://LICENSE;md5=b1beb00e508e89da1ed2a541934f28c0"
 
 inherit autotools pkgconfig
