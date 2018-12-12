@@ -11,7 +11,11 @@ inherit obmc-phosphor-discovery-service
 
 TARGET_CFLAGS   += "-fpic -O2"
 
-DEPENDS += "autoconf-archive-native"
+DEPENDS += "autoconf-archive-native \
+            systemd \
+            "
+
+RDEPENDS_${PN} += "libsystemd"
 
 SRC_URI += "git://github.com/openbmc/obmc-console"
 SRC_URI += "file://${PN}.conf"
