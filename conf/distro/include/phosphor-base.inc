@@ -148,3 +148,11 @@ BAD_RECOMMENDATIONS_pn-obmc-phosphor-image = "udev-hwdb"
 BAD_RECOMMENDATIONS_pn-obmc-phosphor-image += "shared-mime-info"
 
 LAYER_CONF_VERSION ?= "8"
+
+# Set the root password to '0penBmc'
+inherit extrausers
+
+EXTRA_USERS_PARAMS_append_pn-obmc-phosphor-image = " \
+  usermod -p '\$1\$UGMqyqdG\$FZiylVFmRRfl9Z0Ue8G7e/' root; \
+  usermod -a -G priv-admin root; \
+  "
