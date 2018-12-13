@@ -19,6 +19,8 @@ S = "${WORKDIR}/git"
 
 DEPENDS = "openssl zlib boost libpam sdbusplus gtest nlohmann-json libtinyxml2 "
 
+RDEPENDS_${PN} += "jsnbd"
+
 FILES_${PN} += "${datadir}/** "
 
 inherit cmake
