@@ -15,6 +15,7 @@ inherit autotools \
 require phosphor-inventory-manager.inc
 
 DEPENDS += " \
+        gtest \
         ${PN}-config-native \
         phosphor-dbus-interfaces \
         phosphor-dbus-interfaces-native \
