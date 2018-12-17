@@ -16,7 +16,8 @@ RDEPENDS_${PN} += "libsystemd \
                    "
 
 
-SRC_URI += "git://github.com/openbmc/ipmitool"
+SRC_URI += "git://github.com/openbmc/ipmitool \
+            file://0001-Add-openSSL-1.1-compatibility.patch"
 
 SRCREV = "dfdfd89ec9b36c115a98f589880fd757a162af19"
 
