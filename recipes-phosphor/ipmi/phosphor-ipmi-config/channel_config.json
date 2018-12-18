@@ -1,6 +1,8 @@
 {
   "0" : {
     "name" : "IPMB",
+    "intfName" : "nil",
+    "is_NIC" : false,
     "is_valid" : true,
     "active_sessions" : 0,
     "channel_info" : {
@@ -12,6 +14,8 @@
   },
   "1" : {
     "name" : "LAN1",
+    "intfName" : "eth0",
+    "is_NIC" : true,
     "is_valid" : true,
     "active_sessions" : 0,
     "channel_info" : {
@@ -23,6 +27,8 @@
   },
   "2" : {
     "name" : "LAN2",
+    "intfName" : "eth1",
+    "is_NIC" : true,
     "is_valid" : true,
     "active_sessions" : 0,
     "channel_info" : {
@@ -34,6 +40,8 @@
   },
   "3" : {
     "name" : "RESERVED",
+    "intfName" : "nil",
+    "is_NIC" : false,
     "is_valid" : false,
     "active_sessions" : 0,
     "channel_info" : {
@@ -45,6 +53,8 @@
   },
   "4" : {
     "name" : "RESERVED",
+    "intfName" : "nil",
+    "is_NIC" : false,
     "is_valid" : false,
     "active_sessions" : 0,
     "channel_info" : {
@@ -56,6 +66,8 @@
   },
   "5" : {
     "name" : "RESERVED",
+    "intfName" : "nil",
+    "is_NIC" : false,
     "is_valid" : false,
     "active_sessions" : 0,
     "channel_info" : {
@@ -67,6 +79,8 @@
   },
   "6" : {
     "name" : "RESERVED",
+    "intfName" : "nil",
+    "is_NIC" : false,
     "is_valid" : false,
     "active_sessions" : 0,
     "channel_info" : {
@@ -78,6 +92,8 @@
   },
   "7" : {
     "name" : "RESERVED",
+    "intfName" : "nil",
+    "is_NIC" : false,
     "is_valid" : false,
     "active_sessions" : 0,
     "channel_info" : {
@@ -89,6 +105,8 @@
   },
   "8" : {
     "name" : "RESERVED",
+    "intfName" : "nil",
+    "is_NIC" : false,
     "is_valid" : false,
     "active_sessions" : 0,
     "channel_info" : {
@@ -100,6 +118,8 @@
   },
   "9" : {
     "name" : "RESERVED",
+    "intfName" : "nil",
+    "is_NIC" : false,
     "is_valid" : false,
     "active_sessions" : 0,
     "channel_info" : {
@@ -111,6 +131,8 @@
   },
   "10" : {
     "name" : "RESERVED",
+    "intfName" : "nil",
+    "is_NIC" : false,
     "is_valid" : false,
     "active_sessions" : 0,
     "channel_info" : {
@@ -122,6 +144,8 @@
   },
   "11" : {
     "name" : "RESERVED",
+    "intfName" : "nil",
+    "is_NIC" : false,
     "is_valid" : false,
     "active_sessions" : 0,
     "channel_info" : {
@@ -133,6 +157,8 @@
   },
   "12" : {
     "name" : "RESERVED",
+    "intfName" : "nil",
+    "is_NIC" : false,
     "is_valid" : false,
     "active_sessions" : 0,
     "channel_info" : {
@@ -144,6 +170,8 @@
   },
   "13" : {
     "name" : "RESERVED",
+    "intfName" : "nil",
+    "is_NIC" : false,
     "is_valid" : false,
     "active_sessions" : 0,
     "channel_info" : {
@@ -155,6 +183,8 @@
   },
   "14" : {
     "name" : "SELF",
+    "intfName" : "nil",
+    "is_NIC" : false,
     "is_valid" : false,
     "active_sessions" : 0,
     "channel_info" : {
@@ -166,6 +196,8 @@
   },
   "15" : {
     "name" : "SMS",
+    "intfName" : "nil",
+    "is_NIC" : false,
     "is_valid" : true,
     "active_sessions" : 0,
     "channel_info" : {
