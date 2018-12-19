@@ -16,7 +16,7 @@ DEPENDS += "sdbusplus"
 
 S = "${WORKDIR}/git"
 SRC_URI = "git://github.com/openbmc/phosphor-ipmi-flash"
-SRCREV = "aa32a36aabeb8078ad2a3f7570633f9500bc319c"
+SRCREV = "4cbb5a2a2ef5be9ddadf9c3bcf1a44f4a110b71c"
 
 FILES_${PN}_append = " ${libdir}/ipmid-providers/lib*${SOLIBS}"
 FILES_${PN}_append = " ${libdir}/blob-ipmid/lib*${SOLIBS}"
