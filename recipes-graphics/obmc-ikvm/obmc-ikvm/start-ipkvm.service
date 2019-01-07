@@ -1,0 +1,11 @@
+[Unit]
+Description=OpenBMC ipKVM daemon
+Conflicts=obmc-host-stop@0.target
+
+[Service]
+Restart=always
+ExecStartPre=/usr/bin/create_usbhid.sh
+ExecStart=/usr/bin/obmc-ikvm -v /dev/video0 -i /dev/hidg0
+
+[Install]
+WantedBy=obmc-host-start@0.target
