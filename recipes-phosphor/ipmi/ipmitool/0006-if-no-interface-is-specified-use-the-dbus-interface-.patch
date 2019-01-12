@@ -1,0 +1,41 @@
+From 0c0963251762bfe730acf4fb8d2308ee08db9014 Mon Sep 17 00:00:00 2001
+From: Vernon Mauery <vernon.mauery@intel.com>
+Date: Tue, 12 Dec 2017 13:30:37 -0800
+Subject: [PATCH 6/6] if no interface is specified, use the dbus interface by
+ default
+
+This is a patch that should only be on openbmc, not sent upstream
+because the dbus interface is really only an openbmc thing.
+
+Signed-off-by: Vernon Mauery <vernon.mauery@linux.intel.com>
+---
+ src/plugins/ipmi_intf.c | 6 +++---
+ 1 file changed, 3 insertions(+), 3 deletions(-)
+
+diff --git a/src/plugins/ipmi_intf.c b/src/plugins/ipmi_intf.c
+index d815e2b..97b5470 100644
+--- a/src/plugins/ipmi_intf.c
++++ b/src/plugins/ipmi_intf.c
+@@ -91,6 +91,9 @@ extern struct ipmi_intf ipmi_dbus_intf;
+ #endif
+ 
+ struct ipmi_intf * ipmi_intf_table[] = {
++#ifdef IPMI_INTF_DBUS
++	&ipmi_dbus_intf,
++#endif
+ #ifdef IPMI_INTF_OPEN
+ 	&ipmi_open_intf,
+ #endif
+@@ -121,9 +124,6 @@ struct ipmi_intf * ipmi_intf_table[] = {
+ #endif
+ #ifdef IPMI_INTF_USB
+ 	&ipmi_usb_intf,
+-#endif
+-#ifdef IPMI_INTF_DBUS
+-	&ipmi_dbus_intf,
+ #endif
+ 	NULL
+ };
+-- 
+2.17.1
+

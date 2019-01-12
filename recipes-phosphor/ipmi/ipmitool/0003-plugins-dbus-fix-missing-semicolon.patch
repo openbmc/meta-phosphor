@@ -1,0 +1,28 @@
+From ffd8d415e5e2bd5299922a1eae64d4066b668742 Mon Sep 17 00:00:00 2001
+From: Jeremy Kerr <jk@ozlabs.org>
+Date: Tue, 27 Oct 2015 11:13:16 +0800
+Subject: [PATCH 3/6] plugins/dbus: fix missing semicolon
+
+Reported-by: Chris Austen <austenc@us.ibm.com>
+
+Signed-off-by: Jeremy Kerr <jk@ozlabs.org>
+---
+ src/plugins/dbus/dbus.c | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/src/plugins/dbus/dbus.c b/src/plugins/dbus/dbus.c
+index ad7334d..6a4395e 100644
+--- a/src/plugins/dbus/dbus.c
++++ b/src/plugins/dbus/dbus.c
+@@ -139,7 +139,7 @@ static int ipmi_dbus_method_send_message(sd_bus_message *msg, void *userdata,
+ 	}
+ 
+ 	if (recv_seq == seq) {
+-		rsp.ccode = rsp.ccode
++		rsp.ccode = rsp.ccode;
+ 		rsp.data_len = n;
+ 		memcpy(rsp.data, data, rsp.data_len);
+ 		reply_received = true;
+-- 
+2.17.1
+

@@ -1,0 +1,28 @@
+From 798bf371706ee0d02305325f59dfb10d759187b6 Mon Sep 17 00:00:00 2001
+From: Jeremy Kerr <jk@ozlabs.org>
+Date: Tue, 27 Oct 2015 13:55:48 +0800
+Subject: [PATCH 4/6] plugins/dbus: Fix ccode response
+
+We need to copy it in from the dbus reply.
+
+Signed-off-by: Jeremy Kerr <jk@ozlabs.org>
+---
+ src/plugins/dbus/dbus.c | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/src/plugins/dbus/dbus.c b/src/plugins/dbus/dbus.c
+index 6a4395e..c4e2a5d 100644
+--- a/src/plugins/dbus/dbus.c
++++ b/src/plugins/dbus/dbus.c
+@@ -139,7 +139,7 @@ static int ipmi_dbus_method_send_message(sd_bus_message *msg, void *userdata,
+ 	}
+ 
+ 	if (recv_seq == seq) {
+-		rsp.ccode = rsp.ccode;
++		rsp.ccode = recv_cc;
+ 		rsp.data_len = n;
+ 		memcpy(rsp.data, data, rsp.data_len);
+ 		reply_received = true;
+-- 
+2.17.1
+

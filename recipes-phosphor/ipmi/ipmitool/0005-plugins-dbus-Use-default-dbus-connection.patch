@@ -1,0 +1,28 @@
+From e3d4d85572fb45576ce9fefc15d841248cba86d7 Mon Sep 17 00:00:00 2001
+From: Jeremy Kerr <jk@ozlabs.org>
+Date: Tue, 27 Oct 2015 21:38:46 +0800
+Subject: [PATCH 5/6] plugins/dbus: Use default dbus connection
+
+... so we'll use the system bus if run as UID 0.
+
+Signed-off-by: Jeremy Kerr <jk@ozlabs.org>
+---
+ src/plugins/dbus/dbus.c | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/src/plugins/dbus/dbus.c b/src/plugins/dbus/dbus.c
+index c4e2a5d..c20545f 100644
+--- a/src/plugins/dbus/dbus.c
++++ b/src/plugins/dbus/dbus.c
+@@ -164,7 +164,7 @@ static int ipmi_dbus_setup(struct ipmi_intf *intf)
+ 	const char *name;
+ 	int rc;
+ 
+-	rc = sd_bus_default_user(&bus);
++	rc = sd_bus_default(&bus);
+ 	if (rc < 0) {
+ 		lprintf(LOG_ERR, "Can't connect to session bus: %s\n",
+ 				strerror(-rc));
+-- 
+2.17.1
+
