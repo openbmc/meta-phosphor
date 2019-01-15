@@ -12,3 +12,8 @@ EXTRA_OECONF_append_class-target = " no-idea no-md2 no-mdc2 no-rc5 no-md4 \
 do_configure_append() {
     oe_runmake depend
 }
+
+# We don't want to depend on perl in our image
+do_install_append_class-target () {
+  rm ${D}${bindir}/c_rehash
+}
