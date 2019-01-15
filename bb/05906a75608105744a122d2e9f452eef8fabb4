@@ -1,0 +1,11 @@
+Ok-To-Test+1: Jenkins <openbmc-ci-admin@ozlabs.org>
+Code-Review+1: Gunnar Mills <gmills@us.ibm.com>
+Code-Review+1: Andrew Geissler <geissonator@yahoo.com>
+Verified+1: Jenkins <openbmc-ci-admin@ozlabs.org>
+Code-Review+1: Matt Spinler <spinler@us.ibm.com>
+Code-Review+2: Brad Bishop <bradleyb@fuzziesquirrel.com>
+Submitted-by: Brad Bishop <bradleyb@fuzziesquirrel.com>
+Submitted-at: Tue, 15 Jan 2019 16:15:37 +0000
+Reviewed-on: https://gerrit.openbmc-project.xyz/17111
+Project: openbmc/meta-phosphor
+Branch: refs/heads/master
