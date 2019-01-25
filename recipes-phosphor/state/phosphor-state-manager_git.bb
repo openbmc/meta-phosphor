@@ -60,6 +60,8 @@ SYSTEMD_SERVICE_${PN}-host += "phosphor-reset-host-reboot-attempts@.service"
 FILES_${PN}-chassis = "${sbindir}/phosphor-chassis-state-manager"
 DBUS_SERVICE_${PN}-chassis += "xyz.openbmc_project.State.Chassis.service"
 
+FILES_${PN}-chassis += "${sbindir}/obmcutil"
+
 FILES_${PN}-bmc = "${sbindir}/phosphor-bmc-state-manager"
 DBUS_SERVICE_${PN}-bmc += "xyz.openbmc_project.State.BMC.service"
 
@@ -141,3 +143,8 @@ SRC_URI += "git://github.com/openbmc/phosphor-state-manager"
 SRCREV = "32c532ea9bcddcab30f4fff30e6938211fdf584d"
 
 S = "${WORKDIR}/git"
+
+do_install() {
+    install -d ${D}${sbindir}
+    install -m 0755 ${S}/obmcutil ${D}${sbindir}/obmcutil
+}
