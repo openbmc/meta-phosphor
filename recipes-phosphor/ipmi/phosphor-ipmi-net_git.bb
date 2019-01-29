@@ -19,7 +19,7 @@ RDEPENDS_${PN} += "iptables"
 
 SRC_URI += "git://github.com/openbmc/phosphor-net-ipmid"
 SRC_URI += "file://ipmi-net-firewall.sh"
-SRCREV = "5f1dd316fca522a8b32547ef2466714c62e1d7d6"
+SRCREV = "d5a4f45e1ef5408876069af570e7b0d006c5b5db"
 
 S = "${WORKDIR}/git"
 
