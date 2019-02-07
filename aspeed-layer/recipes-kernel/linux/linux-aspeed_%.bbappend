@@ -7,6 +7,7 @@ SRC_URI += "file://phosphor-vlan.cfg"
 SRC_URI += "file://phosphor-wdt-on-panic.scc"
 SRC_URI += "file://phosphor-wdt-on-panic.cfg"
 SRC_URI_append_df-obmc-ubi-fs = " file://0001-ARM-dts-Aspeed-Witherspoon-Update-BMC-partitioning.patch"
+SRC_URI_append_df-obmc-ubi-fs = " file://0001-ARM-dts-Aspeed-Witherspoon-128-Update-BMC-partitioni.patch"
 
 KERNEL_FEATURES_append = " phosphor-vlan"
 KERNEL_FEATURES_remove_qemuall = " phosphor-vlan"
