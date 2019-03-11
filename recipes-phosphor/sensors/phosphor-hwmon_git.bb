@@ -38,7 +38,7 @@ SRC_URI += "file://70-hwmon.rules"
 SRC_URI += "file://70-iio.rules"
 SRC_URI += "file://start_hwmon.sh"
 
-SRCREV = "56c876f3a108f4f4fdbe13898ac3ba47b98b9a20"
+SRCREV = "5d8f570bdc264d7447ee2fc0fb6f134c1a3780f8"
 
 S = "${WORKDIR}/git"
 
