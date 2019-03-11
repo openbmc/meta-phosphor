@@ -40,5 +40,5 @@ DBUS_SERVICE_phosphor-ldap = " \
         xyz.openbmc_project.LDAP.PrivilegeMapper.service \
 "
 SRC_URI += "git://github.com/openbmc/phosphor-user-manager"
-SRCREV = "a929752bef26e02ccd103a5669a402ba2b5d5eec"
+SRCREV = "aeaf9413a965d225d11ee1cd2c8ee9aa1f8dc862"
 S = "${WORKDIR}/git"
