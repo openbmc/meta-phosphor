@@ -23,6 +23,7 @@ DEPENDS += " \
         sdbusplus-native \
         autoconf-archive-native \
         libcereal \
+        nlohmann-json \
         "
 RDEPENDS_${PN} += " \
         sdbusplus \
@@ -44,3 +45,14 @@ EXTRA_OECONF = " \
         IFACE=${OBMC_INVENTORY_MGR_IFACE} \
         IFACES_PATH=${STAGING_DIR_NATIVE}${yaml_dir} \
         "
+
+SRC_URI += "file://associations.json"
+PACKAGECONFIG ??= ""
+PACKAGECONFIG[associations] = "--enable-associations, --disable-associations,,"
+
+install_associations_json() {
+    install -d ${D}${base_datadir}
+    install -m 0755 ${WORKDIR}/associations.json ${D}${base_datadir}/associations.json
+}
+
+do_install[postfuncs]+="${@bb.utils.contains('PACKAGECONFIG', 'associations', 'install_associations_json', '', d)}"
