@@ -14,7 +14,6 @@ DEPENDS += "cli11"
 DEPENDS += "phosphor-mapper"
 DEPENDS += "systemd"
 DEPENDS += "phosphor-ipmi-host"
-RDEPENDS_${PN} += "iptables"
 
 SRC_URI += "git://github.com/openbmc/phosphor-net-ipmid"
 SRC_URI += "file://ipmi-net-firewall.sh"
@@ -28,7 +27,12 @@ do_install_append() {
         ${D}${bindir}/ipmi-net-firewall.sh
 }
 
+# If RMCPP_IFACE is not set by bbappend, set it to default
+DEFAULT_RMCPP_IFACE = "eth0"
+RMCPP_IFACE ?= "${DEFAULT_RMCPP_IFACE}"
+
+# install parameterized service and socket files
 SYSTEMD_SERVICE_${PN} = " \
-        ${PN}.service \
-        ${PN}.socket \
+        ${PN}@${RMCPP_IFACE}.service \
+        ${PN}@${RMCPP_IFACE}.socket \
         "
