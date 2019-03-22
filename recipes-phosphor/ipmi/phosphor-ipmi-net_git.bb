@@ -7,28 +7,30 @@ LICENSE = "Apache-2.0"
 LIC_FILES_CHKSUM = "file://LICENSE;md5=e3fc50a88d0a364313df4b21ef20c29e"
 
 inherit autotools pkgconfig
-inherit obmc-phosphor-systemd
+inherit systemd
 
 DEPENDS += "autoconf-archive-native"
 DEPENDS += "cli11"
 DEPENDS += "phosphor-mapper"
 DEPENDS += "systemd"
 DEPENDS += "phosphor-ipmi-host"
-RDEPENDS_${PN} += "iptables"
 
 SRC_URI += "git://github.com/openbmc/phosphor-net-ipmid"
-SRC_URI += "file://ipmi-net-firewall.sh"
-SRCREV = "8af90ebcc552e243ae85aa9e9da1a00fbecab56c"
+SRCREV = "d92bc324ffa70d7f12f96e44ca6031e3e16224bd"
 
 S = "${WORKDIR}/git"
 
-do_install_append() {
-        install -d ${D}${bindir}
-        install -m 0755 ${WORKDIR}/ipmi-net-firewall.sh \
-        ${D}${bindir}/ipmi-net-firewall.sh
-}
+# If RMCPP_IFACE is not set by bbappend, set it to default
+DEFAULT_RMCPP_IFACE = "eth0"
+RMCPP_IFACE ?= "${DEFAULT_RMCPP_IFACE}"
 
+# install parameterized service and socket files
 SYSTEMD_SERVICE_${PN} = " \
-        ${PN}.service \
-        ${PN}.socket \
+        ${PN}@${RMCPP_IFACE}.service \
+        ${PN}@${RMCPP_IFACE}.socket \
+        "
+
+FILES_${PN} += " \
+        ${systemd_system_unitdir}/${PN}@.service \
+        ${systemd_system_unitdir}/${PN}@.socket \
         "
