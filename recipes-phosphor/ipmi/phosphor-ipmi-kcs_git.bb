@@ -12,8 +12,7 @@ PV = "1.0+git${SRCPV}"
 
 KCS_DEVICE ?= "ipmi-kcs3"
 
-DBUS_SERVICE_${PN} = "org.openbmc.HostIpmi.service"
-SYSTEMD_SUBSTITUTIONS += "KCS_DEVICE:${KCS_DEVICE}:org.openbmc.HostIpmi.service"
+DBUS_SERVICE_${PN} = "${PN}@${KCS_DEVICE}.service"
 
 PROVIDES += "virtual/obmc-host-ipmi-hw"
 RPROVIDES_${PN} += "virtual-obmc-host-ipmi-hw"
