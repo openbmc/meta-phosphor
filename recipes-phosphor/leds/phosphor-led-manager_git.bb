@@ -26,11 +26,6 @@ DEPENDS += "sdbusplus sdbusplus-native"
 DEPENDS += "phosphor-logging"
 
 DEPENDS += "virtual/${PN}-config-native"
-RDEPENDS_${PN}-ledmanager += "libsystemd"
-RDEPENDS_${PN}-ledmanager += "phosphor-logging"
-
-RDEPENDS_${PN}-faultmonitor += "libsystemd"
-RDEPENDS_${PN}-faultmonitor += "phosphor-logging"
 
 S = "${WORKDIR}/git"
 

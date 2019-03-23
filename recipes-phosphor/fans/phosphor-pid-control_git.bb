@@ -33,8 +33,6 @@ DEPENDS += "cli11"
 # We depend on this to be built first so we can build our providers.
 DEPENDS += "phosphor-ipmi-host"
 
-RDEPENDS_${PN} += "sdbusplus phosphor-dbus-interfaces"
-
 FILES_${PN} = "${sbindir}/swampd ${sbindir}/setsensor"
 
 # The following installs the OEM IPMI handler for the fan controls.
