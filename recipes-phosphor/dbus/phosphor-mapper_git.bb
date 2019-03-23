@@ -25,7 +25,6 @@ SYSTEMD_SERVICE_${PN} += " \
         mapper-wait@.service \
         mapper-subtree-remove@.service \
         "
-RDEPENDS_libmapper += "libsystemd"
 RDEPENDS_${PN} += " \
         python-argparse \
         python-xml \
