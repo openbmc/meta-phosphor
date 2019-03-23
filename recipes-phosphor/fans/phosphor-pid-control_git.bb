@@ -25,6 +25,7 @@ DEPENDS += "autoconf-archive-native"
 DEPENDS += "python-pyyaml-native"
 DEPENDS += "python-mako-native"
 DEPENDS += "sdbusplus"
+DEPENDS += "phosphor-dbus-interfaces"
 DEPENDS += "phosphor-logging"
 DEPENDS += "libevdev"
 DEPENDS += "nlohmann-json"
@@ -32,8 +33,6 @@ DEPENDS += "cli11"
 
 # We depend on this to be built first so we can build our providers.
 DEPENDS += "phosphor-ipmi-host"
-
-RDEPENDS_${PN} += "sdbusplus phosphor-dbus-interfaces"
 
 FILES_${PN} = "${sbindir}/swampd ${sbindir}/setsensor"
 

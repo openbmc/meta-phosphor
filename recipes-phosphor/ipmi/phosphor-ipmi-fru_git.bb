@@ -25,10 +25,6 @@ DEPENDS += " \
         phosphor-logging \
         "
 
-RDEPENDS_${PN} += " \
-        sdbusplus \
-        "
-
 SYSTEMD_SERVICE_${PN} += "obmc-read-eeprom@.service"
 
 S = "${WORKDIR}/git"
