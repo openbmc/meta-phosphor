@@ -5,9 +5,10 @@ Wants=network.target
 After=network.target
 
 [Service]
+ExecReload={bindir}/env {bindir}/env kill -s HUP $MAINPID
 ExecStart={bindir}/bmcweb
 Type=simple
-WorkingDirectory=/home/root
+WorkingDirectory={sysconfdir}/ssl/certs/https
 
 [Install]
 WantedBy=network.target
