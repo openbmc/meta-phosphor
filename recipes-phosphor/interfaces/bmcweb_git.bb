@@ -32,6 +32,8 @@ SYSTEMD_SERVICE_${PN} += "bmcweb.service bmcweb.socket"
 FULL_OPTIMIZATION = "-Os -pipe "
 
 do_install_append() {
+    # setup home directory for certificate
+    install -d ${D}${sysconfdir}/ssl/certs/https
     rm -rf ${D}${includedir}/dbus
     rm -rf ${D}${libdir}/cmake
 }
