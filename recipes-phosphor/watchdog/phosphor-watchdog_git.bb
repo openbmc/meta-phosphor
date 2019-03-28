@@ -18,8 +18,6 @@ DEPENDS += "sdbusplus"
 DEPENDS += "sdeventplus"
 DEPENDS += "phosphor-dbus-interfaces"
 DEPENDS += "phosphor-logging"
-RDEPENDS_${PN} += "libsystemd"
-RDEPENDS_${PN} += "phosphor-logging"
 
 SRC_URI += "git://github.com/openbmc/phosphor-watchdog"
 SRCREV = "50ae4b152ba8aaecd1a09634d2df7036f14e03ed"
