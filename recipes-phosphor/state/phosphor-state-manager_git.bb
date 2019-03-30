@@ -44,22 +44,22 @@ DEPENDS += "phosphor-dbus-interfaces"
 DEPENDS += "systemd"
 DEPENDS += "libcereal"
 
-FILES_${PN}-host = "${sbindir}/phosphor-host-state-manager"
+FILES_${PN}-host = "${bindir}/phosphor-host-state-manager"
 DBUS_SERVICE_${PN}-host += "xyz.openbmc_project.State.Host.service"
 DBUS_SERVICE_${PN}-host += "phosphor-reboot-host@.service"
 SYSTEMD_ENVIRONMENT_FILE_${PN}-host += "obmc/phosphor-reboot-host/reboot.conf"
 SYSTEMD_SERVICE_${PN}-host += "phosphor-reset-host-reboot-attempts@.service"
 
-FILES_${PN}-chassis = "${sbindir}/phosphor-chassis-state-manager"
+FILES_${PN}-chassis = "${bindir}/phosphor-chassis-state-manager"
 DBUS_SERVICE_${PN}-chassis += "xyz.openbmc_project.State.Chassis.service"
 
-FILES_${PN}-bmc = "${sbindir}/phosphor-bmc-state-manager"
+FILES_${PN}-bmc = "${bindir}/phosphor-bmc-state-manager"
 DBUS_SERVICE_${PN}-bmc += "xyz.openbmc_project.State.BMC.service"
 
-FILES_${PN}-discover = "${sbindir}/phosphor-discover-system-state"
+FILES_${PN}-discover = "${bindir}/phosphor-discover-system-state"
 SYSTEMD_SERVICE_${PN}-discover += "phosphor-discover-system-state@.service"
 
-FILES_${PN}-host-check = "${sbindir}/phosphor-host-check"
+FILES_${PN}-host-check = "${bindir}/phosphor-host-check"
 SYSTEMD_SERVICE_${PN}-host-check += "phosphor-reset-host-check@.service"
 SYSTEMD_SERVICE_${PN}-host-check += "phosphor-reset-host-running@.service"
 
