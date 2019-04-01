@@ -21,10 +21,10 @@ SYSTEMD_PACKAGES = "${BUTTON_PACKAGES}"
 PACKAGECONFIG[signals] = ",,gpioplus nlohmann-json,"
 PACKAGECONFIG[handler] = ",,,phosphor-state-manager-chassis phosphor-state-manager-host"
 
-FILES_${PN}-signals = "${sbindir}/buttons"
+FILES_${PN}-signals = "${bindir}/buttons"
 SYSTEMD_SERVICE_${PN}-signals = "xyz.openbmc_project.Chassis.Buttons.service"
 
-FILES_${PN}-handler = "${sbindir}/button-handler"
+FILES_${PN}-handler = "${bindir}/button-handler"
 SYSTEMD_SERVICE_${PN}-handler = "phosphor-button-handler.service"
 
 DEPENDS += " \
