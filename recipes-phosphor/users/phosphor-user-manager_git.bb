@@ -31,8 +31,8 @@ GROUPMEMS_PARAM_${PN} = "-g priv-admin -a root"
 
 DBUS_SERVICE_${PN} += "xyz.openbmc_project.User.Manager.service"
 FILES_phosphor-ldap += " \
-        ${sbindir}/phosphor-ldap-conf \
-        ${sbindir}/phosphor-ldap-mapper \
+        ${bindir}/phosphor-ldap-conf \
+        ${bindir}/phosphor-ldap-mapper \
 "
 DBUS_SERVICE_phosphor-ldap = " \
         xyz.openbmc_project.Ldap.Config.service \
