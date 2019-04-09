@@ -1,5 +1,5 @@
 diff --git a/options.h b/options.h
-index 0c51bb1..3df2d67 100644
+index 0c51bb1..06746c4 100644
 --- a/options.h
 +++ b/options.h
 @@ -95,12 +95,12 @@ much traffic. */
@@ -18,11 +18,13 @@ index 0c51bb1..3df2d67 100644
  
  /* Enable "Counter Mode" for ciphers. This is more secure than normal
   * CBC mode against certain attacks. It is recommended for security
-@@ -131,10 +131,10 @@ If you test it please contact the Dropbear author */
+@@ -130,11 +130,11 @@ If you test it please contact the Dropbear author */
+  * These hashes are also used for public key fingerprints in logs.
   * If you disable MD5, Dropbear will fall back to SHA1 fingerprints,
   * which are not the standard form. */
- #define DROPBEAR_SHA1_HMAC
+-#define DROPBEAR_SHA1_HMAC
 -#define DROPBEAR_SHA1_96_HMAC
++/*#define DROPBEAR_SHA1_HMAC*/
 +/*#define DROPBEAR_SHA1_96_HMAC*/
  #define DROPBEAR_SHA2_256_HMAC
  #define DROPBEAR_SHA2_512_HMAC
@@ -31,3 +33,12 @@ index 0c51bb1..3df2d67 100644
  
  /* You can also disable integrity. Don't bother disabling this if you're
   * still using a cipher, it's relatively cheap. If you disable this it's dead
+@@ -170,7 +170,7 @@ If you test it please contact the Dropbear author */
+ 
+ /* Group14 (2048 bit) is recommended. Group1 is less secure (1024 bit) though
+    is the only option for interoperability with some older SSH programs */
+-#define DROPBEAR_DH_GROUP1 1
++/*#define DROPBEAR_DH_GROUP1 1*/
+ #define DROPBEAR_DH_GROUP14 1
+ 
+ /* Control the memory/performance/compression tradeoff for zlib.
