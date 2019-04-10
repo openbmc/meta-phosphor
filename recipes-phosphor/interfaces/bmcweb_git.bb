@@ -1,5 +1,6 @@
 inherit obmc-phosphor-systemd
 inherit useradd
+inherit certificate
 
 USERADD_PACKAGES = "${PN}"
 
@@ -25,7 +26,7 @@ FILES_${PN} += "${datadir}/** "
 
 inherit cmake
 
-EXTRA_OECMAKE = "-DBMCWEB_BUILD_UT=OFF -DYOCTO_DEPENDENCIES=ON"
+EXTRA_OECMAKE = "-DBMCWEB_BUILD_UT=OFF -DYOCTO_DEPENDENCIES=ON -DCERTIFICATE_PATH=${https_certificate_dir}"
 
 SYSTEMD_SERVICE_${PN} += "bmcweb.service bmcweb.socket"
 
