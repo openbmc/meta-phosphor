@@ -43,5 +43,9 @@ do_install () {
    cp -r ${S}/dist/** ${D}${datadir}/www
    find ${D}${datadir}/www -type f -exec chmod a=r,u+w '{}' +
    find ${D}${datadir}/www -type d -exec chmod a=rx,u+w '{}' +
+
+   # Create link to /var/log/obmc-console.log so that webui could download it.
+   install -d ${D}${datadir}/www/logs
+   ln -sf /var/log/obmc-console.log  ${D}${datadir}/www/logs/obmc-console.log
 }
 
