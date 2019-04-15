@@ -1,0 +1,51 @@
+From 416073a41e07d5defefd4036ed863d3d402949a8 Mon Sep 17 00:00:00 2001
+From: Ed Tanous <ed.tanous@intel.com>
+Date: Mon, 15 Apr 2019 10:33:39 -0700
+Subject: [PATCH] dropbear: drop support for SHA1 SSH
+
+SHA1 is currently considered "broken" by the security community.
+
+See: https://www.owasp.org/index.php/Testing_for_Weak_Encryption_(OTG-CRYPST-004)
+
+"Weak hash/encryption algorithms should not be used such MD5, RC4, DES,
+Blowfish, SHA1"
+
+This WILL have compatibility consequences, as any system that doesn't
+implement SHA256 will now be broken.  Given that OpenBMC is intended to
+be "secure by default" and users can easily override, and add back SHA1
+support, these compatibility issues should be fine.
+
+Known broken client OS:
+Ubuntu 14.04
+RHEL 6
+
+There are likely more.  Ubuntu 14 has just gone through end of life, so
+that shouldn't be a concern.
+
+Signed-off-by: Ed Tanous <ed.tanous@intel.com>
+---
+ default_options.h | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
+
+diff --git a/default_options.h b/default_options.h
+index 6840032..46283ec 100644
+--- a/default_options.h
++++ b/default_options.h
+@@ -100,7 +100,7 @@ IMPORTANT: Some options will require "make clean" after changes */
+ 
+ /* Message integrity. sha2-256 is recommended as a default, 
+    sha1 for compatibility */
+-#define DROPBEAR_SHA1_HMAC 1
++#define DROPBEAR_SHA1_HMAC 0
+ #define DROPBEAR_SHA1_96_HMAC 0
+ #define DROPBEAR_SHA2_256_HMAC 1
+ 
+@@ -149,7 +149,7 @@ IMPORTANT: Some options will require "make clean" after changes */
+  * Small systems should generally include either curve25519 or ecdh for performance.
+  * curve25519 is less widely supported but is faster
+  */ 
+-#define DROPBEAR_DH_GROUP14_SHA1 1
++#define DROPBEAR_DH_GROUP14_SHA1 0
+ #define DROPBEAR_DH_GROUP14_SHA256 1
+ #define DROPBEAR_DH_GROUP16 0
+ #define DROPBEAR_CURVE25519 1
