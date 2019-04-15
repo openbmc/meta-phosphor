@@ -1,0 +1,53 @@
+From c9811ae6c7b3620a86a4856fb56ee53668cf60bb Mon Sep 17 00:00:00 2001
+From: Ed Tanous <ed.tanous@intel.com>
+Date: Thu, 11 Apr 2019 17:17:26 -0700
+Subject: [PATCH] Add default_options.h patch for OpenBMC support
+
+This commit overrides the default settings in dropbear.
+
+1. CBC mode is disabled.  See comment in dropbear about its security
+worthiness
+2. SHA1 HMAC and Diffie helman groups are removed.  This will cause
+compatibility issues with libraries that don't yet support SHA2 ciphers.
+IMHO this is an acceptible risk, and can be overriden back to defaults
+by end users if they choose.
+
+Tested:
+Code builds.  Will test better shortly.
+
+Signed-off-by: Ed Tanous <ed.tanous@intel.com>
+---
+ default_options.h | 6 +++---
+ 1 file changed, 3 insertions(+), 3 deletions(-)
+
+diff --git a/default_options.h b/default_options.h
+index 93cf590..6840032 100644
+--- a/default_options.h
++++ b/default_options.h
+@@ -91,7 +91,7 @@ IMPORTANT: Some options will require "make clean" after changes */
+ 
+ /* Enable CBC mode for ciphers. This has security issues though
+  * is the most compatible with older SSH implementations */
+-#define DROPBEAR_ENABLE_CBC_MODE 1
++#define DROPBEAR_ENABLE_CBC_MODE 0
+ 
+ /* Enable "Counter Mode" for ciphers. This is more secure than
+  * CBC mode against certain attacks. It is recommended for security
+@@ -101,7 +101,7 @@ IMPORTANT: Some options will require "make clean" after changes */
+ /* Message integrity. sha2-256 is recommended as a default, 
+    sha1 for compatibility */
+ #define DROPBEAR_SHA1_HMAC 1
+-#define DROPBEAR_SHA1_96_HMAC 1
++#define DROPBEAR_SHA1_96_HMAC 0
+ #define DROPBEAR_SHA2_256_HMAC 1
+ 
+ /* Hostkey/public key algorithms - at least one required, these are used
+@@ -154,7 +154,7 @@ IMPORTANT: Some options will require "make clean" after changes */
+ #define DROPBEAR_DH_GROUP16 0
+ #define DROPBEAR_CURVE25519 1
+ #define DROPBEAR_ECDH 1
+-#define DROPBEAR_DH_GROUP1 1
++#define DROPBEAR_DH_GROUP1 0
+ 
+ /* When group1 is enabled it will only be allowed by Dropbear client
+ not as a server, due to concerns over its strength. Set to 0 to allow
