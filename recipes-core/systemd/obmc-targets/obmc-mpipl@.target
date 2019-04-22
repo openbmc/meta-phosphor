@@ -1,0 +1,5 @@
+[Unit]
+Description= Memory Preserving IPL.
+Wants=multi-user.target
+After=multi-user.target
+OnFailure=obmc-chassis-poweroff@%i.target
