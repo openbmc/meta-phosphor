@@ -1,0 +1,52 @@
+From c297f90210ef747dea577f8b3381098793cf692a Mon Sep 17 00:00:00 2001
+From: Vernon Mauery <vernon.mauery@intel.com>
+Date: Tue, 30 Apr 2019 08:53:30 -0700
+Subject: [PATCH] Allow BindToSocket with instance as NIC name
+
+If a socket/unit file pair is set up to bind to an interface
+and expected to run on a one-copy-per-interface basis, the
+BindToDevice parsing must take into account the unit file
+specifiers to parse the rvalue.
+
+Signed-off-by: Vernon Mauery <vernon.mauery@intel.com>
+---
+ src/core/load-fragment.c | 13 ++++++++++---
+ 1 file changed, 10 insertions(+), 3 deletions(-)
+
+diff --git a/src/core/load-fragment.c b/src/core/load-fragment.c
+index bb302fb46b..4aa7e01c89 100644
+--- a/src/core/load-fragment.c
++++ b/src/core/load-fragment.c
+@@ -801,6 +801,8 @@ int config_parse_socket_bindtodevice(
+                 void *userdata) {
+ 
+         Socket *s = data;
++        _cleanup_free_ char *p = NULL;
++        int r;
+ 
+         assert(filename);
+         assert(lvalue);
+@@ -812,12 +814,17 @@ int config_parse_socket_bindtodevice(
+                 return 0;
+         }
+ 
+-        if (!ifname_valid(rvalue)) {
+-                log_syntax(unit, LOG_ERR, filename, line, 0, "Invalid interface name, ignoring: %s", rvalue);
++        r = unit_name_printf(&s->meta, rvalue, &p);
++        if (r < 0) {
++                log_syntax(unit, LOG_ERR, filename, line, r, "Failed to resolve unit specifiers in interface name: ignoring %s", rvalue);
++                return 0;
++        }
++        if (!ifname_valid(p)) {
++                log_syntax(unit, LOG_ERR, filename, line, 0, "Invalid interface name, ignoring: %s", p);
+                 return 0;
+         }
+ 
+-        if (free_and_strdup(&s->bind_to_device, rvalue) < 0)
++        if (free_and_strdup(&s->bind_to_device, p) < 0)
+                 return log_oom();
+ 
+         return 0;
+-- 
+2.17.1
+
