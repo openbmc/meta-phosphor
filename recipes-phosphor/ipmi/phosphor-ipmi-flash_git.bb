@@ -18,7 +18,7 @@ DEPENDS += "pciutils"
 
 S = "${WORKDIR}/git"
 SRC_URI = "git://github.com/openbmc/phosphor-ipmi-flash"
-SRCREV = "241416115e13659b9cb6cef9e77e469c1f99f640"
+SRCREV = "b58f56153784a81dfcde62313ce1d3cad3dd3bc4"
 
 FILES_${PN}_append = " ${libdir}/ipmid-providers/lib*${SOLIBS}"
 FILES_${PN}_append = " ${libdir}/blob-ipmid/lib*${SOLIBS}"
