@@ -1,0 +1,59 @@
+From 0b4c695af592303a7b3a17d52821e034c596504f Mon Sep 17 00:00:00 2001
+From: Jae Hyun Yoo <jae.hyun.yoo@linux.intel.com>
+Date: Thu, 9 May 2019 15:33:55 -0700
+Subject: [PATCH] Add a hooking function to deliver rfbFramebufferUpdateRequest
+ msgs.
+
+This commit adds a hooking function to deliver
+rfbFramebufferUpdateRequest messages from clients to the frame
+provider for a case the provider needs to handle the messages for
+flow control or etc.
+
+Signed-off-by: Jae Hyun Yoo <jae.hyun.yoo@linux.intel.com>
+---
+ libvncserver/rfbserver.c | 3 +++
+ rfb/rfb.h                | 7 +++++++
+ 2 files changed, 10 insertions(+)
+
+diff --git a/libvncserver/rfbserver.c b/libvncserver/rfbserver.c
+index 42209cf29a0d..07ed070bc9ac 100644
+--- a/libvncserver/rfbserver.c
++++ b/libvncserver/rfbserver.c
+@@ -2388,6 +2388,9 @@ rfbProcessClientNormalMessage(rfbClientPtr cl)
+ 			   msg.fur.x+msg.fur.w,
+ 			   msg.fur.y+msg.fur.h);
+ 
++        if(cl->clientFramebufferUpdateRequestHook)
++            cl->clientFramebufferUpdateRequestHook(cl, tmpRegion);
++
+         LOCK(cl->updateMutex);
+ 	sraRgnOr(cl->requestedRegion,tmpRegion);
+ 
+diff --git a/rfb/rfb.h b/rfb/rfb.h
+index 2a5600e25375..ed19e0b99ab0 100644
+--- a/rfb/rfb.h
++++ b/rfb/rfb.h
+@@ -412,6 +412,8 @@ typedef struct sraRegion* sraRegionPtr;
+  */
+ 
+ typedef void (*ClientGoneHookPtr)(struct _rfbClientRec* cl);
++typedef void (*ClientFramebufferUpdateRequestHookPtr)(struct _rfbClientRec* cl,
++                                                      sraRegionPtr region);
+ 
+ typedef struct _rfbFileTransferData {
+   int fd;
+@@ -457,6 +459,11 @@ typedef struct _rfbClientRec {
+     void* clientData;
+     ClientGoneHookPtr clientGoneHook;
+ 
++    /** clientFramebufferUpdateRequestHook is called when a client requests a
++     * frame buffer update.
++     */
++    ClientFramebufferUpdateRequestHookPtr clientFramebufferUpdateRequestHook;
++
+     SOCKET sock;
+     char *host;
+ 
+-- 
+2.7.4
+
