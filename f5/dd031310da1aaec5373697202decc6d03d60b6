@@ -1,0 +1,10 @@
+Code-Review+1: William A. Kennington III <wak@google.com>
+Code-Review+1: Emily Shaffer <emilyshaffer@google.com>
+Ok-To-Test+1: Jenkins <openbmc-ci-admin@ozlabs.org>
+Code-Review+2: Brad Bishop <bradleyb@fuzziesquirrel.com>
+Verified+1: Brad Bishop <bradleyb@fuzziesquirrel.com>
+Submitted-by: Brad Bishop <bradleyb@fuzziesquirrel.com>
+Submitted-at: Mon, 13 May 2019 22:50:00 +0000
+Reviewed-on: https://gerrit.openbmc-project.xyz/c/openbmc/meta-phosphor/+/21147
+Project: openbmc/meta-phosphor
+Branch: refs/heads/master
