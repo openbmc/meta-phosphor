@@ -1,3 +1,5 @@
+PHOSPHOR_LED_CONFIG_USE_NATIVE_SYSROOT ?= "1"
+PHOSPHOR_LED_CONFIG_RECIPE_SUFFIX = "${@bb.utils.contains('PHOSPHOR_LED_CONFIG_USE_NATIVE_SYSROOT', '1', '-native', '', d)}"
 OBMC_BMC_INSTANCES ?= "0"
 OBMC_CHASSIS_INSTANCES ?= "0"
 OBMC_CHECKSTOP_INSTANCES ?= "0"
@@ -177,12 +179,13 @@ PREFERRED_PROVIDER_virtual/phosphor-ipmi-inventory-sel ?= \
 # Various other overrides.
 
 # The phosphor-led-manager application is data-driven and requires an input
-# yaml of LED group and members.
-# This virtual is a native recipe that provides that mapping by installing
-# configuration files in the format and native sysroot location expected by
-# the phosphor-led-manager build process in the native sysroot.
+# yaml of LED group and members.  This virtual is a recipe that provides that
+# mapping by installing configuration files in the format and sysroot location
+# expected by the phosphor-led-manager build process in the sysroot.
 PREFERRED_PROVIDER_virtual/phosphor-led-manager-config-native ?= \
-    "phosphor-led-manager-config-example-native"
+    "phosphor-led-manager-config-example${PHOSPHOR_LED_CONFIG_RECIPE_SUFFIX}"
+PREFERRED_PROVIDER_virtual/phosphor-led-manager-config ?= \
+    "phosphor-led-manager-config-example${PHOSPHOR_LED_CONFIG_RECIPE_SUFFIX}"
 
 # The phosphor-logging application has a data driven plugin that adds FRU
 # callout information to error logs, when applications generating error logs

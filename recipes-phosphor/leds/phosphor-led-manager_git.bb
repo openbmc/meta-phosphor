@@ -8,6 +8,8 @@ require ${PN}.inc
 inherit autotools pkgconfig pythonnative
 inherit obmc-phosphor-dbus-service obmc-phosphor-systemd
 
+PHOSPHOR_LED_STAGING_DIR = "${@bb.utils.contains('PHOSPHOR_LED_CONFIG_USE_NATIVE_SYSROOT', '1', '${STAGING_DIR_NATIVE}', '${STAGING_DIR_HOST}', d)}"
+
 LED_MGR_PACKAGES = " \
     ${PN}-ledmanager \
     ${PN}-faultmonitor \
@@ -26,7 +28,7 @@ DEPENDS += "sdbusplus sdbusplus-native"
 DEPENDS += "systemd"
 DEPENDS += "phosphor-logging"
 
-DEPENDS += "virtual/${PN}-config-native"
+DEPENDS += "virtual/${PN}-config${PHOSPHOR_LED_CONFIG_RECIPE_SUFFIX}"
 
 S = "${WORKDIR}/git"
 
@@ -50,4 +52,4 @@ SYSTEMD_LINK_${PN}-ledmanager += "${@compose_list(d, 'FMT', 'STATES')}"
 # Install the override to set up a Conflicts relation
 SYSTEMD_OVERRIDE_${PN}-ledmanager += "bmc_booted.conf:obmc-led-group-start@bmc_booted.service.d/bmc_booted.conf"
 
-EXTRA_OECONF = "YAML_PATH=${STAGING_DATADIR_NATIVE}/${PN}"
+EXTRA_OECONF = "YAML_PATH=${PHOSPHOR_LED_STAGING_DIR}${datadir}/${PN}"
