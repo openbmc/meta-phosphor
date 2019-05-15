@@ -16,6 +16,11 @@ DEPENDS += "sdbusplus"
 DEPENDS += "ipmi-blob-tool"
 DEPENDS += "pciutils"
 
+EXTRA_OECONF_append += " \
+        --disable-tests \
+        --disable-build-host-tool \
+        "
+
 S = "${WORKDIR}/git"
 SRC_URI = "git://github.com/openbmc/phosphor-ipmi-flash"
 SRCREV = "699750dedaaad4639ce3c831aed7d897f3572fbe"
