@@ -52,6 +52,23 @@
       "revId": "65edd5ad607134038751207ba47f114779562f18",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "a5ebf56a_1d6d1f7f",
+        "filename": "recipes-phosphor/leds/phosphor-led-manager-config-mrw.bb",
+        "patchSetId": 1
+      },
+      "lineNbr": 25,
+      "author": {
+        "id": 1000100
+      },
+      "writtenOn": "2019-05-23T19:54:25Z",
+      "side": 1,
+      "message": "stupid question, but if USE_MRW was no, and this recipe is included, this should generate a QA warning or error -- is that deliberate?",
+      "revId": "65edd5ad607134038751207ba47f114779562f18",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": false
     }
   ]
 }
