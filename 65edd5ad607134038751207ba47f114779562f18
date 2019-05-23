@@ -34,6 +34,24 @@
       "revId": "65edd5ad607134038751207ba47f114779562f18",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "09113076_b9deae17",
+        "filename": "recipes-phosphor/leds/phosphor-led-manager-config-example_git.bb",
+        "patchSetId": 1
+      },
+      "lineNbr": 12,
+      "author": {
+        "id": 1000100
+      },
+      "writtenOn": "2019-05-23T19:53:12Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "bb76b7b7_cbf59408",
+      "revId": "65edd5ad607134038751207ba47f114779562f18",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": false
     }
   ]
 }
