@@ -16,6 +16,24 @@
       "revId": "65edd5ad607134038751207ba47f114779562f18",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "bb76b7b7_cbf59408",
+        "filename": "recipes-phosphor/leds/phosphor-led-manager-config-example_git.bb",
+        "patchSetId": 1
+      },
+      "lineNbr": 12,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-05-23T19:23:49Z",
+      "side": 1,
+      "message": "No, you don\u0027t install into the sysroot.  The default do_populate_sysroot_* tasks do that for you (based on what was installed to $D in the do_install task).",
+      "parentUuid": "20ca125c_bd0a11a5",
+      "revId": "65edd5ad607134038751207ba47f114779562f18",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
     }
   ]
 }
