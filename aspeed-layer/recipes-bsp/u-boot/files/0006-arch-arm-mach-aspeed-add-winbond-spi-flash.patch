@@ -1,0 +1,32 @@
+diff -Naur a/arch/arm/mach-aspeed/flash.c b/arch/arm/mach-aspeed/flash.c
+--- a/arch/arm/mach-aspeed/flash.c	2019-05-29 14:16:45.932616335 -0400
++++ b/arch/arm/mach-aspeed/flash.c	2019-05-30 17:43:08.312771450 -0400
+@@ -84,6 +84,7 @@
+ #define AT25DF161		0x02461F
+ #define AT25DF321		0x01471F
+ #define MT25QL01GB		0x21ba20
++#define W25M512JV		0x1971ef
+ 
+ /* SPI Define */
+ #define CS0_CTRL			0x10
+@@ -1155,6 +1156,20 @@
+ 			ReadClk  = 50;
+ 			info->address32 = 1;
+ 			break;
++
++		case W25M512JV:
++			info->sector_count = 512;
++			info->size = 0x2000000;
++			erase_region_size  = 0x10000;
++			info->readcmd = 0x0b;
++			info->dualport = 1;
++			info->dummybyte = 1;
++			info->buffersize = 256;
++			WriteClk = 50;
++			EraseClk = 20;
++			ReadClk  = 50;
++			info->address32 = 1;
++			break;
+ 
+ 		default:	/* use JEDEC ID */
+ 			printf("Unsupported SPI Flash!! 0x%08lx\n", info->flash_id);

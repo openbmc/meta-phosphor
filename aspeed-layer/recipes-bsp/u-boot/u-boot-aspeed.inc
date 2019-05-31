@@ -1,6 +1,9 @@
 inherit image_version
 
-SRC_URI_append_aspeed = " file://0001-configs-ast-Add-redundnant-env.patch"
+SRC_URI_append_aspeed = " \
+	file://0001-configs-ast-Add-redundnant-env.patch \
+	file://0006-arch-arm-mach-aspeed-add-winbond-spi-flash.patch \
+	"
 
 SRC_URI_append_aspeed_df-obmc-ubi-fs = " \
     file://0002-config-ast-common-hack-bootopts.patch \
