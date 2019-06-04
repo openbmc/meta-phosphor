@@ -16,15 +16,18 @@ IMAGE_BASETYPE ?= "squashfs-xz"
 OVERLAY_BASETYPE ?= "jffs2"
 FLASH_UBI_BASETYPE ?= "${IMAGE_BASETYPE}"
 FLASH_UBI_OVERLAY_BASETYPE ?= "ubifs"
+FLASH_EXT4_BASETYPE ?= "${IMAGE_BASETYPE}"
+FLASH_EXT4_OVERLAY_BASETYPE ?= "ext4"
 
-IMAGE_TYPES += "mtd-static mtd-static-alltar mtd-static-tar mtd-ubi mtd-ubi-tar"
+IMAGE_TYPES += "mtd-static mtd-static-alltar mtd-static-tar mtd-ubi mtd-ubi-tar emmc-ext4"
 
 IMAGE_TYPEDEP_mtd-static = "${IMAGE_BASETYPE}"
 IMAGE_TYPEDEP_mtd-static-tar = "${IMAGE_BASETYPE}"
 IMAGE_TYPEDEP_mtd-static-alltar = "mtd-static"
 IMAGE_TYPEDEP_mtd-ubi = "${FLASH_UBI_BASETYPE}"
 IMAGE_TYPEDEP_mtd-ubi-tar = "${FLASH_UBI_BASETYPE}"
-IMAGE_TYPES_MASKED += "mtd-static mtd-static-alltar mtd-static-tar mtd-ubi mtd-ubi-tar"
+IMAGE_TYPEDEP_emmc-ext4 = "${FLASH_EXT4_BASETYPE}"
+IMAGE_TYPES_MASKED += "mtd-static mtd-static-alltar mtd-static-tar mtd-ubi mtd-ubi-tar emmc-ext4"
 
 # Flash characteristics in KB unless otherwise noted
 FLASH_SIZE ?= "32768"
@@ -252,6 +255,23 @@ do_generate_static[depends] += " \
         u-boot:do_populate_sysroot \
         "
 
+python do_generate_ext4() {
+        version_id = do_get_versionID(d)
+        d.setVar('VERSION_ID', version_id)
+        bb.build.exec_func("do_make_ext4", d)
+}
+do_make_ext4() {
+    mk_nor_image ${IMGDEPLOYDIR}/${IMAGE_NAME}.ext4 ${FLASH_SIZE}
+    mkfs.ext4 -F ${IMGDEPLOYDIR}/${IMAGE_NAME}.ext4 -d ${IMAGE_ROOTFS}
+    fsck.ext4 -pvfD ${IMGDEPLOYDIR}/${IMAGE_NAME}.ext4 || [ $? -le 3 ]
+}
+do_make_ext4[dirs] = "${S}/ext4"
+do_make_ext4[depends] += " \
+        ${PN}:do_image_${@d.getVar('FLASH_EXT4_BASETYPE', True).replace('-', '_')} \
+        virtual/kernel:do_deploy \
+        u-boot:do_populate_sysroot \
+        "
+
 make_signatures() {
 	signature_files=""
 	for file in "$@"; do
@@ -428,4 +448,8 @@ python() {
                 'do_generate_ubi_tar',
                 'do_image_complete',
                 'do_generate_rwfs_ubi do_generate_phosphor_manifest', d)
+    if 'emmc-ext4' in types:
+        bb.build.addtask(
+                'do_generate_ext4',
+                'do_image_complete', d)
 }
