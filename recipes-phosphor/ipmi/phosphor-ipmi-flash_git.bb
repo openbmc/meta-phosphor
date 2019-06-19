@@ -17,15 +17,21 @@ DEPENDS += "ipmi-blob-tool"
 DEPENDS += "pciutils"
 
 EXTRA_OECONF = "--disable-tests --disable-build-host-tool"
+# TODO: Use a PACKAGECONFIG variable with it enabled by default.
+# Enable the cleanup blob by default.
+EXTRA_OECONF += " --enable-cleanup-delete"
 
 S = "${WORKDIR}/git"
 SRC_URI = "git://github.com/openbmc/phosphor-ipmi-flash"
-SRCREV = "e1118bcb2dbb64e90ac5671f7978d4748d0a5e3b"
+SRCREV = "380832ccf6d9986cd2e993a6c463da97eadf7997"
 
 FILES_${PN}_append = " ${libdir}/ipmid-providers/lib*${SOLIBS}"
 FILES_${PN}_append = " ${libdir}/blob-ipmid/lib*${SOLIBS}"
 FILES_${PN}-dev_append = " ${libdir}/ipmid-providers/lib*${SOLIBSDEV} ${libdir}/ipmid-providers/*.la"
 
 BLOBIPMI_PROVIDER_LIBRARY += "libfirmwareblob.so"
+
+# By default enable the cleanup blob.
+BLOBIPMI_PROVIDER_LIBRARY += "libfirmwarecleanupblob.so"
 
 do_configure[depends] += "virtual/kernel:do_shared_workdir"
