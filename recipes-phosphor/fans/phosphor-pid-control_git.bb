@@ -10,6 +10,7 @@ inherit flto-automake pkgconfig
 
 inherit phosphor-pid-control
 inherit obmc-phosphor-ipmiprovider-symlink
+inherit obmc-phosphor-systemd
 
 S = "${WORKDIR}/git"
 SRC_URI = "git://github.com/openbmc/phosphor-pid-control"
@@ -31,6 +32,14 @@ DEPENDS += "boost"
 
 # We depend on this to be built first so we can build our providers.
 DEPENDS += "phosphor-ipmi-host"
+
+SERVICE_FILE = "xyz.openbmc_project.phosphor-pid-control.service"
+SYSTEMD_PACKAGES = "${PN}"
+SYSTEMD_SERVICE_${PN} = "${SERVICE_FILE}"
+
+EXTRA_OECONF = " \
+  SYSTEMD_TARGET="basic.target" \
+       "
 
 FILES_${PN} = "${bindir}/swampd ${bindir}/setsensor"
 
