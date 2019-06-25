@@ -49,6 +49,7 @@ INSECURE_KEY = "${@'${SIGNING_KEY}' == '${STAGING_DIR_NATIVE}${datadir}/OpenBMC.
 SIGNING_KEY_DEPENDS = "${@oe.utils.conditional('INSECURE_KEY', 'True', 'phosphor-insecure-signing-key-native:do_populate_sysroot', '', d)}"
 
 UBOOT_SUFFIX ?= "bin"
+FLASH_UBOOT_IMAGE ?= "u-boot.${UBOOT_SUFFIX}"
 
 python() {
     # Compute rwfs LEB count and LEB size.
@@ -166,7 +167,7 @@ do_make_ubi() {
 	# Concatenate the uboot and ubi partitions
 	mk_nor_image ${IMGDEPLOYDIR}/${IMAGE_NAME}.ubi.mtd ${FLASH_SIZE}
 	dd bs=1k conv=notrunc seek=${FLASH_UBOOT_OFFSET} \
-		if=${DEPLOY_DIR_IMAGE}/u-boot.${UBOOT_SUFFIX} \
+		if=${DEPLOY_DIR_IMAGE}/${FLASH_UBOOT_IMAGE} \
 		of=${IMGDEPLOYDIR}/${IMAGE_NAME}.ubi.mtd
 	dd bs=1k conv=notrunc seek=${FLASH_UBI_OFFSET} \
 		if=ubi-img \
@@ -207,7 +208,7 @@ python do_generate_static() {
                                'of=%s' % nor_image])
 
     _append_image(os.path.join(d.getVar('DEPLOY_DIR_IMAGE', True),
-                               'u-boot.%s' % d.getVar('UBOOT_SUFFIX',True)),
+                               d.getVar('FLASH_UBOOT_IMAGE',True)),
                   int(d.getVar('FLASH_UBOOT_OFFSET', True)),
                   int(d.getVar('FLASH_KERNEL_OFFSET', True)))
 
@@ -240,7 +241,7 @@ do_mk_static_symlinks() {
 	# Maintain non-standard legacy links
 	ln -sf ${IMAGE_NAME}.static.mtd ${IMGDEPLOYDIR}/flash-${MACHINE}
 	ln -sf ${IMAGE_NAME}.static.mtd ${IMGDEPLOYDIR}/image-bmc
-	ln -sf u-boot.${UBOOT_SUFFIX} ${IMGDEPLOYDIR}/image-u-boot
+	ln -sf ${FLASH_UBOOT_IMAGE} ${IMGDEPLOYDIR}/image-u-boot
 	ln -sf ${FLASH_KERNEL_IMAGE} ${IMGDEPLOYDIR}/image-kernel
 	ln -sf ${IMAGE_LINK_NAME}.${IMAGE_BASETYPE} ${IMGDEPLOYDIR}/image-rofs
 	ln -sf rwfs.${OVERLAY_BASETYPE} ${IMGDEPLOYDIR}/image-rwfs
@@ -296,7 +297,7 @@ make_image_links() {
 
 	# Create some links to help make the tar archive in the format
 	# expected by phosphor-bmc-code-mgmt.
-	ln -sf ${DEPLOY_DIR_IMAGE}/u-boot.${UBOOT_SUFFIX} image-u-boot
+	ln -sf ${DEPLOY_DIR_IMAGE}/${FLASH_UBOOT_IMAGE} image-u-boot
 	ln -sf ${DEPLOY_DIR_IMAGE}/${FLASH_KERNEL_IMAGE} image-kernel
 	ln -sf ${IMGDEPLOYDIR}/${IMAGE_LINK_NAME}.$rofs image-rofs
 	ln -sf rwfs.$rwfs image-rwfs
