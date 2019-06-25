@@ -10,7 +10,7 @@ inherit systemd
 
 PV = "1.0+git${SRCPV}"
 
-KCS_DEVICE ?= "ipmi-kcs3"
+KCS_DEVICE ?= "ipmi_kcs3"
 
 SYSTEMD_SERVICE_${PN} = " ${PN}@${KCS_DEVICE}.service "
 FILES_${PN} += " ${systemd_system_unitdir}/${PN}@.service "
@@ -35,3 +35,9 @@ SRCREV = "2cdc49585235a6557c9cbb6c8b75c064fc02681a"
 # This is how linux-libc-headers says to include custom uapi headers
 CFLAGS_append = " -I ${STAGING_KERNEL_DIR}/include/uapi"
 do_configure[depends] += "virtual/kernel:do_shared_workdir"
+
+SRC_URI += "file://99-ipmi-kcs3.rules"
+do_install_append() {
+    install -d ${D}${base_libdir}/udev/rules.d
+    install -m 0644 ${WORKDIR}/99-ipmi-kcs3.rules ${D}${base_libdir}/udev/rules.d/
+}

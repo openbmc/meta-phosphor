@@ -1,0 +1,1 @@
+KERNEL=="ipmi-kcs3", SYMLINK+="ipmi_kcs3"
