@@ -145,7 +145,7 @@ do_generate_ubi[dirs] = "${S}/ubi"
 do_generate_ubi[depends] += " \
         ${PN}:do_image_${@d.getVar('FLASH_UBI_BASETYPE', True).replace('-', '_')} \
         virtual/kernel:do_deploy \
-        u-boot:do_populate_sysroot \
+        virtual/bootloader:do_populate_sysroot \
         mtd-utils-native:do_populate_sysroot \
         "
 
@@ -180,7 +180,7 @@ do_make_ubi[dirs] = "${S}/ubi"
 do_make_ubi[depends] += " \
         ${PN}:do_image_${@d.getVar('FLASH_UBI_BASETYPE', True).replace('-', '_')} \
         virtual/kernel:do_deploy \
-        u-boot:do_populate_sysroot \
+        virtual/bootloader:do_populate_sysroot \
         mtd-utils-native:do_populate_sysroot \
         "
 
@@ -250,7 +250,7 @@ do_generate_static[dirs] = "${S}/static"
 do_generate_static[depends] += " \
         ${PN}:do_image_${@d.getVar('IMAGE_BASETYPE', True).replace('-', '_')} \
         virtual/kernel:do_deploy \
-        u-boot:do_populate_sysroot \
+        virtual/bootloader:do_populate_sysroot \
         "
 
 make_signatures() {
@@ -331,7 +331,7 @@ do_generate_static_tar[dirs] = " ${S}/static"
 do_generate_static_tar[depends] += " \
         ${PN}:do_image_${@d.getVar('IMAGE_BASETYPE', True).replace('-', '_')} \
         virtual/kernel:do_deploy \
-        u-boot:do_populate_sysroot \
+        virtual/bootloader:do_populate_sysroot \
         openssl-native:do_populate_sysroot \
         ${SIGNING_KEY_DEPENDS} \
         ${PN}:do_copy_signing_pubkey \
@@ -349,7 +349,7 @@ do_generate_ubi_tar[dirs] = " ${S}/ubi"
 do_generate_ubi_tar[depends] += " \
         ${PN}:do_image_${@d.getVar('FLASH_UBI_BASETYPE', True).replace('-', '_')} \
         virtual/kernel:do_deploy \
-        u-boot:do_populate_sysroot \
+        virtual/bootloader:do_populate_sysroot \
         openssl-native:do_populate_sysroot \
         ${SIGNING_KEY_DEPENDS} \
         ${PN}:do_copy_signing_pubkey \
