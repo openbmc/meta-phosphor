@@ -20,6 +20,7 @@ PACKAGECONFIG ?= "cleanup-delete"
 PACKAGECONFIG[cleanup-delete] = "--enable-cleanup-delete, --disable-cleanup-delete"
 # If using static-layout, reboot-update is a good option to handle updating.
 PACKAGECONFIG[reboot-update] = "--enable-reboot-update, --disable-reboot-update"
+PACKAGECONFIG[static-layout] = "--enable-static-layout, --disable-static-layout"
 
 EXTRA_OECONF = "--disable-tests --disable-build-host-tool"
 
