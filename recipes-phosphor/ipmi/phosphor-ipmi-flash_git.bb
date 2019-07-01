@@ -8,11 +8,13 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=86d3f3a95c324c9479bd8986968f4327"
 
 inherit autotools pkgconfig
 inherit obmc-phosphor-ipmiprovider-symlink
+inherit systemd
 
 DEPENDS += "autoconf-archive-native"
 DEPENDS += "phosphor-ipmi-blobs"
 DEPENDS += "phosphor-logging"
 DEPENDS += "sdbusplus"
+DEPENDS += "systemd"
 DEPENDS += "ipmi-blob-tool"
 DEPENDS += "pciutils"
 
@@ -26,6 +28,11 @@ EXTRA_OECONF = "--disable-tests --disable-build-host-tool"
 S = "${WORKDIR}/git"
 SRC_URI = "git://github.com/openbmc/phosphor-ipmi-flash"
 SRCREV = "cf9b2195a3509b7481cbe564b0fc290c9bfc1475"
+
+SYSTEMD_PACKAGES = "${PN}"
+SYSTEMD_SERVICE_${PN} += "phosphor-ipmi-flash-bmc-prepare.target \
+ phosphor-ipmi-flash-bmc-verify.target \
+ phosphor-ipmi-flash-bmc-update.target"
 
 FILES_${PN}_append = " ${libdir}/ipmid-providers/lib*${SOLIBS}"
 FILES_${PN}_append = " ${libdir}/blob-ipmid/lib*${SOLIBS}"
