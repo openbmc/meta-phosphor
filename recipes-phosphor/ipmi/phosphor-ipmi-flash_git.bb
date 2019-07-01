@@ -13,6 +13,7 @@ DEPENDS += "autoconf-archive-native"
 DEPENDS += "phosphor-ipmi-blobs"
 DEPENDS += "phosphor-logging"
 DEPENDS += "sdbusplus"
+DEPENDS += "systemd"
 DEPENDS += "ipmi-blob-tool"
 DEPENDS += "pciutils"
 
