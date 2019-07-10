@@ -8,6 +8,10 @@ FILESEXTRAPATHS_prepend := "${THISDIR}/${PN}:"
 SRC_URI += "file://default.network"
 SRC_URI += "file://0001-sd-bus-Don-t-automatically-add-ObjectManager.patch"
 
+# Backport from master to fix https://github.com/systemd/systemd/issues/12784
+SRC_URI += "file://0001-network-do-not-send-ipv6-token-to-kernel.patch"
+SRC_URI += "file://0002-sd-bus-Don-t-automatically-add-ObjectManager.patch"
+
 RRECOMMENDS_${PN} += "obmc-targets"
 FILES_${PN} += "${systemd_unitdir}/network/default.network"
 
