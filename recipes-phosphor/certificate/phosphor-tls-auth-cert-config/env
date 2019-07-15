@@ -1,0 +1,13 @@
+#D-Bus object path
+#example: /xyz/openbmc_project/certs/server/https
+ENDPOINT=tls_auth
+
+#Path for the certificate file
+CERTPATH=/etc/ssl/certs/tls_auth
+
+#Type of the service client/server
+TYPE=storage
+
+#Units to restart
+UNIT=bmcweb.service
+
