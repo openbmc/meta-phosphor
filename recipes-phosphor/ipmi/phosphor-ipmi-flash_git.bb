@@ -31,6 +31,10 @@ PACKAGECONFIG[nuvoton-lpc] = "--enable-nuvoton-lpc, --disable-nuvoton-lpc"
 
 EXTRA_OECONF = "--disable-tests --disable-build-host-tool"
 
+# Set this variable in your recipe to set it instead of using MAPPED_ADDRESS directly.
+IPMI_FLASH_BMC_ADDRESS ?= "0"
+EXTRA_OECONF_append = " MAPPED_ADDRESS=${IPMI_FLASH_BMC_ADDRESS}"
+
 S = "${WORKDIR}/git"
 SRC_URI = "git://github.com/openbmc/phosphor-ipmi-flash"
 SRCREV = "c9792e75361c86da7f674976eacd03c761021d2f"
