@@ -15,6 +15,7 @@ STATE_MGR_PACKAGES = " \
     ${PN}-discover \
     ${PN}-host-check \
     ${PN}-reset-sensor-states \
+    ${PN}-systemd-target-monitor \
 "
 PACKAGE_BEFORE_PN += "${STATE_MGR_PACKAGES}"
 ALLOW_EMPTY_${PN} = "1"
@@ -23,6 +24,7 @@ DBUS_PACKAGES = "${STATE_MGR_PACKAGES}"
 
 SYSTEMD_PACKAGES = "${PN}-discover \
                     ${PN}-reset-sensor-states \
+                    ${PN}-systemd-target-monitor \
 "
 
 # The host-check function will check if the host is running
@@ -42,6 +44,8 @@ DEPENDS += "sdeventplus"
 DEPENDS += "phosphor-logging"
 DEPENDS += "phosphor-dbus-interfaces"
 DEPENDS += "libcereal"
+DEPENDS += "nlohmann-json"
+DEPENDS += "cli11"
 
 FILES_${PN}-host = "${bindir}/phosphor-host-state-manager"
 DBUS_SERVICE_${PN}-host += "xyz.openbmc_project.State.Host.service"
@@ -65,6 +69,12 @@ SYSTEMD_SERVICE_${PN}-host-check += "phosphor-reset-host-check@.service"
 SYSTEMD_SERVICE_${PN}-host-check += "phosphor-reset-host-running@.service"
 
 SYSTEMD_SERVICE_${PN}-reset-sensor-states += "phosphor-reset-sensor-states@.service"
+
+FILES_${PN}-systemd-target-monitor = " \
+    ${bindir}/phosphor-systemd-target-monitor \
+    ${sysconfdir}/phosphor-systemd-target-monitor/phosphor-target-monitor-default.json \
+    "
+SYSTEMD_SERVICE_${PN}-systemd-target-monitor += "phosphor-systemd-target-monitor.service"
 
 RESET_CHECK_TMPL = "phosphor-reset-host-check@.service"
 RESET_CHECK_TGTFMT = "obmc-host-reset@{1}.target"
@@ -131,7 +141,13 @@ HOST_RST_RBT_ATTEMPTS_SVC_INST = "phosphor-reset-host-reboot-attempts@{0}.servic
 HOST_RST_RBT_ATTEMPTS_SVC_FMT = "../${HOST_RST_RBT_ATTEMPTS_SVC}:${HOST_START_TGTFMT}.requires/${HOST_RST_RBT_ATTEMPTS_SVC_INST}"
 SYSTEMD_LINK_${PN}-host += "${@compose_list_zip(d, 'HOST_RST_RBT_ATTEMPTS_SVC_FMT', 'OBMC_HOST_INSTANCES', 'OBMC_HOST_INSTANCES')}"
 
-SRC_URI += "git://github.com/openbmc/phosphor-state-manager"
-SRCREV = "27115aec886d69def59d18be7534d1156a9712ce"
+do_install_append () {
+  install -d ${D}${sysconfdir}/phosphor-systemd-target-monitor
+  install ${S}/phosphor-target-monitor-default.json ${D}${sysconfdir}/phosphor-systemd-target-monitor/phosphor-target-monitor-default.json
+}
+
+# TODO - This needs to be changed back to defaults before merge
+SRC_URI += "git://github.com/openbmc/phosphor-state-manager;nobranch=1"
+SRCREV = "4894bffa367f0832841a33d1da9cd0b818fbc919"
 
 S = "${WORKDIR}/git"
