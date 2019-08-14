@@ -38,6 +38,12 @@ VIRTUAL-RUNTIME_obmc-host-state-manager ?= "phosphor-state-manager-host"
 # power the host back on.
 VIRTUAL-RUNTIME_obmc-discover-system-state ?= "phosphor-state-manager-discover"
 
+# obmc-systemd-target-monitor
+#
+# Provides a service that monitors for default phosphor systemd targets and
+# logs errors if they fail
+VIRTUAL-RUNTIME_obmc-systemd-target-monitor ?= "phosphor-state-manager-systemd-target-monitor"
+
 # obmc-fan-presence
 #
 # Provides implementations of fan presence detection

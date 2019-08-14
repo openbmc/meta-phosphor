@@ -23,11 +23,17 @@ PACKAGES = " \
         ${PN}-settings \
         ${PN}-network \
         ${PN}-user-mgmt \
+        ${PN}-systemd-target-mntr \
         "
 
 SUMMARY_${PN}-bmc-state-mgmt = "BMC state management"
 RDEPENDS_${PN}-bmc-state-mgmt = " \
         ${VIRTUAL-RUNTIME_obmc-bmc-state-manager} \
+        "
+
+SUMMARY_${PN}-systemd-target-mntr = "systemd target monitoring"
+RDEPENDS_${PN}-systemd-target-mntr = " \
+        ${VIRTUAL-RUNTIME_obmc-systemd-target-monitor} \
         "
 
 SUMMARY_${PN}-chassis-state-mgmt = "Chassis state management"

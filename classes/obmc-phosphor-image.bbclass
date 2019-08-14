@@ -21,6 +21,7 @@
 # - obmc-system-mgmt                  - OpenBMC system management
 # - obmc-user-mgmt                    - OpenBMC user management
 # - obmc-debug-collector              - OpenBMC debug collector
+# - obmc-systemd-target-mntr          - OpenBMC systemd target monitor
 
 inherit core-image
 inherit obmc-phosphor-utils
@@ -48,6 +49,7 @@ FEATURE_PACKAGES_obmc-debug-collector ?= "packagegroup-obmc-apps-debug-collector
 FEATURE_PACKAGES_obmc-settings-mgmt ?= "packagegroup-obmc-apps-settings"
 FEATURE_PACKAGES_obmc-network-mgmt ?= "packagegroup-obmc-apps-network"
 FEATURE_PACKAGES_obmc-user-mgmt ?= "packagegroup-obmc-apps-user-mgmt"
+FEATURE_PACKAGES_obmc-systemd-target-mntr ?= "packagegroup-obmc-apps-systemd-target-mntr"
 
 # FIXME: phosphor-net-ipmi depends on phosphor-ipmi-host !?!? and
 # cannot be built on core-qemu machines because of the dependency
@@ -78,6 +80,7 @@ IMAGE_FEATURES += " \
         obmc-debug-collector \
         obmc-network-mgmt \
         obmc-settings-mgmt \
+        obmc-systemd-target-mntr \
         "
 
 IMAGE_FEATURES_append_df-obmc-ubi-fs = " read-only-rootfs"
