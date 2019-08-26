@@ -11,25 +11,29 @@ RDEPENDS_${PN} += "${VIRTUAL-RUNTIME_base-utils}"
 
 S = "${WORKDIR}"
 SRC_URI += "file://obmc-init.sh"
-SRC_URI += "file://obmc-shutdown.sh"
-SRC_URI += "file://obmc-update.sh"
-SRC_URI += "file://whitelist"
+SRC_URI += "${@bb.utils.contains('DISTRO_FEATURES', 'obmc-ext4-fs', '', 'file://obmc-shutdown.sh', d)}"
+SRC_URI += "${@bb.utils.contains('DISTRO_FEATURES', 'obmc-ext4-fs', '', 'file://obmc-update.sh', d)}"
+SRC_URI += "${@bb.utils.contains('DISTRO_FEATURES', 'obmc-ext4-fs', '', 'file://whitelist', d)}"
 
 do_install() {
-	for f in init-download-url init-options
-	do
-		if test -e $f
-		then
-			install -m 0755 ${WORKDIR}/$f ${D}/$f
-		fi
-	done
-        install -m 0755 ${WORKDIR}/obmc-init.sh ${D}/init
+    if ! ${@bb.utils.contains('DISTRO_FEATURES', 'obmc-ext4-fs', 'true', 'false', d)}; then
+        for f in init-download-url init-options
+        do
+            if test -e $f
+            then
+                install -m 0755 ${WORKDIR}/$f ${D}/$f
+            fi
+        done
         install -m 0755 ${WORKDIR}/obmc-shutdown.sh ${D}/shutdown
         install -m 0755 ${WORKDIR}/obmc-update.sh ${D}/update
         install -m 0644 ${WORKDIR}/whitelist ${D}/whitelist
-        install -d ${D}/dev
-        mknod -m 622 ${D}/dev/console c 5 1
+    fi
+
+    install -m 0755 ${WORKDIR}/obmc-init.sh ${D}/init
+    install -d ${D}/dev
+    mknod -m 622 ${D}/dev/console c 5 1
 }
 
-FILES_${PN} += " /init /shutdown /update /whitelist /dev "
-FILES_${PN} += " /init-options /init-download-url "
+FILES_${PN} += " /init /dev "
+FILES_${PN} += "${@bb.utils.contains('DISTRO_FEATURES', 'obmc-ext4-fs', '', ' /shutdown /update /whitelist ', d)}"
+FILES_${PN} += "${@bb.utils.contains('DISTRO_FEATURES', 'obmc-ext4-fs', '', ' /init-options /init-download-url ', d)}"
