@@ -36,8 +36,10 @@ FLASH_NOR_UBI_OVERHEAD ?= "64"
 # Fixed partition offsets
 FLASH_UBOOT_OFFSET ?= "0"
 FLASH_KERNEL_OFFSET ?= "512"
+FLASH_KERNEL_OFFSET_aspeed-g6 ?= "640"
 FLASH_UBI_OFFSET ?= "${FLASH_KERNEL_OFFSET}"
 FLASH_ROFS_OFFSET ?= "4864"
+FLASH_ROFS_OFFSET_aspeed-g6 ?= "5888"
 FLASH_RWFS_OFFSET ?= "28672"
 
 # UBI volume sizes in KB unless otherwise noted.
