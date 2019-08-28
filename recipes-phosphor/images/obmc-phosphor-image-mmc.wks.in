@@ -1,0 +1,1 @@
+part /boot --ondisk mmcblk0 --source bootimg-partition --fstype=ext4 --label boot
