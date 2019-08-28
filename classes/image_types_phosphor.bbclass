@@ -9,6 +9,7 @@ inherit image_version
 # The reference BMC software update implementation.
 
 # Image composition
+IMAGE_BOOT_FILES_df-phosphor-mmc ?= "fitImage-${INITRAMFS_IMAGE}-${MACHINE}-${MACHINE} ${IMAGE_LINK_NAME}.ext4"
 FLASH_KERNEL_IMAGE ?= "fitImage-${INITRAMFS_IMAGE}-${MACHINE}-${MACHINE}"
 FLASH_KERNEL_IMAGE_df-obmc-ubi-fs ?= "fitImage-${MACHINE}.bin"
 
