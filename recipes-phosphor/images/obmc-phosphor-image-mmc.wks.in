@@ -1,0 +1,2 @@
+part --ondisk mmcblk0 --source rawcopy --sourceparams="file=fitImage-${MACHINE}.bin" --no-table
+part / --ondisk mmcblk0 --source rootfs --fstype=ext4 --label root --align 4
