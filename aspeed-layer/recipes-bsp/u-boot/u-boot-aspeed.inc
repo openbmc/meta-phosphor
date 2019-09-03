@@ -9,9 +9,20 @@ SRC_URI_append_aspeed_df-obmc-ubi-fs = " \
     file://0005-config-ast-common-Fall-back-to-secondary-flash-on-fa.patch \
     "
 
+SRC_URI_append_aspeed_df-obmc-ext4-fs = " \
+    file://0001-mmc-Add-AST-SDHCI-driver.patch \
+    "
+
 SRC_URI_append_aspeed_df-isolate-bmc = " \
     file://0001-aspeed-Disable-unnecessary-features.patch \
     "
+SRC_URI_remove_aspeed_df-isolate-bmc_df-obmc-ext4-fs = " \
+    file://0001-mmc-Add-AST-SDHCI-driver.patch \
+    "
+SRC_URI_append_aspeed_df-isolate-bmc_df-obmc-ext4-fs = " \
+    file://0002-mmc-Add-AST-SDHCI-driver.patch \
+    "
+
 SRC_URI_append_aspeed_df-aspeednic-use-mac2 = " \
     file://0002-board-aspeed-aspeednic-Use-MAC2-for-networking.patch \
     "

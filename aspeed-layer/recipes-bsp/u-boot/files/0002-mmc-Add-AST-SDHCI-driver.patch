@@ -1,0 +1,241 @@
+From 71e563cbac12f662df83d5258a9e326a8342e751 Mon Sep 17 00:00:00 2001
+From: Eddie James <eajames@linux.ibm.com>
+Date: Tue, 20 Aug 2019 15:09:18 -0500
+Subject: [PATCH] mmc: Add AST SDHCI driver
+
+Signed-off-by: Eddie James <eajames@linux.ibm.com>
+---
+ arch/arm/include/asm/arch-aspeed/ast_scu.h   |  1 +
+ arch/arm/include/asm/arch-aspeed/ast_sdhci.h | 11 ++++++
+ arch/arm/include/asm/gpio.h                  |  2 +-
+ arch/arm/mach-aspeed/ast-scu.c               |  6 ++++
+ board/aspeed/ast-g5/ast-g5.c                 | 11 ++++++
+ configs/ast_g5_ncsi_defconfig                |  2 ++
+ drivers/mmc/Kconfig                          |  9 +++++
+ drivers/mmc/Makefile                         |  1 +
+ drivers/mmc/ast_sdhci.c                      | 54 ++++++++++++++++++++++++++++
+ include/configs/ast-common.h                 | 13 +++++++
+ 10 files changed, 109 insertions(+), 1 deletion(-)
+ create mode 100644 arch/arm/include/asm/arch-aspeed/ast_sdhci.h
+ create mode 100644 drivers/mmc/ast_sdhci.c
+
+diff --git a/arch/arm/include/asm/arch-aspeed/ast_scu.h b/arch/arm/include/asm/arch-aspeed/ast_scu.h
+index dcbc673..e2cc693 100644
+--- a/arch/arm/include/asm/arch-aspeed/ast_scu.h
++++ b/arch/arm/include/asm/arch-aspeed/ast_scu.h
+@@ -44,6 +44,7 @@ extern u32 ast_scu_get_vga_memsize(void);
+ 
+ extern void ast_scu_init_eth(u8 num);
+ extern void ast_scu_multi_func_eth(u8 num);
++extern void ast_scu_multi_func_mmc(void);
+ extern void ast_scu_multi_func_romcs(u8 num);
+ 
+ #endif
+diff --git a/arch/arm/include/asm/arch-aspeed/ast_sdhci.h b/arch/arm/include/asm/arch-aspeed/ast_sdhci.h
+new file mode 100644
+index 0000000..89ffd61
+--- /dev/null
++++ b/arch/arm/include/asm/arch-aspeed/ast_sdhci.h
+@@ -0,0 +1,11 @@
++/*
++ * Copyright 2019 IBM Corp.
++ * SPDX-License-Identifier:	GPL-2.0+
++ */
++
++#ifndef _AST_SDHCI_H_
++#define _AST_SDHCI_H_
++
++int ast_sdhci_init(void);
++
++#endif /* _AST_SDHCI_H_ */
+diff --git a/arch/arm/include/asm/gpio.h b/arch/arm/include/asm/gpio.h
+index fe4419c..e5fcdfb 100644
+--- a/arch/arm/include/asm/gpio.h
++++ b/arch/arm/include/asm/gpio.h
+@@ -1,4 +1,4 @@
+-#ifndef CONFIG_ARCH_UNIPHIER
++#if !defined(CONFIG_ARCH_UNIPHIER) && !defined(CONFIG_ARCH_ASPEED)
+ #include <asm/arch/gpio.h>
+ #endif
+ #include <asm-generic/gpio.h>
+diff --git a/arch/arm/mach-aspeed/ast-scu.c b/arch/arm/mach-aspeed/ast-scu.c
+index 12de9b8..507c252 100644
+--- a/arch/arm/mach-aspeed/ast-scu.c
++++ b/arch/arm/mach-aspeed/ast-scu.c
+@@ -443,6 +443,12 @@ void ast_scu_multi_func_eth(u8 num)
+ 	}
+ }
+ 
++void ast_scu_multi_func_mmc(void)
++{
++	ast_scu_write(ast_scu_read(AST_SCU_FUN_PIN_CTRL5) | SCU_FUC_PIN_SD2,
++		      AST_SCU_FUN_PIN_CTRL5);
++}
++
+ void ast_scu_multi_func_romcs(u8 num)
+ {
+ 	ast_scu_write(ast_scu_read(AST_SCU_FUN_PIN_CTRL3) |
+diff --git a/board/aspeed/ast-g5/ast-g5.c b/board/aspeed/ast-g5/ast-g5.c
+index 12496ce..44b206a 100644
+--- a/board/aspeed/ast-g5/ast-g5.c
++++ b/board/aspeed/ast-g5/ast-g5.c
+@@ -8,9 +8,11 @@
+  */
+ 
+ #include <common.h>
++#include <mmc.h>
+ #include <netdev.h>
+ 
+ #include <asm/arch/ast_scu.h>
++#include <asm/arch/ast_sdhci.h>
+ #include <asm/arch/ast-sdmc.h>
+ #include <asm/arch/regs-lpc.h>
+ #include <asm/arch/regs-scu.h>
+@@ -97,6 +99,15 @@ int board_eth_init(bd_t *bd)
+ }
+ #endif
+ 
++#ifdef CONFIG_MMC
++int board_mmc_init(bd_t *bd)
++{
++	ast_scu_multi_func_mmc();
++
++	return ast_sdhci_init();
++}
++#endif
++
+ /* Called by macro WATCHDOG_RESET */
+ #if defined(CONFIG_HW_WATCHDOG)
+ void hw_watchdog_reset(void)
+diff --git a/configs/ast_g5_ncsi_defconfig b/configs/ast_g5_ncsi_defconfig
+index 74029ed..399283b 100644
+--- a/configs/ast_g5_ncsi_defconfig
++++ b/configs/ast_g5_ncsi_defconfig
+@@ -3,6 +3,8 @@ CONFIG_TARGET_AST_G5=y
+ CONFIG_SYS_PROMPT="ast# "
+ CONFIG_CMD_BOOTEFI=n
+ CONFIG_CMD_DHCP=y
++CONFIG_CMD_EXT4=y
++CONFIG_CMD_MMC=y
+ CONFIG_CMD_PING=y
+ CONFIG_EFI_LOADER=n
+ CONFIG_FIT=y
+diff --git a/drivers/mmc/Kconfig b/drivers/mmc/Kconfig
+index c80efc3..ab7ad44 100644
+--- a/drivers/mmc/Kconfig
++++ b/drivers/mmc/Kconfig
+@@ -34,6 +34,15 @@ config ROCKCHIP_DWMMC
+ 	  SD 3.0, SDIO 3.0 and MMC 4.5 and supports common eMMC chips as well
+ 	  as removeable SD and micro-SD cards.
+ 
++config AST_SDHCI
++	bool "Aspeed SDHCI controller"
++	depends on ARCH_ASPEED
++	help
++	  Enables support for the Aspeed SDHCI 2.0 controller present on Aspeed
++	  SoCs. This device is compatible with SD 3.0 and/or MMC 4.3
++	  specifications. On the AST2600, the device is also compatible with
++	  MMC 5.1 and eMMC 3.0.
++
+ config SH_SDHI
+ 	bool "SuperH/Renesas ARM SoCs on-chip SDHI host controller support"
+ 	depends on RMOBILE
+diff --git a/drivers/mmc/Makefile b/drivers/mmc/Makefile
+index 3da4817..2b89fa4 100644
+--- a/drivers/mmc/Makefile
++++ b/drivers/mmc/Makefile
+@@ -14,6 +14,7 @@ obj-$(CONFIG_GENERIC_MMC) += mmc_legacy.o
+ endif
+ 
+ obj-$(CONFIG_ARM_PL180_MMCI) += arm_pl180_mmci.o
++obj-$(CONFIG_AST_SDHCI) += ast_sdhci.o
+ obj-$(CONFIG_ATMEL_SDHCI) += atmel_sdhci.o
+ obj-$(CONFIG_BCM2835_SDHCI) += bcm2835_sdhci.o
+ obj-$(CONFIG_BFIN_SDH) += bfin_sdh.o
+diff --git a/drivers/mmc/ast_sdhci.c b/drivers/mmc/ast_sdhci.c
+new file mode 100644
+index 0000000..69b8729
+--- /dev/null
++++ b/drivers/mmc/ast_sdhci.c
+@@ -0,0 +1,54 @@
++/*
++ * Copyright 2019 IBM Corp.
++ * SPDX-License-Identifier:	GPL-2.0+
++ */
++
++#include <common.h>
++#include <malloc.h>
++#include <sdhci.h>
++
++#include <asm/arch/ast_sdhci.h>
++#include <asm/arch/platform.h>
++
++#define AST_SDHCI_MAX_CLK	198000000
++#define AST_SDHCI_NAME_SIZE	8
++
++#if defined(AST_SOC_G4) || defined(AST_SOC_G5)
++#define AST_SDHCI_NUM_SLOTS	2
++#endif
++
++static const u32 ast_sdhci_slot_addrs[] = {
++	AST_SDHC_BASE + 0x100,
++	AST_SDHC_BASE + 0x200,
++};
++
++struct ast_sdhci_host {
++	char name[AST_SDHCI_NAME_SIZE];
++	struct sdhci_host host;
++};
++
++int ast_sdhci_init(void)
++{
++	int rc;
++	struct ast_sdhci_host *hosts;
++
++	hosts = (struct ast_sdhci_host *)calloc(AST_SDHCI_NUM_SLOTS,
++						sizeof(struct ast_sdhci_host));
++	if (!hosts)
++		return -ENOMEM;
++
++	for (unsigned int i = 0; i < AST_SDHCI_NUM_SLOTS; ++i) {
++		snprintf(hosts[i].name, AST_SDHCI_NAME_SIZE, "sdhci%d", i);
++		hosts[i].host.name = hosts[i].name;
++		hosts[i].host.ioaddr = (void *)ast_sdhci_slot_addrs[i];
++		hosts[i].host.version = SDHCI_SPEC_200;
++
++		rc = add_sdhci(&hosts[i].host, AST_SDHCI_MAX_CLK, 0);
++		if (rc) {
++			free(hosts);
++			return rc;
++		}
++	}
++
++	return 0;
++}
+diff --git a/include/configs/ast-common.h b/include/configs/ast-common.h
+index a024308..4a51e6a 100644
+--- a/include/configs/ast-common.h
++++ b/include/configs/ast-common.h
+@@ -84,6 +84,19 @@
+ #define CONFIG_SYS_MAXARGS		16
+ #define CONFIG_SYS_BARGSIZE		CONFIG_SYS_CBSIZE
+ 
++/* Optional MMC support */
++#ifdef CONFIG_CMD_MMC
++#define CONFIG_MMC
++#define CONFIG_GENERIC_MMC
++#define CONFIG_SDHCI
++#define CONFIG_AST_SDHCI
++#endif
++
++/* Optional EXT4 support */
++#ifdef CONFIG_CMD_EXT4
++#define CONFIG_FS_EXT4
++#endif
++
+ /*
+  * Optional MTD and UBI support
+  */
+-- 
+1.8.3.1
+
