@@ -80,7 +80,7 @@ IMAGE_FEATURES += " \
         obmc-settings-mgmt \
         "
 
-IMAGE_FEATURES_append_df-obmc-ubi-fs = " read-only-rootfs"
+IMAGE_FEATURES_append = " read-only-rootfs"
 
 CORE_IMAGE_EXTRA_INSTALL_append = " bash \
         packagegroup-obmc-apps-extras \
