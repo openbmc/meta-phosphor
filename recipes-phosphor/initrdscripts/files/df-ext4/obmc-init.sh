@@ -21,6 +21,26 @@ mount tmpfs run -t tmpfs -o mode=755,nodev
 vgscan --mknodes
 vgchange --sysinit -a ly
 
+# Check if read-write fs exists, if not it means this is a newly flashed emmc
+# that contains only the kernel and rootfs.
+if [ ! -e "/dev/mapper/vg-rwfs" ]; then
+    # Create partition #3 (#1:kernel, #2:rootfs) for lvm (use all remaining
+    # space in the emmc) and create the rwfs volume.
+    fdisk /dev/mmcblk0 << HERE
+    n
+    p
+    3
+
+
+    w
+HERE
+
+    pvcreate /dev/mmcblk0p3
+    vgcreate vg /dev/mmcblk0p3
+    lvcreate -L 2G -n rwfs vg
+    mkfs.ext4 /dev/mapper/vg-rwfs
+fi
+
 mkdir -p $rodir
 mount "$(get_root)" $rodir -t ext4 -o ro
 
