@@ -19,6 +19,7 @@ DEPENDS += "sdeventplus"
 DEPENDS += "phosphor-dbus-interfaces phosphor-dbus-interfaces-native"
 DEPENDS += "phosphor-logging"
 DEPENDS += "libnl"
+DEPENDS += "boost"
 
 S = "${WORKDIR}/git"
 
