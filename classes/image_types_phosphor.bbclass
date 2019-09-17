@@ -2,6 +2,12 @@
 
 inherit image_version
 
+# Skip the udev database by default.  It adds around 2MB
+# compressed to the root filesystem, and probably doesn't
+# make sense on a BMC anyway.
+BAD_RECOMMENDATIONS += "udev-hwdb"
+BAD_RECOMMENDATIONS += "shared-mime-info"
+
 # Phosphor image types
 #
 # Phosphor OpenBMC supports a fixed partition mtd layout,
