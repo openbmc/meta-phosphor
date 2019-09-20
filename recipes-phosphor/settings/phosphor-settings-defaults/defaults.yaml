@@ -104,6 +104,12 @@
           TPMEnable:
              Default: 'false'
 
+/org/open_power/control/host0/ClearHostSecurityKeys:
+    - Interface: org.open_power.Control.TPM.SecurityKeys
+      Properties:
+          ClearHostSecurityKeys:
+             Default: 0
+
 /xyz/openbmc_project/control/power_supply_attributes:
     - Interface: xyz.openbmc_project.Control.PowerSupplyAttributes
       Properties:
