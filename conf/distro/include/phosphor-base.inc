@@ -82,6 +82,7 @@ VIRTUAL-RUNTIME_keymaps = ""
 
 # Phosphor OpenBMC uses systemd and udev
 VIRTUAL-RUNTIME_init_manager = "systemd"
+VIRTUAL-RUNTIME_dev_manager = "systemd"
 VIRTUAL-RUNTIME_initscripts = ""
 
 DISTRO_FEATURES_BACKFILL_CONSIDERED = " \
