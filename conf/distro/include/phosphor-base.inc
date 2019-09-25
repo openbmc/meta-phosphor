@@ -136,6 +136,7 @@ KERNEL_FEATURES_remove_qemuall = " phosphor-gpio-keys"
 IMAGE_CLASSES_append = " image_types_phosphor"
 IMAGE_CLASSES_append_npcm7xx = " image_types_phosphor_nuvoton"
 
+IMAGE_INSTALL_append = " kernel-modules"
 IMAGE_INSTALL_append = " dbus-broker"
 
 # OpenBMC uses a couple recipes from meta-virtualization
