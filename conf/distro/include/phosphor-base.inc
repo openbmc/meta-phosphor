@@ -138,6 +138,14 @@ IMAGE_CLASSES_append_npcm7xx = " image_types_phosphor_nuvoton"
 
 IMAGE_INSTALL_append = " dbus-broker"
 
+IMAGE_FSTYPES += "${@bb.utils.contains('DISTRO_FEATURES', \
+        'obmc-ubi-fs', \
+        'mtd-ubi mtd-ubi-tar', \
+        'mtd-static mtd-static-tar mtd-static-alltar', d)}"
+
+INITRAMFS_IMAGE = "obmc-phosphor-initramfs"
+INITRAMFS_IMAGE_df-obmc-ubi-fs = ""
+
 # OpenBMC uses a couple recipes from meta-virtualization
 # but we do not actually want any virtualization support
 # enabled on a BMC distribution.  Silence the emitted
