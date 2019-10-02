@@ -1,0 +1,11 @@
+Ok-To-Test+1: Jenkins <openbmc-ci-admin@ozlabs.org>
+Code-Review+1: Fran Hsu <fran.hsu@quantatw.com>
+Code-Review+1: Samuel Jiang <Samuel.Jiang@quantatw.com>
+Ok-To-Test+1: Brad Bishop <radsquirrel@gmail.com>
+Verified+1: Jenkins <openbmc-ci-admin@ozlabs.org>
+Code-Review+2: Brad Bishop <radsquirrel@gmail.com>
+Submitted-by: Brad Bishop <radsquirrel@gmail.com>
+Submitted-at: Wed, 02 Oct 2019 20:30:36 +0000
+Reviewed-on: https://gerrit.openbmc-project.xyz/c/openbmc/meta-phosphor/+/25267
+Project: openbmc/meta-phosphor
+Branch: refs/heads/master
