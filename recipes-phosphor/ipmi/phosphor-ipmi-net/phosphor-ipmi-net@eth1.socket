@@ -1,0 +1,7 @@
+[Socket]
+ListenDatagram=623
+BindToDevice=eth1
+
+[Install]
+WantedBy=sockets.target
+

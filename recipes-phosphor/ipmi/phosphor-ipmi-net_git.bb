@@ -32,8 +32,24 @@ RMCPP_IFACE ?= "${DEFAULT_RMCPP_IFACE}"
 # install parameterized service and socket files
 SYSTEMD_SERVICE_${PN} = " \
         ${PN}@${RMCPP_IFACE}.service \
-        ${PN}@${RMCPP_IFACE}.socket \
         "
+
+# Add the socket files for eth0 and eth1 because %i can't work in phosphor-ipmi-net@.socket
+FILESEXTRAPATHS_prepend := "${THISDIR}/${PN}:"
+SRC_URI += " \
+    file://phosphor-ipmi-net@eth0.socket \
+    file://phosphor-ipmi-net@eth1.socket \
+    "
+
+FILES_${PN} += " \
+        ${systemd_system_unitdir}/${PN}@eth0.socket \
+        ${systemd_system_unitdir}/${PN}@eth1.socket \
+        "
+
+do_install_append_mihawk() {
+        install -D ${WORKDIR}/phosphor-ipmi-net@eth0.socket ${D}${systemd_system_unitdir}/phosphor-ipmi-net@eth0.socket
+        install -D ${WORKDIR}/phosphor-ipmi-net@eth1.socket ${D}${systemd_system_unitdir}/phosphor-ipmi-net@eth1.socket
+}
 
 # To add another RMCPP interface, add similar lines to the
 # following lines in a bbappend:
