@@ -11,8 +11,10 @@ inherit allarch
 
 SRC_URI = "file://env"
 
+FILES_${PN} = "${datadir_native}"
+
 do_install() {
-	install -D ${WORKDIR}/env ${D}/${sysconfdir}/default/obmc/cert/nslcd
+	install -D ${WORKDIR}/env ${D}/${datadir_native}/phosphor-certificate-manager/nslcd
 }
 
 pkg_postinst_${PN}() {
