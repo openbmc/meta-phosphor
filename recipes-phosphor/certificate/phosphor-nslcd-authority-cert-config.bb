@@ -1,4 +1,4 @@
-SUMMARY = "Phosphor certificate manager configuration for an nslcd authority service"
+SUMMARY = "Phosphor certificate manager configuration for an nslcd authority2 service"
 
 PR = "r1"
 
@@ -12,17 +12,17 @@ inherit allarch
 SRC_URI = "file://env"
 
 do_install() {
-	install -D ${WORKDIR}/env ${D}/${sysconfdir}/default/obmc/cert/authority
+	install -D ${WORKDIR}/env ${D}/${sysconfdir}/default/obmc/cert/authority2
 }
 
 pkg_postinst_${PN}() {
-	LINK="$D$systemd_system_unitdir/multi-user.target.wants/phosphor-certificate-manager@authority.service"
+	LINK="$D$systemd_system_unitdir/multi-user.target.wants/phosphor-certificate-manager@authority2.service"
 	TARGET="../phosphor-certificate-manager@.service"
 	mkdir -p $D$systemd_system_unitdir/multi-user.target.wants
 	ln -s $TARGET $LINK
 }
 
 pkg_prerm_${PN}() {
-	LINK="$D$systemd_system_unitdir/multi-user.target.wants/phosphor-certificate-manager@authority.service"
+	LINK="$D$systemd_system_unitdir/multi-user.target.wants/phosphor-certificate-manager@authority2.service"
 	rm $LINK
 }
