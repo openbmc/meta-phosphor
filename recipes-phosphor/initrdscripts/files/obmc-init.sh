@@ -363,6 +363,15 @@ fi
 
 mount $rodev $rodir -t $rofst -o $roopts
 
+# Ensure our rwfs can be loaded as a module, in case we don't build them into
+# the initrd
+modules_mounted=
+if [ ! -e /lib/modules -a -e "$rodir"/lib/modules ]; then
+  mkdir -p /lib/modules
+  mount --bind "$rodir"/lib/modules /lib/modules
+  modules_mounted=1
+fi
+
 if test -x $rodir$fsck
 then
 	for fs in $fslist
@@ -421,6 +430,11 @@ do
 	mount --move $f root/$f
 done
 
+# We don't want our initramfs to depend on the rofs on shutdown
+# So we unbound the bind mounted modules
+if [ -n "$modules_mounted" ]; then
+  umount /lib/modules
+fi
+
 # switch_root /root $init
 exec chroot /root $init
-
