@@ -107,6 +107,24 @@
     },
     {
       "key": {
+        "uuid": "49e17379_e5136a43",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 13,
+      "author": {
+        "id": 1000021
+      },
+      "writtenOn": "2019-10-15T21:23:35Z",
+      "side": 1,
+      "message": "You can probably shave a lot of space off of the busybox config, I took the defaults and added a few things (eg mtd-tools) that were needed.\n\nYou could probably rewrite the init script as a static c program without conditions and save a lot of space.   To keep support for the shutdown/update scripts build this initramfs and just unpack it to /run/initramfs.",
+      "parentUuid": "8703fb80_852faeed",
+      "revId": "2260a7048a32e4b7682f6a3a4757963b651ac35b",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "4a6744a6_6a3b8afd",
         "filename": "recipes-phosphor/initrdscripts/files/obmc-init.sh",
         "patchSetId": 1
@@ -136,6 +154,24 @@
       "side": 1,
       "message": "Yeah, I could use a symlink since I\u0027m unmounting before pivoting. Yeah, I can remove the quotes if that\u0027s the convention. Never heard about that type of security feature.",
       "parentUuid": "4a6744a6_6a3b8afd",
+      "revId": "2260a7048a32e4b7682f6a3a4757963b651ac35b",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "100fd01c_dd6e85ca",
+        "filename": "recipes-phosphor/initrdscripts/files/obmc-init.sh",
+        "patchSetId": 1
+      },
+      "lineNbr": 373,
+      "author": {
+        "id": 1000021
+      },
+      "writtenOn": "2019-10-15T21:23:35Z",
+      "side": 1,
+      "message": "Its more that in this file its not parsing any extra output, so the quotes don\u0027t provide security against user input and just add clutter.\n\nThe update script, by contrast, is very careful to variables it gets from the filesystem.\n\nThe security feature was at most a lockdown proposal similar to \"no more modules\" one-way gate.\nI have no idea as to its upstream status.",
+      "parentUuid": "fcb7aada_3c06318d",
       "revId": "2260a7048a32e4b7682f6a3a4757963b651ac35b",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
       "unresolved": true
