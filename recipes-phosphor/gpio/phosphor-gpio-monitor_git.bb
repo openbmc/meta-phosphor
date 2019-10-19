@@ -28,11 +28,17 @@ DEPENDS += "phosphor-dbus-interfaces"
 DEPENDS += "libevdev"
 DEPENDS += "phosphor-logging"
 DEPENDS += "systemd"
+DEPENDS += "boost"
+DEPENDS += "libgpiod"
+DEPENDS += "cli11"
+DEPENDS += "nlohmann-json"
 
+SYSTEMD_SERVICE_${PN}-monitor += "phosphor-multi-gpio-monitor.service"
 SYSTEMD_SERVICE_${PN}-monitor += "phosphor-gpio-monitor@.service"
 SYSTEMD_SERVICE_${PN}-presence += "phosphor-gpio-presence@.service"
 
 FILES_${PN}-monitor += "${bindir}/phosphor-gpio-monitor"
+FILES_${PN}-monitor += "${bindir}/phosphor-multi-gpio-monitor"
 FILES_${PN}-monitor += "${bindir}/phosphor-gpio-util"
 FILES_${PN}-presence += "${bindir}/phosphor-gpio-presence"
 
