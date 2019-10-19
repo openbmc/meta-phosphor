@@ -29,14 +29,30 @@ DEPENDS += "phosphor-dbus-interfaces"
 DEPENDS += "libevdev"
 DEPENDS += "phosphor-logging"
 DEPENDS += "systemd"
+DEPENDS += "boost"
+DEPENDS += "libgpiod"
+DEPENDS += "cli11"
+DEPENDS += "nlohmann-json"
 
+CONFIG_JSON_FILE ?= "gpio-default"
+
+SYSTEMD_SERVICE_${PN}-monitor += "phosphor-multi-gpio-monitor@.service"
+SYSTEMD_SERVICE_${PN}-monitor += "phosphor-multi-gpio-monitor@${CONFIG_JSON_FILE}.service"
 SYSTEMD_SERVICE_${PN}-monitor += "phosphor-gpio-monitor@.service"
 SYSTEMD_SERVICE_${PN}-presence += "phosphor-gpio-presence@.service"
 
 FILES_${PN}-monitor += "${bindir}/phosphor-gpio-monitor"
+FILES_${PN}-monitor += "${bindir}/phosphor-multi-gpio-monitor"
 FILES_${PN}-monitor += "${bindir}/phosphor-gpio-util"
 FILES_${PN}-presence += "${bindir}/phosphor-gpio-presence"
 
 SRC_URI += "git://github.com/openbmc/phosphor-gpio-monitor"
+SRC_URI += "file://${CONFIG_JSON_FILE}.json"
 SRCREV = "86d16f037350afd379d062ca17cab5d553a1c8f2"
+
+do_install_append() {
+        install -m 0755 -d ${D}${sysconfdir}
+        install -m 0644 ${WORKDIR}/${CONFIG_JSON_FILE}.json ${D}${sysconfdir}/${CONFIG_JSON_FILE}.json
+}
+
 S = "${WORKDIR}/git"

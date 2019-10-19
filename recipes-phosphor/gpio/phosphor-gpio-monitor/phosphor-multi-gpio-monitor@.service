@@ -1,0 +1,7 @@
+[Unit]
+Description=Phosphor %I GPIO monitor
+
+[Service]
+Restart=no
+ExecStart=/usr/bin/env phosphor-multi-gpio-monitor --config {sysconfdir}/%I.json
+SyslogIdentifier=phosphor-multi-gpio-monitor

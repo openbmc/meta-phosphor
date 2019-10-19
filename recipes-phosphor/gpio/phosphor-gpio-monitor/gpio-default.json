@@ -1,0 +1,9 @@
+[
+	{
+		"Name": "PowerButton",
+		"LineName": "POWER_BUTTON",
+		"GpioNum": 34,
+		"EventMon": "BOTH",
+		"Continue": true
+	}
+]
