@@ -7,22 +7,20 @@ LIC_FILES_CHKSUM = "file://${COREBASE}/meta/files/common-licenses/Apache-2.0;md5
 
 RDEPENDS_${PN} = "phosphor-certificate-manager"
 
-inherit allarch
+inherit allarch \
+        obmc-phosphor-systemd
 
-SRC_URI = "file://env"
 
-do_install() {
-	install -D ${WORKDIR}/env ${D}/${sysconfdir}/default/obmc/cert/authority
-}
+SYSTEMD_SERVICE_${PN} = "phosphor-certificate-manager-authority@.service"
 
 pkg_postinst_${PN}() {
-	LINK="$D$systemd_system_unitdir/multi-user.target.wants/phosphor-certificate-manager@authority.service"
-	TARGET="../phosphor-certificate-manager@.service"
+	LINK="$D$systemd_system_unitdir/multi-user.target.wants/phosphor-certificate-manager-authority@0.service"
+	TARGET="../phosphor-certificate-manager-authority@.service"
 	mkdir -p $D$systemd_system_unitdir/multi-user.target.wants
 	ln -s $TARGET $LINK
 }
 
 pkg_prerm_${PN}() {
-	LINK="$D$systemd_system_unitdir/multi-user.target.wants/phosphor-certificate-manager@authority.service"
+	LINK="$D$systemd_system_unitdir/multi-user.target.wants/phosphor-certificate-manager-authority@0.service"
 	rm $LINK
 }
