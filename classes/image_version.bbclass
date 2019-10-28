@@ -2,6 +2,12 @@
 
 DEPENDS_append = " os-release"
 
+VERSION_PURPOSE ?= "xyz.openbmc_project.Software.Version.VersionPurpose.BMC"
+
+def do_get_version_purpose(d):
+    purpose = d.getVar('VERSION_PURPOSE', True)
+    return purpose
+
 def do_get_version(d):
     import configparser
     import io
