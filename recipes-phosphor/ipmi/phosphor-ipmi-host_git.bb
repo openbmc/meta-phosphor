@@ -55,7 +55,7 @@ USERADD_PACKAGES = "${PN}"
 # add ipmi group
 GROUPADD_PARAM_${PN} = "ipmi"
 # Add root user to ipmi group
-GROUPMEMS_PARAM_${PN} = "-g ipmi -a root"
+GROUPMEMS_PARAM_${PN} = "${@bb.utils.contains_any("IMAGE_FEATURES", [ 'debug-tweaks', 'allow-root-login' ], '-g ipmi -a root', '', d)}"
 
 SYSTEMD_SERVICE_${PN} += "xyz.openbmc_project.Ipmi.Internal.SoftPowerOff.service phosphor-ipmi-host.service"
 

@@ -27,7 +27,7 @@ GROUPADD_PARAM_${PN} = "priv-admin; priv-operator; priv-user; priv-callback "
 GROUPADD_PARAM_phosphor-ldap = "priv-admin; priv-operator; priv-user; priv-callback "
 
 # Add root user to priv-admin group
-GROUPMEMS_PARAM_${PN} = "-g priv-admin -a root"
+GROUPMEMS_PARAM_${PN} = "${@bb.utils.contains_any("IMAGE_FEATURES", [ 'debug-tweaks', 'allow-root-login' ], '-g priv-admin -a root', '', d)}"
 
 DBUS_SERVICE_${PN} += "xyz.openbmc_project.User.Manager.service"
 FILES_phosphor-ldap += " \

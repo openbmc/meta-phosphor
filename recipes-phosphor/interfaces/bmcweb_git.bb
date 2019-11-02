@@ -7,7 +7,7 @@ USERADD_PACKAGES = "${PN}"
 USERADD_PARAM_${PN} = "-r -s /usr/sbin/nologin bmcweb"
 GROUPADD_PARAM_${PN} = "web; redfish"
 # Add root user to web & redfish group
-GROUPMEMS_PARAM_${PN} = "-g web -a root; -g redfish -a root"
+GROUPMEMS_PARAM_${PN} = "${@bb.utils.contains_any("IMAGE_FEATURES", [ 'debug-tweaks', 'allow-root-login' ], '-g web -a root; -g redfish -a root', '', d)}"
 
 LICENSE = "Apache-2.0"
 LIC_FILES_CHKSUM = "file://LICENCE;md5=a6a4edad4aed50f39a66d098d74b265b"
