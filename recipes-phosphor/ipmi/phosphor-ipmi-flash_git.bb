@@ -35,12 +35,19 @@ PACKAGECONFIG[host-bios] = "--enable-host-bios, --disable-host-bios"
 PACKAGECONFIG[aspeed-p2a] = "--enable-aspeed-p2a, --disable-aspeed-p2a"
 PACKAGECONFIG[aspeed-lpc] = "--enable-aspeed-lpc, --disable-aspeed-lpc"
 PACKAGECONFIG[nuvoton-lpc] = "--enable-nuvoton-lpc, --disable-nuvoton-lpc"
+PACKAGECONFIG[nuvoton-p2a-vga] = "--enable-nuvoton-p2a-vga, --disable-nuvoton-p2a-vga"
+PACKAGECONFIG[nuvoton-p2a-mbox] = "--enable-nuvoton-p2a-mbox, --disable-nuvoton-p2a-mbox"
 
 EXTRA_OECONF = "--disable-tests --disable-build-host-tool"
 
 # Set this variable in your recipe to set it instead of using MAPPED_ADDRESS directly.
 IPMI_FLASH_BMC_ADDRESS ?= "0"
 EXTRA_OECONF_append = " MAPPED_ADDRESS=${IPMI_FLASH_BMC_ADDRESS}"
+
+# Memory address for NUVOTON
+NUVOTON_FLASH_PCIVGA  = "0x7F400000"
+NUVOTON_FLASH_PCIMBOX = "0xF0848000"
+NUVOTON_FLASH_LPC     = "0xc0008000"
 
 S = "${WORKDIR}/git"
 SRC_URI = "git://github.com/openbmc/phosphor-ipmi-flash"
