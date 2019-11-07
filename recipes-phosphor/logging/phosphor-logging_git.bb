@@ -24,6 +24,7 @@ DEPENDS += "phosphor-logging-error-logs-native"
 DEPENDS += "phosphor-logging-native"
 DEPENDS += "libcereal"
 DEPENDS += "sdeventplus"
+DEPENDS += "cli11"
 
 PACKAGE_BEFORE_PN = "${PN}-test"
 FILES_${PN}-test = "${bindir}/*-test"
