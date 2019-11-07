@@ -96,6 +96,7 @@ PACKAGECONFIG[openpower-pels] = " \
         --enable-openpower-pel-extension, \
         --disable-openpower-pel-extension, \
         nlohmann-json, \
+        CLI, \
         , \
         "
 
