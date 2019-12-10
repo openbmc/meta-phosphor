@@ -17,7 +17,5 @@ then
     fi
 fi
 
-path="${path//:/--}"
-path="${path//-/\\x2d}"
-
-systemctl --no-block $action 'xyz.openbmc_project.Hwmon@'$path'.service'
+path="$(systemd-escape "$path")"
+systemctl --no-block "$action" "xyz.openbmc_project.Hwmon@$path.service"
