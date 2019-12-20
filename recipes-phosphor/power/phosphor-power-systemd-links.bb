@@ -13,6 +13,7 @@ OBMC_POWER_SUPPLY_INSTANCES ?= "0"
 ALLOW_EMPTY_${PN} = "1"
 
 pkg_postinst_${PN}() {
+	mkdir -p $D$systemd_system_unitdir/obmc-chassis-poweron@0.target.requires
 	mkdir -p $D$systemd_system_unitdir/obmc-chassis-poweron@0.target.wants
 	mkdir -p $D$systemd_system_unitdir/multi-user.target.requires
 	mkdir -p $D$systemd_system_unitdir/multi-user.target.wants
@@ -35,6 +36,11 @@ pkg_postinst_${PN}() {
 	LINK="$D$systemd_system_unitdir/multi-user.target.wants/phosphor-regulators.service"
 	TARGET="../phosphor-regulators.service"
 	ln -s $TARGET $LINK
+
+	# Link phosphor-regulators-config service against obmc-chassis-poweron requires target
+	LINK="$D$systemd_system_unitdir/obmc-chassis-poweron@$i.target.requires/phosphor-regulators-config@$i.service"
+	TARGET="../phosphor-regulators-config.service"
+	ln -s $TARGET $LINK
 }
 
 pkg_prerm_${PN}() {
@@ -49,4 +55,7 @@ pkg_prerm_${PN}() {
 
 	# Remove link to phosphor-regulators from multi-user wants target
 	rm "$D$systemd_system_unitdir/multi-user.target.wants/phosphor-regulators.service"
+
+	# Remove link to phosphor-regulators-config from obmc-chassis-poweron requires target
+	rm "$D$systemd_system_unitdir/obmc-chassis-poweron@$i.target.requires/phosphor-regulators-config.service"
 }
