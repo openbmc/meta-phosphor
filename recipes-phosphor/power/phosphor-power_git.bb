@@ -28,3 +28,7 @@ SEQ_MONITOR_SVC = "pseq-monitor.service"
 SEQ_PGOOD_SVC = "pseq-monitor-pgood.service"
 PSU_MONITOR_TMPL = "power-supply-monitor@.service"
 SYSTEMD_SERVICE_${PN} += "${SEQ_MONITOR_SVC} ${SEQ_PGOOD_SVC} ${PSU_MONITOR_TMPL}"
+
+# ${PN}-regulators service/systemd setup
+REGS_TMPL = "phosphor-regulators@.service"
+SYSTEMD_SERVICE_${PN} += "${REGS_TMPL}"
