@@ -29,6 +29,14 @@ pkg_postinst_${PN}() {
 		TARGET="../power-supply-monitor@.service"
 		ln -s $TARGET $LINK
 	done
+
+	CHASSIS_INSTANCES="${@d.getVar('OBMC_CHASSIS_INSTANCES') or ''}"
+	for i in $CHASSIS_INSTANCES; do
+		# Link each instance of phosphor-regulators against multi-user requires target
+		LINK="$D$systemd_system_unitdir/multi-user.target.requires/phosphor-regulators@$i.service"
+		TARGET="../phosphor-regulators@.service"
+		ln -s $TARGET $LINK
+	done
 }
 
 pkg_prerm_${PN}() {
@@ -39,5 +47,11 @@ pkg_prerm_${PN}() {
 	for inst in $OBMC_POWER_SUPPLY_INSTANCES; do
 		LINK="$D$systemd_system_unitdir/multi-user.target.requires/power-supply-monitor@$inst.service"
 		rm $LINK
+	done
+
+	CHASSIS_INSTANCES="${@d.getVar('OBMC_CHASSIS_INSTANCES') or ''}"
+	for i in $CHASSIS_INSTANCES; do
+		# Remove link to phosphor-regulators from multi-user requires target
+		rm "$D$systemd_system_unitdir/multi-user.target.requires/phosphor-regulators@$i.service"
 	done
 }
