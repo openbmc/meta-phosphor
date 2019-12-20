@@ -15,6 +15,7 @@ ALLOW_EMPTY_${PN} = "1"
 pkg_postinst_${PN}() {
 	mkdir -p $D$systemd_system_unitdir/obmc-chassis-poweron@0.target.wants
 	mkdir -p $D$systemd_system_unitdir/multi-user.target.requires
+	mkdir -p $D$systemd_system_unitdir/multi-user.target.wants
 
 	LINK="$D$systemd_system_unitdir/obmc-chassis-poweron@0.target.wants/pseq-monitor.service"
 	TARGET="../pseq-monitor.service"
@@ -29,6 +30,11 @@ pkg_postinst_${PN}() {
 		TARGET="../power-supply-monitor@.service"
 		ln -s $TARGET $LINK
 	done
+
+	# Link phosphor-regulators service against multi-user wants target
+	LINK="$D$systemd_system_unitdir/multi-user.target.wants/phosphor-regulators.service"
+	TARGET="../phosphor-regulators.service"
+	ln -s $TARGET $LINK
 }
 
 pkg_prerm_${PN}() {
@@ -40,4 +46,7 @@ pkg_prerm_${PN}() {
 		LINK="$D$systemd_system_unitdir/multi-user.target.requires/power-supply-monitor@$inst.service"
 		rm $LINK
 	done
+
+	# Remove link to phosphor-regulators from multi-user wants target
+	rm "$D$systemd_system_unitdir/multi-user.target.wants/phosphor-regulators.service"
 }
