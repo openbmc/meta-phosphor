@@ -42,6 +42,11 @@ pkg_postinst_${PN}() {
 		LINK="$D$systemd_system_unitdir/obmc-chassis-poweron@$i.target.requires/phosphor-regulators-config@$i.service"
 		TARGET="../phosphor-regulators-config@.service"
 		ln -s $TARGET $LINK
+
+		# Link each instance of phosphor-regulators-monitor against obmc-chassis-poweron wants target
+		LINK="$D$systemd_system_unitdir/obmc-chassis-poweron@$i.target.wants/phosphor-regulators-monitor@$i.service"
+		TARGET="../phosphor-regulators-monitor@.service"
+		ln -s $TARGET $LINK
 	done
 }
 
@@ -62,5 +67,8 @@ pkg_prerm_${PN}() {
 
 		# Remove link to phosphor-regulators-config from obmc-chassis-poweron requires target
 		rm "$D$systemd_system_unitdir/obmc-chassis-poweron@$i.target.requires/phosphor-regulators-config@$i.service"
+
+		# Remove link to phosphor-regulators-monitor from obmc-chassis-poweron wants target
+		rm "$D$systemd_system_unitdir/obmc-chassis-poweron@$i.target.wants/phosphor-regulators-monitor@$i.service"
 	done
 }
