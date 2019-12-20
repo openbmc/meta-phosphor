@@ -36,3 +36,7 @@ FILES_${PN} += "${datadir}/phosphor-regulators"
 # ${PN}-regulators service/systemd setup
 REGS_SVC = "phosphor-regulators.service"
 SYSTEMD_SERVICE_${PN} += "${REGS_SVC}"
+
+# ${PN}-regulators-configure service/systemd setup
+REGS_CONF_SVC = "phosphor-regulators-config.service"
+SYSTEMD_SERVICE_${PN} += "${REGS_CONF_SVC}"
