@@ -44,3 +44,11 @@ SYSTEMD_SERVICE_${PN} += "${REGS_SVC}"
 # ${PN}-regulators-configure service/systemd setup
 REGS_CONF_SVC = "phosphor-regulators-config.service"
 SYSTEMD_SERVICE_${PN} += "${REGS_CONF_SVC}"
+
+# ${PN}-regulators-monitor-enable service/systemd setup
+REGS_MON_ENA_SVC = "phosphor-regulators-monitor-enable.service"
+SYSTEMD_SERVICE_${PN} += "${REGS_MON_ENA_SVC}"
+
+# ${PN}-regulators-monitor-disable service/systemd setup
+REGS_MON_DIS_SVC = "phosphor-regulators-monitor-disable.service"
+SYSTEMD_SERVICE_${PN} += "${REGS_MON_DIS_SVC}"
