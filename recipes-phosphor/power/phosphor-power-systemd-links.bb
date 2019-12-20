@@ -13,6 +13,7 @@ OBMC_POWER_SUPPLY_INSTANCES ?= "0"
 ALLOW_EMPTY_${PN} = "1"
 
 pkg_postinst_${PN}() {
+	mkdir -p $D$systemd_system_unitdir/obmc-chassis-poweron@0.target.requires
 	mkdir -p $D$systemd_system_unitdir/obmc-chassis-poweron@0.target.wants
 	mkdir -p $D$systemd_system_unitdir/multi-user.target.requires
 
@@ -36,6 +37,11 @@ pkg_postinst_${PN}() {
 		LINK="$D$systemd_system_unitdir/multi-user.target.requires/phosphor-regulators@$i.service"
 		TARGET="../phosphor-regulators@.service"
 		ln -s $TARGET $LINK
+
+		# Link each instance of phosphor-regulators-config against obmc-chassis-poweron requires target
+		LINK="$D$systemd_system_unitdir/obmc-chassis-poweron@$i.target.requires/phosphor-regulators-config@$i.service"
+		TARGET="../phosphor-regulators-config@.service"
+		ln -s $TARGET $LINK
 	done
 }
 
@@ -53,5 +59,8 @@ pkg_prerm_${PN}() {
 	for i in $CHASSIS_INSTANCES; do
 		# Remove link to phosphor-regulators from multi-user requires target
 		rm "$D$systemd_system_unitdir/multi-user.target.requires/phosphor-regulators@$i.service"
+
+		# Remove link to phosphor-regulators-config from obmc-chassis-poweron requires target
+		rm "$D$systemd_system_unitdir/obmc-chassis-poweron@$i.target.requires/phosphor-regulators-config@$i.service"
 	done
 }

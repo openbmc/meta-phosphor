@@ -33,3 +33,7 @@ SYSTEMD_SERVICE_${PN} += "${SEQ_MONITOR_SVC} ${SEQ_PGOOD_SVC} ${PSU_MONITOR_TMPL
 # ${PN}-regulators service/systemd setup
 TMPL_REGS = "phosphor-regulators@.service"
 SYSTEMD_SERVICE_${PN} += "${TMPL_REGS}"
+
+# ${PN}-regulators-configure service/systemd setup
+TMPL_REGS_CONF = "phosphor-regulators-config@.service"
+SYSTEMD_SERVICE_${PN} += "${TMPL_REGS_CONF}"
