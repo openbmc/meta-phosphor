@@ -1,0 +1,12 @@
+[Unit]
+Description=Create file indicating warm reboot for host%i
+Before=obmc-host-reboot@%i.target
+Conflicts=obmc-chassis-poweroff@%i.target
+
+[Service]
+RemainAfterExit=yes
+Type=oneshot
+ExecStart=/bin/sh -c "mkdir -p /run/openbmc && touch /run/openbmc/host@%i-warm-reboot"
+
+[Install]
+WantedBy=obmc-host-warm-reboot@%i.target
