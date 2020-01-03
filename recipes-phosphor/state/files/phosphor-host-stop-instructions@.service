@@ -1,0 +1,16 @@
+[Unit]
+# TODO - This should be meta-openpower layer
+Description=Stop instructions for host%i
+Before=obmc-host-stop-pre@%i.target
+After=op-occ-disable@%i.service
+After=xyz.openbmc_project.Ipmi.Internal.SoftPowerOff.service
+Conflicts=obmc-host-startmin@%i.target
+ConditionPathExists=/sys/class/fsi-master/fsi0/slave@00:00/cfam_id
+
+[Service]
+RemainAfterExit=yes
+Type=oneshot
+ExecStart=/usr/bin/pdbg -D 2 -a stop
+
+[Install]
+WantedBy=obmc-host-stop@%i.target
