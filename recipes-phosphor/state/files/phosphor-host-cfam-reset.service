@@ -1,0 +1,16 @@
+[Unit]
+# TODO - This should be meta-openpower layer
+Description=CFAM Reset Processor Chips
+Wants=obmc-power-on@0.target
+After=obmc-power-on@0.target
+Wants=obmc-host-start-pre@0.target
+Before=obmc-host-start-pre@0.target
+Conflicts=obmc-host-stop@0.target
+
+[Service]
+RemainAfterExit=yes
+Type=oneshot
+ExecStart=/usr/bin/gpioset  --mode time --sec 1 gpiochip0 1=0
+
+[Install]
+WantedBy=obmc-host-startmin@0.target
