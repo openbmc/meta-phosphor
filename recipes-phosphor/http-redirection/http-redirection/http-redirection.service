@@ -1,0 +1,13 @@
+[Unit]
+Description=Redirect HTTP to HTTPS interface
+Wants=network-online.target
+After=network-online.target
+
+[Service]
+Type=simple
+Restart=always
+ExecStart=/usr/bin/http-redirection.sh
+StandardError=null
+
+[Install]
+WantedBy=multi-user.target
