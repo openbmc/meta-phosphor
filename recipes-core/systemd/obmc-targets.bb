@@ -49,7 +49,8 @@ HOST_SYNCH_TARGETS = "start-pre starting started stop-pre stopping stopped reset
 # - timeout: Target to run when host watchdog times out
 # - reboot:  Reboot the host
 # - warm-reboot: Reboot the host but do not cycle chassis power
-HOST_ACTION_TARGETS = "start startmin stop quiesce reset shutdown crash timeout reboot warm-reboot"
+# - diagnostic-mode: The host is collecting debug data
+HOST_ACTION_TARGETS = "start startmin stop quiesce reset shutdown crash timeout reboot warm-reboot diagnostic-mode"
 
 CHASSIS_SYNCH_FMT = "obmc-power-{0}@.target"
 CHASSIS_ACTION_FMT = "obmc-chassis-{0}@.target"
