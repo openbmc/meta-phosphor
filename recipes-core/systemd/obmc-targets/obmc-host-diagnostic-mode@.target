@@ -1,0 +1,6 @@
+[Unit]
+Description=Host %i Diagnostic Mode
+Wants=multi-user.target
+After=multi-user.target
+RefuseManualStop=yes
+Conflicts=obmc-host-start@%i.target
