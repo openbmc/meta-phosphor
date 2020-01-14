@@ -46,10 +46,11 @@ DEPENDS += "libcereal"
 DEPENDS += "nlohmann-json"
 DEPENDS += "cli11"
 
-FILES_${PN}-host = "${bindir}/phosphor-host-state-manager"
+FILES_${PN}-host = "${bindir}/phosphor-host-state-manager \
+    ${sysconfdir}/default/obmc/phosphor-reboot-host/reboot.conf \
+    "
 DBUS_SERVICE_${PN}-host += "xyz.openbmc_project.State.Host.service"
 DBUS_SERVICE_${PN}-host += "phosphor-reboot-host@.service"
-SYSTEMD_ENVIRONMENT_FILE_${PN}-host += "obmc/phosphor-reboot-host/reboot.conf"
 SYSTEMD_SERVICE_${PN}-host += "phosphor-reset-host-reboot-attempts@.service"
 
 FILES_${PN}-chassis = "${bindir}/phosphor-chassis-state-manager"
@@ -140,7 +141,8 @@ HOST_RST_RBT_ATTEMPTS_SVC_INST = "phosphor-reset-host-reboot-attempts@{0}.servic
 HOST_RST_RBT_ATTEMPTS_SVC_FMT = "../${HOST_RST_RBT_ATTEMPTS_SVC}:${HOST_START_TGTFMT}.requires/${HOST_RST_RBT_ATTEMPTS_SVC_INST}"
 SYSTEMD_LINK_${PN}-host += "${@compose_list_zip(d, 'HOST_RST_RBT_ATTEMPTS_SVC_FMT', 'OBMC_HOST_INSTANCES', 'OBMC_HOST_INSTANCES')}"
 
-SRC_URI += "git://github.com/openbmc/phosphor-state-manager"
-SRCREV = "4640d48e998709f1b64b97347db0f1b355b7f423"
+# TODO - Change this once code merged
+SRC_URI += "git://github.com/openbmc/phosphor-state-manager;nobranch=1"
+SRCREV = "99a5101ede9eee0057a45e81ad9021f185053b41"
 
 S = "${WORKDIR}/git"
