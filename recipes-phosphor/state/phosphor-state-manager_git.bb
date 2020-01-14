@@ -127,6 +127,26 @@ HOST_REBOOT_SVC_INST = "phosphor-reboot-host@{0}.service"
 HOST_REBOOT_SVC_FMT = "../${HOST_REBOOT_SVC}:${HOST_REBOOT_TGTFMT}.requires/${HOST_REBOOT_SVC_INST}"
 SYSTEMD_LINK_${PN}-host += "${@compose_list_zip(d, 'HOST_REBOOT_SVC_FMT', 'OBMC_HOST_INSTANCES', 'OBMC_HOST_INSTANCES')}"
 
+# Force warm reboot target to call soft power off
+HOST_WARM_REBOOT_SOFT_TGTFMT = "obmc-host-warm-reboot@{0}.target"
+HOST_WARM_REBOOT_SOFT_SVC = "xyz.openbmc_project.Ipmi.Internal.SoftPowerOff.service"
+HOST_WARM_REBOOT_SOFT_SVC_FMT = "../${HOST_WARM_REBOOT_SOFT_SVC}:${HOST_WARM_REBOOT_SOFT_TGTFMT}.requires/${HOST_WARM_REBOOT_SOFT_SVC}"
+SYSTEMD_LINK_${PN}-host += "${@compose_list_zip(d, 'HOST_WARM_REBOOT_SOFT_SVC_FMT', 'OBMC_HOST_INSTANCES')}"
+
+# Force warm reboot target to call host stop
+HOST_WARM_REBOOT_STOP_TMPL="obmc-host-stop@.target"
+HOST_WARM_REBOOT_STOP_REQUIRES="obmc-host-warm-reboot@{0}.target"
+HOST_WARM_REBOOT_STOP_TMPL_INST="obmc-host-stop@{0}.target"
+HOST_WARM_REBOOT_STOP_TARGET_FMT = "../${HOST_WARM_REBOOT_STOP_TMPL}:${HOST_WARM_REBOOT_STOP_REQUIRES}.requires/${HOST_WARM_REBOOT_STOP_TMPL_INST}"
+SYSTEMD_LINK_${PN}-host += "${@compose_list_zip(d, 'HOST_WARM_REBOOT_STOP_TARGET_FMT', 'OBMC_HOST_INSTANCES')}"
+
+# Force warm reboot target to call reboot host
+HOST_WARM_REBOOT_TGTFMT = "obmc-host-warm-reboot@{0}.target"
+HOST_WARM_REBOOT_SVC = "phosphor-reboot-host@.service"
+HOST_WARM_REBOOT_SVC_INST = "phosphor-reboot-host@{0}.service"
+HOST_WARM_REBOOT_SVC_FMT = "../${HOST_WARM_REBOOT_SVC}:${HOST_WARM_REBOOT_TGTFMT}.requires/${HOST_WARM_REBOOT_SVC_INST}"
+SYSTEMD_LINK_${PN}-host += "${@compose_list_zip(d, 'HOST_WARM_REBOOT_SVC_FMT', 'OBMC_HOST_INSTANCES')}"
+
 # Force the host-start target to call the host-startmin target
 HOST_STARTMIN_TMPL = "obmc-host-startmin@.target"
 HOST_START_TGTFMT = "obmc-host-start@{0}.target"
