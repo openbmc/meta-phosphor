@@ -20,6 +20,19 @@
           BootMode:
               Default: Mode::Modes::Regular
 
+/xyz/openbmc_project/control/host0/boot/mailbox:
+    - Interface: xyz.openbmc_project.Control.Boot.Mailbox
+      Properties:
+          Supported:
+              Default: 'false'
+          IANAEnterpriseNumber:
+              Default: 0
+          Data:
+              # The default value satisfies IPMI 2.0 requirements
+              # so the machine-specific override may leave
+              # this property as is
+              Default: 'std::vector<uint8_t>(77)'
+
 /xyz/openbmc_project/control/host0/boot/one_time:
     - Interface: xyz.openbmc_project.Control.Boot.Source
       Properties:
