@@ -13,11 +13,12 @@ LIC_FILES_CHKSUM = "file://LICENCE;md5=a6a4edad4aed50f39a66d098d74b265b"
 SRC_URI = "git://github.com/openbmc/bmcweb.git"
 
 PV = "1.0+git${SRCPV}"
-SRCREV = "453fed064da5751d4de325357ead2b4e1c5a3757"
+SRCREV = "fe30672809d9dcf83f6cab821d02650b250664b9"
 
 S = "${WORKDIR}/git"
 
-DEPENDS = "openssl zlib boost libpam sdbusplus gtest nlohmann-json libtinyxml2 "
+DEPENDS = "openssl zlib boost libpam sdbusplus gtest nlohmann-json libtinyxml2"
+DEPENDS += "libmimetic"
 
 RDEPENDS_${PN} += "jsnbd"
 
