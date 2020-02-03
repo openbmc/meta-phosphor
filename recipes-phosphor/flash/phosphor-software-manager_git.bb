@@ -26,6 +26,8 @@ SYSTEMD_PACKAGES = ""
 PACKAGECONFIG[verify_signature] = "--enable-verify_signature,--disable-verify_signature"
 PACKAGECONFIG[sync_bmc_files] = "--enable-sync_bmc_files,--disable-sync_bmc_files"
 PACKAGECONFIG[ubifs_layout] = "--enable-ubifs_layout"
+PACKAGECONFIG[obmc-host-bios-mgmt] = "--enable-host_bios_upgrade=yes"
+PACKAGECONFIG ??= "${@bb.utils.filter('MACHINE_FEATURES', 'obmc-host-bios-mgmt', d)}"
 
 inherit autotools pkgconfig
 inherit obmc-phosphor-dbus-service
@@ -72,6 +74,10 @@ DBUS_SERVICE_${PN}-sync += "xyz.openbmc_project.Software.Sync.service"
 SYSTEMD_SERVICE_${PN}-updater += " \
     obmc-flash-bmc-setenv@.service \
     usr-local.mount \
+"
+
+SYSTEMD_SERVICE_${PN}-updater += " \
+    ${@bb.utils.contains('MACHINE_FEATURES', 'obmc-host-bios-mgmt', 'obmc-flash-host-bios@.service', '', d)} \
 "
 
 S = "${WORKDIR}/git"
