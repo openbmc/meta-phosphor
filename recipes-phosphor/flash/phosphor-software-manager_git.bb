@@ -71,6 +71,7 @@ DBUS_SERVICE_${PN}-sync += "xyz.openbmc_project.Software.Sync.service"
 
 SYSTEMD_SERVICE_${PN}-updater += " \
     obmc-flash-bmc-setenv@.service \
+    obmc-flash-host-bios@.service \
     usr-local.mount \
 "
 
