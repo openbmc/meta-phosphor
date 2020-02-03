@@ -17,9 +17,10 @@ SRCREV = "aa9bb6b1115c79b795f4c1f79154e1f2f00613c5"
 
 S = "${WORKDIR}/git"
 
-DEPENDS = "openssl zlib boost libpam sdbusplus gtest nlohmann-json libtinyxml2 "
+DEPENDS = "openssl zlib boost libpam sdbusplus gtest nlohmann-json libtinyxml2 libmimetic "
 
 RDEPENDS_${PN} += "jsnbd"
+RDEPENDS_${PN} += "libmimetic"
 
 FILES_${PN} += "${datadir}/** "
 
