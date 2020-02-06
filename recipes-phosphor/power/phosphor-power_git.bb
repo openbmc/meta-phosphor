@@ -13,6 +13,20 @@ require ${PN}.inc
 
 S = "${WORKDIR}/git"
 
+POWER_SERVICE_PACKAGES = " \
+    ${PN}-cold-redundancy \
+    ${PN}-monitor \
+    ${PN}-psu-monitor \
+    ${PN}-regulators \
+    ${PN}-sequencer \
+"
+POWER_UTIL_PACKAGES = "${PN}-utils"
+
+PACKAGE_BEFORE_PN = "${POWER_SERVICE_PACKAGES} ${POWER_UTIL_PACKAGES}"
+ALLOW_EMPTY_${PN} = "1"
+
+SYSTEMD_PACKAGES = "${POWER_SERVICE_PACKAGES}"
+
 # TODO: in future when openpower-dbus-interfaces is removed from
 # phosphor-power, remove the dependency here.
 DEPENDS += " \
@@ -25,14 +39,23 @@ DEPENDS += " \
          i2c-tools \
          "
 
-PACKAGE_BEFORE_PN = "phosphor-psu-monitor"
-FILES_phosphor-psu-monitor = "${bindir}/phosphor-psu-monitor \
-                              ${systemd_system_unitdir}/phosphor-psu-monitor.service"
-
 SEQ_MONITOR_SVC = "pseq-monitor.service"
 SEQ_PGOOD_SVC = "pseq-monitor-pgood.service"
 PSU_MONITOR_TMPL = "power-supply-monitor@.service"
-SYSTEMD_SERVICE_${PN} += "${SEQ_MONITOR_SVC} ${SEQ_PGOOD_SVC} ${PSU_MONITOR_TMPL}"
+PSU_MONITOR_SVC = "phosphor-psu-monitor.service"
 
-# Package all phosphor-regulators config files
-FILES_${PN} += "${datadir}/phosphor-regulators"
+SYSTEMD_SERVICE_${PN}-sequencer = "${SEQ_MONITOR_SVC} ${SEQ_PGOOD_SVC}"
+SYSTEMD_SERVICE_${PN}-monitor = "${PSU_MONITOR_TMPL}"
+SYSTEMD_SERVICE_${PN}-psu-monitor = "${PSU_MONITOR_SVC}"
+
+
+# TODO: cold-redundancy is not installed in the repo yet
+# FILES_${PN}-cold-redundancy = "${bindir}/cold-redundancy"
+
+FILES_${PN}-monitor = "${bindir}/psu-monitor"
+FILES_${PN}-psu-monitor = "${bindir}/phosphor-psu-monitor"
+FILES_${PN}-regulators = "${bindir}/phosphor-regulators"
+FILES_${PN}-sequencer = "${bindir}/pseq-monitor"
+FILES_${PN}-utils = "${bindir}/psutils"
+
+FILES_${PN}-regulators += "${datadir}/phosphor-regulators"
