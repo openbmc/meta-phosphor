@@ -143,6 +143,31 @@ HOST_RST_RBT_ATTEMPTS_SVC_INST = "phosphor-reset-host-reboot-attempts@{0}.servic
 HOST_RST_RBT_ATTEMPTS_SVC_FMT = "../${HOST_RST_RBT_ATTEMPTS_SVC}:${HOST_START_TGTFMT}.requires/${HOST_RST_RBT_ATTEMPTS_SVC_INST}"
 SYSTEMD_LINK_${PN}-host += "${@compose_list_zip(d, 'HOST_RST_RBT_ATTEMPTS_SVC_FMT', 'OBMC_HOST_INSTANCES', 'OBMC_HOST_INSTANCES')}"
 
+# Force warm reboot target to call soft power off
+HOST_WARM_REBOOT_TGTFMT = "obmc-host-warm-reboot@{0}.target"
+HOST_WARM_REBOOT_SOFT_SVC = "xyz.openbmc_project.Ipmi.Internal.SoftPowerOff.service"
+HOST_WARM_REBOOT_SOFT_SVC_FMT = "../${HOST_WARM_REBOOT_SOFT_SVC}:${HOST_WARM_REBOOT_TGTFMT}.requires/${HOST_WARM_REBOOT_SOFT_SVC}"
+SYSTEMD_LINK_${PN}-host += "${@compose_list_zip(d, 'HOST_WARM_REBOOT_SOFT_SVC_FMT', 'OBMC_HOST_INSTANCES')}"
+
+# Force warm reboot target to call host stop
+HOST_WARM_REBOOT_STOP_TMPL="obmc-host-stop@.target"
+HOST_WARM_REBOOT_STOP_REQUIRES="obmc-host-force-warm-reboot@{0}.target"
+HOST_WARM_REBOOT_STOP_TMPL_INST="obmc-host-stop@{0}.target"
+HOST_WARM_REBOOT_STOP_TARGET_FMT = "../${HOST_WARM_REBOOT_STOP_TMPL}:${HOST_WARM_REBOOT_STOP_REQUIRES}.requires/${HOST_WARM_REBOOT_STOP_TMPL_INST}"
+SYSTEMD_LINK_${PN}-host += "${@compose_list_zip(d, 'HOST_WARM_REBOOT_STOP_TARGET_FMT', 'OBMC_HOST_INSTANCES')}"
+
+# Force warm reboot target to call reboot host
+HOST_WARM_REBOOT_FORCE_TGTFMT = "obmc-host-force-warm-reboot@{0}.target"
+HOST_WARM_REBOOT_SVC = "phosphor-reboot-host@.service"
+HOST_WARM_REBOOT_SVC_INST = "phosphor-reboot-host@{0}.service"
+HOST_WARM_REBOOT_SVC_FMT = "../${HOST_WARM_REBOOT_SVC}:${HOST_WARM_REBOOT_FORCE_TGTFMT}.requires/${HOST_WARM_REBOOT_SVC_INST}"
+SYSTEMD_LINK_${PN}-host += "${@compose_list_zip(d, 'HOST_WARM_REBOOT_SVC_FMT', 'OBMC_HOST_INSTANCES')}"
+
+# Warm reboot to call force warm reboot
+# Warm reboot will be graceful due to to it also containing soft power off
+HOST_WARM_REBOOT_FORCE_TGT = "obmc-host-force-warm-reboot@.target"
+HOST_WARM_REBOOT_FORCE_TARGET_FMT = "../${HOST_WARM_REBOOT_FORCE_TGT}:${HOST_WARM_REBOOT_TGTFMT}.requires/${HOST_WARM_REBOOT_FORCE_TGTFMT}"
+SYSTEMD_LINK_${PN}-host += "${@compose_list_zip(d, 'HOST_WARM_REBOOT_FORCE_TARGET_FMT', 'OBMC_HOST_INSTANCES')}"
 
 # Chassis power synchronization targets
 # - start-pre:         Services to run before we start power on process
@@ -183,8 +208,11 @@ HOST_SYNCH_TARGETS = "start-pre starting started stop-pre stopping stopped reset
 #            quiesce target but the only delta is that this target contains
 #            multiple services and one of them is the quiesce target.
 # - timeout: Target to run when host watchdog times out
-# - reboot:  Reboot the host
-HOST_ACTION_TARGETS = "start startmin stop quiesce reset shutdown crash timeout reboot"
+# - reboot:  Reboot the host with a chassis power cycle included
+# - warm-reboot: Reboot the host without a chassis power cycle.
+# - force-warm-reboot: Reboot the host without a chassis power cycle and without
+#                      notifying the host.
+HOST_ACTION_TARGETS = "start startmin stop quiesce reset shutdown crash timeout reboot warm-reboot force-warm-reboot"
 
 CHASSIS_SYNCH_FMT = "obmc-power-{0}@.target"
 CHASSIS_ACTION_FMT = "obmc-chassis-{0}@.target"
@@ -225,7 +253,8 @@ SYSTEMD_LINK_${PN}-obmc-targets += "${@compose_list(d, 'HOST_LINK_ACTION_FMT', '
 SYSTEMD_LINK_${PN}-obmc-targets += "${@compose_list(d, 'FAN_LINK_FMT', 'OBMC_CHASSIS_INSTANCES')}"
 SYSTEMD_LINK_${PN}-obmc-targets += "${@compose_list(d, 'QUIESCE_FMT', 'HOST_ERROR_TARGETS', 'OBMC_HOST_INSTANCES')}"
 
-SRC_URI += "git://github.com/openbmc/phosphor-state-manager"
-SRCREV = "c101157e5b138f36044a2a3aaf15ad8ac16501fc"
+# TODO FIX THIS
+SRC_URI += "git://github.com/openbmc/phosphor-state-manager;nobranch=1"
+SRCREV = "40dd6e7020b43dcbdc2c88ae293c3bdcb696dd02"
 
 S = "${WORKDIR}/git"
