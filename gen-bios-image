@@ -1,0 +1,61 @@
+#!/bin/sh
+
+# "Copyright (c) 2019-present Facebook
+
+# Usage of this utility
+function usage() {
+	echo "usage: gen-bios-image --ver=VERSION --machine=MACHINE-NAME --image=IMAGE-PATH";
+}
+
+IMG_DIR=/tmp/obmc-bios
+MFEST=$IMG_DIR/MANIFEST
+
+#Read input parameter for image creation 
+if [ $# -ne 3 ]; then
+	echo "Insufficient parameter"
+	echo "Total number of parameter provided $#"
+	usage;
+	exit 1;
+fi
+
+while [ $# -gt 0 ]; do
+  case "$1" in
+	  --ver=*)
+		  version="${1#*=}"
+		  ;;
+		--machine=*)
+		  machine="${1#*=}"
+		  ;;
+    --image=*)
+    image="${1#*=}"
+    ;;
+		*)
+      echo "Error: Invalid argument $1"
+      usage;
+			exit 1
+	esac
+	shift
+done
+
+#Create temporary image directory
+mkdir $IMG_DIR
+
+#Create manifest file
+echo "purpose=xyz.openbmc_project.Software.Version.VersionPurpose.Host" > $MFEST
+echo "version=$version" >> $MFEST
+echo "KeyType=OpenBMC" >> $MFEST
+echo "HashType=RSA-SHA256" >> $MFEST
+echo "MachineName=$machine" >> $MFEST
+
+#Copy image file to temp image directory
+if [ -e "$image" ]; then
+  cp $image $IMG_DIR
+else
+  echo "$image file not found"
+  exit 1
+fi
+
+# Create final image tarball
+tar -C $IMG_DIR -cf obmc-bios.tar .
+rm -rf $IMG_DIR
+exit 0
