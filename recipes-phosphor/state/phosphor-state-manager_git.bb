@@ -169,6 +169,11 @@ HOST_WARM_REBOOT_FORCE_TGT = "obmc-host-force-warm-reboot@.target"
 HOST_WARM_REBOOT_FORCE_TARGET_FMT = "../${HOST_WARM_REBOOT_FORCE_TGT}:${HOST_WARM_REBOOT_TGTFMT}.requires/${HOST_WARM_REBOOT_FORCE_TGTFMT}"
 SYSTEMD_LINK_${PN}-host += "${@compose_list_zip(d, 'HOST_WARM_REBOOT_FORCE_TARGET_FMT', 'OBMC_HOST_INSTANCES')}"
 
+# Diagnostic target to call force warm reboot target
+HOST_DIAG_TGTFMT = "obmc-host-diagnostic-mode@0.target"
+HOST_DIAG_TARGET_FMT = "../${HOST_WARM_REBOOT_FORCE_TGT}:${HOST_DIAG_TGTFMT}.requires/${HOST_WARM_REBOOT_FORCE_TGTFMT}"
+SYSTEMD_LINK_${PN}-host += "${@compose_list_zip(d, 'HOST_DIAG_TARGET_FMT', 'OBMC_HOST_INSTANCES')}"
+
 # Chassis power synchronization targets
 # - start-pre:         Services to run before we start power on process
 # - start:             Services to run to do the chassis power on
@@ -212,7 +217,10 @@ HOST_SYNCH_TARGETS = "start-pre starting started stop-pre stopping stopped reset
 # - warm-reboot: Reboot the host without a chassis power cycle.
 # - force-warm-reboot: Reboot the host without a chassis power cycle and without
 #                      notifying the host.
-HOST_ACTION_TARGETS = "start startmin stop quiesce reset shutdown crash timeout reboot warm-reboot force-warm-reboot"
+# - diagnostic-mode: This will be entered when the host is collecting diagnostic
+#                    data for itself.
+HOST_ACTION_TARGETS = "start startmin stop quiesce reset shutdown crash timeout "
+HOST_ACTION_TARGETS += "reboot warm-reboot force-warm-reboot diagnostic-mode"
 
 CHASSIS_SYNCH_FMT = "obmc-power-{0}@.target"
 CHASSIS_ACTION_FMT = "obmc-chassis-{0}@.target"
@@ -255,6 +263,6 @@ SYSTEMD_LINK_${PN}-obmc-targets += "${@compose_list(d, 'QUIESCE_FMT', 'HOST_ERRO
 
 # TODO FIX THIS
 SRC_URI += "git://github.com/openbmc/phosphor-state-manager;nobranch=1"
-SRCREV = "40dd6e7020b43dcbdc2c88ae293c3bdcb696dd02"
+SRCREV = "47b96128da8da00c2238f1314a3be6b0a9c9fce5"
 
 S = "${WORKDIR}/git"
