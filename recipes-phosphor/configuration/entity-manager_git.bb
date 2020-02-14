@@ -19,7 +19,4 @@ DEPENDS = "boost \
            valijson"
 
 S = "${WORKDIR}/git/"
-inherit cmake systemd
-
-EXTRA_OECMAKE = "-DYOCTO=1 -DUSE_OVERLAYS=0"
-
+inherit meson systemd
