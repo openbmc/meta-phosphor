@@ -18,6 +18,7 @@ inherit cmake pkgconfig systemd
 SYSTEMD_SERVICE_${PN} = "xyz.openbmc_project.State.Boot.PostCode.service"
 
 DEPENDS += " \
+    boost \
     sdbusplus \
     phosphor-dbus-interfaces \
     phosphor-logging \
