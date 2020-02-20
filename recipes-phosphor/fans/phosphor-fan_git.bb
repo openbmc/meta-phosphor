@@ -6,7 +6,7 @@ PV = "1.0+git${SRCPV}"
 
 require ${PN}.inc
 
-inherit autotools pkgconfig pythonnative
+inherit autotools pkgconfig python3native
 inherit obmc-phosphor-systemd
 inherit phosphor-fan
 
@@ -14,8 +14,8 @@ S = "${WORKDIR}/git"
 
 # Common build dependencies
 DEPENDS += "autoconf-archive-native"
-DEPENDS += "python-pyyaml-native"
-DEPENDS += "python-mako-native"
+DEPENDS += "python3-pyyaml-native"
+DEPENDS += "python3-mako-native"
 DEPENDS += "sdbusplus"
 DEPENDS += "sdbusplus-native"
 DEPENDS += "sdeventplus"
