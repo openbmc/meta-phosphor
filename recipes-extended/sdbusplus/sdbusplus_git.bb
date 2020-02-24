@@ -7,7 +7,7 @@ LICENSE = "Apache-2.0"
 LIC_FILES_CHKSUM = "file://LICENSE;md5=e3fc50a88d0a364313df4b21ef20c29e"
 
 inherit autotools pkgconfig
-inherit obmc-phosphor-python-autotools
+inherit obmc-phosphor-python3-autotools
 
 DEPENDS += " \
         autoconf-archive-native \
@@ -38,6 +38,7 @@ DEPENDS_append_class-native = " \
         "
 
 SRC_URI += "git://github.com/openbmc/sdbusplus"
+SRC_URI += "file://0001-sdbus-switch-to-python3.patch"
 SRCREV = "1dfce5a2947e1fcd56fe46a93dfb31f67a98fcc8"
 
 PACKAGECONFIG ??= "libsdbusplus transaction"
