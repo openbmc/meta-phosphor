@@ -2,8 +2,6 @@ inherit obmc-phosphor-utils
 inherit pythonnative
 inherit setuptools
 
-DEPENDS += "python"
-
 export BUILD_SYS
 export HOST_SYS
 export STAGING_INCDIR
