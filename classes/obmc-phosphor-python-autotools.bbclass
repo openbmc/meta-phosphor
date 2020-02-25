@@ -1,5 +1,6 @@
 inherit obmc-phosphor-utils
 inherit pythonnative
+inherit setuptools
 
 DEPENDS += "python"
 
