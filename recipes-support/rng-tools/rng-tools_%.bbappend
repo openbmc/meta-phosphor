@@ -1,6 +1,8 @@
 FILESEXTRAPATHS_prepend := "${THISDIR}/${PN}:"
 SRC_URI += "file://10-nice.conf"
 
+PACKAGECONFIG_remove = "libjitterentropy"
+
 inherit systemd
 
 FILES_${PN} += "${systemd_unitdir}/system/rngd.service.d"
