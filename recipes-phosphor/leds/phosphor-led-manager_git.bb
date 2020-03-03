@@ -5,7 +5,7 @@ PV = "1.0+git${SRCPV}"
 
 require ${PN}.inc
 
-inherit autotools pkgconfig pythonnative
+inherit autotools pkgconfig python3native
 inherit obmc-phosphor-dbus-service obmc-phosphor-systemd
 
 LED_MGR_PACKAGES = " \
@@ -20,7 +20,9 @@ DBUS_PACKAGES = "${PN}-ledmanager"
 
 SYSTEMD_PACKAGES = "${LED_MGR_PACKAGES}"
 
-DEPENDS += "python-pyyaml-native"
+DEPENDS += "python3-native"
+DEPENDS += "python3-pyyaml-native"
+DEPENDS += "python3-inflection-native"
 DEPENDS += "autoconf-archive-native"
 DEPENDS += "sdbusplus sdbusplus-native"
 DEPENDS += "systemd"
