@@ -36,6 +36,7 @@ DEPENDS += " \
         sdbusplus-native \
         autoconf-archive-native \
         virtual/phosphor-debug-errors \
+        pldm \
 "
 
 RDEPENDS_${PN}-manager += " \
