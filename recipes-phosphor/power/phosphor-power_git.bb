@@ -23,6 +23,10 @@ DEPENDS += " \
          nlohmann-json \
          cli11 \
          i2c-tools \
+         ${PYTHON_PN}-native \
+         ${PYTHON_PN}-pyyaml-native \
+         ${PYTHON_PN}-setuptools-native \
+         ${PYTHON_PN}-mako-native \
          "
 
 PACKAGE_BEFORE_PN = "phosphor-psu-monitor"
