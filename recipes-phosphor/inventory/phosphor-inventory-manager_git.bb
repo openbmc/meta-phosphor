@@ -23,6 +23,8 @@ DEPENDS += " \
         sdbusplus-native \
         autoconf-archive-native \
         libcereal \
+        python-native \
+        python-yaml \
         "
 
 OBMC_INVENTORY_PATH="${OBMC_DBUS_PATH_ROOT}/inventory"
