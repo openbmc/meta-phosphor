@@ -8,6 +8,7 @@ inherit meson
 inherit pkgconfig
 inherit systemd
 inherit pythonnative
+inherit python3native
 
 require ${PN}.inc
 
@@ -37,10 +38,10 @@ DEPENDS += " \
          nlohmann-json \
          cli11 \
          i2c-tools \
-         ${PYTHON_PN}-native \
-         ${PYTHON_PN}-pyyaml-native \
-         ${PYTHON_PN}-setuptools-native \
-         ${PYTHON_PN}-mako-native \
+         python3-native \
+         python3-pyyaml-native \
+         python3-setuptools-native \
+         python3-mako-native \
          "
 
 SEQ_MONITOR_SVC = "pseq-monitor.service"
