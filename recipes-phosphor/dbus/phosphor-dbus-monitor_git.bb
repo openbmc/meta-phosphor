@@ -11,7 +11,7 @@ SRCREV = "b4d69909425dac7bccb28331f2da78a0ad7092b8"
 
 inherit autotools \
         pkgconfig \
-        pythonnative \
+        python3native \
         phosphor-dbus-monitor \
         obmc-phosphor-systemd
 
