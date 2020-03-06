@@ -7,11 +7,13 @@ PV = "1.0+git${SRCPV}"
 inherit meson
 inherit pkgconfig
 inherit systemd
-inherit pythonnative
+inherit python3native
 
 require ${PN}.inc
 
 S = "${WORKDIR}/git"
+
+SRC_URI += " file://0001-Use-python3.patch"
 
 # TODO: in future when openpower-dbus-interfaces is removed from
 # phosphor-power, remove the dependency here.
