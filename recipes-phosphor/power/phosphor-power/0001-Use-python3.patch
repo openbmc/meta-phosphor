@@ -1,0 +1,54 @@
+From 4ab847339925a147168eb73452a247070325eb38 Mon Sep 17 00:00:00 2001
+From: Lei YU <mine260309@gmail.com>
+Date: Mon, 9 Mar 2020 10:32:48 +0800
+Subject: [PATCH] Use python3
+
+python2 is EOL, specify the python scripts to use python3.
+
+Tested: Verify it builds fine in local CI. With bitbake recipe changes,
+        verify it builds OK with python3native.
+
+Signed-off-by: Lei YU <mine260309@gmail.com>
+Change-Id: Icd5d10193e9323bbdbcd854e9027e014e01a1829
+---
+ meson.build                                             | 2 +-
+ phosphor-regulators/tools/validate-regulators-config.py | 2 +-
+ power-sequencer/gen-ucd90160-defs.py                    | 2 +-
+ 3 files changed, 3 insertions(+), 3 deletions(-)
+
+diff --git a/meson.build b/meson.build
+index 9cfb46c..92c1450 100644
+--- a/meson.build
++++ b/meson.build
+@@ -33,7 +33,7 @@ gmock = dependency('gmock', disabler: true, required: build_tests)
+ gtest = dependency('gtest', main: true, disabler: true, required: build_tests)
+ phosphor_dbus_interfaces = dependency('phosphor-dbus-interfaces')
+ phosphor_logging = dependency('phosphor-logging')
+-prog_python = import('python').find_installation('python')
++prog_python = import('python').find_installation('python3')
+ sdbusplus = dependency('sdbusplus')
+ sdbuspp = find_program('sdbus++')
+ sdeventplus = dependency('sdeventplus')
+diff --git a/phosphor-regulators/tools/validate-regulators-config.py b/phosphor-regulators/tools/validate-regulators-config.py
+index bca989d..7b1cd6f 100755
+--- a/phosphor-regulators/tools/validate-regulators-config.py
++++ b/phosphor-regulators/tools/validate-regulators-config.py
+@@ -1,4 +1,4 @@
+-#!/usr/bin/env python
++#!/usr/bin/env python3
+ 
+ import argparse
+ import json
+diff --git a/power-sequencer/gen-ucd90160-defs.py b/power-sequencer/gen-ucd90160-defs.py
+index 1eb0d06..b191ef6 100755
+--- a/power-sequencer/gen-ucd90160-defs.py
++++ b/power-sequencer/gen-ucd90160-defs.py
+@@ -1,4 +1,4 @@
+-#!/usr/bin/env python
++#!/usr/bin/env python3
+ 
+ import os
+ import yaml
+-- 
+2.17.1
+

@@ -8,10 +8,13 @@ inherit meson
 inherit pkgconfig
 inherit systemd
 inherit pythonnative
+inherit python3native
 
 require ${PN}.inc
 
 S = "${WORKDIR}/git"
+
+SRC_URI += " file://0001-Use-python3.patch"
 
 # TODO: in future when openpower-dbus-interfaces is removed from
 # phosphor-power, remove the dependency here.
@@ -23,10 +26,10 @@ DEPENDS += " \
          nlohmann-json \
          cli11 \
          i2c-tools \
-         ${PYTHON_PN}-native \
-         ${PYTHON_PN}-pyyaml-native \
-         ${PYTHON_PN}-setuptools-native \
-         ${PYTHON_PN}-mako-native \
+         python3-native \
+         python3-pyyaml-native \
+         python3-setuptools-native \
+         python3-mako-native \
          "
 
 PACKAGE_BEFORE_PN = "phosphor-psu-monitor"
