@@ -128,13 +128,13 @@ try_wget() {
 
 debug_takeover() {
 	echo "$@"
-	test -n "$@" && echo Enter password to try to manually fix.
+	test -n "$@" && echo Try to manually fix.
 	cat << HERE
 After fixing run exit to continue this script, or reboot -f to retry, or
 touch /takeover and exit to become PID 1 allowing editing of this script.
 HERE
 
-	while ! sulogin && ! test -f /takeover
+	while ! /bin/sh && ! test -f /takeover
 	do
 		echo getty failed, retrying
 	done
