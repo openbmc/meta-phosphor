@@ -38,6 +38,7 @@ DEPENDS_append_class-native = " \
         "
 
 SRC_URI += "git://github.com/openbmc/sdbusplus"
+SRC_URI += "file://0001-sdbus-refactor-enum-handling-for-container-types.patch"
 SRCREV = "1dfce5a2947e1fcd56fe46a93dfb31f67a98fcc8"
 
 PACKAGECONFIG ??= "libsdbusplus transaction"
