@@ -183,6 +183,12 @@ PACKAGECONFIG[ubifs-workaround] = " \
        --disable-ubifs-workaround \
 "
 
+PACKAGECONFIG[host-dump-offload-pldm] = " \
+        --with-host-dump-offload-transport=pldm, \
+        --without-host-dump-offload-transport, \
+        pldm \
+        "
+
 do_install[postfuncs] += "install_dreport"
 do_install[postfuncs] += "install_dreport_conf_file"
 do_install[postfuncs] += "install_dreport_plugins_scripts"
