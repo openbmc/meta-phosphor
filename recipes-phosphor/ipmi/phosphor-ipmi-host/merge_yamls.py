@@ -34,7 +34,7 @@ def dict_merge(target, source):
     """
     if not isinstance(source, dict):
         return source
-    for k, v in source.iteritems():
+    for k, v in source.items():
         if k in target and isinstance(target[k], dict):
             dict_merge(target[k], v)
         else:
