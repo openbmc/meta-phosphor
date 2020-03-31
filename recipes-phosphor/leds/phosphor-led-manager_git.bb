@@ -22,7 +22,7 @@ SYSTEMD_PACKAGES = "${LED_MGR_PACKAGES}"
 
 DEPENDS += "python-pyyaml-native"
 DEPENDS += "autoconf-archive-native"
-DEPENDS += "sdbusplus sdbusplus-native"
+DEPENDS += "sdbusplus ${PYTHON_PN}-sdbus++-native"
 DEPENDS += "systemd"
 DEPENDS += "phosphor-logging"
 
