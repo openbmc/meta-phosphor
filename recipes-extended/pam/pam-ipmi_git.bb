@@ -21,3 +21,8 @@ FILES_${PN} += " \
                ${sysconfdir}/key_file \
                ${sysconfdir}/ipmi_pass \
                "
+
+do_install_append() {
+    chmod 0600 ${D}${sysconfdir}/key_file
+    chmod 0600 ${D}${sysconfdir}/ipmi_pass
+}
