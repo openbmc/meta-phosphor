@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "7fbd748c_5f9c047e",
+        "filename": "recipes-phosphor/interfaces/bmcweb_git.bb",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000022
+      },
+      "writtenOn": "2020-04-09T10:57:27Z",
+      "side": 1,
+      "message": "I think we need to create the bbappend file in the meta-ibm layer as it is IBM specific change.",
+      "revId": "fbdf4eccf71c03d2da1c1542cbf15f12b542e1cd",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
+    }
+  ]
+}
