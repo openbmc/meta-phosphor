@@ -17,9 +17,12 @@ SRCREV = "453fed064da5751d4de325357ead2b4e1c5a3757"
 
 S = "${WORKDIR}/git"
 
-DEPENDS = "openssl zlib boost libpam sdbusplus gtest nlohmann-json libtinyxml2 "
+DEPENDS = "openssl zlib boost libpam sdbusplus gtest nlohmann-json libtinyxml2 pldm"
 
 RDEPENDS_${PN} += "jsnbd"
+
+PACKAGECONFIG ??= ""
+PACKAGECONFIG[ibm-mc-console] = "-DIBM_MC_CONSOLE=yes, -DIBM_MC_CONSOLE=no, pldm, "
 
 FILES_${PN} += "${datadir}/** "
 
