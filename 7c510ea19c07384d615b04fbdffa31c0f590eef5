@@ -22,6 +22,30 @@
       "revId": "7c510ea19c07384d615b04fbdffa31c0f590eef5",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "dedffc13_090d06c9",
+        "filename": "recipes-phosphor/interfaces/bmcweb_git.bb",
+        "patchSetId": 6
+      },
+      "lineNbr": 24,
+      "author": {
+        "id": 1000401
+      },
+      "writtenOn": "2020-04-09T05:21:33Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "664af822_cad3822a",
+      "range": {
+        "startLine": 24,
+        "startChar": 0,
+        "endLine": 24,
+        "endChar": 30
+      },
+      "revId": "7c510ea19c07384d615b04fbdffa31c0f590eef5",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": false
     }
   ]
 }
