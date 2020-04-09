@@ -21,6 +21,9 @@ DEPENDS = "openssl zlib boost libpam sdbusplus gtest nlohmann-json libtinyxml2 "
 
 RDEPENDS_${PN} += "jsnbd"
 
+PACKAGECONFIG ??= ""
+PACKAGECONFIG[ibm-mc-console] = "-DIBM_MC_CONSOLE=yes, -DIBM_MC_CONSOLE=no, pldm, "
+
 FILES_${PN} += "${datadir}/** "
 
 inherit cmake
