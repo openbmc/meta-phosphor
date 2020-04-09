@@ -70,6 +70,24 @@
       "revId": "fbdf4eccf71c03d2da1c1542cbf15f12b542e1cd",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "9007be8e_a47dcc49",
+        "filename": "recipes-phosphor/interfaces/bmcweb_git.bb",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000022
+      },
+      "writtenOn": "2020-04-09T16:05:00Z",
+      "side": 1,
+      "message": "Brad, This bbappend file will go under meta-ibm?",
+      "parentUuid": "bbc0ac1f_492b6e8d",
+      "revId": "fbdf4eccf71c03d2da1c1542cbf15f12b542e1cd",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
     }
   ]
 }
