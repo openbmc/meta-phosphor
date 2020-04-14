@@ -1,5 +1,3 @@
-FILESEXTRAPATHS_prepend := "${THISDIR}/${PN}:"
-
 # Remove all python .py files from python recipe. Only the .pyc
 # files are required. Only do this if the openbmc-phosphor-tiny
 # distro feature is enabled
