@@ -14,7 +14,7 @@ DEPENDS += "autoconf-archive-native"
 DEPENDS += "${PYTHON_PN}-sdbus++-native"
 
 SRC_URI = "git://github.com/openbmc/phosphor-dbus-interfaces"
-SRCREV = "1362ce345867b4bc380f1d0b1c9ca77e5d5c996d"
+SRCREV = "b167aca801eb2d02e0ddb65485f9c36168fcf6ed"
 
 PACKAGECONFIG ??= "libphosphor_dbus"
 PACKAGECONFIG[libphosphor_dbus] = " \
