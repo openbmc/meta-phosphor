@@ -13,7 +13,7 @@ FILES_${PN} += "${systemd_unitdir}/network/default.network"
 do_install_append() {
         install -m 644 ${WORKDIR}/default.network ${D}${systemd_unitdir}/network/
 }
-
+EXTRA_OEMESON += "-Ddns-servers=''"
 ALTERNATIVE_${PN} += "init"
 ALTERNATIVE_TARGET[init] = "${rootlibexecdir}/systemd/systemd"
 ALTERNATIVE_LINK_NAME[init] = "${base_sbindir}/init"
