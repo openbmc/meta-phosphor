@@ -6,12 +6,16 @@ PACKAGECONFIG = "pam hostnamed networkd randomseed resolved sysusers timedated \
 
 FILESEXTRAPATHS_prepend := "${THISDIR}/${PN}:"
 SRC_URI += "file://default.network"
+SRC_URI += "file://fallback_dns.conf"
 SRC_URI += "file://0001-sd-bus-Don-t-automatically-add-ObjectManager.patch"
 
 FILES_${PN} += "${systemd_unitdir}/network/default.network"
+FILES_${PN} += "${sysconfdir}/resolved.conf.d/fallback_dns.conf"
 
 do_install_append() {
         install -m 644 ${WORKDIR}/default.network ${D}${systemd_unitdir}/network/
+        install -d ${D}${sysconfdir}/systemd/resolved.conf.d/
+        install -m 644 ${WORKDIR}/fallback_dns.conf ${D}${sysconfdir}/systemd/resolved.conf.d/
 }
 
 ALTERNATIVE_${PN} += "init"
