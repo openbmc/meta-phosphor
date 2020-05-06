@@ -23,18 +23,12 @@ DBUS_PACKAGES = "${SOFTWARE_MGR_PACKAGES}"
 # handles the rest.
 SYSTEMD_PACKAGES = ""
 
-PACKAGECONFIG[verify_signature] = "--enable-verify_signature,--disable-verify_signature"
-PACKAGECONFIG[sync_bmc_files] = "--enable-sync_bmc_files,--disable-sync_bmc_files"
-PACKAGECONFIG[ubifs_layout] = "--enable-ubifs_layout"
-PACKAGECONFIG[flash_bios] = "--enable-host_bios_upgrade"
-
-inherit autotools pkgconfig
+inherit meson pkgconfig
 inherit obmc-phosphor-dbus-service
 inherit python3native
 inherit ${@bb.utils.contains('DISTRO_FEATURES', 'obmc-ubi-fs', 'phosphor-software-manager-ubi-fs', '', d)}
 
 DEPENDS += " \
-    autoconf-archive-native \
     openssl \
     phosphor-dbus-interfaces \
     phosphor-logging \
@@ -45,10 +39,6 @@ DEPENDS += " \
 RDEPENDS_${PN}-updater += " \
     bash \
     virtual-obmc-image-manager \
-"
-EXTRA_OECONF += " \
-    ACTIVE_BMC_MAX_ALLOWED=1 \
-    MEDIA_DIR=/run/media \
 "
 
 RPROVIDES_${PN}-version += " \
