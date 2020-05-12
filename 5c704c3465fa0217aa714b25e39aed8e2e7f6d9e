@@ -34,6 +34,24 @@
       "revId": "5c704c3465fa0217aa714b25e39aed8e2e7f6d9e",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "bb03d390_0d45e697",
+        "filename": "recipes-phosphor/interfaces/bmcweb_git.bb",
+        "patchSetId": 7
+      },
+      "lineNbr": 21,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-05-12T16:27:19Z",
+      "side": 1,
+      "message": "\u003e would be used in implementing the \"MultipartHttpPushUri\" in Redfish Update service.\n\nGreat!  When this happens we can remove the conditional.  For now though, lets do it as I\u0027ve outlined just because I don\u0027t really know when/if the support for MultipartHttpPushUri will show up.",
+      "parentUuid": "407c8f8b_d98ea29c",
+      "revId": "5c704c3465fa0217aa714b25e39aed8e2e7f6d9e",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
     }
   ]
 }
