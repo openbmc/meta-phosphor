@@ -16,6 +16,24 @@
       "revId": "5c704c3465fa0217aa714b25e39aed8e2e7f6d9e",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "407c8f8b_d98ea29c",
+        "filename": "recipes-phosphor/interfaces/bmcweb_git.bb",
+        "patchSetId": 7
+      },
+      "lineNbr": 21,
+      "author": {
+        "id": 1000022
+      },
+      "writtenOn": "2020-05-12T04:10:39Z",
+      "side": 1,
+      "message": "libmimetic would be used in implementing the \"MultipartHttpPushUri\" in Redfish Update service.\n\n```A client POST to this URI shall contain theContent-TypeHTTP header with the valuemultipart/form-data, with the body formatted as defined by this specification. For moreinformation aboutmultipart/form-dataHTTP requests,```\n\nSeems we don\u0027t need condition here.",
+      "parentUuid": "2cc393c5_7c080a76",
+      "revId": "5c704c3465fa0217aa714b25e39aed8e2e7f6d9e",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
     }
   ]
 }
