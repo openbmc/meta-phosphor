@@ -19,7 +19,7 @@ FLASH_UBI_OVERLAY_BASETYPE ?= "ubifs"
 FLASH_EXT4_BASETYPE ?= "ext4"
 FLASH_EXT4_OVERLAY_BASETYPE ?= "ext4"
 
-IMAGE_TYPES += "mtd-static mtd-static-alltar mtd-static-tar mtd-ubi mtd-ubi-tar mmc-verity mmc-ext4-tar"
+IMAGE_TYPES += "mtd-static mtd-static-alltar mtd-static-tar mtd-ubi mtd-ubi-tar mmc-verity mmc-ext4 mmc-ext4-tar"
 
 IMAGE_TYPEDEP_mtd-static = "${IMAGE_BASETYPE}"
 IMAGE_TYPEDEP_mtd-static-tar = "${IMAGE_BASETYPE}"
@@ -27,8 +27,9 @@ IMAGE_TYPEDEP_mtd-static-alltar = "mtd-static"
 IMAGE_TYPEDEP_mtd-ubi = "${FLASH_UBI_BASETYPE}"
 IMAGE_TYPEDEP_mtd-ubi-tar = "${FLASH_UBI_BASETYPE}"
 IMAGE_TYPEDEP_mmc-verity = "${FLASH_EXT4_BASETYPE}"
+IMAGE_TYPEDEP_mmc-ext4 = "${FLASH_EXT4_BASETYPE}"
 IMAGE_TYPEDEP_mmc-ext4-tar = "${FLASH_EXT4_BASETYPE}"
-IMAGE_TYPES_MASKED += "mtd-static mtd-static-alltar mtd-static-tar mtd-ubi mtd-ubi-tar mmc-verity mmc-ext4-tar"
+IMAGE_TYPES_MASKED += "mtd-static mtd-static-alltar mtd-static-tar mtd-ubi mtd-ubi-tar mmc-verity mmc-ext4 mmc-ext4-tar"
 
 IMAGE_BLOCK_SIZE ?= "4096"
 EXTRA_IMAGECMD_ext4 = "-b ${IMAGE_BLOCK_SIZE}"
@@ -57,6 +58,23 @@ FLASH_UBI_RWFS_SIZE ?= "6144"
 FLASH_UBI_RWFS_SIZE_flash-131072 ?= "32768"
 FLASH_UBI_RWFS_TXT_SIZE ?= "6MiB"
 FLASH_UBI_RWFS_TXT_SIZE_flash-131072 ?= "32MiB"
+
+MMC_SECTOR_SIZE ?= "512"
+
+# eMMC boot partition which follows after U-Boot
+MMC_BOOT_OFFSET ?= "1024"
+MMC_BOOT_SIZE ?= "131072"
+
+# eMMC sizes for the rootfs content.
+# Assumption: minimum 12 GB flash size (FLASH_SIZE = "12582912")
+# Rootfs A (1 GB)
+# Rootfs B for dual image support (1 GB)
+# Read/Write BMC data (6 GB)
+# Read/Write filesystem for an additional image such as host bios FW (4 GB)
+MMC_ROFS_A_SIZE ?= "1048576"
+MMC_ROFS_B_SIZE ?= "1048576"
+MMC_RWFS_SIZE ?= "6291456"
+MMC_OTHER_SIZE ?= "4194304"
 
 SIGNING_KEY ?= "${STAGING_DIR_NATIVE}${datadir}/OpenBMC.priv"
 INSECURE_KEY = "${@'${SIGNING_KEY}' == '${STAGING_DIR_NATIVE}${datadir}/OpenBMC.priv'}"
@@ -220,6 +238,120 @@ do_make_ubi[depends] += " \
         u-boot:do_populate_sysroot \
         mtd-utils-native:do_populate_sysroot \
         "
+
+do_mk_mmc_empty_image() {
+    mk_empty_image ${IMGDEPLOYDIR}/${IMAGE_NAME}.ext4.mmc ${FLASH_SIZE}
+}
+
+do_mk_mmc_empty_ext4_images() {
+    # BMC rwfs
+    bmc_rwfs="${IMAGE_LINK_NAME}.bmc.rwfs.${FLASH_EXT4_BASETYPE}"
+    if [ ! -e ${bmc_rwfs} ]; then
+        mk_empty_image ${bmc_rwfs} ${MMC_RWFS_SIZE}
+        mkfs.ext4 -F ${bmc_rwfs}
+    fi
+
+    # Other rwfs
+    other_rwfs="${IMAGE_LINK_NAME}.other.rwfs.${FLASH_EXT4_BASETYPE}"
+    if [ ! -e ${other_rwfs} ]; then
+        mk_empty_image ${other_rwfs} ${MMC_OTHER_SIZE}
+        mkfs.ext4 -F ${other_rwfs}
+    fi
+}
+
+do_mk_mmc_symlinks() {
+    cd ${IMGDEPLOYDIR}
+    ln -sf ${IMAGE_NAME}.ext4.mmc ${IMGDEPLOYDIR}/${IMAGE_LINK_NAME}.ext4.mmc
+    ln -sf ${IMAGE_NAME}.dm.env ${IMGDEPLOYDIR}/${IMAGE_LINK_NAME}.dm.env
+}
+
+python do_generate_mmc_ext4() {
+    import subprocess
+
+    mmc_image = os.path.join(d.getVar('IMGDEPLOYDIR', True),
+                             '%s.ext4.mmc' % d.getVar('IMAGE_NAME', True))
+
+    bb.build.exec_func("do_mk_mmc_empty_image", d)
+    bb.build.exec_func("do_mk_mmc_empty_ext4_images", d)
+
+    def _append_image(imgpath, start_kb, finish_kb):
+        imgsize = os.path.getsize(imgpath)
+        maxsize = (finish_kb - start_kb) * 1024
+        bb.debug(1, 'Considering file size=' + str(imgsize) + ' name=' + imgpath)
+        bb.debug(1, 'Spanning start=' + str(start_kb) + 'K end=' + str(finish_kb) + 'K')
+        bb.debug(1, 'Compare needed=' + str(imgsize) + ' available=' + str(maxsize) + ' margin=' + str(maxsize - imgsize))
+        if imgsize > maxsize:
+            bb.fatal("Image '%s' is too large!" % imgpath)
+
+        subprocess.check_call(['dd', 'bs=1k', 'conv=notrunc',
+                               'seek=%d' % start_kb,
+                               'if=%s' % imgpath,
+                               'of=%s' % mmc_image])
+
+    rofs_a_size = int(d.getVar('MMC_ROFS_A_SIZE', True))
+    rofs_b_size = int(d.getVar('MMC_ROFS_B_SIZE', True))
+    rwfs_size = int(d.getVar('MMC_RWFS_SIZE', True))
+    other_size = int(d.getVar('MMC_OTHER_SIZE', True))
+    rofs_a_offset = 0
+    rofs_b_offset = rofs_a_size
+    rwfs_offset = rofs_b_offset + rofs_b_size
+    other_offset = rwfs_offset + rwfs_size
+
+    _append_image(os.path.join(d.getVar('IMGDEPLOYDIR', True),
+                               '%s.%s' % (
+                                    d.getVar('IMAGE_LINK_NAME', True),
+                                    d.getVar('FLASH_EXT4_BASETYPE', True))),
+                  rofs_a_offset, rofs_b_offset)
+
+    _append_image(os.path.join(d.getVar('IMGDEPLOYDIR', True),
+                               '%s.%s' % (
+                                    d.getVar('IMAGE_LINK_NAME', True),
+                                    d.getVar('FLASH_EXT4_BASETYPE', True))),
+                  rofs_b_offset, rwfs_offset)
+
+    _append_image('%s.bmc.rwfs.%s' % (
+                                    d.getVar('IMAGE_LINK_NAME', True),
+                                    d.getVar('FLASH_EXT4_BASETYPE', True)),
+                  rwfs_offset, other_offset)
+
+    _append_image('%s.other.rwfs.%s' % (
+                                    d.getVar('IMAGE_LINK_NAME', True),
+                                    d.getVar('FLASH_EXT4_BASETYPE', True)),
+                  other_offset, int(d.getVar('FLASH_SIZE', True)))
+
+    boot_size = int(d.getVar('MMC_BOOT_SIZE', True))
+    boot_offset = int(d.getVar('MMC_BOOT_OFFSET', True))
+
+    # Store size and offset information in a file.
+    # Users can use the OFFSET variables to determine where a filesystem is
+    # located, this can be used to flash a filesystem post-bitbake.
+    # The DM offsets are used by the initramfs to created device mappers out of
+    # the rootfs content, therefore they do not take into account the size of
+    # the boot partition and only use the offsets used to build the mmc image.
+    env_file = os.path.join(d.getVar('IMGDEPLOYDIR', True),
+                            '%s.dm.env' % d.getVar('IMAGE_NAME', True))
+    with open(env_file, 'w') as fd:
+        fd.write('SECTOR_SIZE={}\n'.format(d.getVar('MMC_SECTOR_SIZE', True)))
+        fd.write('BOOT_OFFSET={}\n'.format(boot_offset * 1024))
+        fd.write('ROFS_A_OFFSET={}\n'.format((boot_offset + boot_size + rofs_a_offset) * 1024))
+        fd.write('ROFS_B_OFFSET={}\n'.format((boot_offset + boot_size + rofs_b_offset) * 1024))
+        fd.write('RWFS_OFFSET={}\n'.format((boot_offset + boot_size + rwfs_offset) * 1024))
+        fd.write('OTHER_OFFSET={}\n'.format((boot_offset + boot_size + other_offset) * 1024))
+        fd.write('ROFS_A_SIZE={}\n'.format(rofs_a_size * 1024))
+        fd.write('ROFS_B_SIZE={}\n'.format(rofs_b_size * 1024))
+        fd.write('RWFS_SIZE={}\n'.format(rwfs_size * 1024))
+        fd.write('OTHER_SIZE={}\n'.format(other_size * 1024))
+        fd.write('ROFS_A_DM_OFFSET={}\n'.format(rofs_a_offset * 1024))
+        fd.write('ROFS_B_DM_OFFSET={}\n'.format(rofs_b_offset * 1024))
+        fd.write('RWFS_DM_OFFSET={}\n'.format(rwfs_offset * 1024))
+        fd.write('OTHER_DM_OFFSET={}\n'.format(other_offset * 1024))
+
+    bb.build.exec_func("do_mk_mmc_symlinks", d)
+}
+do_generate_mmc_ext4[dirs] = "${S}/mmc"
+do_generate_mmc_ext4[depends] += " \
+    ${PN}:do_image_${FLASH_EXT4_BASETYPE} \
+    "
 
 python do_generate_mmc_verity() {
     import os
@@ -612,6 +744,14 @@ python() {
     if 'mmc-verity' in types:
         bb.build.addtask(
                 'do_generate_mmc_verity',
+                'do_image_complete','', d)
+    if 'mmc-ext4' in types:
+        if 'wic.xz' in types:
+            pn = d.getVar('PN')
+            dep = ' u-boot:do_populate_sysroot %s:do_generate_mmc_ext4' % pn
+            d.appendVarFlag('do_image_wic', 'depends', dep)
+        bb.build.addtask(
+                'do_generate_mmc_ext4',
                 'do_image_complete','', d)
     if 'mmc-ext4-tar' in types:
         bb.build.addtask(
