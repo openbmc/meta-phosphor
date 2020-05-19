@@ -1,10 +1,14 @@
 SUMMARY = "sdbus++ dbus API / binding generator"
 DESCRIPTION = "Generates bindings against sdbusplus for dbus APIs"
 
-inherit autotools pkgconfig
-inherit obmc-phosphor-python3-autotools
+inherit setuptools3
 
 include sdbusplus-rev.inc
+
+LICENSE = "Apache-2.0"
+LIC_FILES_CHKSUM = "file://${COREBASE}/meta/files/common-licenses/Apache-2.0;md5=89aea4e17d99a7cacdbeed46a0096b10"
+
+S="${WORKDIR}/git/tools"
 
 # Provide these aliases temporarily until everyone can move over to the
 # new package name.
@@ -23,9 +27,5 @@ RDEPENDS_${PN} += " \
     ${PYTHON_PN}-mako \
     ${PYTHON_PN}-pyyaml \
     "
-
-PACKAGECONFIG ??= "transaction"
-PACKAGECONFIG[libsdbusplus] = "--enable-libsdbusplus,--disable-libsdbusplus,systemd,libsystemd"
-PACKAGECONFIG[transaction] = "--enable-transaction,--disable-transaction"
 
 BBCLASSEXTEND += "native nativesdk"
