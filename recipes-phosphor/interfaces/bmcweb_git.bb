@@ -17,6 +17,10 @@ SRCREV = "38268fa8af4964312062bd92156ab87637f82e71"
 
 S = "${WORKDIR}/git"
 
+do_install_append() {
+        install -d ${D}/var/lib/bmcweb
+}
+
 DEPENDS = "openssl zlib boost libpam sdbusplus gtest nlohmann-json libtinyxml2 "
 
 RDEPENDS_${PN} += "jsnbd"
