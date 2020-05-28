@@ -1,0 +1,30 @@
+From 312568a5de8ec7aff1709b21dd1ebe66c11a2af1 Mon Sep 17 00:00:00 2001
+From: Patrick Williams <patrick@stwcx.xyz>
+Date: Thu, 28 May 2020 14:49:15 -0500
+Subject: [PATCH] meson: add missing pkgconfig requires
+
+In the past we have added a "Requires: libsystemd" into our pkgconfig
+file so that users of the libsdbusplus library do not also need to
+directly use a -lsystemd.  There are header files we provide that make
+inline calls to functions from libsystemd.  Add this under meson.
+
+Signed-off-by: Patrick Williams <patrick@stwcx.xyz>
+Change-Id: Id3bc326dfbf405f3b5300db05ed3fa2e507521ca
+---
+ meson.build | 1 +
+ 1 file changed, 1 insertion(+)
+
+diff --git a/meson.build b/meson.build
+index a965d14..3fe2662 100644
+--- a/meson.build
++++ b/meson.build
+@@ -49,5 +49,6 @@ import('pkgconfig').generate(
+     libraries: libsdbusplus,
+     name: meson.project_name(),
+     version: meson.project_version(),
++    requires: libsystemd_pkg,
+     description: 'C++ bindings for sdbus',
+ )
+-- 
+2.26.2
+
