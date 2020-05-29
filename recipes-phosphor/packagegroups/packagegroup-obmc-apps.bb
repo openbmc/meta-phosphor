@@ -102,10 +102,11 @@ RDEPENDS_${PN}-sensors = " \
         ${VIRTUAL-RUNTIME_obmc-sensors-hwmon} \
         "
 
-${PN}-software-extras = ""
-
-${PN}-software-extras_df-obmc-ubi-fs = " \
+${PN}-software-extras = " \
         phosphor-image-signing \
+"
+
+${PN}-software-extras_append_df-obmc-ubi-fs = " \
         phosphor-software-manager-updater-ubi \
         "
 
