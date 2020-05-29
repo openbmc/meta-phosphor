@@ -46,6 +46,9 @@ RDEPENDS_${PN}-updater += " \
     bash \
     virtual-obmc-image-manager \
 "
+RDEPENDS_${PN}-updater += " \
+    ${@bb.utils.contains('PACKAGECONFIG', 'verify_signature', 'phosphor-image-signing', '', d)} \
+"
 EXTRA_OECONF += " \
     ACTIVE_BMC_MAX_ALLOWED=1 \
     MEDIA_DIR=/run/media \
