@@ -41,6 +41,7 @@ SUMMARY_${PN}-extras = "Extra features"
 RDEPENDS_${PN}-extras = " \
         bmcweb \
         phosphor-bmcweb-cert-config \
+        phosphor-misc \
         phosphor-nslcd-cert-config \
         phosphor-nslcd-authority-cert-config \
         obmc-ikvm \
