@@ -262,7 +262,8 @@ do_mk_mmc_empty_ext4_images() {
 do_mk_mmc_symlinks() {
     cd ${IMGDEPLOYDIR}
     ln -sf ${IMAGE_NAME}.ext4.mmc ${IMGDEPLOYDIR}/${IMAGE_LINK_NAME}.ext4.mmc
-    ln -sf ${IMAGE_NAME}.dm.env ${IMGDEPLOYDIR}/${IMAGE_LINK_NAME}.dm.env
+    cd ${DEPLOY_DIR_IMAGE}
+    ln -sf ${IMAGE_NAME}.dm.env ${DEPLOY_DIR_IMAGE}/${IMAGE_LINK_NAME}.dm.env
 }
 
 python do_generate_mmc_ext4() {
@@ -328,7 +329,9 @@ python do_generate_mmc_ext4() {
     # The DM offsets are used by the initramfs to created device mappers out of
     # the rootfs content, therefore they do not take into account the size of
     # the boot partition and only use the offsets used to build the mmc image.
-    env_file = os.path.join(d.getVar('IMGDEPLOYDIR', True),
+    # Create the file in DEPLOY_DIR_IMAGE so that recipes like the initramfs has
+    # access to it.
+    env_file = os.path.join(d.getVar('DEPLOY_DIR_IMAGE', True),
                             '%s.dm.env' % d.getVar('IMAGE_NAME', True))
     with open(env_file, 'w') as fd:
         fd.write('SECTOR_SIZE={}\n'.format(d.getVar('MMC_SECTOR_SIZE', True)))
