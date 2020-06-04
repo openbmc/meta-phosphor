@@ -18,6 +18,7 @@ S="${WORKDIR}/git/tools"
 # Provide these aliases temporarily until everyone can move over to the
 # new package name.
 PROVIDES_class-native += "sdbusplus-native"
+PROVIDES_class-native += "python3-sdbus++-native"
 PROVIDES_class-nativesdk += "sdbusplus-nativesdk"
 
 DEPENDS += " \
