@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "2dc7d203_326a06f8",
+        "filename": "recipes-extended/sdbusplus/sdbus++_git.bb",
+        "patchSetId": 2
+      },
+      "lineNbr": 26,
+      "author": {
+        "id": 1000000
+      },
+      "writtenOn": "2020-06-05T03:59:25Z",
+      "side": 1,
+      "message": "Why the switch from single +\u003d format to multiple?  I\u0027ve been tending to convert them in the other direction so I\u0027m wondering if we have rationale on which way is which.  I don\u0027t want to keep fighting back and forth on it.\n\nMy reasons for doing it the other way:\n    - Reduces typing.\n    - Very minor performance improvement by less interpreter operations by bitbake.",
+      "range": {
+        "startLine": 23,
+        "startChar": 0,
+        "endLine": 26,
+        "endChar": 34
+      },
+      "revId": "a1474ae308c17e0351d442ad19765b1b606dc05e",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
+    }
+  ]
+}

@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "22a08f37_a9cb3c42",
+        "filename": "recipes-extended/sdbusplus/sdbus++_git.bb",
+        "patchSetId": 2
+      },
+      "lineNbr": 29,
+      "author": {
+        "id": 1000000
+      },
+      "writtenOn": "2020-06-05T03:59:25Z",
+      "side": 0,
+      "message": "Totally agree on removing autoconf-archive-native.\n\nI _think_ this causes issues for the SDK.  The SDK doesn\u0027t have any such thing as RDEPENDS and so dependencies only get installed if they are DEPENDS.\n\nI looked at the version of sdbusplus_git.bb that was in the 2.6 tag and it has this wording:\n\n# sdbus++ has a handful of runtime dependencies on other python packages.\n# Bitbake doesn\u0027t do anything with RDEPENDS in native context because\n# native context doesn\u0027t have packages.\n#\n# While technically sdbus++ doesn\u0027t require its runtime dependencies to be\n# installed to build, work around the above native context behavior\n# by adding a build dependency so that clients don\u0027t have to DEPEND\n# on sdbus++ runtime dependencies manually.\n\nDEPENDS_append_class-native \u003d \" \\\n        python-inflection-native \\\n        python-mako-native \\\n        python-pyyaml-native \\\n        \"",
+      "range": {
+        "startLine": 24,
+        "startChar": 0,
+        "endLine": 29,
+        "endChar": 5
+      },
+      "revId": "4821ef90bc87100f4b929ecdb9fbe58676f7a8eb",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
+    }
+  ]
+}
