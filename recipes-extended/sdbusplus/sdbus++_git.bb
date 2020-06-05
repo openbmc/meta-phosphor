@@ -21,17 +21,8 @@ PROVIDES_class-native += "sdbusplus-native"
 PROVIDES_class-native += "python3-sdbus++-native"
 PROVIDES_class-nativesdk += "sdbusplus-nativesdk"
 
-DEPENDS += " \
-    autoconf-archive-native \
-    ${PYTHON_PN}-inflection-native \
-    ${PYTHON_PN}-mako-native \
-    ${PYTHON_PN}-pyyaml-native \
-    "
-
-RDEPENDS_${PN} += " \
-    ${PYTHON_PN}-inflection \
-    ${PYTHON_PN}-mako \
-    ${PYTHON_PN}-pyyaml \
-    "
+RDEPENDS_${PN} += "python3-inflection"
+RDEPENDS_${PN} += "python3-mako"
+RDEPENDS_${PN} += "python3-pyyaml"
 
 BBCLASSEXTEND += "native nativesdk"
