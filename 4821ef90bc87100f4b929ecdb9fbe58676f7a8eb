@@ -46,6 +46,30 @@
       "revId": "4821ef90bc87100f4b929ecdb9fbe58676f7a8eb",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "393a768a_a8b23b2a",
+        "filename": "recipes-extended/sdbusplus/sdbus++_git.bb",
+        "patchSetId": 2
+      },
+      "lineNbr": 29,
+      "author": {
+        "id": 1000000
+      },
+      "writtenOn": "2020-06-06T07:31:09Z",
+      "side": 0,
+      "message": "Scratch that... this is python3-sdbus++ but with the now abandoned move.",
+      "parentUuid": "a4a71756_d5917c43",
+      "range": {
+        "startLine": 24,
+        "startChar": 0,
+        "endLine": 29,
+        "endChar": 5
+      },
+      "revId": "4821ef90bc87100f4b929ecdb9fbe58676f7a8eb",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
     }
   ]
 }
