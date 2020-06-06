@@ -22,6 +22,30 @@
       "revId": "4821ef90bc87100f4b929ecdb9fbe58676f7a8eb",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "a4a71756_d5917c43",
+        "filename": "recipes-extended/sdbusplus/sdbus++_git.bb",
+        "patchSetId": 2
+      },
+      "lineNbr": 29,
+      "author": {
+        "id": 1000000
+      },
+      "writtenOn": "2020-06-06T07:29:43Z",
+      "side": 0,
+      "message": "I thought about this a little more. Removing these DEPENDS here is the right thing to do as long as they are in python3-sdbus++.  It should be that recipes responsibility to ensure its SDK needs are installed and not this ones.",
+      "parentUuid": "22a08f37_a9cb3c42",
+      "range": {
+        "startLine": 24,
+        "startChar": 0,
+        "endLine": 29,
+        "endChar": 5
+      },
+      "revId": "4821ef90bc87100f4b929ecdb9fbe58676f7a8eb",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
     }
   ]
 }
