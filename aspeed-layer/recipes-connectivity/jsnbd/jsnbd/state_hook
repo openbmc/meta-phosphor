@@ -10,7 +10,6 @@ action=$1
 config=$2
 
 gadget_name=mass-storage
-gadget_dir=/sys/kernel/config/usb_gadget/$gadget_name
 
 case "$config" in
 0)
@@ -26,38 +25,10 @@ set -ex
 
 case "$action" in
 start)
-    mkdir -p $gadget_dir
-    (
-    cd $gadget_dir
-    # http://www.linux-usb.org/usb.ids
-    #    |-> 1d6b  Linux Foundation
-    #          |-> 0104  Multifunction Composite Gadget
-    echo "0x1d6b" > idVendor
-    echo "0x0104" > idProduct
-    mkdir -p strings/0x409
-    echo "OpenBMC" > strings/0x409/manufacturer
-    echo "Virtual Media Device" > strings/0x409/product
-    mkdir -p configs/c.1/strings/0x409
-    echo "config 1" > configs/c.1/strings/0x409/configuration
-    mkdir -p functions/mass_storage.usb0
-    ln -s functions/mass_storage.usb0 configs/c.1
-    echo 1 > functions/mass_storage.usb0/lun.0/removable
-    echo 1 > functions/mass_storage.usb0/lun.0/ro
-    echo 0 > functions/mass_storage.usb0/lun.0/cdrom
-    echo $nbd_device > functions/mass_storage.usb0/lun.0/file
-    echo "1e6a0000.usb-vhub:p4" > UDC
-    )
+    usb-ctrl insert "$gadget_name" "$nbd_device"
     ;;
 stop)
-    (
-    cd $gadget_dir
-    rm configs/c.1/mass_storage.usb0
-    rmdir functions/mass_storage.usb0
-    rmdir configs/c.1/strings/0x409
-    rmdir configs/c.1
-    rmdir strings/0x409
-    )
-    rmdir $gadget_dir
+    usb-ctrl eject "$gadget_name"
     ;;
 *)
     echo "invalid action $action" >&2
