@@ -13,8 +13,8 @@ inherit phosphor-dbus-yaml
 DEPENDS += "autoconf-archive-native"
 DEPENDS += "${PYTHON_PN}-sdbus++-native"
 
-SRC_URI = "git://github.com/openbmc/phosphor-dbus-interfaces"
-SRCREV = "da67a61695d9717b640b3288c673c2dba2b0e94c"
+SRC_URI = "git://github.com/openbmc/phosphor-dbus-interfaces;nobranch=1"
+SRCREV = "c9b7bfff609cdce145558c8ae831ec3d1cb14d5a"
 
 PACKAGECONFIG ??= "libphosphor_dbus"
 PACKAGECONFIG[libphosphor_dbus] = " \
