@@ -46,6 +46,30 @@
       "revId": "a1474ae308c17e0351d442ad19765b1b606dc05e",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "4cc932d0_18c128dc",
+        "filename": "recipes-extended/sdbusplus/sdbusplus_git.bb",
+        "patchSetId": 2
+      },
+      "lineNbr": 17,
+      "author": {
+        "id": 1000000
+      },
+      "writtenOn": "2020-06-16T18:20:10Z",
+      "side": 0,
+      "message": "The python drops have to come after (or at the same time) as the EXTRA_OEMESON changes to disable example / tests.\n\nMany upstream recipes include their dependencies for unit test but only when the \u0027ptest\u0027 feature is enabled.  I enabled this on facebook/openbmc and it allows us to create unit-test packages which you can side-load onto the BMC and run all of your unit-tests natively (on ARM).  We are looking to enable this in our functional / regression testing.  Many upstream recipes have support for \u0027ptest\u0027 already.",
+      "parentUuid": "30517714_b89eeee9",
+      "range": {
+        "startLine": 17,
+        "startChar": 0,
+        "endLine": 17,
+        "endChar": 15
+      },
+      "revId": "a1474ae308c17e0351d442ad19765b1b606dc05e",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
     }
   ]
 }
