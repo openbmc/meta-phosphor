@@ -22,6 +22,30 @@
       "revId": "a1474ae308c17e0351d442ad19765b1b606dc05e",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "30517714_b89eeee9",
+        "filename": "recipes-extended/sdbusplus/sdbusplus_git.bb",
+        "patchSetId": 2
+      },
+      "lineNbr": 17,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-06-16T17:58:52Z",
+      "side": 0,
+      "message": "It would be great to see a patch that starts by dropping the python things.\n\nDo upstream recipes typically include the dependencies for building unit tests?",
+      "parentUuid": "faa7eaa1_c7f17b48",
+      "range": {
+        "startLine": 17,
+        "startChar": 0,
+        "endLine": 17,
+        "endChar": 15
+      },
+      "revId": "a1474ae308c17e0351d442ad19765b1b606dc05e",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
     }
   ]
 }
