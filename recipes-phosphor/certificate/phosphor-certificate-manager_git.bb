@@ -28,3 +28,6 @@ S = "${WORKDIR}/git"
 
 CERT_TMPL = "phosphor-certificate-manager@.service"
 SYSTEMD_SERVICE_${PN} = "${CERT_TMPL}"
+
+PACKAGECONFIG ??= ""
+PACKAGECONFIG[ibm-vmi-cert] = "--enable-ibm-vmi-extension,,"
