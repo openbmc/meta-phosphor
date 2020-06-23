@@ -28,3 +28,6 @@ S = "${WORKDIR}/git"
 
 CERT_TMPL = "phosphor-certificate-manager@.service"
 SYSTEMD_SERVICE_${PN} = "${CERT_TMPL}"
+
+PACKAGECONFIG ??= ""
+PACKAGECONFIG[ibm-hypervisor-cert] = "--enable-ibm-hypervisor-extension,,"
