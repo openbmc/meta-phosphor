@@ -40,6 +40,9 @@ RRECOMMENDS_${PN}-host = "${PN}-host-check ${PN}-reset-sensor-states"
 # The obmc-targets are the base targets required to boot a computer system
 RRECOMMENDS_${PN}-host += "${PN}-obmc-targets"
 
+# The scheduled-host-transition function to handle with BMC time changing
+RRECOMMENDS_${PN}-host += "${PN}-scheduled-host-transition"
+
 inherit meson pkgconfig
 inherit obmc-phosphor-dbus-service
 
@@ -266,6 +269,6 @@ SYSTEMD_LINK_${PN}-obmc-targets += "${@compose_list(d, 'FAN_LINK_FMT', 'OBMC_CHA
 SYSTEMD_LINK_${PN}-obmc-targets += "${@compose_list(d, 'QUIESCE_FMT', 'HOST_ERROR_TARGETS', 'OBMC_HOST_INSTANCES')}"
 
 SRC_URI += "git://github.com/openbmc/phosphor-state-manager"
-SRCREV = "7fdad605ab7ce4dcaf91af43ec1439582063f048"
+SRCREV = "d8779cd867956e852deaa4c26a5c013ec8470aaa"
 
 S = "${WORKDIR}/git"
