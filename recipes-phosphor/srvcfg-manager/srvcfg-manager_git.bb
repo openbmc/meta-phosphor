@@ -7,17 +7,20 @@ DESCRIPTION = "Applications must use service manager daemon to configure \
 PR = "r1"
 PV = "1.0+git${SRCPV}"
 
-inherit meson pkgconfig systemd
+LICENSE = "Apache-2.0"
+LIC_FILES_CHKSUM = "file://LICENSE;md5=7becf906c8f8d03c237bad13bc3dac53"
 
-require srvcfg-manager.inc
+SRC_URI = "git://github.com/openbmc/service-config-manager"
+SRCREV = "83241c09ec5acfb894da08c10dfd574034c33ff9"
+
+inherit meson pkgconfig systemd
 
 S = "${WORKDIR}/git"
 SYSTEMD_SERVICE_${PN} = "srvcfg-manager.service"
 
-DEPENDS += " \
+DEPENDS = " \
     boost \
     phosphor-logging \
     sdbusplus \
-    sdbusplus-native \
     systemd \
     "
