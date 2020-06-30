@@ -18,10 +18,12 @@ SYSTEMD_SERVICE_${PN} += "xyz.openbmc_project.Chassis.Control.Power.service \
                          chassis-system-reset.service \
                          chassis-system-reset.target"
 
+FILES_${PN} += "/usr/share/power-control/power-config-host0.json"
 DEPENDS += " \
     boost \
     i2c-tools \
     libgpiod \
     sdbusplus \
     phosphor-logging \
+    nlohmann-json \
   "
