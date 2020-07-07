@@ -25,3 +25,7 @@ ALTERNATIVE_${PN} += "init"
 ALTERNATIVE_TARGET[init] = "${rootlibexecdir}/systemd/systemd"
 ALTERNATIVE_LINK_NAME[init] = "${base_sbindir}/init"
 ALTERNATIVE_PRIORITY[init] ?= "300"
+
+do_install_append() {
+    echo 'F! /run/utmp 0644 root utmp -' >>${D}${exec_prefix}/lib/tmpfiles.d/systemd.conf
+}
