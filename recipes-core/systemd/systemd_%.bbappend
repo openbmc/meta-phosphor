@@ -13,6 +13,7 @@ PACKAGECONFIG = "\
         sysvinit \
         timedated \
         timesyncd \
+        utmp \
         xz \
         "
 
