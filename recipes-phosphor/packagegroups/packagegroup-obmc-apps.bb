@@ -55,6 +55,7 @@ RDEPENDS_${PN}-extrasdev = " \
 SUMMARY_${PN}-extrasdevtools = "Development tools"
 RDEPENDS_${PN}-extrasdevtools = " \
         libgpiod-tools \
+        strace \
         "
 
 # Use the fan control package group for applications
