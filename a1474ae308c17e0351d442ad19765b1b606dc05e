@@ -22,6 +22,30 @@
       "revId": "a1474ae308c17e0351d442ad19765b1b606dc05e",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "21eb5ffa_5c74e8f9",
+        "filename": "recipes-extended/sdbusplus/sdbus++_git.bb",
+        "patchSetId": 2
+      },
+      "lineNbr": 26,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-07-15T12:53:56Z",
+      "side": 1,
+      "message": "I like this guideline as well.  I\u0027ve added it to my todo list of things to document in the CONTRIBUTING file.",
+      "parentUuid": "2dc7d203_326a06f8",
+      "range": {
+        "startLine": 23,
+        "startChar": 0,
+        "endLine": 26,
+        "endChar": 34
+      },
+      "revId": "a1474ae308c17e0351d442ad19765b1b606dc05e",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
     }
   ]
 }
