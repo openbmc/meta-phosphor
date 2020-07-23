@@ -174,11 +174,12 @@ python install_dreport_user_scripts() {
         install_dreport_user_script(srcname, d)
 }
 
-#Enable ubifs-workaround by DISTRO_FEATURE obmc-ubi-fs.
-PACKAGECONFIG_append_df-obmc-ubi-fs = " ubifs-workaround"
-PACKAGECONFIG[ubifs-workaround] = " \
-       -Dubifs-workaround=enabled, \
-       -Dubifs-workaround=disabled \
+#Enable filesystem-flag for DISTRO_FEATURE phosphor-mmc and obmc-ubi-fs.
+PACKAGECONFIG_append_df-obmc-ubi-fs = " filesystem-flag"
+PACKAGECONFIG_append_df-phosphor-mmc = " filesystem-flag"
+PACKAGECONFIG[filesystem-flag] = " \
+       -Dfilesystem-flag=enabled, \
+       -Dfilesystem-flag=disabled \
 "
 
 PACKAGECONFIG[host-dump-transport-pldm] = " \
