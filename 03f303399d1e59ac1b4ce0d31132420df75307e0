@@ -16,6 +16,24 @@
       "revId": "03f303399d1e59ac1b4ce0d31132420df75307e0",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "0db0a6d6_2416666e",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 14,
+      "author": {
+        "id": 1000003
+      },
+      "writtenOn": "2020-07-27T14:44:20Z",
+      "side": 1,
+      "message": "Discussing with the team, the issue appears to be on the filesystem, not systemd. It was discussed to verify that this workaround works on the jffs2 filesystem which is the read-write filesystem for the static layout, and once it\u0027s verified it works the same as ubi, then make that behavior the default for openbmc (documenting in the code that it\u0027s a workaround), while a filesystem issue is pursued.",
+      "parentUuid": "a80724f9_b92d216f",
+      "revId": "03f303399d1e59ac1b4ce0d31132420df75307e0",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
     }
   ]
 }
