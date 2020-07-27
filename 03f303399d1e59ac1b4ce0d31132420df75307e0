@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "a80724f9_b92d216f",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 14,
+      "author": {
+        "id": 1000003
+      },
+      "writtenOn": "2020-07-27T13:14:32Z",
+      "side": 1,
+      "message": "Jayanth mentions that this workaround is in place to address an unexpected behavior from systemd. Initially it was thought to be unique to UBIFS, but now you\u0027re seeing it in ext4 which is a widely used filesystem. Have you contacted systemd to determine what is the expected behavior, why it differs with different filesystems, and figure out if there\u0027s indeed a bug in systemd in which case an issue should be raised?",
+      "revId": "03f303399d1e59ac1b4ce0d31132420df75307e0",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
+    }
+  ]
+}
