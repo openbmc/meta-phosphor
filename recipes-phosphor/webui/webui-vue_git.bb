@@ -6,7 +6,7 @@ LICENSE = "Apache-2.0"
 LIC_FILES_CHKSUM = "file://LICENSE;md5=e3fc50a88d0a364313df4b21ef20c29e"
 
 SRC_URI = "git://github.com/openbmc/webui-vue.git"
-SRCREV = "6534e58bc4c46165d846f786804f534aab29912d"
+SRCREV = "fc16f3c268a9d35f889f5770331d11e87ab16af3"
 S = "${WORKDIR}/git"
 
 DEPENDS_prepend = "nodejs-native "
