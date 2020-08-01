@@ -13,7 +13,7 @@ LIC_FILES_CHKSUM = "file://LICENCE;md5=a6a4edad4aed50f39a66d098d74b265b"
 SRC_URI = "git://github.com/openbmc/bmcweb.git"
 
 PV = "1.0+git${SRCPV}"
-SRCREV = "5a806649ec187926be5829f42f8f18606a3d4e75"
+SRCREV = "30c58d581606b4484757e6ee9133c248de1514a6"
 
 S = "${WORKDIR}/git"
 
