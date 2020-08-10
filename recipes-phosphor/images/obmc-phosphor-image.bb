@@ -22,13 +22,13 @@ IMAGE_FEATURES += " \
         obmc-sensors \
         obmc-software \
         obmc-system-mgmt \
+        ${@bb.utils.contains('DISTRO_FEATURES', 'obmc-ubi-fs', 'read-only-rootfs', '', d)} \
         obmc-user-mgmt \
         ssh-server-dropbear \
         obmc-debug-collector \
         obmc-network-mgmt \
         obmc-settings-mgmt \
+        ${@bb.utils.contains('DISTRO_FEATURES', 'phosphor-mmc', 'read-only-rootfs', '', d)} \
         "
-IMAGE_FEATURES_append_df-obmc-ubi-fs = " read-only-rootfs"
-IMAGE_FEATURES_append_df-phosphor-mmc = " read-only-rootfs"
 
 inherit obmc-phosphor-image
