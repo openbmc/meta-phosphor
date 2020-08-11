@@ -6,9 +6,11 @@ IMAGE_LINGUAS = ""
 
 IMAGE_FEATURES += " \
         obmc-bmc-state-mgmt \
+        obmc-bmcweb \
         obmc-chassis-mgmt \
         obmc-chassis-state-mgmt \
         obmc-console \
+        obmc-dbus-monitor \
         obmc-devtools \
         obmc-fan-control \
         obmc-fan-mgmt \
@@ -16,6 +18,7 @@ IMAGE_FEATURES += " \
         obmc-host-ctl \
         obmc-host-ipmi \
         obmc-host-state-mgmt \
+        obmc-ikvm \
         obmc-inventory \
         obmc-leds \
         obmc-logging-mgmt \
@@ -27,6 +30,7 @@ IMAGE_FEATURES += " \
         obmc-system-mgmt \
         ${@bb.utils.contains('DISTRO_FEATURES', 'obmc-ubi-fs', 'read-only-rootfs', '', d)} \
         obmc-user-mgmt \
+        obmc-user-mgmt-ldap \
         ssh-server-dropbear \
         obmc-debug-collector \
         obmc-network-mgmt \
