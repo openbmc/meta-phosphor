@@ -31,6 +31,8 @@ IMAGE_FEATURES += " \
         ${@bb.utils.contains('DISTRO_FEATURES', 'phosphor-mmc', 'read-only-rootfs', '', d)} \
         "
 
+LICENSE = "Apache-2.0"
+
 inherit obmc-phosphor-image
 
 # The /etc/version file is misleading and not useful.  Remove it.
