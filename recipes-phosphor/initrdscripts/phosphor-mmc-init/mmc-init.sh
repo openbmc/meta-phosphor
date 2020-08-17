@@ -17,6 +17,13 @@ mount sys sys -tsysfs
 mount proc proc -tproc
 mount tmpfs run -t tmpfs -o mode=755,nodev
 
+# There eMMC GPT labels for the rootfs are rofs-a and rofs-b, and the label for
+# the read-write partition is rwfs. Run udev to make the partition labels show
+# up. Mounting by label allows for partition numbers to change if needed.
+udevd --daemon
+udevadm trigger --type=devices --action=add
+udevadm settle --timeout=10
+
 # Move the secondary GPT to the end of the device if needed. Look for the GPT
 # header signature "EFI PART" located 512 bytes from the end of the device.
 magic=$(tail -c 512 /dev/mmcblk0 | hexdump -C -n 8 | grep "EFI PART")
@@ -24,13 +31,6 @@ if test -z "${magic}"; then
     sgdisk -e /dev/mmcblk0
     partprobe
 fi
-
-# There eMMC GPT labels for the rootfs are rofs-a and rofs-b, and the label for
-# the read-write partition is rwfs. Run udev to make the partition labels show 
-# up. Mounting by label allows for partition numbers to change if needed.
-udevd --daemon
-udevadm trigger --type=devices --action=add
-udevadm settle --timeout=10
 
 mkdir -p $rodir
 if ! mount /dev/disk/by-partlabel/"$(get_root)" $rodir -t ext4 -o ro; then
