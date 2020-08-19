@@ -39,6 +39,8 @@ SYSTEMD_SERVICE_${PN} = "${SERVICE_FILE}"
 EXTRA_OECONF = " \
   SYSTEMD_TARGET="multi-user.target" \
        "
+PACKAGECONFIG ??= "${@bb.utils.filter('DISTRO_FEATURES', 'entity-manager', d)}"
+PACKAGECONFIG[entity-manager] = "--enable-configure-dbus=yes, --enable-configure-dbus=no"
 
 FILES_${PN} = "${bindir}/swampd ${bindir}/setsensor"
 
