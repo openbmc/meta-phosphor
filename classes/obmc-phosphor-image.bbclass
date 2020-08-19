@@ -70,6 +70,7 @@ FEATURE_PACKAGES_obmc-net-ipmi_qemuall = ""
 # Add new packages to be installed to a package group in
 # packagegroup-obmc-apps, not here.
 OBMC_IMAGE_BASE_INSTALL = " \
+        packagegroup-obmc-base \
         packagegroup-obmc-apps-extras \
         ${OBMC_IMAGE_EXTRA_INSTALL} \
         "
