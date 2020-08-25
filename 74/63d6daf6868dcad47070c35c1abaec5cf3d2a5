@@ -1,0 +1,17 @@
+Code-Review+1: Benjamin Fair <benjaminfair@google.com>
+Code-Review+1: Vijay Khemka <vijaykhemka@fb.com>
+Code-Review+1: Adriana Kobylak <anoo@linux.ibm.com>
+Ok-To-Test+1: OpenBMC CI <openbmcbump-ci@yahoo.com>
+Verified+1: OpenBMC CI <openbmcbump-ci@yahoo.com>
+Code-Review+1: Alexander Filippov <a.filippov@yadro.com>
+Code-Review+1: Artem Senichev <artemsen@gmail.com>
+Code-Review+1: Brandon Kim <brandonkim@google.com>
+Code-Review+1: Alexander Amelkin <a.amelkin@yadro.com>
+Code-Review+1: George Hung <george.hung@quantatw.com>
+Code-Review+1: Ratan Gupta <ratagupt@linux.vnet.ibm.com>
+Code-Review+2: Brad Bishop <bradleyb@fuzziesquirrel.com>
+Submitted-by: Brad Bishop <bradleyb@fuzziesquirrel.com>
+Submitted-at: Tue, 25 Aug 2020 12:00:27 +0000
+Reviewed-on: https://gerrit.openbmc-project.xyz/c/openbmc/meta-phosphor/+/35558
+Project: openbmc/meta-phosphor
+Branch: refs/heads/master
