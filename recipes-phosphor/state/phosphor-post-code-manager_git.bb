@@ -15,7 +15,19 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=86d3f3a95c324c9479bd8986968f4327"
 
 inherit cmake pkgconfig systemd
 
-SYSTEMD_SERVICE_${PN} = "xyz.openbmc_project.State.Boot.PostCode.service"
+TEMP = ""
+
+python () {
+
+  if(d.getVar('OBMC_HOST_INSTANCES') == '0'):
+      d.setVar('TEMP', "xyz.openbmc_project.State.Boot.PostCode.service");
+  else:
+      d.setVar('TEMP', " ".join(["xyz.openbmc_project.State.Boot.PostCode@{}.service".format(x) for x in d.getVar('OBMC_HOST_INSTANCES').split()]))
+
+}
+
+SYSTEMD_SERVICE_${PN} = "${TEMP}"
+
 
 DEPENDS += " \
     sdbusplus \
