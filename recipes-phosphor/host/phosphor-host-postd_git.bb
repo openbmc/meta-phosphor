@@ -17,6 +17,7 @@ DEPENDS += "sdbusplus"
 DEPENDS += "sdeventplus"
 DEPENDS += "phosphor-dbus-interfaces"
 DEPENDS += "systemd"
+DEPENDS += "libgpiod"
 
 S = "${WORKDIR}/git"
 SRC_URI = "git://github.com/openbmc/phosphor-host-postd"
