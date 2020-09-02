@@ -31,10 +31,10 @@ RDEPENDS_${PN} += "jsnbd"
 
 FILES_${PN} += "${datadir}/** "
 
-inherit cmake
+inherit meson
 
-EXTRA_OECMAKE = "-DBMCWEB_BUILD_UT=OFF -DYOCTO_DEPENDENCIES=ON"
+EXTRA_OEMESON = "-Dtests=disabled "
 
 SYSTEMD_SERVICE_${PN} += "bmcweb.service bmcweb.socket"
 
-FULL_OPTIMIZATION = "-Os -pipe "
+FULL_OPTIMIZATION = "-Os "
