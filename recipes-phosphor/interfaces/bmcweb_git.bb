@@ -13,7 +13,7 @@ LIC_FILES_CHKSUM = "file://LICENCE;md5=a6a4edad4aed50f39a66d098d74b265b"
 SRC_URI = "git://github.com/openbmc/bmcweb.git"
 
 PV = "1.0+git${SRCPV}"
-SRCREV = "d609fd6ebd1af3a9cbba0dd646aee27da8e1f971"
+SRCREV = "d43cd0ca0ff6ea11e6dd0ccedb83147bb0b2d207"
 
 S = "${WORKDIR}/git"
 
@@ -31,10 +31,10 @@ RDEPENDS_${PN} += "jsnbd"
 
 FILES_${PN} += "${datadir}/** "
 
-inherit cmake
+inherit meson
 
-EXTRA_OECMAKE = "-DBMCWEB_BUILD_UT=OFF -DYOCTO_DEPENDENCIES=ON"
+EXTRA_OEMESON = "--buildtype=minsize -Dtests=disabled -Dyocto-deps=enabled"
 
 SYSTEMD_SERVICE_${PN} += "bmcweb.service bmcweb.socket"
 
-FULL_OPTIMIZATION = "-Os -pipe "
+FULL_OPTIMIZATION = "-Os "
