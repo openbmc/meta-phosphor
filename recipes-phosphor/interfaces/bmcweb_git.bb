@@ -29,6 +29,14 @@ DEPENDS = "openssl \
 
 RDEPENDS_${PN} += "jsnbd"
 
+PACKAGECONFIG ??= "phosphor-webui"
+
+# webui-vue provides its own login page, and chooses to run javascript in an
+# unauthenticated context
+PACKAGECONFIG[webui-vue] = "-DBMCWEB_INSECURE_UNAUTHENTICATED_JAVASCRIPT=ON \
+                            -DBMCWEB_ENABLE_LOGIN_PAGE=OFF,,webui-vue"
+PACKAGECONFIG[phosphor-webui] = ",,phosphor-webui"
+
 FILES_${PN} += "${datadir}/** "
 
 inherit cmake
