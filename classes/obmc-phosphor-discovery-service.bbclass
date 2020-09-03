@@ -72,7 +72,7 @@ python discovery_services_postinstall() {
             fd.write('<?xml version="1.0" ?>\n')
             fd.write('<!DOCTYPE service-group SYSTEM "avahi-service.dtd">\n')
             fd.write('<service-group>\n')
-            fd.write('        <name>%s</name>\n' % service_name)
+            fd.write('        <name replace-wildcards="yes">%h</name>\n')
             fd.write('        <service>\n')
             fd.write('                <type>%s</type>\n' % service_type)
             fd.write('                <port>%s</port>\n' % service_port)
