@@ -17,6 +17,7 @@ SRCREV = "6868ff503529feceba217da7a223b0dfd83628b8"
 
 S = "${WORKDIR}/git"
 
+
 DEPENDS = "openssl \
            zlib \
            boost \
@@ -33,8 +34,17 @@ FILES_${PN} += "${datadir}/** "
 
 inherit meson
 
+PACKAGECONFIG ??= "https-redirect"
+PACKAGECONFIG[https-redirect] = " \
+-Dhttps-redirect=enabled,-Dhttps-redirect=disabled \
+"
+
 EXTRA_OEMESON = "--buildtype=minsize -Dtests=disabled -Dyocto-deps=enabled"
 
-SYSTEMD_SERVICE_${PN} += "bmcweb.service bmcweb.socket"
+SYSTEMD_SERVICE_${PN} = " \
+     bmcweb.service \
+     bmcweb_https.socket \
+     ${@bb.utils.contains('PACKAGECONFIG', 'https-redirect', 'bmcweb_redirect.socket', '', d)} \
+"
 
 FULL_OPTIMIZATION = "-Os "
