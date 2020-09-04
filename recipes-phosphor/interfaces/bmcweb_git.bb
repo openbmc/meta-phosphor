@@ -17,6 +17,7 @@ SRCREV = "7c486a180c492d5f0080ad59ad44b0b59787ac31"
 
 S = "${WORKDIR}/git"
 
+
 DEPENDS = "openssl \
            zlib \
            boost \
@@ -33,8 +34,17 @@ FILES_${PN} += "${datadir}/** "
 
 inherit cmake
 
+PACKAGECONFIG ??= "enable-https-redirect"
+PACKAGECONFIG[enable-https-redirect] = " \
+-DBMCWEB_ENABLE_HTTPS_REDIRECT=ON,-DBMCWEB_ENABLE_HTTPS_REDIRECT=OFF \
+"
+
 EXTRA_OECMAKE = "-DBMCWEB_BUILD_UT=OFF -DYOCTO_DEPENDENCIES=ON"
 
-SYSTEMD_SERVICE_${PN} += "bmcweb.service bmcweb.socket"
+SYSTEMD_SERVICE_${PN} = " \
+     bmcweb.service \
+     bmcweb.socket \
+     ${@bb.utils.contains('PACKAGECONFIG', 'enable-https-redirect', 'bmcweb_redirect.socket', '', d)} \
+"
 
 FULL_OPTIMIZATION = "-Os -pipe "
