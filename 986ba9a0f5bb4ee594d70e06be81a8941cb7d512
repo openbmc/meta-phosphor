@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "ffa51aac_282899d3",
+        "filename": "recipes-phosphor/state/phosphor-post-code-manager_git.bb",
+        "patchSetId": 2
+      },
+      "lineNbr": 19,
+      "author": {
+        "id": 1000000
+      },
+      "writtenOn": "2020-09-04T18:52:27Z",
+      "side": 1,
+      "message": "I don\u0027t think we should install this template service in all situations.\n\nThere is a variable OBMC_HOST_INSTANCES which is a list of host instances available on a server.  Right now this defaults to \"0\".  On Yosemite we need to change this to \"1 2 3 4\".\n\nI would suggest that we remove the non-template PostCode.service and instead install PostCode@.  We also need to use SYSTEMD_LINK_${PN} to process the OBMC_HOST_INSTANCES in order to instantiate the template instances based on that variable.  (There are plenty of other examples of this being done in other recipes).\n\nIf we are going to keep the non-template PostCode.service, we need to do extra work here to process OBMC_HOST_INSTANCES and use the \"0\" to indicate PostCode.service should be installed and any other case PostCode@.service should be installed.  This is extra work that I do not think is necessary when the template version should work for all cases.",
+      "revId": "986ba9a0f5bb4ee594d70e06be81a8941cb7d512",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
+    }
+  ]
+}
