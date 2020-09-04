@@ -35,6 +35,6 @@ inherit cmake
 
 EXTRA_OECMAKE = "-DBMCWEB_BUILD_UT=OFF -DYOCTO_DEPENDENCIES=ON"
 
-SYSTEMD_SERVICE_${PN} += "bmcweb.service bmcweb.socket"
+SYSTEMD_SERVICE_${PN} += "bmcweb.service bmcweb.socket bmcweb_redirect.socket"
 
 FULL_OPTIMIZATION = "-Os -pipe "
