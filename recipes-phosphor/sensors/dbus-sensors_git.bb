@@ -18,6 +18,7 @@ SYSTEMD_SERVICE_${PN} += " xyz.openbmc_project.ipmbsensor.service"
 SYSTEMD_SERVICE_${PN} += " xyz.openbmc_project.intrusionsensor.service"
 SYSTEMD_SERVICE_${PN} += " xyz.openbmc_project.psusensor.service"
 SYSTEMD_SERVICE_${PN} += " xyz.openbmc_project.mcutempsensor.service"
+SYSTEMD_SERVICE_${PN} += " xyz.openbmc_project.externalsensor.service"
 
 DEPENDS = "boost nlohmann-json sdbusplus i2c-tools libgpiod"
 inherit cmake systemd
