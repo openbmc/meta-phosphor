@@ -16,6 +16,24 @@
       "revId": "986ba9a0f5bb4ee594d70e06be81a8941cb7d512",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "d4b3644d_df3c99bb",
+        "filename": "recipes-phosphor/state/phosphor-post-code-manager_git.bb",
+        "patchSetId": 2
+      },
+      "lineNbr": 19,
+      "author": {
+        "id": 1000546
+      },
+      "writtenOn": "2020-09-07T16:13:28Z",
+      "side": 1,
+      "message": "Sure. I will look into this and add the variable \"OBMC_HOST_INSTANCES\" to have host information and install the service files.",
+      "parentUuid": "ffa51aac_282899d3",
+      "revId": "986ba9a0f5bb4ee594d70e06be81a8941cb7d512",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
     }
   ]
 }
