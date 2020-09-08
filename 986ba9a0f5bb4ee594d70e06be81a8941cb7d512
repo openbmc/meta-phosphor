@@ -51,6 +51,24 @@
       "revId": "986ba9a0f5bb4ee594d70e06be81a8941cb7d512",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "d21b4446_a11bb473",
+        "filename": "recipes-phosphor/state/phosphor-post-code-manager_git.bb",
+        "patchSetId": 2
+      },
+      "lineNbr": 19,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-09-08T18:30:16Z",
+      "side": 1,
+      "message": "\u003e I don\u0027t think we should install this template service in all situations.\n\nWhich situations?  It seems strange to me to make install a unit file and then omit it.",
+      "parentUuid": "617fbb40_86e32a1b",
+      "revId": "986ba9a0f5bb4ee594d70e06be81a8941cb7d512",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": false
     }
   ]
 }
