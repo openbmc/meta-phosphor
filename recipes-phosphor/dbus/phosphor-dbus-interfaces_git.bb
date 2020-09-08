@@ -18,4 +18,4 @@ DEPENDS += " \
         "
 
 SRC_URI = "git://github.com/openbmc/phosphor-dbus-interfaces"
-SRCREV = "1751787a076983b8d75bb208597272482e4c657b"
+SRCREV = "47f32d12c1ef5d4311a8b8c5779a6c67616cb7e8"
