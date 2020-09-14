@@ -16,6 +16,24 @@
       "revId": "b24e572f9b8ce6b8b7cc34651b842818b6e9976b",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "cd1a3170_a849d127",
+        "filename": "recipes-phosphor/interfaces/bmcweb_git.bb",
+        "patchSetId": 3
+      },
+      "lineNbr": 20,
+      "author": {
+        "id": 1000153
+      },
+      "writtenOn": "2020-09-14T19:50:22Z",
+      "side": 1,
+      "message": "Nope, no good reason.  I had the SRC_URI overridden here to make sure it built locally without being devtooled.  I\u0027ll update the patch before I ping you.",
+      "parentUuid": "0aeb262c_6dd50d11",
+      "revId": "b24e572f9b8ce6b8b7cc34651b842818b6e9976b",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
     }
   ]
 }
