@@ -1,13 +1,19 @@
 #!/bin/sh
 
-if [ $# -ne 2 ]
+if [ $# -ne 3 ]
 then
-    echo "usage: $0 <start|stop> <config>" >&2
+    echo "usage: $0 <start|stop> <config> <usb|hdd|cdrom>" >&2
     exit 1
 fi
 
 action=$1
 config=$2
+media="${3}"
+
+# params of the virtual media interface type
+removable=
+ro=
+cdrom=
 
 gadget_name=mass-storage
 gadget_dir=/sys/kernel/config/usb_gadget/$gadget_name
@@ -16,9 +22,6 @@ case "$config" in
 0)
     nbd_device=/dev/nbd0
     ;;
-1)
-    nbd_device=/dev/nbd1
-    ;;
 *)
     echo "invalid config $config" >&2
     exit 1
@@ -26,6 +29,28 @@ case "$config" in
 esac
 
 set -ex
+
+case "${media}" in
+hdd)
+    removable=0
+    ro=0
+    cdrom=0
+    ;;
+usb)
+    removable=1
+    ro=0
+    cdrom=0
+    ;;
+cdrom)
+    removable=1
+    ro=1
+    cdrom=1
+    ;;
+*)
+    echo "invalid media type $media" >&2
+    exit 1
+    ;;
+esac
 
 case "$action" in
 start)
@@ -44,9 +69,9 @@ start)
     echo "config 1" > configs/c.1/strings/0x409/configuration
     mkdir -p functions/mass_storage.usb0
     ln -s functions/mass_storage.usb0 configs/c.1
-    echo 1 > functions/mass_storage.usb0/lun.0/removable
-    echo 1 > functions/mass_storage.usb0/lun.0/ro
-    echo 0 > functions/mass_storage.usb0/lun.0/cdrom
+    echo $removable > functions/mass_storage.usb0/lun.0/removable
+    echo $ro > functions/mass_storage.usb0/lun.0/ro
+    echo $cdrom > functions/mass_storage.usb0/lun.0/cdrom
     echo $nbd_device > functions/mass_storage.usb0/lun.0/file
     echo "1e6a0000.usb-vhub:p4" > UDC
     )
