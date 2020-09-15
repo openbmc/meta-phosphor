@@ -12,6 +12,7 @@ IMAGE_FEATURES += " \
         obmc-console \
         obmc-dbus-monitor \
         obmc-devtools \
+        obmc-entity-manager \
         obmc-fan-control \
         obmc-fan-mgmt \
         obmc-flash-mgmt \

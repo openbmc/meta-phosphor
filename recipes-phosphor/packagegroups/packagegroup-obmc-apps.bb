@@ -10,6 +10,7 @@ PACKAGES = " \
         ${PN}-chassis-state-mgmt \
         ${PN}-console \
         ${PN}-dbus-monitor \
+        ${PN}-entity-manager \
         ${PN}-extras \
         ${PN}-devtools \
         ${PN}-fan-control \
@@ -53,6 +54,11 @@ RDEPENDS_${PN}-chassis-state-mgmt = " \
 SUMMARY_${PN}-console = "Serial over LAN support"
 RDEPENDS_${PN}-console = " \
         obmc-console \
+        "
+
+SUMMARY_${PN}-entity-manager = "Entity Manager support"
+RDEPENDS_${PN}-entity-manager = " \
+        entity-manager \
         "
 
 # Deprecated - add new packages to an existing packagegroup or create a new one.
