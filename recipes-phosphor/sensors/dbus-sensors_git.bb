@@ -2,7 +2,7 @@ SUMMARY = "dbus-sensors"
 DESCRIPTION = "Dbus Sensor Services Configured from D-Bus"
 
 SRC_URI = "git://github.com/openbmc/dbus-sensors.git"
-SRCREV = "8aeffd91ff3434f7812e9fdb6b0b03c6119921dd"
+SRCREV = "98be984491da67666534f9b958fa689ca22d645c"
 
 PV = "0.1+git${SRCPV}"
 
