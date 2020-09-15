@@ -9,6 +9,7 @@
 # - obmc-console                      - OpenBMC serial over LAN
 # - obmc-dbus-monitor                 - OpenBMC dbus monitoring
 # - obmc-devtools                     - OpenBMC development and debugging tools
+# - obmc-entity-manager               - OpenBMC entity manager
 # - obmc-fan-control                  - OpenBMC fan management
 # - obmc-fan-mgmt                     - Deprecated - use obmc-fan-control instead
 # - obmc-flash-mgmt                   - OpenBMC flash management
@@ -40,6 +41,7 @@ FEATURE_PACKAGES_obmc-chassis-state-mgmt ?= "packagegroup-obmc-apps-chassis-stat
 FEATURE_PACKAGES_obmc-console ?= "packagegroup-obmc-apps-console"
 FEATURE_PACKAGES_obmc-dbus-monitor ?= "packagegroup-obmc-apps-dbus-monitor"
 FEATURE_PACKAGES_obmc-devtools ?= "packagegroup-obmc-apps-devtools"
+FEATURE_PACKAGES_obmc-entity-manager ?= "packagegroup-obmc-apps-entity-manager"
 FEATURE_PACKAGES_obmc-fan-control ?= "packagegroup-obmc-apps-fan-control"
 FEATURE_PACKAGES_obmc-fan-mgmt ?= "${@bb.utils.contains('COMBINED_FEATURES', 'obmc-phosphor-fan-mgmt', 'virtual-obmc-fan-mgmt', '', d)}"
 FEATURE_PACKAGES_obmc-flash-mgmt ?= "${@bb.utils.contains('COMBINED_FEATURES', 'obmc-phosphor-flash-mgmt', 'virtual-obmc-flash-mgmt', '', d)}"
