@@ -19,7 +19,12 @@ SYSTEMD_SERVICE_${PN} += " xyz.openbmc_project.intrusionsensor.service"
 SYSTEMD_SERVICE_${PN} += " xyz.openbmc_project.psusensor.service"
 SYSTEMD_SERVICE_${PN} += " xyz.openbmc_project.mcutempsensor.service"
 
-DEPENDS = "boost nlohmann-json sdbusplus i2c-tools libgpiod"
+DEPENDS_append = "boost nlohmann-json sdbusplus i2c-tools libgpiod \
+    phosphor-dbus-interfaces \
+"
+RDEPENDS_${PN}_append = " phosphor-dbus-interfaces "
+
+inherit pkgconfig
 inherit cmake systemd
 
 S = "${WORKDIR}/git/"
