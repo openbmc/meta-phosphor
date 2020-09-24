@@ -181,6 +181,11 @@ PACKAGECONFIG[ubifs-workaround] = " \
        -Dubifs-workaround=disabled \
 "
 
+PACKAGECONFIG[host-dump-system-dump] = " \
+       -Dsystem_dump=enabled, \
+       -Dsystem_dump=disabled \
+"
+
 PACKAGECONFIG[host-dump-offload-pldm] = " \
         -Dhost-dump-offload-transport=pldm,, \
         pldm \
