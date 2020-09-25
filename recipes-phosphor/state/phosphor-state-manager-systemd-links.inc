@@ -27,6 +27,10 @@ pkg_postinst_${PN}-obmc-targets_append() {
     TARGET="../phosphor-reset-sensor-states@.service"
     ln -s $TARGET $LINK
 
+    LINK="$D$systemd_system_unitdir/obmc-host-stop@0.target.requires/phosphor-reset-sensor-states@0.service"
+    TARGET="../phosphor-reset-sensor-states@.service"
+    ln -s $TARGET $LINK
+
     LINK="$D$systemd_system_unitdir/obmc-host-reset@0.target.requires/phosphor-reset-host-running@0.service"
     TARGET="../phosphor-reset-host-running@.service"
     ln -s $TARGET $LINK
@@ -87,6 +91,9 @@ pkg_prerm_${PN}-obmc-targets_append() {
     rm $LINK
 
     LINK="$D$systemd_system_unitdir/obmc-host-reset@0.target.requires/phosphor-reset-sensor-states@0.service"
+    rm $LINK
+
+    LINK="$D$systemd_system_unitdir/obmc-host-stop@0.target.requires/phosphor-reset-sensor-states@0.service"
     rm $LINK
 
     LINK="$D$systemd_system_unitdir/obmc-host-reset@0.target.requires/phosphor-reset-host-running@0.service"
