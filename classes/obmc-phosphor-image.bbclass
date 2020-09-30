@@ -90,7 +90,9 @@ disable_systemd_pager() {
 }
 
 enable_ldap_nsswitch() {
-    sed -i 's/\(\(passwd\|group\|shadow\):\s*\).*/\1files ldap/' \
+    sed -i 's/\(\(passwd\|group\):\s*\).*/\1files systemd ldap/' \
+        "${IMAGE_ROOTFS}${sysconfdir}/nsswitch.conf"
+    sed -i 's/\(shadow:\s*\).*/\1files ldap/' \
         "${IMAGE_ROOTFS}${sysconfdir}/nsswitch.conf"
 }
 

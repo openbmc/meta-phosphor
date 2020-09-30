@@ -131,7 +131,7 @@ KERNEL_FEATURES_remove_qemuall = " phosphor-gpio-keys"
 IMAGE_CLASSES_append = " image_types_phosphor phosphor-rootfs-postcommands"
 IMAGE_CLASSES_append_npcm7xx = " image_types_phosphor_nuvoton"
 
-IMAGE_INSTALL_append = " dbus-broker"
+IMAGE_INSTALL_append = " dbus-broker libnss-systemd"
 
 # Skip the udev database by default.  It adds around 2MB
 # compressed to the root filesystem, and probably doesn't
