@@ -6,6 +6,7 @@ PACKAGECONFIG = "\
         hostnamed \
         kmod \
         networkd \
+        ${@bb.utils.contains('IMAGE_FEATURES', 'obmc-privilege-separation', 'nss', '', d)} \
         pam \
         randomseed \
         resolved \
