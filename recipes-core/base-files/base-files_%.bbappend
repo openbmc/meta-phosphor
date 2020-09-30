@@ -10,6 +10,10 @@ SRC_URI += " \
 "
 
 do_install_append() {
+    if [ -n "${@bb.utils.contains('IMAGE_FEATURES', 'privilege-separation', '1', '', d)}" ]; then
+        sed -i 's/\(\(passwd\|group\):\s*\).*/\1files systemd/' \
+            "${D}${sysconfdir}/nsswitch.conf"
+    fi
 
     install -d ${D}/srv
 
