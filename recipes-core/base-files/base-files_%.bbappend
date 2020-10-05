@@ -7,6 +7,7 @@ RDEPENDS_${PN}_append_df-obmc-ubi-fs = " preinit-mounts"
 
 SRC_URI += " \
     file://50-rp_filter.conf \
+    file://50-panic.conf \
 "
 
 do_install_append() {
@@ -15,4 +16,5 @@ do_install_append() {
 
     install -d ${D}/${libdir}/sysctl.d
     install -D -m 644 ${WORKDIR}/50-rp_filter.conf ${D}/${libdir}/sysctl.d/50-rp_filter.conf
+    install -D -m 644 ${WORKDIR}/50-panic.conf ${D}/${libdir}/sysctl.d/50-panic.conf
 }
