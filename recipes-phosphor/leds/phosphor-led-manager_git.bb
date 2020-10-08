@@ -31,6 +31,8 @@ DEPENDS += "nlohmann-json"
 
 DEPENDS += "virtual/${PN}-config-native"
 
+RDEPENDS_${PN} += "bash"
+
 S = "${WORKDIR}/git"
 
 FILES_${PN}-ledmanager += "${bindir}/phosphor-ledmanager"
