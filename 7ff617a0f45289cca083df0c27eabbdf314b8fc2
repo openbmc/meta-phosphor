@@ -1,0 +1,44 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "ebfa0687_66678be3",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 15,
+      "author": {
+        "id": 1000153
+      },
+      "writtenOn": "2020-10-20T17:44:58Z",
+      "side": 1,
+      "message": "Does this have any impacts to the users or developers?  I know there\u0027s a binary size increase;  Does having this library present change anything significantly from a user perspective?  Will this change the LDAP flows at all in such a way that they need to be retested?",
+      "revId": "7ff617a0f45289cca083df0c27eabbdf314b8fc2",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "5d778c82_99f1c7be",
+        "filename": "recipes-core/systemd/systemd_%.bbappend",
+        "patchSetId": 1
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 1000153
+      },
+      "writtenOn": "2020-10-20T17:44:58Z",
+      "side": 1,
+      "message": "Can you measure the impact to the binary size this imposes?  Many systems are very close to their binary size limit.",
+      "range": {
+        "startLine": 9,
+        "startChar": 8,
+        "endLine": 9,
+        "endChar": 11
+      },
+      "revId": "7ff617a0f45289cca083df0c27eabbdf314b8fc2",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
+    }
+  ]
+}
