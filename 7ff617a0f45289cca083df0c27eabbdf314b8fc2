@@ -201,6 +201,30 @@
       "revId": "7ff617a0f45289cca083df0c27eabbdf314b8fc2",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "375146ce_c389458f",
+        "filename": "recipes-core/systemd/systemd_%.bbappend",
+        "patchSetId": 1
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 1000064
+      },
+      "writtenOn": "2020-10-22T22:13:04Z",
+      "side": 1,
+      "message": "The difference in root squashfs image is 92k for witherspoon.",
+      "parentUuid": "953d50b4_6511c7b7",
+      "range": {
+        "startLine": 9,
+        "startChar": 8,
+        "endLine": 9,
+        "endChar": 11
+      },
+      "revId": "7ff617a0f45289cca083df0c27eabbdf314b8fc2",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": false
     }
   ]
 }
