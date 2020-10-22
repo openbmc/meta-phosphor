@@ -129,6 +129,30 @@
       "revId": "7ff617a0f45289cca083df0c27eabbdf314b8fc2",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "39110f75_3d90ed92",
+        "filename": "recipes-core/systemd/systemd_%.bbappend",
+        "patchSetId": 1
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 1000153
+      },
+      "writtenOn": "2020-10-22T17:26:50Z",
+      "side": 1,
+      "message": "I should be noted, witherspoon is apparently right up against the binary limit, so this will likely push it over.  We either need to find space somewhere (there\u0027s been a couple ideas floated in the past) or we need to make this an optional image feature.  I\u0027d be in favor of the former.",
+      "parentUuid": "0e1a36e3_d8b2ce4c",
+      "range": {
+        "startLine": 9,
+        "startChar": 8,
+        "endLine": 9,
+        "endChar": 11
+      },
+      "revId": "7ff617a0f45289cca083df0c27eabbdf314b8fc2",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
     }
   ]
 }
