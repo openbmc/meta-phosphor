@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "cdfc6db0_cdd58f89",
+        "filename": "recipes-phosphor/configuration/entity-manager_git.bb",
+        "patchSetId": 1
+      },
+      "lineNbr": 40,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-10-22T14:20:49Z",
+      "side": 1,
+      "message": "There was some whitspace here - can you put it back?",
+      "revId": "f319bc2572cbce83a02fa7ee2263f9aff8e97a06",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": false
+    }
+  ]
+}
