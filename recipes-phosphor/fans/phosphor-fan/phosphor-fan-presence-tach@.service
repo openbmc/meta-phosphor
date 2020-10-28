@@ -1,8 +1,6 @@
 [Unit]
 Description=Phosphor Fan Presence Tach Daemon
-Wants=obmc-power-on@%i.target
-After=obmc-power-on@%i.target
-Conflicts=obmc-chassis-powered-off@%i.target
+After=mapper-wait@-xyz-openbmc_project-inventory.service
 
 [Service]
 Restart=on-failure
@@ -10,4 +8,4 @@ ExecStart=/usr/bin/env phosphor-fan-presence-tach
 SyslogIdentifier=phosphor-fan-presence-tach
 
 [Install]
-RequiredBy=obmc-chassis-poweron@%i.target
+WantedBy=multi-user.target
