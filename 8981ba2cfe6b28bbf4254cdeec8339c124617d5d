@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "c35b0e2c_1b04c6d3",
+        "filename": "recipes-phosphor/fans/phosphor-fan/phosphor-fan-presence-tach@.service",
+        "patchSetId": 1
+      },
+      "lineNbr": 3,
+      "author": {
+        "id": 1000029
+      },
+      "writtenOn": "2020-10-29T16:25:28Z",
+      "side": 1,
+      "message": "Should also be after the entity manager service as well.\n\nThough are we requiring entity manager be installed in all openbmc machine images? If not, then I guess we\u0027ll need to atleast override this service file to also be after the entity manager service in the IBM layer.",
+      "range": {
+        "startLine": 3,
+        "startChar": 0,
+        "endLine": 3,
+        "endChar": 56
+      },
+      "revId": "8981ba2cfe6b28bbf4254cdeec8339c124617d5d",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": false
+    }
+  ]
+}
