@@ -86,6 +86,30 @@
       "revId": "8981ba2cfe6b28bbf4254cdeec8339c124617d5d",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "c0dcfb82_26e1a31d",
+        "filename": "recipes-phosphor/fans/phosphor-fan_git.bb",
+        "patchSetId": 1
+      },
+      "lineNbr": 54,
+      "author": {
+        "id": 1000008
+      },
+      "writtenOn": "2020-10-29T19:11:04Z",
+      "side": 1,
+      "message": "We can\u0027t cover this with the fan watchdog because the watchdog gets reset at poweron, which I think we still want to keep, so I was thinking we can use your process recovery function to reboot the BMC if this were to fail.  Alternatively, I could make this a requires here and stop the BMC from coming to ready.",
+      "parentUuid": "6f404065_db385bfa",
+      "range": {
+        "startLine": 54,
+        "startChar": 45,
+        "endLine": 54,
+        "endChar": 50
+      },
+      "revId": "8981ba2cfe6b28bbf4254cdeec8339c124617d5d",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
     }
   ]
 }
