@@ -14,6 +14,8 @@ inherit obmc-phosphor-systemd
 inherit phosphor-ipmi-host
 inherit python3native
 
+_INSTALL_DBUS_CONFIGS = "xyz.openbmc_project.Ipmi.Host.conf"
+
 def ipmi_whitelists(d):
     whitelists = d.getVar(
         'VIRTUAL-RUNTIME_phosphor-ipmi-providers', True) or ''
@@ -21,6 +23,7 @@ def ipmi_whitelists(d):
     whitelists = [ '{}-whitelist-native'.format(x) for x in whitelists ]
     return ' '.join(whitelists)
 
+DEPENDS += "phosphor-ipmi-config"
 DEPENDS += "autoconf-archive-native"
 DEPENDS += "nlohmann-json"
 DEPENDS += "phosphor-state-manager"
@@ -52,12 +55,6 @@ RDEPENDS_${PN} += "${VIRTUAL-RUNTIME_obmc-bmc-state-manager}"
 RDEPENDS_${PN} += "${VIRTUAL-RUNTIME_obmc-bmc-version}"
 RDEPENDS_${PN} += "${VIRTUAL-RUNTIME_obmc-bmc-updater}"
 
-inherit useradd
-
-USERADD_PACKAGES = "${PN}"
-# add ipmi group
-GROUPADD_PARAM_${PN} = "ipmi"
-
 SYSTEMD_SERVICE_${PN} += "xyz.openbmc_project.Ipmi.Internal.SoftPowerOff.service phosphor-ipmi-host.service"
 
 RRECOMMENDS_${PN} += "phosphor-settings-manager"
@@ -81,7 +78,10 @@ EXTRA_OECONF_append = " \
 
 S = "${WORKDIR}/git"
 
-SRC_URI += "file://merge_yamls.py "
+SRC_URI += " \
+        file://merge_yamls.py \
+		file://xyz.openbmc_project.Ipmi.Host.conf \
+        "
 
 HOSTIPMI_PROVIDER_LIBRARY += "libipmi20.so"
 HOSTIPMI_PROVIDER_LIBRARY += "libsysintfcmds.so"
@@ -133,3 +133,9 @@ python do_merge_sensors () {
 
 # python-pyyaml-native is installed by do_configure, so put this task after
 addtask merge_sensors after do_configure before do_compile
+
+#pkg_postinst_phosphor-ipmi-host_append () {
+#    if [ -n "$D" ]; then
+#        gawk -v u=phosphor-ipmi-host -v g=ipmi -i inplace -F: '$1 == g { printf "%s", $0; if ($4 != "") printf ","; print u; next } { print }' $D/etc/group
+#    fi
+#}
