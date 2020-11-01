@@ -23,7 +23,7 @@ import dbus.service
 import dbus.mainloop.glib
 
 if __name__ == '__main__':
-	print "obmc-phosphor-watchdogd starting..."
+	print("obmc-phosphor-watchdogd starting...")
 
 	while 1:
 		time.sleep(5)

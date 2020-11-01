@@ -6,6 +6,7 @@ EnvironmentFile=/usr/share/phosphor-certificate-manager/%I
 ExecStart=/usr/bin/env phosphor-certificate-manager --endpoint=${{ENDPOINT}} --path=${{CERTPATH}} --unit=${{UNIT}} --type=${{TYPE}}
 SyslogIdentifier=phosphor-certificate-manager
 Restart=always
+UMask=0007
 
 [Install]
 WantedBy=multi-user.target

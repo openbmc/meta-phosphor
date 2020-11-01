@@ -7,24 +7,26 @@ LIC_FILES_CHKSUM = "file://${COREBASE}/meta/files/common-licenses/Apache-2.0;md5
 
 RDEPENDS_${PN} = "phosphor-certificate-manager"
 
-inherit allarch
+inherit allarch \
+        obmc-phosphor-dbus-service \
+        obmc-phosphor-systemd
 
-SRC_URI = "file://env"
+SRC_URI = "\
+    file://authority \
+    file://override.conf \
+    file://xyz.openbmc_project.Certs.Manager.Authority.Ldap.conf \
+    "
 
-FILES_${PN} = "${datadir}"
+FILESEXTRAPATHS_prepend := "${THISDIR}/phosphor-certificate-manager:"
+envfiledir = "${datadir}/phosphor-certificate-manager"
 
-do_install() {
-	install -D ${WORKDIR}/env ${D}/${datadir}/phosphor-certificate-manager/authority
-}
+TMPL = "phosphor-certificate-manager@.service"
+INST = "phosphor-certificate-manager@authority.service"
+SYSTEMD_SERVICE_${PN} += "${TMPL}"
+SYSTEMD_LINK_${PN} += "../${TMPL}:multi-user.target.wants/${INST}"
+SYSTEMD_ENVIRONMENT_FILE_${PN} = "authority"
+SYSTEMD_OVERRIDE_${PN} = "override.conf:${INST}.d/override.conf"
 
-pkg_postinst_${PN}() {
-	LINK="$D$systemd_system_unitdir/multi-user.target.wants/phosphor-certificate-manager@authority.service"
-	TARGET="../phosphor-certificate-manager@.service"
-	mkdir -p $D$systemd_system_unitdir/multi-user.target.wants
-	ln -s $TARGET $LINK
-}
+_INSTALL_DBUS_CONFIGS = "xyz.openbmc_project.Certs.Manager.Authority.Ldap.conf"
 
-pkg_prerm_${PN}() {
-	LINK="$D$systemd_system_unitdir/multi-user.target.wants/phosphor-certificate-manager@authority.service"
-	rm $LINK
-}
+FILES_${PN} = "${sysconfdir} ${datadir}"

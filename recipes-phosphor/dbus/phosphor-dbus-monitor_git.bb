@@ -7,17 +7,22 @@ HOMEPAGE = "http://github.com/openbmc/phosphor-dbus-monitor"
 LICENSE = "Apache-2.0"
 LIC_FILES_CHKSUM = "file://LICENSE;md5=e3fc50a88d0a364313df4b21ef20c29e"
 SRC_URI = "git://github.com/openbmc/phosphor-dbus-monitor"
+SRC_URI += " file://xyz.openbmc_project.Events.conf"
 SRCREV = "f3367686f8139cfb4566d6df205ceff4d2c33463"
 
 inherit autotools \
         pkgconfig \
         python3native \
         phosphor-dbus-monitor \
+        obmc-phosphor-dbus-service \
         obmc-phosphor-systemd
 
 PACKAGE_BEFORE_PN = "phosphor-msl-verify"
+DBUS_PACKAGES = "${PN}"
 SYSTEMD_PACKAGES = "${PN} phosphor-msl-verify"
 SYSTEMD_SERVICE_phosphor-msl-verify = "phosphor-msl-verify.service"
+
+_INSTALL_DBUS_CONFIGS = "xyz.openbmc_project.Events.conf"
 
 DEPENDS += " \
         ${PN}-config \
@@ -32,6 +37,8 @@ DEPENDS += " \
         ${PYTHON_PN}-setuptools-native \
         ${PYTHON_PN}-mako-native \
         "
+
+FILES_${PN} += "${sysconfdir}"
 
 FILES_phosphor-msl-verify = "${bindir}/phosphor-msl-verify"
 

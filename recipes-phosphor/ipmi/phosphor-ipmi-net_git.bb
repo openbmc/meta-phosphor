@@ -7,7 +7,9 @@ LICENSE = "Apache-2.0"
 LIC_FILES_CHKSUM = "file://LICENSE;md5=e3fc50a88d0a364313df4b21ef20c29e"
 
 inherit autotools pkgconfig
-inherit systemd
+inherit systemd \
+        obmc-phosphor-dbus-service \
+        obmc-phosphor-systemd
 
 DEPENDS += "autoconf-archive-native"
 DEPENDS += "cli11"
@@ -18,11 +20,13 @@ DEPENDS += "phosphor-ipmi-host"
 RRECOMMENDS_${PN} = "pam-ipmi"
 
 SRC_URI += "git://github.com/openbmc/phosphor-net-ipmid"
+SRC_URI += " file://xyz.openbmc_project.Ipmi.Channel.conf"
 SRCREV = "07bb095158b39cedb49dae0972e489a6a2776faf"
 
 S = "${WORKDIR}/git"
 
 FILES_${PN} += " \
+        ${sysconfdir} \
         ${systemd_system_unitdir}/${PN}@.service \
         ${systemd_system_unitdir}/${PN}@.socket \
         "
@@ -36,6 +40,8 @@ SYSTEMD_SERVICE_${PN} = " \
         ${PN}@${RMCPP_IFACE}.service \
         ${PN}@${RMCPP_IFACE}.socket \
         "
+DBUS_PACKAGES = "${PN}"
+_INSTALL_DBUS_CONFIGS = "xyz.openbmc_project.Ipmi.Channel.conf"
 
 # To add another RMCPP interface, add similar lines to the
 # following lines in a bbappend:
@@ -50,3 +56,8 @@ SYSTEMD_SERVICE_${PN} = " \
 # config file with the same 'name' as the interfaces above
 # Override the default phosphor-ipmi-config.bb with a bbappend
 
+#pkg_postinst_phosphor-ipmi-net_append () {
+#    if [ -n "$D" ]; then
+#        gawk -v u=phosphor-ipmi-net -v g=ipmi -i inplace -F: '$1 == g { printf "%s", $0; if ($4 != "") printf ","; print u; next } { print }' $D/etc/group
+#    fi
+#}
