@@ -10,8 +10,12 @@ inherit dbus-dir
 
 SRC_URI += "file://org.openbmc.conf"
 
+ALLOW_EMPTY_${PN} = "${@bb.utils.contains('IMAGE_FEATURES', 'obmc-busconfig-acl', '1', '0', d)}"
+
 do_install_append() {
+    if [ -z "${@bb.utils.contains('IMAGE_FEATURES', 'obmc-busconfig-acl', '1', '', d)}" ]; then
         install -d ${D}${dbus_system_confdir}
         install -m 0644 ${WORKDIR}/org.openbmc.conf \
                 ${D}${dbus_system_confdir}
+    fi
 }
