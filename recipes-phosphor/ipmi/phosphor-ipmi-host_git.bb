@@ -133,3 +133,10 @@ python do_merge_sensors () {
 
 # python-pyyaml-native is installed by do_configure, so put this task after
 addtask merge_sensors after do_configure before do_compile
+
+# Install the .hpp files for other projects to use them easily
+do_install_append(){
+    install -d ${D}${includedir}/phosphor-ipmi-host
+    install -m 0644 -D ${S}/sensorhandler.hpp ${D}${includedir}/phosphor-ipmi-host
+    install -m 0644 -D ${S}/selutility.hpp ${D}${includedir}/phosphor-ipmi-host
+}
