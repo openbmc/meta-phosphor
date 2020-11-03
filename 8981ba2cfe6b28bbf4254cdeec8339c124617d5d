@@ -49,6 +49,30 @@
     },
     {
       "key": {
+        "uuid": "5cb9b0d8_94ed2210",
+        "filename": "recipes-phosphor/fans/phosphor-fan/phosphor-fan-presence-tach@.service",
+        "patchSetId": 1
+      },
+      "lineNbr": 3,
+      "author": {
+        "id": 1000008
+      },
+      "writtenOn": "2020-11-03T19:03:33Z",
+      "side": 1,
+      "message": "It doesn\u0027t seem right to have to make 2 service files just for one service, one with an entity-manager dependency and one without, so maybe I should just move this to meta-ibm...",
+      "parentUuid": "f4b99557_25f1a85c",
+      "range": {
+        "startLine": 3,
+        "startChar": 0,
+        "endLine": 3,
+        "endChar": 56
+      },
+      "revId": "8981ba2cfe6b28bbf4254cdeec8339c124617d5d",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "44379c35_a92e5448",
         "filename": "recipes-phosphor/fans/phosphor-fan_git.bb",
         "patchSetId": 1
