@@ -73,6 +73,30 @@
     },
     {
       "key": {
+        "uuid": "438debab_95935c80",
+        "filename": "recipes-phosphor/fans/phosphor-fan/phosphor-fan-presence-tach@.service",
+        "patchSetId": 1
+      },
+      "lineNbr": 3,
+      "author": {
+        "id": 1000004
+      },
+      "writtenOn": "2020-11-04T16:40:15Z",
+      "side": 1,
+      "message": "One path some apps are taking is to just make the application itself do the waiting vs. utilizing the service file. That would be another option, to just wait for whatever it is entity manager does (create a link to a needed json file I assume?) in the fan application.",
+      "parentUuid": "5cb9b0d8_94ed2210",
+      "range": {
+        "startLine": 3,
+        "startChar": 0,
+        "endLine": 3,
+        "endChar": 56
+      },
+      "revId": "8981ba2cfe6b28bbf4254cdeec8339c124617d5d",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "44379c35_a92e5448",
         "filename": "recipes-phosphor/fans/phosphor-fan_git.bb",
         "patchSetId": 1
