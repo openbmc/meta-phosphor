@@ -16,6 +16,24 @@
       "revId": "f337dd8711af0226df2e4c767bbb6120b8b4ef09",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "b187818f_bfe718c2",
+        "filename": "recipes-core/systemd/systemd_%.bbappend",
+        "patchSetId": 4
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 1000064
+      },
+      "writtenOn": "2020-11-18T19:51:07Z",
+      "side": 1,
+      "message": "As per earlier discussion, this increases the image size and might be a problem for witherspoon targets. Additionally, the privilege separation should be enabled platform-by-platform, thus, covered by image feature flag.",
+      "parentUuid": "4770de05_2238d8d0",
+      "revId": "f337dd8711af0226df2e4c767bbb6120b8b4ef09",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
     }
   ]
 }
