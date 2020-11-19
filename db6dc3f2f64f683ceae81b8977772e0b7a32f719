@@ -16,6 +16,24 @@
       "revId": "db6dc3f2f64f683ceae81b8977772e0b7a32f719",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "a37ba894_20f83fff",
+        "filename": "recipes-phosphor/state/phosphor-post-code-manager_git.bb",
+        "patchSetId": 3
+      },
+      "lineNbr": 18,
+      "author": {
+        "id": 1000546
+      },
+      "writtenOn": "2020-11-19T05:21:06Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "911e723b_6040097e",
+      "revId": "db6dc3f2f64f683ceae81b8977772e0b7a32f719",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": false
     }
   ]
 }
