@@ -12,7 +12,6 @@ LIC_FILES_CHKSUM = "file://${COREBASE}/meta/files/common-licenses/Apache-2.0;md5
 
 OBMC_YAML_PROVIDER_RECIPES += " \
     phosphor-led-manager-yaml-provider \
-    phosphor-software-manager-yaml-provider \
     "
 
 DEPENDS = "${OBMC_YAML_PROVIDER_RECIPES}"
