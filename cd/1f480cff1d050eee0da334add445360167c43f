@@ -1,0 +1,9 @@
+Ok-To-Test+1: OpenBMC CI <openbmcbump-ci@yahoo.com>
+Ok-To-Test+1: George Keishing <gkeishin@in.ibm.com>
+Verified+1: OpenBMC CI <openbmcbump-ci@yahoo.com>
+Code-Review+2: Andrew Geissler <geissonator@yahoo.com>
+Submitted-by: Andrew Geissler <geissonator@yahoo.com>
+Submitted-at: Mon, 30 Nov 2020 14:25:13 +0000
+Reviewed-on: https://gerrit.openbmc-project.xyz/c/openbmc/meta-phosphor/+/38600
+Project: openbmc/meta-phosphor
+Branch: refs/heads/master
