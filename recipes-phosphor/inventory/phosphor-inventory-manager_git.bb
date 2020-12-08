@@ -36,9 +36,6 @@ S = "${WORKDIR}/git"
 
 EXTRA_OECONF = " \
         YAML_PATH=${STAGING_DIR_HOST}${base_datadir} \
-        BUSNAME=${OBMC_INVENTORY_MGR_IFACE} \
-        INVENTORY_ROOT=${OBMC_INVENTORY_PATH} \
-        IFACE=${OBMC_INVENTORY_MGR_IFACE} \
         IFACES_PATH=${STAGING_DIR_TARGET}${yaml_dir} \
         "
 
