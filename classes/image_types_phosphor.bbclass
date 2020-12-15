@@ -328,10 +328,17 @@ do_generate_static[depends] += " \
 
 make_signatures() {
 	signature_files=""
+        cat /dev/null > image-full
 	for file in "$@"; do
 		openssl dgst -sha256 -sign ${SIGNING_KEY} -out "${file}.sig" $file
 		signature_files="${signature_files} ${file}.sig"
+		cat ${file}.sig >> image-full
 	done
+
+	if [ -s image-full ]; then
+		openssl dgst -sha256 -sign ${SIGNING_KEY} -out image-full.sig image-full
+		signature_files="${signature_files} image-full image-full.sig"
+	fi
 }
 
 do_generate_static_alltar() {
