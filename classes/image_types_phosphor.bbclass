@@ -331,7 +331,14 @@ make_signatures() {
 	for file in "$@"; do
 		openssl dgst -sha256 -sign ${SIGNING_KEY} -out "${file}.sig" $file
 		signature_files="${signature_files} ${file}.sig"
+		cat ${file}.sig >> image-tmp.sig
 	done
+
+	if [ -s image-tmp.sig ]; then
+		openssl dgst -sha256 -sign ${SIGNING_KEY} -out image.sig image-tmp.sig
+		signature_files="${signature_files} image.sig"
+		rm -rf image-tmp.sig
+	fi
 }
 
 do_generate_static_alltar() {
