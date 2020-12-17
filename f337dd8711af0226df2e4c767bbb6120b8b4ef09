@@ -2,6 +2,29 @@
   "comments": [
     {
       "key": {
+        "uuid": "ff1c3a69_59be2094",
+        "filename": "recipes-core/base-files/base-files_%.bbappend",
+        "patchSetId": 4
+      },
+      "lineNbr": 13,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-12-17T17:06:27Z",
+      "side": 1,
+      "message": "There is an assumption here that IMAGE_FEATURES is being set from the global configuration, which is a violation of best practices[1].  Bitbake users expect something like this to work:\n\n some_image.bbappend:\n\n IMAGE_FEATURES_append \u003d \" obmc-privilege-separation\"\n\nbut the base_files recipe would never see obmc-privilege-separation if set this way because IMAGE_FEATURES is not in the global configuration.  This same assumption is made in the next patch in this series in the dbus-perms recipe.\n\nIf this must be configurable (more on this below), and you need to be adding logic around this flag in random recipes throughout the tree, then it can\u0027t be an image feature - rather, it has to be a distro feature.\n \n[1] https://www.yoctoproject.org/docs/latest/mega-manual/mega-manual.html#usingpoky-extend-customimage-imagefeatures",
+      "range": {
+        "startLine": 13,
+        "startChar": 35,
+        "endLine": 13,
+        "endChar": 49
+      },
+      "revId": "f337dd8711af0226df2e4c767bbb6120b8b4ef09",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "4770de05_2238d8d0",
         "filename": "recipes-core/systemd/systemd_%.bbappend",
         "patchSetId": 4
@@ -31,6 +54,24 @@
       "side": 1,
       "message": "As per earlier discussion, this increases the image size and might be a problem for witherspoon targets. Additionally, the privilege separation should be enabled platform-by-platform, thus, covered by image feature flag.",
       "parentUuid": "4770de05_2238d8d0",
+      "revId": "f337dd8711af0226df2e4c767bbb6120b8b4ef09",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "8d7921d0_00bf4d43",
+        "filename": "recipes-core/systemd/systemd_%.bbappend",
+        "patchSetId": 4
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-12-17T17:06:27Z",
+      "side": 1,
+      "message": "\u003e As per earlier discussion, this increases the image size\n\nI expect there are exactly zero people that would be upset by the modest size increase here, considering what you get in return.  So I still don\u0027t understand the rationale for making this configurable.  If you can find someone that doesn\u0027t want privilege separation on their OpenBMC based BMC I\u0027ll quit asking about it but I don\u0027t think there are any...\n\n\u003e and might be a problem for witherspoon targets.\n\nThis patch was automatically tested on a witherspoon:\n\n\u003e Build Successful                                                                                               \n\u003e IBM Hardware CI : witherspoon hardware tests passed         \n\nThese lines mean there weren\u0027t any problems with it.\n\n\u003e the privilege separation should be enabled platform-by-platform\n\nIn light of what I\u0027ve said above, do you still feel this way?  If so, can you explain why?",
+      "parentUuid": "b187818f_bfe718c2",
       "revId": "f337dd8711af0226df2e4c767bbb6120b8b4ef09",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
       "unresolved": true
