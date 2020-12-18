@@ -49,6 +49,30 @@
     },
     {
       "key": {
+        "uuid": "13b04871_d8e7dd13",
+        "filename": "recipes-core/base-files/base-files_%.bbappend",
+        "patchSetId": 4
+      },
+      "lineNbr": 13,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-12-18T17:50:36Z",
+      "side": 1,
+      "message": "\u003e DISTRO_FEATURES is globally applied to the targets.\n\nCorrect.  You\u0027d have one set of distro policy that enables priv-separation and another set that does not.  For a given target, you can build with either policy set (or both).\n\n\u003e  that seems like COMBINED_FEATURES is more relevant candidate\n\nUse this metric to determine if something is a MACHINE_FEATURE or a DISTRO_FEATURE:\n\n Does the hardware on \u003cMACHINE\u003e support \u003cFEATURE\u003e?\n\nIf the question makes sense after substituting the feature in question then FEATURE is a MACHINE_FEATURE.  In this case:\n\n Does the hardware on witherspoon support privilege separation?\n\nThis is non-sensical - privilege separation has nothing to do with hardware, it a software feature only, thus it is not a MACHINE_FEATURE and COMBINED_FEATURES is not appropriate.",
+      "parentUuid": "ab4a41e3_0d3e2cca",
+      "range": {
+        "startLine": 13,
+        "startChar": 35,
+        "endLine": 13,
+        "endChar": 49
+      },
+      "revId": "f337dd8711af0226df2e4c767bbb6120b8b4ef09",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "4770de05_2238d8d0",
         "filename": "recipes-core/systemd/systemd_%.bbappend",
         "patchSetId": 4
