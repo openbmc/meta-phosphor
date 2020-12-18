@@ -141,6 +141,24 @@
       "revId": "f337dd8711af0226df2e4c767bbb6120b8b4ef09",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "d15c63d6_d3a9454b",
+        "filename": "recipes-core/systemd/systemd_%.bbappend",
+        "patchSetId": 4
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-12-18T17:50:52Z",
+      "side": 1,
+      "message": "\u003e CI has passed at least because the flag is not enabled.\n\nOops :-).  Yes I remember now.  Let me see if I can get it to fit.  \n\n\u003e be enabled for qemu target \n\nFYI OpenBMC doesn\u0027t support the qemuXXX targets that come with Yocto anymore.  Many targets with OpenBMC support do have models in upstream QEMU though, and those all work.\n\n\u003e Some third-party vendors\u0027 stuff might be also relies on the original behaviour,\n\nThis is not a problem - we absolutely do not work around code that we can\u0027t see in OpenBMC.\n\n\u003e Avoiding use of the feature flags will just break everyone with the follow-up changes. That\u0027s the normal practice when introducing incompatible changes.\n\nOf course.  And this what I\u0027m challenging, not the feature flag itself.  I don\u0027t understand why this can\u0027t be done in a way that is compatible.  For example, why can\u0027t the DBus ACLs include both root and the dynamic user until all the (upstream) code has been fixed up?  I\u0027m happy to be wrong, please just help me understand why it isn\u0027t possible.",
+      "parentUuid": "67539a3b_3cd5a59f",
+      "revId": "f337dd8711af0226df2e4c767bbb6120b8b4ef09",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
     }
   ]
 }
