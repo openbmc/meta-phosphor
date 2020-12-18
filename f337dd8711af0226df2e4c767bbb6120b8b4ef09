@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "ab4a41e3_0d3e2cca",
+        "filename": "recipes-core/base-files/base-files_%.bbappend",
+        "patchSetId": 4
+      },
+      "lineNbr": 13,
+      "author": {
+        "id": 1000064
+      },
+      "writtenOn": "2020-12-18T00:18:02Z",
+      "side": 1,
+      "message": "I set image features from local.conf. And the per-target local.conf.sample should have it at the early stage of development (explained in other comment above). Thus, it catched by base_files recipes. Otherwise, it wouldn\u0027t work for me when I\u0027ve tested it.\n\nFrom my understanding (https://www.yoctoproject.org/pipermail/yocto/2017-January/034171.html), DISTRO_FEATURES is globally applied to the targets. Thus, that seems like COMBINED_FEATURES is more relevant candidate.",
+      "parentUuid": "ff1c3a69_59be2094",
+      "range": {
+        "startLine": 13,
+        "startChar": 35,
+        "endLine": 13,
+        "endChar": 49
+      },
+      "revId": "f337dd8711af0226df2e4c767bbb6120b8b4ef09",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "4770de05_2238d8d0",
         "filename": "recipes-core/systemd/systemd_%.bbappend",
         "patchSetId": 4
@@ -72,6 +96,24 @@
       "side": 1,
       "message": "\u003e As per earlier discussion, this increases the image size\n\nI expect there are exactly zero people that would be upset by the modest size increase here, considering what you get in return.  So I still don\u0027t understand the rationale for making this configurable.  If you can find someone that doesn\u0027t want privilege separation on their OpenBMC based BMC I\u0027ll quit asking about it but I don\u0027t think there are any...\n\n\u003e and might be a problem for witherspoon targets.\n\nThis patch was automatically tested on a witherspoon:\n\n\u003e Build Successful                                                                                               \n\u003e IBM Hardware CI : witherspoon hardware tests passed         \n\nThese lines mean there weren\u0027t any problems with it.\n\n\u003e the privilege separation should be enabled platform-by-platform\n\nIn light of what I\u0027ve said above, do you still feel this way?  If so, can you explain why?",
       "parentUuid": "b187818f_bfe718c2",
+      "revId": "f337dd8711af0226df2e4c767bbb6120b8b4ef09",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "67539a3b_3cd5a59f",
+        "filename": "recipes-core/systemd/systemd_%.bbappend",
+        "patchSetId": 4
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 1000064
+      },
+      "writtenOn": "2020-12-18T00:18:02Z",
+      "side": 1,
+      "message": "This patch is only a little percent of the upcoming change that introduces the image feature flag.\nThe reason why we need this flag (that is OFF by default) to not break everything. The next changes (some of them seen in \"WIP: ...\" PR) makes things incompatible and require to change more and more stuff across different repos at once. To make the process smooth, we need the flag. In first steps the flag will be enabled only through the local.conf file during development. Next it will be enabled for qemu target and then one by one for other platforms.\n\nFor instance, some daemons are dependant to each other. Some third-party vendors\u0027 stuff might be also relies on the original behaviour, filepremissions and running under the root user.\n\n\u003e If you can find someone that doesn\u0027t want privilege separation on their OpenBMC based BMC I\u0027ll quit asking about it but I don\u0027t think there are any...\nThere was some who are more size-constrained rather than security-agnostic. At the end, the priv separation wouldn\u0027t be just a +200k change to the image.\n\nNSS module is pretty small, but even then it might break Witherspoon targets. CI has passed at least because the flag is not enabled. There were several discussions. Sometimes, the image might build well, but it fails with flashing or system bootup on the real hardware.\n\n\u003e In light of what I\u0027ve said above, do you still feel this way?  If so, can you explain why?\n\nAvoiding use of the feature flags will just break everyone with the follow-up changes. That\u0027s the normal practice when introducing incompatible changes.",
+      "parentUuid": "8d7921d0_00bf4d43",
       "revId": "f337dd8711af0226df2e4c767bbb6120b8b4ef09",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
       "unresolved": true
