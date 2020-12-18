@@ -159,6 +159,24 @@
       "revId": "f337dd8711af0226df2e4c767bbb6120b8b4ef09",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "19f2f800_77f746d6",
+        "filename": "recipes-core/systemd/systemd_%.bbappend",
+        "patchSetId": 4
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 1000064
+      },
+      "writtenOn": "2020-12-18T21:47:24Z",
+      "side": 1,
+      "message": "\u003e FYI OpenBMC doesn\u0027t support the qemuXXX targets that come with Yocto anymore.  Many targets with OpenBMC support do have models in upstream QEMU though, and those all work.\n\nI use meta-phosphor/conf template that has qemuarm machine by default.\n\n\u003e This is not a problem - we absolutely do not work around code that we can\u0027t see in OpenBMC.\n\nThere are a number of vendor-specific meta-* in the base openbmc repo. Thus, this priv-separation feature couldn\u0027t be available everywhere at once.\n\n\u003e Of course.  And this what I\u0027m challenging, not the feature flag itself.  I don\u0027t understand why this can\u0027t be done in a way that is compatible.  For example, why can\u0027t the DBus ACLs include both root and the dynamic user until all the (upstream) code has been fixed up? \n\nDynamic users is just a small part of the changes. Even then, we can not simply mix regular users and root user because some daemons have shared access to the same file system resources, thus, have the same permissions (at least, common group). You can check next WIP gerrit that will be splitted in several smaller changes:\n\n   https://gerrit.openbmc-project.xyz/c/openbmc/meta-phosphor/+/37844/2\n\nMoreover, the changed ACLs or filepermissions might be incomplete or wrong that might cause outages. That the major reason to keep priv-separation work covered by the flag.",
+      "parentUuid": "d15c63d6_d3a9454b",
+      "revId": "f337dd8711af0226df2e4c767bbb6120b8b4ef09",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
     }
   ]
 }
