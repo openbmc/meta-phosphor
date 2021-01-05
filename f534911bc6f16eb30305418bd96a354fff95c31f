@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "9fd8030e_2b3f43b8",
+        "filename": "classes/image_types_phosphor.bbclass",
+        "patchSetId": 2
+      },
+      "lineNbr": 335,
+      "author": {
+        "id": 1000003
+      },
+      "writtenOn": "2021-01-05T22:51:35Z",
+      "side": 1,
+      "message": "The code update code would need to concatenate the .sig files in the tarball to check against the image-full.sig file, therefore it needs to know the order in which the concatenation took place. Could a solution be to sort the files in alphabetical order? This would lead for example to kernel, followed by rofs, rwfs, etc.",
+      "revId": "f534911bc6f16eb30305418bd96a354fff95c31f",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "7a88aa7a_5f5cf951",
+        "filename": "classes/image_types_phosphor.bbclass",
+        "patchSetId": 2
+      },
+      "lineNbr": 340,
+      "author": {
+        "id": 1000003
+      },
+      "writtenOn": "2021-01-05T22:51:35Z",
+      "side": 1,
+      "message": "No need to include the \u0027image-full\u0027 file which is the concatenation of the other .sig files since the code update code can use the .sig files in the tarball to recreate this image-full file. This will ensure the tarball only has the expected .sig files.",
+      "revId": "f534911bc6f16eb30305418bd96a354fff95c31f",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
+    }
+  ]
+}
