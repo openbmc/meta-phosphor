@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "67261560_99d9e863",
+        "filename": "classes/image_types_phosphor.bbclass",
+        "patchSetId": 3
+      },
+      "lineNbr": 342,
+      "author": {
+        "id": 1000003
+      },
+      "writtenOn": "2021-01-06T21:33:11Z",
+      "side": 1,
+      "message": "That should do it. Just if you\u0027d use tabs instead of spaces since that\u0027s what this function uses, to be consistent.",
+      "revId": "9d4bf7f6f1a24705d48753e026cd309cc19ae7c5",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
+    }
+  ]
+}
