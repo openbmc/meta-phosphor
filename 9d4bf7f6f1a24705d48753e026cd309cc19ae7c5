@@ -16,6 +16,24 @@
       "revId": "9d4bf7f6f1a24705d48753e026cd309cc19ae7c5",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "ebca89ea_cb8905fe",
+        "filename": "classes/image_types_phosphor.bbclass",
+        "patchSetId": 3
+      },
+      "lineNbr": 342,
+      "author": {
+        "id": 1000397
+      },
+      "writtenOn": "2021-01-07T02:41:23Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "67261560_99d9e863",
+      "revId": "9d4bf7f6f1a24705d48753e026cd309cc19ae7c5",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": false
     }
   ]
 }
