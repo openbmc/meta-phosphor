@@ -226,6 +226,15 @@ OBMC_DBUS_IFACE_ROOT ?= "xyz.openbmc_project"
 # phosphor-ipmi-fru-whitelist-native recipe.
 VIRTUAL-RUNTIME_phosphor-ipmi-providers ?= "phosphor-ipmi-fru"
 
+# Set security headers on builds
+require conf/distro/include/security_flags.inc
+
+# Disable security on croserver.
+# Remove if https://github.com/open-power/eCMD/pull/433 is ever merged
+SECURITY_STRINGFORMAT_pn-croserver = ""
+# obmc-libobmc-intf doesn't compile with security flags enabled
+SECURITY_CFLAGS_pn-obmc-libobmc-intf = ""
+
 # Set the root password to '0penBmc'
 inherit extrausers
 
