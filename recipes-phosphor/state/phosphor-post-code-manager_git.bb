@@ -15,7 +15,8 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=86d3f3a95c324c9479bd8986968f4327"
 
 inherit cmake pkgconfig systemd
 
-SYSTEMD_SERVICE_${PN} = "xyz.openbmc_project.State.Boot.PostCode.service"
+SYSTEMD_SERVICE_${PN} = "xyz.openbmc_project.State.Boot.PostCode@0.service"
+FILES_${PN} += "${systemd_system_unitdir}/xyz.openbmc_project.State.Boot.PostCode@.service"
 
 DEPENDS += " \
     sdbusplus \
