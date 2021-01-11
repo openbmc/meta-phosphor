@@ -16,6 +16,24 @@
       "revId": "67da983e1e1205c95fb293e04322e4ee31a56925",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "19ddfc4e_3661d5e1",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 1000153
+      },
+      "writtenOn": "2021-01-11T23:47:05Z",
+      "side": 1,
+      "message": "\u003e A nit, but this reads like any target simulated under qemu doesn\u0027t have a limit and that is not the case.  The qemu targets supported by upstream Yocto may not have any limits but I assure that the Palmetto/Romulus/Witherspoon/aspeed-evb targets all do.\n\nI could probably phrase it better, but the point is that any root size limitation on a qemu machine type is arbitrary, not imposed by hardware, because we\u0027re running in simulation, we can simulate as much rootfs storage as we like, with little impact until your build machine runs out of space.\n\nI can try to rephrase it better.",
+      "parentUuid": "ec88ec5a_00d89941",
+      "revId": "67da983e1e1205c95fb293e04322e4ee31a56925",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
     }
   ]
 }
