@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "13ddeb06_e008214f",
+        "filename": "recipes-phosphor/host/phosphor-host-postd_git.bb",
+        "patchSetId": 2
+      },
+      "lineNbr": 27,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-01-11T21:06:18Z",
+      "side": 1,
+      "message": "Why was this added?",
+      "revId": "27fde91c49e53e3d626645ee3d0bf2625da76f94",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": false
+    }
+  ]
+}
