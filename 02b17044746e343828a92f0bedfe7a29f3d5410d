@@ -1,0 +1,123 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "d52dc3bd_f01a45b2",
+        "filename": "recipes-phosphor/ipmi/phosphor-ipmi-ssif.bb",
+        "patchSetId": 1
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-01-12T21:14:01Z",
+      "side": 1,
+      "message": "please just use systemd, not obmc-phosphor-systemd",
+      "revId": "02b17044746e343828a92f0bedfe7a29f3d5410d",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "dd415aa6_11786503",
+        "filename": "recipes-phosphor/ipmi/phosphor-ipmi-ssif.bb",
+        "patchSetId": 1
+      },
+      "lineNbr": 14,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-01-12T21:14:01Z",
+      "side": 1,
+      "message": "what happens if we don\u0027t have these virtuals?  I\u0027d like to deprecate them or come up with a better abstraction if possible.",
+      "revId": "02b17044746e343828a92f0bedfe7a29f3d5410d",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8d52af99_87d17ca7",
+        "filename": "recipes-phosphor/ipmi/phosphor-ipmi-ssif.bb",
+        "patchSetId": 1
+      },
+      "lineNbr": 17,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-01-12T21:14:01Z",
+      "side": 1,
+      "message": "above you inherited meson - why is this needed?",
+      "revId": "02b17044746e343828a92f0bedfe7a29f3d5410d",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "46d05694_c0cc3297",
+        "filename": "recipes-phosphor/ipmi/phosphor-ipmi-ssif.bb",
+        "patchSetId": 1
+      },
+      "lineNbr": 22,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-01-12T21:14:01Z",
+      "side": 1,
+      "message": "this is not necessary: https://github.com/openbmc/docs/blob/master/anti-patterns.md#explicit-listing-of-shared-library-packages-in-rdepends-in-bitbake-metadata",
+      "revId": "02b17044746e343828a92f0bedfe7a29f3d5410d",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "956e3a54_b3ce3ef7",
+        "filename": "recipes-phosphor/ipmi/phosphor-ipmi-ssif.bb",
+        "patchSetId": 1
+      },
+      "lineNbr": 29,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-01-12T21:14:01Z",
+      "side": 1,
+      "message": "why is this here?  Do we really have uapi headers that have not made it into the mainline kernel?  which ones?",
+      "revId": "02b17044746e343828a92f0bedfe7a29f3d5410d",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "c16d0a2b_a164ce1c",
+        "filename": "recipes-phosphor/ipmi/phosphor-ipmi-ssif/org.openbmc.HostIpmi.service",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-01-12T21:14:01Z",
+      "side": 1,
+      "message": "please move this file to the ssifbridge repository and install it with meson",
+      "revId": "02b17044746e343828a92f0bedfe7a29f3d5410d",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8227d3c3_939dccc3",
+        "filename": "recipes-phosphor/ipmi/phosphor-ipmi-ssif/org.openbmc.HostIpmi.service",
+        "patchSetId": 1
+      },
+      "lineNbr": 11,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-01-12T21:14:01Z",
+      "side": 1,
+      "message": "please don\u0027t start this way: https://github.com/openbmc/docs/blob/master/anti-patterns.md#use-of-usrbinenv-in-systemd-service-files",
+      "revId": "02b17044746e343828a92f0bedfe7a29f3d5410d",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": false
+    }
+  ]
+}
