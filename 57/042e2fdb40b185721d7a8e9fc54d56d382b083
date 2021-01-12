@@ -1,0 +1,9 @@
+Code-Review+2: Brad Bishop <bradleyb@fuzziesquirrel.com>
+Code-Review+1: Zhikui Ren <zhikui.ren@intel.com>
+Verified+1: OpenBMC CI <openbmcbump-ci@yahoo.com>
+Ok-To-Test+1: OpenBMC CI <openbmcbump-ci@yahoo.com>
+Submitted-by: Kumar Thangavel <thangavel.k@hcl.com>
+Submitted-at: Tue, 12 Jan 2021 06:42:14 +0000
+Reviewed-on: https://gerrit.openbmc-project.xyz/c/openbmc/meta-phosphor/+/36148
+Project: openbmc/meta-phosphor
+Branch: refs/heads/master
