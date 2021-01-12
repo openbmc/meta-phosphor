@@ -34,6 +34,29 @@
       "revId": "27fde91c49e53e3d626645ee3d0bf2625da76f94",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "35c95dc0_9aebd7f5",
+        "filename": "recipes-phosphor/host/phosphor-host-postd_git.bb",
+        "patchSetId": 2
+      },
+      "lineNbr": 28,
+      "author": {
+        "id": 1000218
+      },
+      "writtenOn": "2021-01-12T06:06:52Z",
+      "side": 1,
+      "message": "Could set it as 0 by default, 0 is to indicate single host.",
+      "range": {
+        "startLine": 28,
+        "startChar": 19,
+        "endLine": 28,
+        "endChar": 21
+      },
+      "revId": "27fde91c49e53e3d626645ee3d0bf2625da76f94",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
     }
   ]
 }
