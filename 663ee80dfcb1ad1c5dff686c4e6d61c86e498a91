@@ -22,6 +22,30 @@
       "revId": "663ee80dfcb1ad1c5dff686c4e6d61c86e498a91",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "dd829116_8975adfc",
+        "filename": "recipes-phosphor/ipmi/phosphor-ipmi-config/channel_config.json",
+        "patchSetId": 1
+      },
+      "lineNbr": 36,
+      "author": {
+        "id": 1000940
+      },
+      "writtenOn": "2021-01-12T03:10:03Z",
+      "side": 1,
+      "message": "Replacement of KCS by SSIF on channel 15 will make KCS not work on platforms that support KCS.\nAdding this change will add xyz.openbmc_project.Ipmi.Channel.ipmi_ssif interface for the ssifbridge to work on.\n\nWe can put a copy of this file into platform specific meta- folder but it will need to be updated once this file is updated. If enabling SSIF channel by default is not recommended, we will put into our platform-specific code instead.",
+      "parentUuid": "a3083131_f8e1cfaf",
+      "range": {
+        "startLine": 36,
+        "startChar": 14,
+        "endLine": 36,
+        "endChar": 23
+      },
+      "revId": "663ee80dfcb1ad1c5dff686c4e6d61c86e498a91",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
     }
   ]
 }
