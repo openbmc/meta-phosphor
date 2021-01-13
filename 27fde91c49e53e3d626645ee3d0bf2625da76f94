@@ -37,6 +37,24 @@
     },
     {
       "key": {
+        "uuid": "9116da68_02a25589",
+        "filename": "recipes-phosphor/host/phosphor-host-postd_git.bb",
+        "patchSetId": 2
+      },
+      "lineNbr": 27,
+      "author": {
+        "id": 1000538
+      },
+      "writtenOn": "2021-01-13T06:42:31Z",
+      "side": 1,
+      "message": "Hi Brad,\n\n         This is one of the comments update received on phosphor-host-postd by Patrick.\n\nHi Patrick,\n          I understand that OBMC_HOST_INSTANCES are used for multi-service approach used in phosphor-post-code-manager, obmc-console. Phosphor-host-postd handles multi-host as single service.\n\nThe total number of host added as additional argument in the phosphor-host-postd service to handle multi-host feature.\n\nNUMBER_OF_HOST is 0 or (-1) by default to handle single host in .bb and anyone can override it in their machine layer(..bbappend) \n\n  https://gerrit.openbmc-project.xyz/c/openbmc/phosphor-host-postd/+/36509/2/lpcsnoop.service.in#7",
+      "parentUuid": "34786c30_4dff6bcc",
+      "revId": "27fde91c49e53e3d626645ee3d0bf2625da76f94",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "35c95dc0_9aebd7f5",
         "filename": "recipes-phosphor/host/phosphor-host-postd_git.bb",
         "patchSetId": 2
@@ -57,6 +75,30 @@
       "revId": "27fde91c49e53e3d626645ee3d0bf2625da76f94",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "68f3093b_021908da",
+        "filename": "recipes-phosphor/host/phosphor-host-postd_git.bb",
+        "patchSetId": 2
+      },
+      "lineNbr": 28,
+      "author": {
+        "id": 1000538
+      },
+      "writtenOn": "2021-01-13T06:42:31Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "35c95dc0_9aebd7f5",
+      "range": {
+        "startLine": 28,
+        "startChar": 19,
+        "endLine": 28,
+        "endChar": 21
+      },
+      "revId": "27fde91c49e53e3d626645ee3d0bf2625da76f94",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": false
     }
   ]
 }
