@@ -6,9 +6,8 @@ SRC_URI += " file://pam.d/common-password \
              file://pam.d/common-session \
             "
 
-RDEPENDS_${PN}-runtime += "${MLPREFIX}pam-plugin-cracklib-${libpam_suffix} \
-                           ${MLPREFIX}pam-plugin-tally2-${libpam_suffix} \
-                           ${MLPREFIX}pam-plugin-pwhistory-${libpam_suffix} \
+# TODO : openbmc/openbmc#3750 - replace cracklib and tally2
+RDEPENDS_${PN}-runtime += "${MLPREFIX}pam-plugin-pwhistory-${libpam_suffix} \
                            ${MLPREFIX}pam-plugin-succeed-if-${libpam_suffix} \
                            ${MLPREFIX}pam-plugin-localuser-${libpam_suffix} \
                           "
