@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "3e76ac7e_d31f537f",
+        "filename": "recipes-phosphor/ipmi/phosphor-ipmi-ssif.bb",
+        "patchSetId": 1
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 1000940
+      },
+      "writtenOn": "2021-01-13T06:13:01Z",
+      "side": 1,
+      "message": "Let Dung investigate more on this. Removing obmc-phosphor-systemd will make compilation failure:\n\nERROR: phosphor-ipmi-ssif-1.0-r1 do_package: SYSTEMD_SERVICE_phosphor-ipmi-ssif value org.openbmc.HostIpmi.service does not exist\nERROR: Logfile of failure stored in: /openbmc/jade_build/tmp/work/arm1176jzs-openbmc-linux-gnueabi/phosphor-ipmi-ssif/1.0-r1/temp/log.do_package.47683\nERROR: Task (/openbmc/meta-ampere/meta-common/recipes-phosphor/ipmi/phosphor-ipmi-ssif.bb:do_package) failed with exit code \u00271\u0027",
+      "parentUuid": "d52dc3bd_f01a45b2",
+      "revId": "02b17044746e343828a92f0bedfe7a29f3d5410d",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "dd415aa6_11786503",
         "filename": "recipes-phosphor/ipmi/phosphor-ipmi-ssif.bb",
         "patchSetId": 1
@@ -36,6 +54,24 @@
     },
     {
       "key": {
+        "uuid": "90d54db4_cef1dae5",
+        "filename": "recipes-phosphor/ipmi/phosphor-ipmi-ssif.bb",
+        "patchSetId": 1
+      },
+      "lineNbr": 14,
+      "author": {
+        "id": 1000940
+      },
+      "writtenOn": "2021-01-13T06:13:01Z",
+      "side": 1,
+      "message": "The platform .inc file will have below declaration for IPMI:\nPREFERRED_PROVIDER_virtual/obmc-host-ipmi-hw \u003d phosphor-ipmi-ssif\n\nLike the way other platforms do for BT or KCS:\n./meta-arm/conf/machine/include/arm.inc:PREFERRED_PROVIDER_virtual/obmc-host-ipmi-hw \u003d \"phosphor-ipmi-bt\"\n./meta-intel/conf/machine/include/intel.inc:PREFERRED_PROVIDER_virtual/obmc-host-ipmi-hw \u003d \"phosphor-ipmi-kcs\"\n\nWithout these virtuals, the compilation will be fail because no application produce \nvirtual/obmc-host-ipmi-hw.",
+      "parentUuid": "dd415aa6_11786503",
+      "revId": "02b17044746e343828a92f0bedfe7a29f3d5410d",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "8d52af99_87d17ca7",
         "filename": "recipes-phosphor/ipmi/phosphor-ipmi-ssif.bb",
         "patchSetId": 1
@@ -47,6 +83,24 @@
       "writtenOn": "2021-01-12T21:14:01Z",
       "side": 1,
       "message": "above you inherited meson - why is this needed?",
+      "revId": "02b17044746e343828a92f0bedfe7a29f3d5410d",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "15b4c943_82b5a512",
+        "filename": "recipes-phosphor/ipmi/phosphor-ipmi-ssif.bb",
+        "patchSetId": 1
+      },
+      "lineNbr": 17,
+      "author": {
+        "id": 1000940
+      },
+      "writtenOn": "2021-01-13T06:13:01Z",
+      "side": 1,
+      "message": "Yes, it does not need. Should be removed.",
+      "parentUuid": "8d52af99_87d17ca7",
       "revId": "02b17044746e343828a92f0bedfe7a29f3d5410d",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
       "unresolved": false
@@ -70,6 +124,24 @@
     },
     {
       "key": {
+        "uuid": "6a129622_bac2998d",
+        "filename": "recipes-phosphor/ipmi/phosphor-ipmi-ssif.bb",
+        "patchSetId": 1
+      },
+      "lineNbr": 22,
+      "author": {
+        "id": 1000940
+      },
+      "writtenOn": "2021-01-13T06:13:01Z",
+      "side": 1,
+      "message": "Yes, this should be removed.",
+      "parentUuid": "46d05694_c0cc3297",
+      "revId": "02b17044746e343828a92f0bedfe7a29f3d5410d",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "956e3a54_b3ce3ef7",
         "filename": "recipes-phosphor/ipmi/phosphor-ipmi-ssif.bb",
         "patchSetId": 1
@@ -81,6 +153,24 @@
       "writtenOn": "2021-01-12T21:14:01Z",
       "side": 1,
       "message": "why is this here?  Do we really have uapi headers that have not made it into the mainline kernel?  which ones?",
+      "revId": "02b17044746e343828a92f0bedfe7a29f3d5410d",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "53d56294_e7b63207",
+        "filename": "recipes-phosphor/ipmi/phosphor-ipmi-ssif.bb",
+        "patchSetId": 1
+      },
+      "lineNbr": 29,
+      "author": {
+        "id": 1000940
+      },
+      "writtenOn": "2021-01-13T06:13:01Z",
+      "side": 1,
+      "message": "Yes, this should be removed.",
+      "parentUuid": "956e3a54_b3ce3ef7",
       "revId": "02b17044746e343828a92f0bedfe7a29f3d5410d",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
       "unresolved": false
