@@ -37,6 +37,24 @@
     },
     {
       "key": {
+        "uuid": "46ee9015_b1367c98",
+        "filename": "recipes-phosphor/ipmi/phosphor-ipmi-ssif.bb",
+        "patchSetId": 1
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-01-13T15:56:07Z",
+      "side": 1,
+      "message": "right - you have to move the unit file to the ssifbridge repository and install it with meson before you can use systemd instead of obmc-phosphor-systemd.  thanks for looking into it.",
+      "parentUuid": "3e76ac7e_d31f537f",
+      "revId": "02b17044746e343828a92f0bedfe7a29f3d5410d",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "dd415aa6_11786503",
         "filename": "recipes-phosphor/ipmi/phosphor-ipmi-ssif.bb",
         "patchSetId": 1
@@ -66,6 +84,24 @@
       "side": 1,
       "message": "The platform .inc file will have below declaration for IPMI:\nPREFERRED_PROVIDER_virtual/obmc-host-ipmi-hw \u003d phosphor-ipmi-ssif\n\nLike the way other platforms do for BT or KCS:\n./meta-arm/conf/machine/include/arm.inc:PREFERRED_PROVIDER_virtual/obmc-host-ipmi-hw \u003d \"phosphor-ipmi-bt\"\n./meta-intel/conf/machine/include/intel.inc:PREFERRED_PROVIDER_virtual/obmc-host-ipmi-hw \u003d \"phosphor-ipmi-kcs\"\n\nWithout these virtuals, the compilation will be fail because no application produce \nvirtual/obmc-host-ipmi-hw.",
       "parentUuid": "dd415aa6_11786503",
+      "revId": "02b17044746e343828a92f0bedfe7a29f3d5410d",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "fb16bf22_d9b0a23a",
+        "filename": "recipes-phosphor/ipmi/phosphor-ipmi-ssif.bb",
+        "patchSetId": 1
+      },
+      "lineNbr": 14,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-01-13T15:56:07Z",
+      "side": 1,
+      "message": "ok.  thx for trying.  we can refactor later - go ahead and disregard this comment.",
+      "parentUuid": "90d54db4_cef1dae5",
       "revId": "02b17044746e343828a92f0bedfe7a29f3d5410d",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
       "unresolved": true
