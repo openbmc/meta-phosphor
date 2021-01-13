@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "c0fcdaff_2a149a2c",
+        "filename": "classes/image_types_phosphor.bbclass",
+        "patchSetId": 1
+      },
+      "lineNbr": 44,
+      "author": {
+        "id": 1000044
+      },
+      "writtenOn": "2021-01-13T02:05:32Z",
+      "side": 1,
+      "message": "This does not match the default 64M layout in dts:\nhttps://github.com/openbmc/linux/blob/dev-5.8/arch/arm/boot/dts/openbmc-flash-layout-64.dtsi\n\nThey need to be synced.",
+      "revId": "04ebdbc4f40f9e358b48d23e0a14d7ae180e0b92",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
+    }
+  ]
+}
