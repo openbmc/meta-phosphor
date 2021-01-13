@@ -118,6 +118,30 @@
       "revId": "663ee80dfcb1ad1c5dff686c4e6d61c86e498a91",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "d0684d52_6f9f5518",
+        "filename": "recipes-phosphor/ipmi/phosphor-ipmi-config/channel_config.json",
+        "patchSetId": 1
+      },
+      "lineNbr": 36,
+      "author": {
+        "id": 1000940
+      },
+      "writtenOn": "2021-01-13T07:44:30Z",
+      "side": 1,
+      "message": "Hi Brad,\nSorry, I don\u0027t have experience on this. Do you have any reference codes or guideline?",
+      "parentUuid": "32bdc204_21b3e462",
+      "range": {
+        "startLine": 36,
+        "startChar": 14,
+        "endLine": 36,
+        "endChar": 23
+      },
+      "revId": "663ee80dfcb1ad1c5dff686c4e6d61c86e498a91",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
     }
   ]
 }
