@@ -1,0 +1,9 @@
+Code-Review+2: Brad Bishop <bradleyb@fuzziesquirrel.com>
+Code-Review+1: Adriana Kobylak <anoo@linux.ibm.com>
+Verified+1: OpenBMC CI <openbmcbump-ci@yahoo.com>
+Ok-To-Test+1: OpenBMC CI <openbmcbump-ci@yahoo.com>
+Submitted-by: George Liu <liuxiwei1013@outlook.com>
+Submitted-at: Thu, 14 Jan 2021 07:01:55 +0000
+Reviewed-on: https://gerrit.openbmc-project.xyz/c/openbmc/meta-phosphor/+/39036
+Project: openbmc/meta-phosphor
+Branch: refs/heads/master
