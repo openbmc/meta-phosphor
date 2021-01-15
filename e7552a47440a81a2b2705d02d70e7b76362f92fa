@@ -2,6 +2,23 @@
   "comments": [
     {
       "key": {
+        "uuid": "f4011dc2_922ac4cb",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 31,
+      "author": {
+        "id": 1000235
+      },
+      "writtenOn": "2021-01-15T21:01:16Z",
+      "side": 1,
+      "message": "TODO: Add a migration guide with items like:\nIf you use: pam_tally2 --user\u003dtestuser [--reset]\nUse this instead: faillock --user\u003dtestuser [--reset]",
+      "revId": "e7552a47440a81a2b2705d02d70e7b76362f92fa",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "9e20f643_82b2813a",
         "filename": "recipes-extended/pam/libpam/pam.d/common-auth",
         "patchSetId": 1
@@ -25,6 +42,76 @@
     },
     {
       "key": {
+        "uuid": "f1c0f88b_f315101a",
+        "filename": "recipes-extended/pam/libpam/pam.d/common-auth",
+        "patchSetId": 1
+      },
+      "lineNbr": 16,
+      "author": {
+        "id": 1000235
+      },
+      "writtenOn": "2021-01-15T21:01:16Z",
+      "side": 1,
+      "message": "Yep.  I\u0027ll detabify the whole file.  Because tabs: ick!",
+      "parentUuid": "9e20f643_82b2813a",
+      "range": {
+        "startLine": 16,
+        "startChar": 21,
+        "endLine": 16,
+        "endChar": 40
+      },
+      "revId": "e7552a47440a81a2b2705d02d70e7b76362f92fa",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "cbc85903_7a0425cd",
+        "filename": "recipes-extended/pam/libpam/pam.d/common-password",
+        "patchSetId": 1
+      },
+      "lineNbr": 19,
+      "author": {
+        "id": 1000235
+      },
+      "writtenOn": "2021-01-15T21:01:16Z",
+      "side": 1,
+      "message": "I used max\u003d1024 to change the default max\u003d40 which seems too small.  I believe 1024 is a reasonable default and all OpenBMC components can handle it.  Notwithstanding the Linux-PAM ipmicheck module below which limits IPMI users to 20 characters(bytes).",
+      "range": {
+        "startLine": 19,
+        "startChar": 81,
+        "endLine": 19,
+        "endChar": 89
+      },
+      "revId": "e7552a47440a81a2b2705d02d70e7b76362f92fa",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "6fe02656_61d3970d",
+        "filename": "recipes-extended/pam/libpam/pam.d/common-password",
+        "patchSetId": 1
+      },
+      "lineNbr": 19,
+      "author": {
+        "id": 1000235
+      },
+      "writtenOn": "2021-01-15T21:01:16Z",
+      "side": 1,
+      "message": "I used min\u003d8,8,8,8,8 as the project default for compatibility with the project\u0027s previous cracklib configuration.  Should this be bumped up to min\u003d15,15,15,15,15 to keep up with evolving(increasing) security standards?\nNIST requires 8 per https://pages.nist.gov/800-63-3/sp800-63b.html#sec5",
+      "range": {
+        "startLine": 19,
+        "startChar": 67,
+        "endLine": 19,
+        "endChar": 80
+      },
+      "revId": "e7552a47440a81a2b2705d02d70e7b76362f92fa",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "d0f817db_3980e878",
         "filename": "recipes-extended/pam/libpam_%.bbappend",
         "patchSetId": 1
@@ -36,6 +123,24 @@
       "writtenOn": "2021-01-15T12:48:30Z",
       "side": 1,
       "message": "I\u0027m surprised we don\u0027t need pam-passwdqc in this list too, since we use to have cracklib.",
+      "revId": "e7552a47440a81a2b2705d02d70e7b76362f92fa",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "5ad23faf_91169e0b",
+        "filename": "recipes-extended/pam/libpam_%.bbappend",
+        "patchSetId": 1
+      },
+      "lineNbr": 11,
+      "author": {
+        "id": 1000235
+      },
+      "writtenOn": "2021-01-15T21:01:16Z",
+      "side": 1,
+      "message": "The Linux-PAM project incorporates the faillock module (https://github.com/linux-pam/linux-pam/tree/master/modules) so I can pull it in like the others.  The Linux-PAM module passwdqc is a separate project with a newish bitbake recipe, so I pull it in separately (line 9).\nI think this is the right way to do it ... advice appreciated.",
+      "parentUuid": "d0f817db_3980e878",
       "revId": "e7552a47440a81a2b2705d02d70e7b76362f92fa",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
       "unresolved": true
