@@ -2,6 +2,7 @@ SUMMARY = "Chassis Power Control service for Intel based platforms"
 DESCRIPTION = "Chassis Power Control service for Intel based platforms"
 
 SRC_URI = "git://github.com/openbmc/x86-power-control.git;protocol=ssh"
+SRC_URI += "file://${PN}.conf"
 SRCREV = "047bcb569b9c8baaa6184350a1628ec6e4008252"
 
 PV = "1.0+git${SRCPV}"
@@ -17,6 +18,9 @@ inherit obmc-phosphor-dbus-service
 SYSTEMD_SERVICE_${PN} += "xyz.openbmc_project.Chassis.Control.Power.service \
                          chassis-system-reset.service \
                          chassis-system-reset.target"
+
+DBUS_PACKAGES = "${PN}"
+_INSTALL_DBUS_CONFIGS = "${PN}.conf"
 
 DEPENDS += " \
     boost \

@@ -93,3 +93,40 @@ enable_ldap_nsswitch() {
 
 ROOTFS_POSTPROCESS_COMMAND += "${@bb.utils.contains('IMAGE_FEATURES', 'obmc-user-mgmt-ldap', 'enable_ldap_nsswitch ;', '', d)}"
 
+generate_busconfig_acls() {
+    local hwmon_dir="${IMAGE_ROOTFS}/etc/default/obmc/hwmon"
+    local dbus_dir="${IMAGE_ROOTFS}/etc/dbus-1/system.d"
+
+    [ -d "${hwmon_dir}" ] || return 0
+
+    find "${hwmon_dir}" -type l -name \*.conf | while read f; do
+        local path=$(readlink -f $f)
+        rm -f "${f}"
+        cp ${path} ${f}
+    done
+
+    find "${hwmon_dir}" -type f -name \*.conf | while read f; do
+        local path="/${f##${hwmon_dir}/}"
+        path="${path%.conf}"
+        local sensor_id=$(printf "%s" "${path}" | sha256sum | cut -d\  -f1)
+        local acl_file="${dbus_dir}/xyz.openbmc_project.Hwmon-${sensor_id}.conf"
+
+        egrep -q '^HW_SENSOR_ID = ' "${f}" ||
+            printf "\n# Sensor id for %s\nHW_SENSOR_ID = \"%s\"\n" "${path}" "${sensor_id}" >> $f
+
+        [ ! -f "${acl_file}" ] || continue
+        cat <<EOF>${acl_file}
+<!DOCTYPE busconfig PUBLIC "-//freedesktop//DTD D-BUS Bus Configuration 1.0//EN"
+ "http://www.freedesktop.org/standards/dbus/1.0/busconfig.dtd">
+<busconfig>
+  <policy user="root">
+    <!-- ${path//--/\\-\\-} -->
+    <allow own="xyz.openbmc_project.Hwmon-${sensor_id}.Hwmon1"/>
+    <allow send_destination="xyz.openbmc_project.Hwmon-${sensor_id}.Hwmon1"/>
+  </policy>
+</busconfig>
+EOF
+    done
+}
+
+ROOTFS_POSTPROCESS_COMMAND += "generate_busconfig_acls; "

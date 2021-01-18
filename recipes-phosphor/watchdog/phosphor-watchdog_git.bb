@@ -20,6 +20,7 @@ DEPENDS += "phosphor-logging"
 DEPENDS += "systemd"
 
 SRC_URI += "git://github.com/openbmc/phosphor-watchdog"
+SRC_URI += "file://${BPN}.conf"
 SRCREV = "086837596cdaffd27b399a863775e68cf8f2f344"
 S = "${WORKDIR}/git"
 
@@ -53,3 +54,6 @@ ENABLE_WATCHDOG_FMT = "../${ENABLE_WATCHDOG_TMPL}:obmc-host-startmin@{0}.target.
 
 SYSTEMD_LINK_${PN} += "${@compose_list(d, 'WATCHDOG_FMT', 'OBMC_HOST_WATCHDOG_INSTANCES', 'OBMC_HOST_INSTANCES')}"
 SYSTEMD_LINK_${PN} += "${@compose_list(d, 'ENABLE_WATCHDOG_FMT', 'OBMC_HOST_INSTANCES')}"
+
+DBUS_PACKAGES = "${PN}"
+_INSTALL_DBUS_CONFIGS = "${BPN}.conf"

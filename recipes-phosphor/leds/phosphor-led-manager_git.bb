@@ -35,10 +35,13 @@ RDEPENDS_${PN}-ledmanager += "bash"
 
 S = "${WORKDIR}/git"
 
+SRC_URI += "file://xyz.openbmc_project.LED.GroupManager.conf"
+
 FILES_${PN}-ledmanager += "${bindir}/phosphor-ledmanager ${bindir}/led-set-all-groups-asserted.sh"
 FILES_${PN}-faultmonitor += "${bindir}/phosphor-fru-fault-monitor"
 
 DBUS_SERVICE_${PN}-ledmanager += "xyz.openbmc_project.LED.GroupManager.service"
+_INSTALL_DBUS_CONFIGS = "xyz.openbmc_project.LED.GroupManager.conf"
 
 SYSTEMD_SERVICE_${PN}-ledmanager += "obmc-led-group-start@.service obmc-led-group-stop@.service"
 SYSTEMD_SERVICE_${PN}-faultmonitor += "obmc-fru-fault-monitor.service"

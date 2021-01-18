@@ -7,7 +7,7 @@ LICENSE = "Apache-2.0"
 LIC_FILES_CHKSUM = "file://LICENSE;md5=e3fc50a88d0a364313df4b21ef20c29e"
 
 inherit autotools pkgconfig
-inherit obmc-phosphor-dbus-service
+inherit obmc-phosphor-dbus-service obmc-phosphor-dbus-service
 
 DEPENDS += "autoconf-archive-native"
 DEPENDS += "sdbusplus"
@@ -19,6 +19,7 @@ DBUS_SERVICE_${PN} += "xyz.openbmc_project.led.controller@.service"
 
 SRC_URI += "git://github.com/openbmc/phosphor-led-sysfs"
 SRC_URI += "file://70-leds.rules"
+SRC_URI += "file://xyz.openbmc_project.LED.Controller.conf"
 SRCREV = "61b906367119b794a9788725fad86a3174bd83c0"
 S = "${WORKDIR}/git"
 
@@ -26,3 +27,6 @@ do_install_append() {
         install -d ${D}/${base_libdir}/udev/rules.d/
         install -m 0644 ${WORKDIR}/70-leds.rules ${D}/${base_libdir}/udev/rules.d/
 }
+
+DBUS_PACKAGES = "${PN}"
+_INSTALL_DBUS_CONFIGS = "xyz.openbmc_project.LED.Controller.conf"

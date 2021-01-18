@@ -7,6 +7,7 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=9e69ba356fa59848ffd865152a3ccc13"
 
 inherit meson pkgconfig
 inherit systemd
+inherit obmc-phosphor-dbus-service
 
 DEPENDS += "sdbusplus"
 DEPENDS += "phosphor-dbus-interfaces"
@@ -15,7 +16,10 @@ DEPENDS += "phosphor-logging"
 DEPENDS += "nlohmann-json"
 
 SRC_URI = "git://github.com/openbmc/phosphor-health-monitor.git;protocol=git"
+SRC_URI += "file://xyz.openbmc_project.HealthMon.conf"
 SRCREV = "2b231e8aa91a76a7c36f1c70c7e4058a38d0a5f1"
 S = "${WORKDIR}/git"
+
+_INSTALL_DBUS_CONFIGS = "xyz.openbmc_project.HealthMon.conf"
 
 SYSTEMD_SERVICE_${PN} = "phosphor-health-monitor.service"

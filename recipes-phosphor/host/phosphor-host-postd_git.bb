@@ -9,6 +9,7 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=86d3f3a95c324c9479bd8986968f4327"
 inherit meson
 inherit pkgconfig
 inherit systemd
+inherit obmc-phosphor-dbus-service
 
 PACKAGECONFIG ?= ""
 PACKAGECONFIG[7seg] = "-D7seg=enabled,-D7seg=disabled,,udev"
@@ -20,10 +21,14 @@ DEPENDS += "systemd"
 
 S = "${WORKDIR}/git"
 SRC_URI = "git://github.com/openbmc/phosphor-host-postd"
+SRC_URI += "file://${PN}.conf"
 SRCREV = "c80e59fefb265eba9108bcf1356627b181c00926"
 
 SNOOP_DEVICE ?= "aspeed-lpc-snoop0"
 POST_CODE_BYTES ?= "1"
+
+DBUS_PACKAGES = "${PN}"
+_INSTALL_DBUS_CONFIGS = "${PN}.conf"
 
 SERVICE_FILE = "lpcsnoop.service"
 SYSTEMD_PACKAGES = "${PN}"

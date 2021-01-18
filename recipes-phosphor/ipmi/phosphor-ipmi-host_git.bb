@@ -14,6 +14,8 @@ inherit obmc-phosphor-systemd
 inherit phosphor-ipmi-host
 inherit python3native
 
+_INSTALL_DBUS_CONFIGS = "${BPN}.conf"
+
 def ipmi_whitelists(d):
     whitelists = d.getVar(
         'VIRTUAL-RUNTIME_phosphor-ipmi-providers', True) or ''
@@ -21,6 +23,7 @@ def ipmi_whitelists(d):
     whitelists = [ '{}-whitelist-native'.format(x) for x in whitelists ]
     return ' '.join(whitelists)
 
+DEPENDS += "phosphor-ipmi-config"
 DEPENDS += "autoconf-archive-native"
 DEPENDS += "nlohmann-json"
 DEPENDS += "phosphor-state-manager"
@@ -81,7 +84,8 @@ EXTRA_OECONF_append = " \
 
 S = "${WORKDIR}/git"
 
-SRC_URI += "file://merge_yamls.py "
+SRC_URI += "file://merge_yamls.py"
+SRC_URI += "file://${BPN}.conf"
 
 HOSTIPMI_PROVIDER_LIBRARY += "libipmi20.so"
 HOSTIPMI_PROVIDER_LIBRARY += "libsysintfcmds.so"

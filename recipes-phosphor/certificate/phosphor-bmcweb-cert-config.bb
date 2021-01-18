@@ -7,24 +7,25 @@ LIC_FILES_CHKSUM = "file://${COREBASE}/meta/files/common-licenses/Apache-2.0;md5
 
 RDEPENDS_${PN} = "phosphor-certificate-manager"
 
-inherit allarch
+inherit allarch \
+        obmc-phosphor-dbus-service \
+        obmc-phosphor-systemd
 
-SRC_URI = "file://env"
+SRC_URI = " \
+    file://bmcweb \
+    file://xyz.openbmc_project.Certs.Manager.Server.Https.conf \
+    "
 
-FILES_${PN} = "${datadir}"
+FILESEXTRAPATHS_prepend := "${THISDIR}/phosphor-certificate-manager:"
+envfiledir = "${datadir}/phosphor-certificate-manager"
 
-do_install() {
-	install -D ${WORKDIR}/env ${D}/${datadir}/phosphor-certificate-manager/bmcweb
-}
+TMPL = "phosphor-certificate-manager@.service"
+INST = "phosphor-certificate-manager@bmcweb.service"
+SYSTEMD_SERVICE_${PN} += "${TMPL}"
+SYSTEMD_LINK_${PN} += "../${TMPL}:multi-user.target.wants/${INST}"
+SYSTEMD_ENVIRONMENT_FILE_${PN} = "bmcweb"
 
-pkg_postinst_${PN}() {
-	LINK="$D$systemd_system_unitdir/multi-user.target.wants/phosphor-certificate-manager@bmcweb.service"
-	TARGET="../phosphor-certificate-manager@.service"
-	mkdir -p $D$systemd_system_unitdir/multi-user.target.wants
-	ln -s $TARGET $LINK
-}
+DBUS_PACKAGES = "${PN}"
+_INSTALL_DBUS_CONFIGS = "xyz.openbmc_project.Certs.Manager.Server.Https.conf"
 
-pkg_prerm_${PN}() {
-	LINK="$D$systemd_system_unitdir/multi-user.target.wants/phosphor-certificate-manager@bmcweb.service"
-	rm $LINK
-}
+FILES_${PN} = "${sysconfdir} ${datadir}"

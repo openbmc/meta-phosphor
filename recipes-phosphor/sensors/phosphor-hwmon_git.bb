@@ -7,6 +7,7 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=fa818a259cbed7ce8bc2a22d35a464fc"
 
 inherit autotools pkgconfig
 inherit obmc-phosphor-systemd
+inherit obmc-phosphor-dbus-service
 
 PACKAGECONFIG ??= ""
 # Autotools configure option to enable/disable max31785-msl
@@ -17,8 +18,13 @@ PACKAGECONFIG[max31785-msl] = "--enable-max31785-msl, --disable-max31785-msl"
 PACKAGE_BEFORE_PN = "max31785-msl"
 SYSTEMD_PACKAGES = "${PN} max31785-msl"
 
+DBUS_PACKAGES = "${PN}"
+
 SYSTEMD_SERVICE_${PN} = "xyz.openbmc_project.Hwmon@.service"
 SYSTEMD_SERVICE_max31785-msl = "${@bb.utils.contains('PACKAGECONFIG', 'max31785-msl', 'phosphor-max31785-msl@.service', '', d)}"
+SYSTEMD_SUBSTITUTIONS += "HW_SENSOR_ID:{HW_SENSOR_ID}:xyz.openbmc_project.Hwmon@.service"
+
+_INSTALL_DBUS_CONFIGS = "${BPN}.conf"
 
 DEPENDS += "autoconf-archive-native"
 DEPENDS += " \
@@ -45,6 +51,7 @@ SRC_URI += "git://github.com/openbmc/phosphor-hwmon"
 SRC_URI += "file://70-hwmon.rules"
 SRC_URI += "file://70-iio.rules"
 SRC_URI += "file://start_hwmon.sh"
+SRC_URI += "file://${BPN}.conf"
 
 SRCREV = "94555352240ba7ac577a7017c0719cd9bbeb7a23"
 

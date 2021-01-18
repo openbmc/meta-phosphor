@@ -23,7 +23,6 @@
 inherit dbus-dir
 inherit obmc-phosphor-utils
 
-RDEPENDS_${PN}_append_class-target = " dbus-perms"
 DBUS_PACKAGES ?= "${PN}"
 
 _INSTALL_DBUS_CONFIGS=""

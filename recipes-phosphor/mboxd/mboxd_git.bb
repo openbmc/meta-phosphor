@@ -7,6 +7,7 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=e3fc50a88d0a364313df4b21ef20c29e"
 
 inherit autotools pkgconfig
 inherit obmc-phosphor-systemd
+inherit obmc-phosphor-dbus-service
 
 DEPENDS += "autoconf-archive-native"
 DEPENDS += "systemd"
@@ -15,7 +16,7 @@ DEPENDS += "phosphor-logging"
 S = "${WORKDIR}/git"
 
 SRC_URI += "git://github.com/openbmc/mboxbridge.git"
-
+SRC_URI += "file://xyz.openbmc_project.Hiomapd.conf"
 SRC_URI += "file://99-aspeed-lpc-ctrl.rules"
 
 SRCREV="5ff50e3cbd7702aefc185264e4adfb9952040575"
@@ -35,9 +36,13 @@ TGTFMT = "obmc-host-startmin@{0}.target"
 INSTFMT = "mboxd-reload@{0}.service"
 FMT = "../${TMPL}:${TGTFMT}.wants/${INSTFMT}"
 
+DBUS_PACKAGES = "${PN}"
+
 SYSTEMD_SERVICE_${PN} += "mboxd.service"
 SYSTEMD_SERVICE_${PN} += "mboxd-reload@.service"
 SYSTEMD_LINK_${PN} += "${@compose_list(d, 'FMT', 'OBMC_HOST_INSTANCES')}"
+
+_INSTALL_DBUS_CONFIGS = "xyz.openbmc_project.Hiomapd.conf"
 
 # Enable virtual-pnor by DISTRO_FEATURE openpower-virtual-pnor.
 PACKAGECONFIG_append_df-openpower-virtual-pnor = " virtual-pnor"

@@ -58,6 +58,7 @@ MGR_SVC ?= "xyz.openbmc_project.Dump.Manager.service"
 SYSTEMD_SUBSTITUTIONS += "BMC_DUMP_PATH:${bmc_dump_path}:${MGR_SVC}"
 
 FILES_${PN}-manager +=  " \
+    ${sysconfdir}/dbus-1/system.d/xyz.openbmc_project.Dump.Manager.conf \
     ${bindir}/phosphor-dump-manager \
     ${exec_prefix}/lib/tmpfiles.d/coretemp.conf \
     ${datadir}/dump/ \
@@ -69,6 +70,9 @@ FILES_${PN}-scripts += "${dreport_dir}"
 DBUS_SERVICE_${PN}-manager += "${MGR_SVC}"
 SYSTEMD_SERVICE_${PN}-monitor += "obmc-dump-monitor.service"
 
+DBUS_PACKAGES = "${PN}-manager"
+_INSTALL_DBUS_CONFIGS = "xyz.openbmc_project.Dump.Manager.conf"
+
 EXTRA_OEMESON = " \
     -DBMC_DUMP_PATH=${bmc_dump_path} \
     -DERROR_MAP_YAML=${STAGING_DIR_NATIVE}/${datadir}/dump/errors_watch.yaml \
@@ -76,6 +80,7 @@ EXTRA_OEMESON = " \
 
 S = "${WORKDIR}/git"
 SRC_URI += "file://coretemp.conf"
+SRC_URI += "file://xyz.openbmc_project.Dump.Manager.conf"
 
 do_install_append() {
     install -d ${D}${exec_prefix}/lib/tmpfiles.d

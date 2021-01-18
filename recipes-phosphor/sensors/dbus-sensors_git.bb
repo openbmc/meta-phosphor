@@ -2,6 +2,7 @@ SUMMARY = "dbus-sensors"
 DESCRIPTION = "Dbus Sensor Services Configured from D-Bus"
 
 SRC_URI = "git://github.com/openbmc/dbus-sensors.git"
+SRC_URI += "file://${BPN}.conf"
 SRCREV = "a3e8f2a391f389ffb2c379ca0c181e67de43824e"
 
 PV = "0.1+git${SRCPV}"
@@ -60,7 +61,10 @@ SYSTEMD_SERVICE_${PN} += "${@bb.utils.contains('PACKAGECONFIG', 'psusensor', \
                                                '', d)}"
 
 DEPENDS = "boost nlohmann-json sdbusplus i2c-tools libgpiod"
-inherit cmake systemd
+inherit cmake systemd obmc-phosphor-dbus-service
+
+DBUS_PACKAGES = "${PN}"
+_INSTALL_DBUS_CONFIGS = "${BPN}.conf"
 
 S = "${WORKDIR}/git"
 

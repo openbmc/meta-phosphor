@@ -5,6 +5,6 @@ After=xyz.openbmc_project.ObjectMapper.service
 
 [Service]
 Restart=on-failure
-ExecStart=/usr/bin/env phosphor-hwmon-readd -o %I
+ExecStart=/usr/bin/env phosphor-hwmon-readd -i ${HW_SENSOR_ID} -o %I
 SyslogIdentifier=phosphor-hwmon-readd
 EnvironmentFile=/etc/default/obmc/hwmon/%I.conf

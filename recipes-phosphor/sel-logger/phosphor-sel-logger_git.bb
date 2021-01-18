@@ -9,7 +9,7 @@ DESCRIPTION = "Utility to write IPMI SEL records to the journal"
 #   SEL_LOGGER_MONITOR_THRESHOLD_EVENTS:
 #      Monitors and logs SEL records for threshold sensor events
 
-inherit cmake systemd
+inherit cmake systemd obmc-phosphor-dbus-service
 S = "${WORKDIR}/git"
 
 LICENSE = "Apache-2.0"
@@ -18,8 +18,12 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=86d3f3a95c324c9479bd8986968f4327"
 DEPENDS += "systemd sdbusplus boost phosphor-ipmi-host"
 
 SRC_URI = "git://github.com/openbmc/phosphor-sel-logger.git;protocol=git"
+SRC_URI += "file://${BPN}.conf"
 SRCREV = "e526b86d7f9eef3b7a58f2800263666a04051239"
 
 PV = "0.1+git${SRCPV}"
+
+DBUS_PACKAGES = "${PN}"
+_INSTALL_DBUS_CONFIGS = "${BPN}.conf"
 
 SYSTEMD_SERVICE_${PN} += "xyz.openbmc_project.Logging.IPMI.service"

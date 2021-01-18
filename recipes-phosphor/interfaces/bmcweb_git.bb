@@ -4,7 +4,7 @@ inherit useradd
 USERADD_PACKAGES = "${PN}"
 
 # add a user called httpd for the server to assume
-USERADD_PARAM_${PN} = "-r -s /usr/sbin/nologin bmcweb"
+USERADD_PARAM_${PN} = "-r -s /usr/sbin/nologin -m bmcweb"
 GROUPADD_PARAM_${PN} = "web; redfish"
 
 LICENSE = "Apache-2.0"
@@ -25,7 +25,8 @@ DEPENDS = "openssl \
            sdbusplus \
            gtest \
            nlohmann-json \
-           libtinyxml2 "
+           libtinyxml2 \
+           phosphor-ipmi-host "
 
 RDEPENDS_${PN} += "jsnbd"
 
@@ -33,7 +34,7 @@ FILES_${PN} += "${datadir}/** "
 
 inherit meson
 
-EXTRA_OEMESON = "--buildtype=minsize -Dtests=disabled -Dyocto-deps=enabled"
+EXTRA_OEMESON = "--buildtype=debug -Dtests=disabled -Dyocto-deps=enabled -Dbmcweb-logging=enabled"
 
 SYSTEMD_SERVICE_${PN} += "bmcweb.service bmcweb.socket"
 
