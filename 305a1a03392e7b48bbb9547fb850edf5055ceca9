@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "462288c0_7ebc9da5",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 4
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1000003
+      },
+      "writtenOn": "2021-01-19T16:26:42Z",
+      "side": 1,
+      "message": "Per issue openbmc/openbmc#2287, the plan is to make a config flag to handle the jffs2 behavior: \"For the outlier in jffs2, a workaround can be added to watch IN_CLOSE_WRITE.\"\n\nTherefore all other filesystems (ubifs, ext4, etc) should have a default behavior and no flag should be set based on these filesystems.",
+      "revId": "305a1a03392e7b48bbb9547fb850edf5055ceca9",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "69e332e1_f4d2c5f5",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 4
+      },
+      "lineNbr": 14,
+      "author": {
+        "id": 1000003
+      },
+      "writtenOn": "2021-01-19T16:26:42Z",
+      "side": 1,
+      "message": "Change issues to \"openbmc/openbmc#2240\" and to \"openbmc/openbmc#2287\" so they become hyperlinks.",
+      "revId": "305a1a03392e7b48bbb9547fb850edf5055ceca9",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
+    }
+  ]
+}
