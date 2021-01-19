@@ -112,6 +112,30 @@
     },
     {
       "key": {
+        "uuid": "d373e17f_4b62ac16",
+        "filename": "recipes-extended/pam/libpam/pam.d/common-password",
+        "patchSetId": 1
+      },
+      "lineNbr": 19,
+      "author": {
+        "id": 1000235
+      },
+      "writtenOn": "2021-01-19T15:05:23Z",
+      "side": 1,
+      "message": "Note phosphor-user-manager minPasswordLength works with this parameter and is implemented as uint8_t so it has a limit of 255.  That is, you can set the minimum between 0..255.",
+      "parentUuid": "6fe02656_61d3970d",
+      "range": {
+        "startLine": 19,
+        "startChar": 67,
+        "endLine": 19,
+        "endChar": 80
+      },
+      "revId": "e7552a47440a81a2b2705d02d70e7b76362f92fa",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "d0f817db_3980e878",
         "filename": "recipes-extended/pam/libpam_%.bbappend",
         "patchSetId": 1
