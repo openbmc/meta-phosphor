@@ -66,6 +66,29 @@
     },
     {
       "key": {
+        "uuid": "3bde5ef0_3c792368",
+        "filename": "recipes-extended/pam/libpam/pam.d/common-auth",
+        "patchSetId": 1
+      },
+      "lineNbr": 21,
+      "author": {
+        "id": 1000235
+      },
+      "writtenOn": "2021-01-19T18:18:49Z",
+      "side": 1,
+      "message": "Oops. To remain compatible with the previous behavior we need to set explicit default values for the pam_faillock.so module:\nThe default value for the \"deny\" parameter is 3.  We need to set this parameter to 0 (zero) which disables locking.\nThe default value for the unlock_time parameter is 600 (10 minutes).  We need to set this parameter to 0 (\"never\") which never unlocks.",
+      "range": {
+        "startLine": 21,
+        "startChar": 40,
+        "endLine": 21,
+        "endChar": 55
+      },
+      "revId": "e7552a47440a81a2b2705d02d70e7b76362f92fa",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "cbc85903_7a0425cd",
         "filename": "recipes-extended/pam/libpam/pam.d/common-password",
         "patchSetId": 1
