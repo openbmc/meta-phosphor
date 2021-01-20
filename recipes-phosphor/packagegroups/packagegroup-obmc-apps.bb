@@ -30,6 +30,7 @@ PACKAGES = " \
         ${PN}-network \
         ${PN}-user-mgmt \
         ${PN}-user-mgmt-ldap \
+        ${PN}-telemetry \
         "
 
 SUMMARY_${PN}-bmc-state-mgmt = "BMC state management"
@@ -190,4 +191,9 @@ RDEPENDS_${PN}-user-mgmt-ldap = " \
         phosphor-ldap \
         phosphor-nslcd-cert-config \
         phosphor-nslcd-authority-cert-config \
+        "
+
+SUMMARY_${PN}-telemetry = "Telemetry solution"
+RDEPENDS_${PN}-telemetry = " \
+        telemetry \
         "

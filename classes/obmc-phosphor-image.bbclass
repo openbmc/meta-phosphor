@@ -30,6 +30,7 @@
 # - obmc-user-mgmt                    - OpenBMC user management
 # - obmc-user-mgmt-ldap               - OpenBMC LDAP users
 # - obmc-debug-collector              - OpenBMC debug collector
+# - obmc-telemetry                    - OpenBMC telemetry solution
 
 inherit core-image
 inherit obmc-phosphor-utils
@@ -65,6 +66,7 @@ FEATURE_PACKAGES_obmc-settings-mgmt ?= "packagegroup-obmc-apps-settings"
 FEATURE_PACKAGES_obmc-network-mgmt ?= "packagegroup-obmc-apps-network"
 FEATURE_PACKAGES_obmc-user-mgmt ?= "packagegroup-obmc-apps-user-mgmt"
 FEATURE_PACKAGES_obmc-user-mgmt-ldap ?= "packagegroup-obmc-apps-user-mgmt-ldap"
+FEATURE_PACKAGES_obmc-telemetry ?= "packagegroup-obmc-apps-telemetry"
 
 # FIXME: phosphor-net-ipmi depends on phosphor-ipmi-host !?!? and
 # cannot be built on core-qemu machines because of the dependency
