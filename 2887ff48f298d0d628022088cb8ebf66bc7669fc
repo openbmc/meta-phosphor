@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "ef08bd4b_170fc45b",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 3
+      },
+      "lineNbr": 19,
+      "author": {
+        "id": 1000163
+      },
+      "writtenOn": "2021-01-21T21:25:20Z",
+      "side": 1,
+      "message": "FORTIFY_SOURCE",
+      "range": {
+        "startLine": 19,
+        "startChar": 11,
+        "endLine": 19,
+        "endChar": 24
+      },
+      "revId": "2887ff48f298d0d628022088cb8ebf66bc7669fc",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
+    }
+  ]
+}
