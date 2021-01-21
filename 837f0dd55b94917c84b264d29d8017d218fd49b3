@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "63a5767c_d72e7e4e",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 37,
+      "author": {
+        "id": 1000235
+      },
+      "writtenOn": "2021-01-21T15:08:08Z",
+      "side": 1,
+      "message": "Is this acceptable?  Specifically, the scenario is:\n1. A BMC is running with a previous image that uses the deprecated tally2/cracklib modules.\n2. The BMC admin changes one of the PAM parameters, for example, the minimum password length.  This writes into the PAM config file, which creates or updates an overlayfs file.\n3, The BMC gets firmware update with this fix which removes the tally2/cracklib shared libraries and changes the PAM config files.\nHowever, the PAM config file overlayfs files hide the changes to the PAM config file, so the login/authentication process uses the old modules; this causes authentication to fail.\n\nThe resolution proposed in this commit is to simply delete the overlay files.  The Admin-supported way to do that is to perform a factory reset at the same time as the code update.\n\nAn alternative (easier to consume) resolution is to create a new BMC systemd service to migrate the PAM config files on first boot after this fix is installed, to run before any authentication to the BMC is allowed.  It would changes tally2 references to faillib and reswizzle the parameters, etc.\n\nIs a PAM config file migration service needed?",
+      "range": {
+        "startLine": 32,
+        "startChar": 0,
+        "endLine": 37,
+        "endChar": 52
+      },
+      "revId": "837f0dd55b94917c84b264d29d8017d218fd49b3",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
+    }
+  ]
+}
