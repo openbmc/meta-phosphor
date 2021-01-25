@@ -55,4 +55,10 @@ SYSTEMD_LINK_${PN}-ledmanager += "${@compose_list(d, 'FMT', 'STATES')}"
 # Install the override to set up a Conflicts relation
 SYSTEMD_OVERRIDE_${PN}-ledmanager += "bmc_booted.conf:obmc-led-group-start@bmc_booted.service.d/bmc_booted.conf"
 
+PACKAGECONFIG[lamp-test] = " \
+		--enable-use-lamp-test, \
+		--disable-use-lamp-test, \
+		pldm \
+		"
+
 EXTRA_OECONF = "YAML_PATH=${STAGING_DATADIR_NATIVE}/${PN}"
