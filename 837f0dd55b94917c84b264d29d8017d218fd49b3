@@ -2,6 +2,23 @@
   "comments": [
     {
       "key": {
+        "uuid": "e82cca88_930f2a72",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 27,
+      "author": {
+        "id": 1000235
+      },
+      "writtenOn": "2021-01-25T22:57:08Z",
+      "side": 1,
+      "message": "Note account locking only takes effect when the /redfish/v1/AccountService  AccountLockoutThreshold property is nonzero.  For example, to test, use:\ncurl -X PATCH https://${bmc}/redfish/v1/AccountService -d \u0027{\"AccountLockoutThreshold\": 3, \"AccountLockoutDuration\": 60}\u0027",
+      "revId": "837f0dd55b94917c84b264d29d8017d218fd49b3",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "63a5767c_d72e7e4e",
         "filename": "/COMMIT_MSG",
         "patchSetId": 2
@@ -19,6 +36,40 @@
         "endLine": 37,
         "endChar": 52
       },
+      "revId": "837f0dd55b94917c84b264d29d8017d218fd49b3",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "57aa8545_60c839f7",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 75,
+      "author": {
+        "id": 1000235
+      },
+      "writtenOn": "2021-01-25T22:57:08Z",
+      "side": 1,
+      "message": "Here are some partial test results:\n\nThe password `CI4ever!` is rejected because it is based on a dictionary word.  The password `0penBmc` is too short.  The password `0penBmc1` is accepted.\n\nThe password prompts as shown by the `passwd` command are different.\n\nThis patchset failed to create the /var/run/faillock directory on the BMC.  How is that directory supposed to be created?  I created the directory as root with 755.\n\nAccount locking did not work (even after AccountLockoutThreshold was set to a nonzero value).\nThe only command that writes into the tallydir is: faillock --user testuser --reset\nTo fix this, the faillock authfail module must appear before the deny module.\nThe remainder of the testing was performed with this corrected configuration.\n\nWith the corrected configuration, locking and timeouts appeared to work correctly.\nOne behavior difference from pam_tally2 is: after the lockout threshold is reached, pam_tally2 restarts the timeout for every new authentication attempt, whereas pam_faillock does not and instead times from the failed auth that triggered the lockout.\n\nFrom the Redfish APIs, changing the AccountService AccountLockoutThreshold and AccountLockoutDuration properties made the expected changes into the /etc/pam.d/common-auth config file.\nChanging MinPasswordLength fails with PropertyNotWritable\n\nThe GET /redfish/v1/AccountService/Accounts/testuser shows {\"Locked\": true} as appropriate.  However, as before with the pam_tally2 command, a false positive continues to be shown after the lockout timeout.  See https://github.com/linux-pam/linux-pam/issues/327",
+      "revId": "837f0dd55b94917c84b264d29d8017d218fd49b3",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "aad911db_af871940",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 78,
+      "author": {
+        "id": 1000235
+      },
+      "writtenOn": "2021-01-25T22:57:08Z",
+      "side": 1,
+      "message": "Faillock reports failures for affected users, and the reset option works.",
       "revId": "837f0dd55b94917c84b264d29d8017d218fd49b3",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
       "unresolved": true
