@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "3226b12d_3d900269",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 1000153
+      },
+      "writtenOn": "2021-01-25T20:42:59Z",
+      "side": 1,
+      "message": "Why?  This seems like breaking a pretty critical abstraction if LEDs now need to be aware of an interface specific thing.\n\nCould you please include a lot more detail here on why this is needed?",
+      "range": {
+        "startLine": 9,
+        "startChar": 0,
+        "endLine": 9,
+        "endChar": 49
+      },
+      "revId": "51205e119dce05a6a48cc08df6013ca1bb8e949f",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
+    }
+  ]
+}
