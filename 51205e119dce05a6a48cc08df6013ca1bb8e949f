@@ -22,6 +22,30 @@
       "revId": "51205e119dce05a6a48cc08df6013ca1bb8e949f",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "e289bc91_7b15cade",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 1000397
+      },
+      "writtenOn": "2021-01-26T11:36:58Z",
+      "side": 1,
+      "message": "Because when we enabled `lamp-test`, we need to rely on libpldm to communicate with host and notify it to perform lamp test.\nI will discuss with @Vishwa whether this feature can be put into the *.bbappend file.",
+      "parentUuid": "3226b12d_3d900269",
+      "range": {
+        "startLine": 9,
+        "startChar": 0,
+        "endLine": 9,
+        "endChar": 49
+      },
+      "revId": "51205e119dce05a6a48cc08df6013ca1bb8e949f",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
     }
   ]
 }
