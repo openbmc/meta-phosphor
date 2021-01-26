@@ -46,6 +46,30 @@
       "revId": "51205e119dce05a6a48cc08df6013ca1bb8e949f",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "e18eb235_c174aee1",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 1000153
+      },
+      "writtenOn": "2021-01-26T15:50:35Z",
+      "side": 1,
+      "message": "\u003e Because when we enabled `lamp-test`, we need to rely on libpldm to communicate with host and notify it to perform lamp test.\n\nIf I understand correctly, you rely on PLDM to communicate with the host, not necessarily the underlying library.  the PLDM dependencies should stay in the PLDM daemon, and be exposed through well defined libraries.  Every daemon that needs PLDM shouldn\u0027t require a dependency on libpldm, similar to how IPMI or redfish are implemented.\n\n\u003e I will discuss with @Vishwa whether this feature can be put into the *.bbappend file.\n\nPlease don\u0027t do this, please architect your dependencies properly, and isolate the complexity of pldm in the pldm daemon, similar to how we do other things with other similar requirements.",
+      "parentUuid": "e289bc91_7b15cade",
+      "range": {
+        "startLine": 9,
+        "startChar": 0,
+        "endLine": 9,
+        "endChar": 49
+      },
+      "revId": "51205e119dce05a6a48cc08df6013ca1bb8e949f",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
     }
   ]
 }
