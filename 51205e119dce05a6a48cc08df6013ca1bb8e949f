@@ -111,6 +111,30 @@
       "revId": "51205e119dce05a6a48cc08df6013ca1bb8e949f",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "67b7979a_1175aa29",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 1000153
+      },
+      "writtenOn": "2021-01-27T15:58:52Z",
+      "side": 1,
+      "message": "If you need an LED that\u0027s available through PLDM, why doesn\u0027t the PLDM daemon host an LED interface that can be written, the same way we\u0027d do it for any other interface?  If we had LEDs available over IPMB, we wouldn\u0027t add an IPMB dependency to led manager, nor would we add a redfish dependency if we wanted an LED available through redfish host interface.  If we did that, then every module in the system would rely on every interface, which is why we abstract things to well defined interfaces.",
+      "parentUuid": "1aaffbcf_e614d84f",
+      "range": {
+        "startLine": 9,
+        "startChar": 0,
+        "endLine": 9,
+        "endChar": 49
+      },
+      "revId": "51205e119dce05a6a48cc08df6013ca1bb8e949f",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
     }
   ]
 }
