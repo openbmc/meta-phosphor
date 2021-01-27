@@ -70,6 +70,30 @@
       "revId": "51205e119dce05a6a48cc08df6013ca1bb8e949f",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "1aaffbcf_e614d84f",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 1000014
+      },
+      "writtenOn": "2021-01-27T07:48:37Z",
+      "side": 1,
+      "message": "I have not gone through reviewing this commit yet.. But here is the requirement for IBM systems. We need a command sent up to the host ( using PLDM now ) to tell them the LEDs of external drawers be lit up as part of lamp test feature\n\nSo, how do do we it : use BMC-PLDM requester model.\n\nFor BMC-PLDM requester model, the PLDM design does not involve PLDM daemon. Instead, it is like this : \n\nhttps://github.com/openbmc/pldm/blob/master/README.md\n\n- section: BMC as PLDM requester\n\nSo, we would need to put a dependency on things that are needed to make it happen. I don\u0027t want to put it in the base version. Instead, a machine specific bbappend seems right..\n\nIf you have comments, please let me know.. Thanks.",
+      "parentUuid": "e18eb235_c174aee1",
+      "range": {
+        "startLine": 9,
+        "startChar": 0,
+        "endLine": 9,
+        "endChar": 49
+      },
+      "revId": "51205e119dce05a6a48cc08df6013ca1bb8e949f",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
     }
   ]
 }
