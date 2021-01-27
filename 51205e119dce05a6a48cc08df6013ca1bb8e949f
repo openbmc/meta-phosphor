@@ -2,6 +2,23 @@
   "comments": [
     {
       "key": {
+        "uuid": "001741ed_abd0d293",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1000014
+      },
+      "writtenOn": "2021-01-27T07:50:46Z",
+      "side": 1,
+      "message": "Also: Please help add more details to commit message on __why__ this is needed.",
+      "revId": "51205e119dce05a6a48cc08df6013ca1bb8e949f",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "3226b12d_3d900269",
         "filename": "/COMMIT_MSG",
         "patchSetId": 1
