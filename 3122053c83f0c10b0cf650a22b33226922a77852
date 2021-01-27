@@ -1,0 +1,67 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "5875c045_774e815e",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 13,
+      "author": {
+        "id": 1000168
+      },
+      "writtenOn": "2021-01-27T15:14:40Z",
+      "side": 1,
+      "message": "Joseph, can you tell me the size difference. Still prefer the pam_pwquality as strength checking against dictionary of words is done only in pam_pwquality. pam_cracklib already supported this and moving to pam_paswdqc will be degrading the security check which we enforced earlier.\nSo it\u0027s better to replace the same with pam_pwquality (which is also compatible with pam_cracklib), such that when we update from old version to new version, we need to make sure that pam_cracklib module name in pam.d configuration files is replaced with pam_pwquality. \nBy the way, i don\u0027t find a patch for upgrade mechanism, not sure, whether it is not sent for review. If it is not created, let me know, i can try to send it out, with my local testing of these changes, such that all these are updated and bumped up together.",
+      "range": {
+        "startLine": 13,
+        "startChar": 31,
+        "endLine": 13,
+        "endChar": 44
+      },
+      "revId": "3122053c83f0c10b0cf650a22b33226922a77852",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "3ea40cc7_45bccf32",
+        "filename": "recipes-extended/pam/libpam/pam.d/common-auth",
+        "patchSetId": 1
+      },
+      "lineNbr": 15,
+      "author": {
+        "id": 1000168
+      },
+      "writtenOn": "2021-01-27T15:14:40Z",
+      "side": 1,
+      "message": "Output wise even though it doesn\u0027t matter, it is still better to do pam_fallock.so with preauth, so that password check for locked accounts won\u0027t be made in first place.",
+      "revId": "3122053c83f0c10b0cf650a22b33226922a77852",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "4bb5829f_7bbb992e",
+        "filename": "recipes-extended/pam/libpam_%.bbappend",
+        "patchSetId": 1
+      },
+      "lineNbr": 28,
+      "author": {
+        "id": 1000168
+      },
+      "writtenOn": "2021-01-27T15:14:40Z",
+      "side": 1,
+      "message": "for firmware update, this file needs to be created along with updating /etc/pam.d/\u003cconfiguration\u003e files",
+      "range": {
+        "startLine": 24,
+        "startChar": 0,
+        "endLine": 28,
+        "endChar": 50
+      },
+      "revId": "3122053c83f0c10b0cf650a22b33226922a77852",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
+    }
+  ]
+}
