@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "f4b36c65_1afb4640",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 13,
+      "author": {
+        "id": 1000235
+      },
+      "writtenOn": "2021-01-27T15:51:03Z",
+      "side": 1,
+      "message": "I don\u0027t have the size difference.  Based on your advice, I will change this to use pam_pwquality (libpwquality).\n\nI have not yet created the mechanism to upgrade the /etc/pam.d/* config files.  (My awk skills are rusty.)  Please send yours.",
+      "parentUuid": "5875c045_774e815e",
+      "range": {
+        "startLine": 13,
+        "startChar": 31,
+        "endLine": 13,
+        "endChar": 44
+      },
+      "revId": "3122053c83f0c10b0cf650a22b33226922a77852",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "3ea40cc7_45bccf32",
         "filename": "recipes-extended/pam/libpam/pam.d/common-auth",
         "patchSetId": 1
@@ -42,6 +66,24 @@
     },
     {
       "key": {
+        "uuid": "d6e9818c_6622f631",
+        "filename": "recipes-extended/pam/libpam/pam.d/common-auth",
+        "patchSetId": 1
+      },
+      "lineNbr": 15,
+      "author": {
+        "id": 1000235
+      },
+      "writtenOn": "2021-01-27T15:51:03Z",
+      "side": 1,
+      "message": "Thanks.  I am struggling to understand the best practice for this.  Is the right configuration to use faillock preauth in addition to authsucc, or instead of it?",
+      "parentUuid": "3ea40cc7_45bccf32",
+      "revId": "3122053c83f0c10b0cf650a22b33226922a77852",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "4bb5829f_7bbb992e",
         "filename": "recipes-extended/pam/libpam_%.bbappend",
         "patchSetId": 1
@@ -53,6 +95,30 @@
       "writtenOn": "2021-01-27T15:14:40Z",
       "side": 1,
       "message": "for firmware update, this file needs to be created along with updating /etc/pam.d/\u003cconfiguration\u003e files",
+      "range": {
+        "startLine": 24,
+        "startChar": 0,
+        "endLine": 28,
+        "endChar": 50
+      },
+      "revId": "3122053c83f0c10b0cf650a22b33226922a77852",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "8c4cb1ed_b9f0ae50",
+        "filename": "recipes-extended/pam/libpam_%.bbappend",
+        "patchSetId": 1
+      },
+      "lineNbr": 28,
+      "author": {
+        "id": 1000235
+      },
+      "writtenOn": "2021-01-27T15:51:03Z",
+      "side": 1,
+      "message": "I don\u0027t understand this comment.  This code adds /etc/tmpfiles.d/libpam.conf to the updated firmware image, and we agreed that the /etc/pam.d/* files (as they exist in the BMC\u0027s overlayfs) need to be updated on the BMC, per your comment in the commit message.",
+      "parentUuid": "4bb5829f_7bbb992e",
       "range": {
         "startLine": 24,
         "startChar": 0,
