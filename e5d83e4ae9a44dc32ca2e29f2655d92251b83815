@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "0a958a20_29bb5df1",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 10,
+      "author": {
+        "id": 1000014
+      },
+      "writtenOn": "2021-01-27T10:38:00Z",
+      "side": 1,
+      "message": "Thanks. better than previous version. But it still does not say why we need to use libpldm and not use PLDM daemon. You could use my response to Ed as a reference and update the commit msg.",
+      "revId": "e5d83e4ae9a44dc32ca2e29f2655d92251b83815",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
+    }
+  ]
+}
