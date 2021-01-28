@@ -159,6 +159,30 @@
       "revId": "51205e119dce05a6a48cc08df6013ca1bb8e949f",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "d5cb94fa_733f2696",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 1000397
+      },
+      "writtenOn": "2021-01-28T08:40:40Z",
+      "side": 1,
+      "message": "Yes, I agree with @Vishwa.\ne.g: phosphor-logging, link with:\nhttps://github.com/openbmc/openbmc/blob/master/meta-phosphor/recipes-phosphor/logging/phosphor-logging_git.bb#L99\nwhen it enabled `openpower-pels` in the bbappend file, it will be using the common method in pldm library, like this:\nhttps://github.com/openbmc/phosphor-logging/blob/master/extensions/openpower-pels/pldm_interface.cpp#L94\n\nThe meaning of generating the `libpldm` library in the PLDM daemon is for other reops to use these methods.",
+      "parentUuid": "a47b8c54_6d3bc29e",
+      "range": {
+        "startLine": 9,
+        "startChar": 0,
+        "endLine": 9,
+        "endChar": 49
+      },
+      "revId": "51205e119dce05a6a48cc08df6013ca1bb8e949f",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
     }
   ]
 }
