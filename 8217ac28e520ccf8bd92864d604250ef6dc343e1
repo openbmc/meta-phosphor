@@ -22,6 +22,30 @@
       "revId": "8217ac28e520ccf8bd92864d604250ef6dc343e1",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "59fe3d8f_0489c8bd",
+        "filename": "recipes-core/os-release/os-release.bbappend",
+        "patchSetId": 1
+      },
+      "lineNbr": 25,
+      "author": {
+        "id": 1000003
+      },
+      "writtenOn": "2021-01-28T22:39:14Z",
+      "side": 1,
+      "message": "Agree with Patrick. Seems you\u0027re proposing that the new EXTENDEDVARIABLE be set in the local.conf file, could we have it named EXTENDED_VERSION and avoid multiple variables?",
+      "parentUuid": "8eacb27b_ef9accdd",
+      "range": {
+        "startLine": 24,
+        "startChar": 0,
+        "endLine": 25,
+        "endChar": 39
+      },
+      "revId": "8217ac28e520ccf8bd92864d604250ef6dc343e1",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
     }
   ]
 }
