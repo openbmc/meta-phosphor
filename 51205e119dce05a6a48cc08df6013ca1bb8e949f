@@ -207,6 +207,30 @@
       "revId": "51205e119dce05a6a48cc08df6013ca1bb8e949f",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "cc7c8aa6_738097d6",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 1000014
+      },
+      "writtenOn": "2021-01-28T11:38:41Z",
+      "side": 1,
+      "message": "Deepak, thanks for clarifying this. We had this discussion with Tom and it was recommended that we do what soft-off did. I am adding Tom to the review.\n\nDeepak, the new interface that you coined here, how can that be used for generic SetEffector ?.. lamp test usecase needs SetNumericHostStateEffector with effector id: 19 for example. \n Similarly. someone else might have a different need. \n\nSO the API will take \n- what kind of effector is that\n- what is its ID etc\n- What is the value",
+      "parentUuid": "0f2c2c2b_d23de167",
+      "range": {
+        "startLine": 9,
+        "startChar": 0,
+        "endLine": 9,
+        "endChar": 49
+      },
+      "revId": "51205e119dce05a6a48cc08df6013ca1bb8e949f",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
     }
   ]
 }
