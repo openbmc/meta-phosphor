@@ -135,6 +135,30 @@
       "revId": "51205e119dce05a6a48cc08df6013ca1bb8e949f",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "a47b8c54_6d3bc29e",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 1000014
+      },
+      "writtenOn": "2021-01-28T07:30:04Z",
+      "side": 1,
+      "message": "It\u0027s not to be seen as tied to LED.. it\u0027s a message to be sent to the Host and Host interpreting it and taking action. In this case, the action happens to be to light all the LEDs of externally attached drawers.  Tomorrow, that action cab be anything for that matter.\n\nIf PLDM had to do that for every other requester, PLDM would end up hosting many thing on someone else\u0027s behalf and hence the PLDM came up with \"BMC As Requester\" design. \n\nAgain, majority of use cases are covered by standard PLDM daemon and we don\u0027t have to have this dependency. However, some corner cases like this demands BMC as requester flow.\n\nHave you has a chance to look at : https://github.com/openbmc/pldm/blob/master/README.md\n\nFor example, IBM systems have like 100 LEDs and we don\u0027t have this dependency and they are covered using standard PLDM interfaces.",
+      "parentUuid": "67b7979a_1175aa29",
+      "range": {
+        "startLine": 9,
+        "startChar": 0,
+        "endLine": 9,
+        "endChar": 49
+      },
+      "revId": "51205e119dce05a6a48cc08df6013ca1bb8e949f",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
     }
   ]
 }
