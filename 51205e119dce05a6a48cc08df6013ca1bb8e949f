@@ -279,6 +279,30 @@
       "revId": "51205e119dce05a6a48cc08df6013ca1bb8e949f",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "6f089c19_543724cd",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 1000056
+      },
+      "writtenOn": "2021-01-29T08:09:21Z",
+      "side": 1,
+      "message": "I don\u0027t think a new D-Bus API is required. You could have an object that implements https://github.com/openbmc/phosphor-dbus-interfaces/blob/master/xyz/openbmc_project/Led/Group.interface.yaml, the group here representing all LEDs that are part of the lamp test.",
+      "parentUuid": "f6aaf47d_9fe5377c",
+      "range": {
+        "startLine": 9,
+        "startChar": 0,
+        "endLine": 9,
+        "endChar": 49
+      },
+      "revId": "51205e119dce05a6a48cc08df6013ca1bb8e949f",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
     }
   ]
 }
