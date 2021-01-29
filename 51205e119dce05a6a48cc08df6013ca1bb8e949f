@@ -303,6 +303,30 @@
       "revId": "51205e119dce05a6a48cc08df6013ca1bb8e949f",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "298aef33_6ad2f0d2",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 1000014
+      },
+      "writtenOn": "2021-01-29T09:05:37Z",
+      "side": 1,
+      "message": "We need 1 command sent to Host to let \u0027em know that they need to do lamp test on MEX drawers. Nothing is known to BMC, it just tells Host to do so and does not care what happens later. it is pretty much equivalent to soft-off mechanism\n\nSo, a new D-Bus API is needed that is to be implemented by PLDM.",
+      "parentUuid": "6f089c19_543724cd",
+      "range": {
+        "startLine": 9,
+        "startChar": 0,
+        "endLine": 9,
+        "endChar": 49
+      },
+      "revId": "51205e119dce05a6a48cc08df6013ca1bb8e949f",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
     }
   ]
 }
