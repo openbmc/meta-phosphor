@@ -375,6 +375,30 @@
       "revId": "51205e119dce05a6a48cc08df6013ca1bb8e949f",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "c60a534c_f3f17049",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 1000056
+      },
+      "writtenOn": "2021-02-03T06:19:15Z",
+      "side": 1,
+      "message": "Right, so the PLDM daemon can implement  xyz.openbmc_project.Led.Group on /xyz/openbmc_project/led/groups/host_lamp_test",
+      "parentUuid": "82a25745_3cc9c546",
+      "range": {
+        "startLine": 9,
+        "startChar": 0,
+        "endLine": 9,
+        "endChar": 49
+      },
+      "revId": "51205e119dce05a6a48cc08df6013ca1bb8e949f",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
     }
   ]
 }
