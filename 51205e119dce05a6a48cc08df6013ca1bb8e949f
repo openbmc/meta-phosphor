@@ -447,6 +447,30 @@
       "revId": "51205e119dce05a6a48cc08df6013ca1bb8e949f",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "9f0c4c62_a5acbdf1",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 1000014
+      },
+      "writtenOn": "2021-02-03T10:11:27Z",
+      "side": 1,
+      "message": "hmm.. there is a catch here.. the idea was to just tell the PLDM to let host know to start and Host does stop the test itself after timer expiration. So, a method would have been better.\n\nIf we are going to do this way, then I believe BMC need to have an additional `Set Asserted to false on host_lamp_test\" as part of BMC finishing the lamp test and PLDM daemon should not do anything as part of seating it false.",
+      "parentUuid": "93daadc8_a4200152",
+      "range": {
+        "startLine": 9,
+        "startChar": 0,
+        "endLine": 9,
+        "endChar": 49
+      },
+      "revId": "51205e119dce05a6a48cc08df6013ca1bb8e949f",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
     }
   ]
 }
