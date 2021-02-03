@@ -351,6 +351,30 @@
       "revId": "51205e119dce05a6a48cc08df6013ca1bb8e949f",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "82a25745_3cc9c546",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 1000014
+      },
+      "writtenOn": "2021-02-03T05:11:12Z",
+      "side": 1,
+      "message": "Okay.. so here it is : \n- LED manager implements xyz.openbmc_project.Led.Groups and hosts /xyz/openbmc_project/led/groups/lamp_test\n\n- Users would set \"Asserted\" property on that to initiate lamp_test\n\n- LED manager does what lamp_test means for all BMC accessible LEDs\n\n- LED manager tells operator panel manager that the LCD display be exercised\n\n- Now, LED manager need to tell PLDM to send a message saying \"do lamp test for MEX\" and what Host does by that command is entirely upto the host.",
+      "parentUuid": "91105da1_a171b36f",
+      "range": {
+        "startLine": 9,
+        "startChar": 0,
+        "endLine": 9,
+        "endChar": 49
+      },
+      "revId": "51205e119dce05a6a48cc08df6013ca1bb8e949f",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
     }
   ]
 }
